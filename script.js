@@ -11,3 +11,13 @@ async function includeHTML() {
       }
     }
   }
+
+  function test(){
+    let ov = document.getElementById('overlayId');
+    let logo = document.getElementById('imgHeader1');
+    logo.classList.add('logo2sec');
+    setTimeout(() => {
+      logo.classList.remove('logo2sec');
+      ov.classList.add('dNone');
+    }, 2000);
+  }

@@ -1,18 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles/header.css">
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/header.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./styles/login.css" />
+    <link rel="stylesheet" href="./styles/buttons.css" />
+    <link rel="stylesheet" href="./styles/desktop_join_overlay.css">
     <script src="./script.js"></script>
-    <title>Join - Register </title>
-</head>
-<body onload="includeHTML()">
-    <div class="mainContainer">
-        <header>    
-            <div w3-include-html="./templates/header.html"></div>
-        </header>
+    <title>Join - Register</title>
+  </head>
+  <body onload="includeHTML(), test()">
+    <div class="loginHeaderContainer">
+      <div class="loginHeader">
+        <div class="logoImg">
+          <img id="imgHeader1" src="./assets/img/Capa1.svg" alt="" />
+        </div>
+        <div class="loginHeaderBtn">
+          <p>Not a Join user ?</p>
+          <button class="btnPrimary">Sing up</button>
+        </div>
+      </div>
     </div>
-</body>
+    <main class="maxWidth">
+      <div class="loginContainer">
+        <div class="loginCard">
+          <div class="loginTitle">
+            <h1 class="lh1">Log in</h1>
+            <hr class="separable" />
+          </div>
+          <form action="" class="loginForm">
+            <div class="loginInput">
+              <input
+                type="email"
+                class="loginInputFeld"
+                placeholder="Email"
+                required
+              />
+              <input
+                type="password"
+                class="loginInputFeld"
+                placeholder="Password"
+                required
+              />
+            </div>
+            <div>
+              <input
+                id="checkbox"
+                type="checkbox"
+                placeholder="Remember me"
+                name="Remeber me"
+              />
+              <label for="checkbox">Remember Me</label>
+            </div>
+            <div class="loginBtnContainer">
+              <button class="btnPrimary">Log in</button>
+              <button class="btnSecundary">Guest Log in</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+  </body>
+  <div id="overlayId"  class="" w3-include-html="./templates/desktop_join_overlay.html"></div>
 </html>
