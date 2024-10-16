@@ -1,4 +1,8 @@
 @media (max-width: 345px) {
+    .content{
+        margin-top: 120px;
+        margin-left: 0px;
+    }
     .mobileDisplayNone{
         display: none;
     }
@@ -13,6 +17,11 @@
         display: flex;
         justify-content: space-around;
         width: 100%;
+        margin-block-start: 0em;
+        margin-block-end: 0em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        padding-inline-start: 0px;
     }
     .navBtn{
         color: #CDCDCD;
@@ -28,7 +37,7 @@
     }
     .navBtn:hover{
         color: white;
-        background-color: #091931;
+        background-color: #2A3D59;
         border-radius: 8px;
     }
     .vectorImgColor{
@@ -38,10 +47,66 @@
     .vectorImgColor:hover{
         color: white;
     }
+
+    .topNav{
+        position: fixed;
+        z-index: 998;
+        width: 100%;
+        top: 0;
+        left: 0;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-right: 40px;
+        background-color: #ffffff;
+        display: flex;
+        align-items: start;
+        justify-content:end;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+
+    }
+    .profilBtn{
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+    .profilPic{
+        color: #29ABE2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 56px;
+        height: 56px;
+        border: 3px solid #2A3647;
+        border-radius: 50%;
+        transition: background-color 0.75s ease; 
+    }
+    .profilPic:hover{
+        background-color: #0C2E621F;
+    }
+    .profilText{
+        font-weight: bold;
+    }
+    .profilhelp{
+        width: 32px;
+        height: 32px;
+        transition: width 0.75s ease, height 0.75s ease;
+    }
+    .profilhelp:hover{
+        width: 40px;
+        height: 40px;
+        transition: 750;
+    }
 }
 
 
+
+
+
 @media (max-width: 768px) {
+    .content{
+        margin-top: 120px;
+        margin-left: 0px;
+    }
     .mobileDisplayNone{
         display: none;
     }
@@ -59,6 +124,11 @@
         flex-wrap: wrap;
         justify-content: space-around;
         width: 100%;
+        margin-block-start: 0em;
+        margin-block-end: 0em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        padding-inline-start: 0px;
     }
     .navBtn{
         color: #CDCDCD;
@@ -73,7 +143,7 @@
     }
     .navBtn:hover{
         color: white;
-        background-color: #091931;
+        background-color: #2A3D59;
         border-radius: 8px;
         display: flex;
         align-items: center;
@@ -88,15 +158,73 @@
     .vectorImgColor:hover{
         color: yellowgreen;
     }
+
+    .topNav{
+        position: fixed;
+        z-index: 998;
+        width: 100%;
+        top: 0;
+        left: 0;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-right: 40px;
+        background-color: #ffffff;
+        display: flex;
+        align-items: start;
+        justify-content:end;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+
+    }
+    .profilBtn{
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+    .profilPic{
+        color: #29ABE2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 56px;
+        height: 56px;
+        border: 3px solid #2A3647;
+        border-radius: 50%;
+        transition: background-color 0.75s ease; 
+    }
+    .profilPic:hover{
+        background-color: #0C2E621F;
+    }
+    .profilText{
+        font-weight: bold;
+    }
+    .profilhelp{
+        width: 32px;
+        height: 32px;
+        transition: width 0.75s ease, height 0.75s ease;
+    }
+    .profilhelp:hover{
+        width: 40px;
+        height: 40px;
+        transition: 750;
+    }
 }
 
+
+
+
+
 @media (min-width: 768px) {
+    .content{
+        margin-top: 120px;
+        margin-left: 240px;
+    }
     .desktopLogoVector{
         margin-top: 64px;
     }
     .navSection{
         width: 232px;
         position: fixed;
+        z-index: 999;
         top: 0;
         bottom: 0;
         left: 0;
@@ -104,14 +232,18 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
     }
     .navLink{
         width: 100%;
-        margin-top: 114px;
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
         gap: 15px;
+        margin-block-start: 0em;
+        margin-block-end: 0em;
+        padding-inline-start: 0px;
+        margin-top: 114px;
     }
     .navBtn{
         color: #CDCDCD;
@@ -124,7 +256,7 @@
     }
     .navBtn:hover{
         color: white;
-        background-color: #091931;
+        background-color: #2A3D59;
     }
     .vectorImgColor{
         color: white;
@@ -134,12 +266,58 @@
     .vectorImgColor:hover{
         color: white;
     }
-    .content{
-        margin-left: 233px;
-    }
     .desktopPrivacy{
         margin-top: 114px;
         padding-top: 243px;
         color: #CDCDCD;
+    }
+    .topNav{
+        position: fixed;
+        z-index: 998;
+        width: calc(100% - 388px);
+        top: 0;
+        left: 0;
+        padding-left: 348px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-right: 40px;
+        background-color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+
+    }
+    .profilBtn{
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+    .profilPic{
+        color: #29ABE2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 56px;
+        height: 56px;
+        border: 3px solid #000000;
+        border-radius: 50%;
+        transition: background-color 0.75s ease; 
+    }
+    .profilPic:hover{
+        background-color: #0C2E621F;
+    }
+    .profilText{
+        font-weight: bold;
+    }
+    .profilhelp{
+        width: 32px;
+        height: 32px;
+        transition: width 0.75s ease, height 0.75s ease;
+    }
+    .profilhelp:hover{
+        width: 40px;
+        height: 40px;
+        transition: 750;
     }
 }
