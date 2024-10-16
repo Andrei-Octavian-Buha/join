@@ -1,45 +1,91 @@
-.joinHeader{
-    width: 232px;
-    height: 100vh;
-    background-color: #2A3647;
-}
-.mobileDisplayNone{
-    display: none;
+@media (max-width: 340px) {
+    .mobileDisplayNone{
+        display: none;
+    }
+    .navSection{
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        background-color: #2A3647;
+    }
+    .navLink{
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+    }
+    .navBtn{
+        color: #CDCDCD;
+        border-radius: 8px;
+        padding: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    span{
+        font-size: 10px;
+    }
+    .navBtn:hover{
+        color: white;
+        background-color: #091931;
+        border-radius: 8px;
+    }
+    .vectorImgColor{
+        color: white;
+        width: 10px; 
+    }
+    .vectorImgColor:hover{
+        color: white;
+    }
 }
 
 
-.navSection{
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    background-color: #2A3647;
-}
-.navLink{
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-}
-.navBtn{
-    color: #CDCDCD;
-    font-weight: 400;
-    font-size: 14px;
-    border-radius: 8px;
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-.navBtn:hover{
-    color: white;
-    background-color: #091931;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-.vectorImgColor:hover{
-    color: white;
+@media (max-width: 768px) {
+    .mobileDisplayNone{
+        display: none;
+    }
+    
+    
+    .navSection{
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        background-color: #2A3647;
+    }
+    .navLink{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        width: 100%;
+    }
+    .navBtn{
+        color: #CDCDCD;
+        font-weight: 400;
+        font-size: 14px;
+        border-radius: 8px;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .navBtn:hover{
+        color: white;
+        background-color: #091931;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .vectorImgColor{
+        color: white;
+        width: 24px; 
+        height: 24px;
+    }
+    .vectorImgColor:hover{
+        color: white;
+    }
 }
