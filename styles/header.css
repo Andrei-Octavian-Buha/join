@@ -1,4 +1,4 @@
-@media (max-width: 345px) {
+@media (max-width: 355px) {
     .content{
         margin-top: 120px;
         margin-left: 0px;
@@ -27,13 +27,6 @@
         color: #CDCDCD;
         border-radius: 8px;
         padding: 4px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-    }
-    span{
-        font-size: 10px;
     }
     .navBtn:hover{
         color: white;
@@ -47,6 +40,19 @@
     .vectorImgColor:hover{
         color: white;
     }
+    .aLink{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 15px;
+        text-decoration: none;
+        color: #CDCDCD;
+    }
+    span{
+        font-size: 8px;
+    }
+
 
     .topNav{
         position: fixed;
@@ -158,6 +164,18 @@
     .vectorImgColor:hover{
         color: yellowgreen;
     }
+
+    .aLink{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 15px;
+        text-decoration: none;
+        color: #CDCDCD;
+    }
+
+
 
     .topNav{
         position: fixed;
@@ -271,6 +289,19 @@
         padding-top: 243px;
         color: #CDCDCD;
     }
+
+    .aLink{
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        text-decoration: none;
+        color: #CDCDCD;
+    }
+    span{
+        font-size: 16px;
+    }
+
+
     .topNav{
         position: fixed;
         z-index: 998;
