@@ -23,3 +23,10 @@ p{
     left: 50%; 
     transform: translate(-50%, -50%);
 }
+
+.privacyMainDiv{
+    margin-top: 192px;
+    padding-left: 296px;
+    margin-right: 64px;
+    padding-bottom: 32px;
+}
