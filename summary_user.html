@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="./styles/header.css" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="./styles/summary_user.css" />
     <script src="./script.js"></script>
+    <script src="./js/summary_user.js"></script>
     <title>Summary User</title>
 </head>
+
 <body onload="includeHTML()">
     <div class="" w3-include-html="./templates/header.html"></div>
     <div class="summary-main-div">
@@ -19,30 +27,32 @@
                 <p class="stats-header-text">Key Metrics at a Glance</p>
             </div>
             <div class="stats-first">
-                <a href="board.html" class="stat-button">
-                    <div  >
+                <a href="board.html" class="stat-button-to-do">
+                    <div class="stat-icon-div">
                         <div>
-                            <img src="assets/img/summary-button-pen.png" alt="">
+                            <img class="summary-icon" id="summary-icon-pen" src="assets/img/summary-button-pen.png" alt="">
                         </div>
-                        <div>
-                            <span>1</span>
+                        <div class="stat-icon-text">
+                            <span class="number-div">1</span>
                             <span>To-Do</span>
                         </div>
                     </div>
                 </a>
-                <a href="board.html">
-                    <div>
-                        <img src="assets/img/summary-button-check.png" alt="">
+                <a href="board.html" class="stat-button-done">
+                    <div class="stat-icon-div">
+                        <div>
+                            <img class="summary-icon" id="summary-icon-check" src="assets/img/summary-button-check.png" alt="">
+                        </div>
+                        <div class="stat-icon-text">
+                            <span class="number-div">2</span>
+                            <span>Done</span>
+                        </div>
                     </div>
-                    <div>
-                        <span>2</span>
-                        <span>Done</span>
-                    </div>
-                </div>
                 </a>
             </div>
         </div>
         <div class="greeting-div"></div>
     </div>
 </body>
+
 </html>

@@ -3,6 +3,7 @@
     padding-left: 296px;
     margin-right: 64px;
     padding-bottom: 32px;
+    font-family: 'Inter';
 }
 
 .seperator {
@@ -33,6 +34,78 @@
     text-align: left;
 }
 
-.stat-button{
+.stat-icon-div{
+    display: flex;
+    align-items: center;
+}
 
+.stat-icon-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 20px;
+}
+
+.stat-button-to-do{   
+    width: 239px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+    background-color: #ffffff;
+    text-decoration: none;
+    color: black;
+    transition: transform 0.3s ease;
+}
+
+.stat-button-done{   
+    width: 239px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+    background-color: #ffffff;
+    text-decoration: none;
+    color: black;
+    transition: transform 0.3s ease;
+}
+
+.stat-button-done:hover{
+    transform: scale(1.1);
+    background-color: #2A3647;
+    color: #ffffff;
+}
+
+.stat-button-to-do:hover{
+    transform: scale(1.1);
+    background-color: #2A3647;
+    color: #ffffff;
+}
+
+.stats-first{
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: black;
+}
+
+.number-div{
+    font-size: 64px;
+    font-weight: 600;
+}
+
+.summary-icon{
+    width: 69px;
+    height: 69px;
+    margin-right: 6px;
 }
