@@ -5,13 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/header.css" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./styles/summary_user.css" />
     <script src="./script.js"></script>
     <title>Summary User</title>
 </head>
 <body onload="includeHTML()">
     <div class="" w3-include-html="./templates/header.html"></div>
     <div class="summary-main-div">
-        <div class="stats-div"></div>
+        <div class="stats-div">
+            <div class="stats-header">
+                <h1 class="stats-cap">Join 381</h1>
+                <div class="seperator"></div>
+                <p class="stats-header-text">Key Metrics at a Glance</p>
+            </div>
+            <div class="stats-first">
+                <a href="board.html" class="stat-button">
+                    <div  >
+                        <div>
+                            <img src="assets/img/summary-button-pen.png" alt="">
+                        </div>
+                        <div>
+                            <span>1</span>
+                            <span>To-Do</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="board.html">
+                    <div>
+                        <img src="assets/img/summary-button-check.png" alt="">
+                    </div>
+                    <div>
+                        <span>2</span>
+                        <span>Done</span>
+                    </div>
+                </div>
+                </a>
+            </div>
+        </div>
+        <div class="greeting-div"></div>
     </div>
 </body>
 </html>

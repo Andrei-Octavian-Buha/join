@@ -1,0 +1,38 @@
+.summary-main-div {
+    margin-top: 192px;
+    padding-left: 296px;
+    margin-right: 64px;
+    padding-bottom: 32px;
+}
+
+.seperator {
+    height: 59px;
+    width: 3px;
+    background-color: #29ABE2;
+}
+
+.stats-header-text {
+    color: #2A3647;
+
+}
+
+.stats-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.stats-div {
+    width: 560px;
+}
+
+.stats-cap {
+    font-size: 61px;
+    font-weight: 700;
+    line-height: 73.2px;
+    text-align: left;
+}
+
+.stat-button{
+
+}
