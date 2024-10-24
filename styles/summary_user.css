@@ -279,8 +279,25 @@ body{
     z-index: 999;
 }
 
+@media (max-width: 1210px) {
+    .greeting-text {
+        margin: 10px;
+        font-size: 30px;
+        font-weight: 500;
+    }
 
-@media (max-width: 1000px) {
+    .greeting-name {
+        font-size: 30px;
+        font-weight: 700;
+        color: #29ABE2;
+        margin: 10px;
+    }
+    .summary-main-div {
+        margin-right: 0px
+    }
+}
+
+@media (max-width: 1050px) {
     .fullscreen-greeting-overlay {
         display: flex; 
         animation: fadeInOut 3.5s forwards; 
@@ -288,5 +305,23 @@ body{
 
     .greeting-div{
         display: none;
+    }
+}
+
+@media (max-width: 800px) {
+    .summary-main-div {
+        margin-top: 120px;
+        padding-left: 0px;
+        margin-right: 0px;
+        padding-bottom: 32px;
+        font-family: 'Inter';
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .stats-div{
+        margin-right: 0px;
+        
     }
 }
