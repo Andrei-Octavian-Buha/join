@@ -1,14 +1,27 @@
-
-
 @media (max-width: 355px) {
     .loginCard{
         display: flex;
         flex-direction: column;
-        width: 100%;
+        align-items: center;
+        justify-content: center;
+        width: 90%;
+        height: 515px;
         border-radius: 30px;
         background-color: #ffffff;
         border: 0px;
         box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.4);
+    }
+    .loginContainer{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .maxWidth{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100svh;
     }
     .separable{
         width: 150px;
@@ -31,6 +44,7 @@
     .loginForm{
         display: flex;
         flex-direction: column;
+        align-items: center;
         gap: 32px;
     }
     
@@ -41,7 +55,8 @@
     }
     .loginBtnContainer{
         display: flex;
-        gap: 35px;
+        flex-direction: column;
+        gap: 21px;
     }
     .loginHeaderContainer{
         position: absolute;
@@ -59,26 +74,14 @@
     .loginHeaderBtn{
         display: flex;
         gap: 35px;
-        padding-top: 67px;
-        padding-right: 122px;
         display: flex;
         gap: 35px;
     }
     .logoImg{
-        padding-top: 80px;
-        padding-left: 77px;
     }
-    .maxWidth{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .loginContainer{
-        display: flex;
-        max-width: 1440px;
-    }
+
     .loginInputFeld{
-        width: 442px;
+        width: 100%;
         border-radius: 10px;
         border: 1px solid #D1D1D1;
         padding: 10px 21px;
@@ -101,13 +104,127 @@
     .loginInputFeld:valid {
         border: 1px solid #28a745;
     }
+    .mobileDesktopDNone{
+        display: none;
+    }
+
 }
 
 @media (max-width: 768px) {
+    .loginCard{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+        width: 90%;
+        height: 493px;
+        border-radius: 30px;
+        background-color: #ffffff;
+        border: 0px;
+        box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.4);
+    }
+    .loginContainer{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .maxWidth{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        height: 100svh;
+    }
+    .separable{
+        width: 150px;
+        border-bottom: 3px solid;
+        color: #29ABE2;
+    }
+    
+    .lh1{
+        font-size: 61px;
+        margin-block-start: 0em;
+        margin-block-end: 0em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        font-weight: bold;
+        unicode-bidi: isolate;
+    }
+    .loginTitle{
+        height: 89px;
+    }
+    .loginForm{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+    }
+    
+    .loginInput{
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+    }
+    .loginBtnContainer{
+        display: flex;
+        gap: 21px;
+    }
+    .loginHeaderContainer{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+    .loginHeader{
+        max-width: 1440px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .loginHeaderBtn{
+        display: flex;
+        gap: 35px;
+        display: flex;
+        gap: 35px;
+    }
+    .logoImg{
+        padding-top: 80px;
+        padding-left: 77px;
+    }
 
+    .loginInputFeld{
+        width: 100%;
+        border-radius: 10px;
+        border: 1px solid #D1D1D1;
+        padding: 10px 21px;
+        outline: none
+    }
+    .loginInputFeld:focus{
+        width: 442px;
+        border-radius: 10px;
+        border: 1px solid #29ABE2;
+        padding: 10px 21px;
+        outline: none
+    }
+    .loginInputFeld.invalid{
+        width: 442px;
+        border-radius: 10px;
+        border: 1px solid #ff001f;
+        padding: 10px 21px;
+        outline: none
+    }
+    .loginInputFeld:valid {
+        border: 1px solid #28a745;
+    }
+    .mobileDesktopDNone{
+        display: none;
+    }
 }
 
 @media (min-width: 768px) {
+
     .loginCard{
         display: flex;
         flex-direction: column;
@@ -142,6 +259,7 @@
     .loginForm{
         display: flex;
         flex-direction: column;
+        align-items: center;
         gap: 32px;
     }
     
@@ -214,5 +332,8 @@
     }
     .loginInputFeld:valid {
         border: 1px solid #28a745;
+    }
+    .desktopMobileDnone{
+        display: none;
     }
 }
