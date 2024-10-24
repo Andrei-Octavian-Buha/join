@@ -1,0 +1,207 @@
+.content-wrapper {
+    width: 94%;
+    max-width: 1900px;
+    margin: auto;
+}
+
+.top-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.right-content {
+    display: flex;
+    gap: 30px;
+}
+
+h1 {
+    font-weight: 700;
+}
+
+input {
+    width: 250px;
+    border-radius: 12px;
+    border: 1px solid rgba(211, 211, 211, 0.712);
+    padding-right: 35px;
+    background-image: url('/assets/img/lupe.png');
+    background-size: 20px 20px;
+    background-position: right 10px center;
+    background-repeat: no-repeat;
+    padding-left: 10px;
+}
+
+.add-new-button {
+    width: 140px;
+    padding: 6px 18px;
+    background-color: rgb(42,54,71);
+    border-color: transparent;
+    border-radius: 12px;
+    color: white;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: blue;
+}
+
+.plus {
+    font-size: 28px;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+.head-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.head-content h1 {
+    flex-grow: 1; /* H1 nimmt so viel Platz wie möglich ein */
+    flex-shrink: 1; /* H1 wird bei weniger Platz verkleinert */
+    margin: 0; /* Entfernt zusätzliche Abstände */
+}
+
+.head-content .right-content {
+    display: flex;
+    gap: 10px; /* Abstand zwischen den Elementen */
+    flex-shrink: 1; /* Erlaubt es, bei kleinerer Breite zu schrumpfen */
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-between;  /* Verteilung entlang der Außenkanten */
+    gap: 10px;  /* Abstand zwischen den Spalten */
+    width: 100%;  /* Wrapper deckt die volle Breite des content-wrapper ab */
+}
+
+h3 {
+    font-weight: 300;
+    margin-left: 4px;
+    font-size: 16px;
+}
+
+.add-new {
+    width: 18px;
+    height: 18px;
+    border: 2px solid black;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.add-new img {
+    width: 10px;
+    height: 10px;
+}
+
+.add-new:hover {
+    cursor: pointer;
+}
+
+.column {
+    flex: 1;
+    padding: 4px;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 22px;
+}
+
+
+.drag-area {
+    display: flex; /* Flexbox für die Kinder-Elemente */
+    flex-wrap: wrap; /* Erlaubt das Umfließen der Karten in die nächste Zeile */
+    justify-content: center; 
+    width: 100%;
+    min-height: 180px;
+    background-color: #e2e2e2d5;
+    border: 1px solid rgba(211, 211, 211, 0.349);
+    border-radius: 12px;
+    padding: 10px; /* Optionaler Abstand innerhalb des Containers */
+    box-sizing: border-box;
+}
+
+.drag-area-highlight {
+    background-color: rgba(58, 139, 10, 0.397);
+}
+
+.card {
+    flex: 1 1 calc(5% - 20px); /* Nimmt 25% des verfügbaren Platzes ein, abzüglich Abstand */
+    margin: 10px; /* Abstand zwischen den Karten */
+    background-color: darkgoldenrod;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box; /* Padding wird in die Gesamtgröße der Karte einbezogen */
+}
+
+.card-content {
+    width: 100%;
+    border: 1px solid lightgray;
+    background-color: rgb(169, 179, 150);
+    border-radius: 12px;
+    margin-bottom: 4px;
+    padding: 8px;
+}
+
+.card-content:hover {
+    cursor: pointer;
+}
+
+h4 {
+    font-size: 14px;
+    color: green;
+}
+
+p {
+    font-size: 14px;
+}
+
+@media(max-width: 1140px) {
+    h3 {
+        font-size: 14px;
+    }
+}
+
+@media(max-width: 900px) {
+    .wrapper {
+        flex-direction: column;
+        gap: 0;
+    }
+    .top-content {
+        gap: 15px;
+    }
+    .right-content {
+        gap: 10px;
+    }
+    input {
+        width: 180px;
+    }
+}
+
+@media(max-width: 600px) {
+    .top-content {
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+}
+
+@media(max-width: 460px) {
+    .right-content {
+        flex-direction: column;
+        align-items: center;
+    }
+    input {
+        padding: 10px;
+    }
+}
