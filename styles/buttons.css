@@ -1,6 +1,7 @@
 .btnPrimary{
     display: flex;
     align-items: center;
+    justify-content: center;
     text-align: center;
     height: 48px;
     font-weight: 700;
