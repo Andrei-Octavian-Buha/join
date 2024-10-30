@@ -1,22 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="./styles/header.css" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./styles/add_task.css" />
+    <link rel="stylesheet" href="./styles/buttons.css" />
     <script src="./script.js"></script>
     <title>Add Task</title>
-</head>
-<body onload="includeHTML()">
+  </head>
+  <body onload="includeHTML()">
     <div class="" w3-include-html="./templates/header.html"></div>
-    <div class="content">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro voluptatem ipsum quae vel nulla, rem ex dolore possimus, pariatur quo cum sequi accusamus id inventore commodi soluta amet totam modi.
-            Corrupti et dignissimos sed, cum veniam incidunt delectus magni nulla porro totam perspiciatis illum pariatur voluptate, molestiae reprehenderit eum architecto repellendus nisi. Asperiores quidem nobis consequuntur vel in laudantium maiores.
-            Provident porro nam maiores rem, voluptatibus, totam aspernatur quaerat accusamus accusantium, assumenda quibusdam doloremque quod odit fuga saepe. Repellendus voluptates assumenda fugiat consectetur sint? Accusantium placeat error eius hic praesentium!
-            Excepturi, consectetur reprehenderit molestias corporis, nemo deleniti impedit cumque ipsa blanditiis cupiditate error illo officiis nam et iusto eligendi quisquam velit eveniet voluptate esse atque fugit. Ut ab tempora ea.
-            Pariatur tempora voluptas iste nobis enim ullam error blanditiis, odit nihil dicta, sapiente esse. Quae corporis voluptatibus voluptatem inventore provident atque accusantium quaerat! Aliquid reiciendis eligendi facere mollitia facilis minima?
-        </p>
+    <div class="addTaskMainDiv">
+      <div class="container">
+        <div>
+          <h1>Add Task</h1>
+        </div>
+        <div class="tittle">
+          <h3>Title</h3>
+          <input type="text" />
+        </div>
+        <div class="description">
+          <h3>Description</h3>
+          <input type="text" />
+        </div>
+        <div class="assignet">
+          <h3>Assignet To</h3>
+          <input type="text" />
+        </div>
+        <div class="dueDate">
+          <h3>To due Date</h3>
+          <input type="text" />
+        </div>
+        <div class="priority">
+          <h3>Prio</h3>
+          <div class="priorityBtnContainer">
+            <div>
+              <button class="btnPriority">Urgent<img src="./assets/priority/urgent.svg" alt="" />
+              </button>
+            </div>
+            <div>
+              <button class="btnPriorityMedium">Medium<img src="./assets/priority/medium.svg" alt="" />
+              </button>
+            </div>
+            <div>
+              <button class="btnPriority">Low<img src="./assets/priority/low.svg" alt="" />
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="buttons">
+          <button class="btnSecundary">Clear</button>
+          <button class="btnPrimary">Create Task <img src="" alt="" /></button>
+        </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>

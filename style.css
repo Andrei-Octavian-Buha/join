@@ -1,8 +1,7 @@
 body{
-    height: 100vh;
     margin: 0;
     background-color: #f6f7f8;
-    font-family: sans-serif;
+    font-family: 'Inter';
 }
 
 p{
