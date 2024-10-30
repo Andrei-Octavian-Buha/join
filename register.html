@@ -1,22 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles/header.css" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./styles/login.css" />
+    <link rel="stylesheet" href="./styles/buttons.css" />
+    <link rel="stylesheet" href="./styles/desktop_join_overlay.css" />
     <script src="./script.js"></script>
-    <title>Register</title>
-</head>
-<body onload="includeHTML()">
-    <div class="" w3-include-html="./templates/header.html"></div>
-    <div class="content">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro voluptatem ipsum quae vel nulla, rem ex dolore possimus, pariatur quo cum sequi accusamus id inventore commodi soluta amet totam modi.
-            Corrupti et dignissimos sed, cum veniam incidunt delectus magni nulla porro totam perspiciatis illum pariatur voluptate, molestiae reprehenderit eum architecto repellendus nisi. Asperiores quidem nobis consequuntur vel in laudantium maiores.
-            Provident porro nam maiores rem, voluptatibus, totam aspernatur quaerat accusamus accusantium, assumenda quibusdam doloremque quod odit fuga saepe. Repellendus voluptates assumenda fugiat consectetur sint? Accusantium placeat error eius hic praesentium!
-            Excepturi, consectetur reprehenderit molestias corporis, nemo deleniti impedit cumque ipsa blanditiis cupiditate error illo officiis nam et iusto eligendi quisquam velit eveniet voluptate esse atque fugit. Ut ab tempora ea.
-            Pariatur tempora voluptas iste nobis enim ullam error blanditiis, odit nihil dicta, sapiente esse. Quae corporis voluptatibus voluptatem inventore provident atque accusantium quaerat! Aliquid reiciendis eligendi facere mollitia facilis minima?
-        </p>
+    <title>Join - Sign up</title>
+  </head>
+  <body onload="includeHTML()">
+    <main class="maxWidth">
+      <div class="loginHeaderContainer">
+        <div class="loginHeader">
+          <div class="logoImg">
+            <img id="imgHeader1" src="./assets/img/Capa1.svg" alt="" />
+          </div>
+        </div>
+      </div>
+      <div class="loginCard">
+        <div class="loginTitle">
+          <h1 class="lh1">Sign Up</h1>
+          <hr class="separable" />
+        </div>
+        <form action="" class="loginForm">
+          <div class="loginInput">
+            <input
+            type="text"
+            class="loginInputFeld"
+            placeholder="Name"
+            required
+          />
+            <input
+              type="email"
+              class="loginInputFeld"
+              placeholder="Email"
+              required
+            />
+            <input
+              type="password"
+              class="loginInputFeld"
+              placeholder="Password"
+              required
+            />
+            <input
+            type="password"
+            class="loginInputFeld"
+            placeholder="Confirm Password"
+            required
+          />
+          </div>
+          <div>
+            <input
+              id="checkbox"
+              type="checkbox"
+              placeholder="Remember me"
+              name="Remeber me"
+            />
+            <label for="checkbox">I accept the <a href="./privacy.html">Privacy policy</a></label>
+          </div>
+          <div class="loginBtnContainer">
+            <button class="btnPrimary btnMobileSettings">Log in</button>
+            <button class="btnSecundary btnMobileSettings">Guest Log in</button>
+          </div>
+        </form>
+      </div>
+      <div class="loginHeaderBtn desktopMobileDnone">
+        <p>Not a Join user ?</p>
+        <button class="btnPrimary">Sign up</button>
+      </div>
+        <div class="privacyBtn">
+          <a href="">Privacy Policy</a>
+          <a href="">Legal notice</a>
+        </div>
     </div>
-</body>
+    </main>
+  </body>
 </html>
