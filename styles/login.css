@@ -3,6 +3,13 @@
         position: absolute;
         z-index: 995;
         bottom: 40px;
+        display: flex;
+        gap: 32px;
+    }
+
+    .privacyLink{
+        color: #CDCDCD;
+        text-decoration: none;
     }
     .maxWidth{
         height: 100dvh;
@@ -118,6 +125,17 @@
     .desktopMobileDnone{
         display: none;
     }
+
+
+    .containerInputSignUp{
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+    .inputWithImg{
+        position: absolute;
+        right: 24px;
+    }
 }
 
 
@@ -127,6 +145,10 @@
         position: absolute;
         z-index: 995;
         bottom: 40px;
+    }
+    .privacyLink{
+        color: #CDCDCD;
+        text-decoration: none;
     }
     .maxWidth{
         display: flex;
@@ -162,7 +184,7 @@
     }
     
     .lh1{
-        font-size: 61px;
+        font-size: 47px;
         margin-block-start: 0em;
         margin-block-end: 0em;
         margin-inline-start: 0px;
@@ -223,6 +245,7 @@
         padding-bottom: 90px;
     }
     .loginInputFeld{
+        width: 100%;
         border-radius: 10px;
         border: 1px solid #D1D1D1;
         padding: 10px 21px;
@@ -250,6 +273,17 @@
         display: none;
     }
 
+
+    .containerInputSignUp{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+    .inputWithImg{
+        position: absolute;
+        right: 45px;
+    }
 }
 
 

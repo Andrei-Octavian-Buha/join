@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./styles/buttons.css" />
     <link rel="stylesheet" href="./styles/desktop_join_overlay.css" />
     <script src="./script.js"></script>
+    <script src="./js/register.js"></script>
     <title>Join - Sign up</title>
   </head>
   <body onload="includeHTML()">
@@ -22,7 +23,7 @@
       </div>
       <div class="loginCard">
         <div class="backArrow">
-          <img src="./assets/menu/arrow-left-line.svg" alt="">
+          <img id="backToLogin" src="./assets/menu/arrow-left-line.svg" alt="">
         </div>
           <div class="loginTitle">
               <h1 class="lh1">Sign up</h1>
@@ -88,10 +89,13 @@
         <button class="btnPrimary">Sign up</button>
       </div>
         <div class="privacyBtn">
-          <a class="privacyLink" href="">Privacy Policy</a>
-          <a class="privacyLink" href="">Legal notice</a>
+          <a class="privacyLink" href="./privacy.html">Privacy Policy</a>
+          <a class="privacyLink" href="./legal.html">Legal notice</a>
         </div>
     </div>
     </main>
+    <script>
+      backToLogin();
+    </script>
   </body>
 </html>

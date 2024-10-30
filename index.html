@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./styles/login.css" />
     <link rel="stylesheet" href="./styles/buttons.css" />
     <link rel="stylesheet" href="./styles/desktop_join_overlay.css" />
+    <script src="./js/login.js"></script>
     <script src="./script.js"></script>
     <title>Join - Login</title>
   </head>
@@ -20,7 +21,7 @@
           </div>
           <div class="loginHeaderBtn mobileDesktopDNone">
             <p>Not a Join user ?</p>
-            <button class="btnPrimary">Sign up</button>
+            <button id="loginToSignUp" class="btnPrimary">Sign up</button>
           </div>
         </div>
       </div>
@@ -31,18 +32,24 @@
         </div>
         <form action="" class="loginForm">
           <div class="loginInput">
-            <input
+            <div class="containerInputSignUp">
+              <input
               type="email"
               class="loginInputFeld"
               placeholder="Email"
               required
             />
-            <input
+            <img class="inputWithImg" src="./assets/menu/mail.svg" alt="">
+            </div>
+            <div class="containerInputSignUp">
+              <input
               type="password"
               class="loginInputFeld"
               placeholder="Password"
               required
             />
+            <img class="inputWithImg" src="./assets/menu/lock.svg" alt="">
+            </div>
           </div>
           <div>
             <input
@@ -64,15 +71,18 @@
         <button class="btnPrimary">Sign up</button>
       </div>
         <div class="privacyBtn">
-          <a href="">Privacy Policy</a>
-          <a href="">Legal notice</a>
+          <a class="privacyLink" href="./privacy.html">Privacy Policy</a>
+          <a class="privacyLink" href="./legal.html">Legal notice</a>
         </div>
     </div>
     </main>
-  </body>
-  <div
+    <div
     id="overlayId"
     class=""
     w3-include-html="./templates/desktop_join_overlay.html"
   ></div>
+  <script>
+    addEvent();
+  </script>
+  </body>
 </html>
