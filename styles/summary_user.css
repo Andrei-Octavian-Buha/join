@@ -8,10 +8,6 @@
     align-items: center;
 }
 
-body{
-    overflow: hidden;
-}
-
 .seperator {
     height: 59px;
     width: 3px;
@@ -306,6 +302,23 @@ body{
     .greeting-div{
         display: none;
     }
+
+    .stats-div{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .stats-first{
+        justify-content: normal;
+    }
+
+    .stats-second{
+        justify-content: normal;
+    }
+
+    .stats-third{
+        justify-content: normal;
+    }
 }
 
 @media (max-width: 800px) {
@@ -322,6 +335,39 @@ body{
 
     .stats-div{
         margin-right: 0px;
-        
+    }
+
+    .stats-header{
+        flex-direction: column;
+        align-items: normal;
+    }
+
+    .stats-cap{
+        margin-block-start: 0px;
+        margin-block-end: 0px;
+    }
+
+    .seperator{
+        height: 3px;
+        width: 59px;
     }
 }
+
+@media (max-width: 650px) {
+    .stats-div{
+        width: 500px;
+    }
+}
+
+@media (max-width: 550px) {
+    .stats-div{
+        width: 400px;
+    }
+}
+
+@media (max-width: 450px) {
+    .stats-div{
+        width: 300px;
+    }
+}
+
