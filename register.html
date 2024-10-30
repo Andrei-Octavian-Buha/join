@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles/header.css" />
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="./styles/login.css" />
+    <link rel="stylesheet" href="./styles/register.css" />
     <link rel="stylesheet" href="./styles/buttons.css" />
     <link rel="stylesheet" href="./styles/desktop_join_overlay.css" />
     <script src="./script.js"></script>
@@ -21,36 +21,52 @@
         </div>
       </div>
       <div class="loginCard">
-        <div class="loginTitle">
-          <h1 class="lh1">Sign Up</h1>
-          <hr class="separable" />
+        <div class="backArrow">
+          <img src="./assets/menu/arrow-left-line.svg" alt="">
         </div>
+          <div class="loginTitle">
+              <h1 class="lh1">Sign up</h1>
+              <hr class="separable"/>
+          </div>
+
         <form action="" class="loginForm">
           <div class="loginInput">
-            <input
-            type="text"
-            class="loginInputFeld"
-            placeholder="Name"
-            required
-          />
-            <input
+            <div class="containerInputSignUp">
+              <input
+              type="text"
+              class="loginInputFeld"
+              placeholder="Name"
+              required
+            />
+            <img class="inputWithImg" src="./assets/menu/person.svg" alt="">
+            </div>
+            <div class="containerInputSignUp">
+              <input
               type="email"
               class="loginInputFeld"
               placeholder="Email"
               required
             />
-            <input
+            <img class="inputWithImg" src="./assets/menu/mail.svg" alt="">
+            </div>
+            <div class="containerInputSignUp">
+              <input
               type="password"
               class="loginInputFeld"
               placeholder="Password"
               required
             />
+            <img class="inputWithImg" src="./assets/menu/lock.svg" alt="">
+            </div>
+            <div class="containerInputSignUp">
             <input
             type="password"
             class="loginInputFeld"
             placeholder="Confirm Password"
             required
           />
+          <img class="inputWithImg" src="./assets/menu/lock.svg" alt="">
+        </div>
           </div>
           <div>
             <input
@@ -72,8 +88,8 @@
         <button class="btnPrimary">Sign up</button>
       </div>
         <div class="privacyBtn">
-          <a href="">Privacy Policy</a>
-          <a href="">Legal notice</a>
+          <a class="privacyLink" href="">Privacy Policy</a>
+          <a class="privacyLink" href="">Legal notice</a>
         </div>
     </div>
     </main>
