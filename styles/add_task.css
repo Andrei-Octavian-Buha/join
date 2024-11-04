@@ -1,38 +1,59 @@
 @media (min-width: 771px) {
-    .addTaskMainDiv{
-        margin-top: 192px;
-        padding-left: 296px;
-        margin-right: 64px;
-        padding-bottom: 32px;
-    }
+  .addTaskMainDiv {
+    margin-top: 192px;
+    padding-left: 296px;
+    margin-right: 64px;
+    padding-bottom: 32px;
+  }
 }
 
 @media (max-width: 770px) {
-    .addTaskMainDiv{
-        margin-top: 192px;
-        padding-left: 0px;
-        margin-right: 0px;
-        padding-bottom: 32px;
-    }
-    .priority{
-        display: flex;
-        flex-direction: column;
-    }
-    .priorityBtnContainer{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 16px;
-    }
-    .buttons{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 32px;
-    }
+  .inputStyle {
+    width: 100%;
+  }
+  .containerR {
+    display: flex;
+    flex-direction: column;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .leftContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+  }
+  .rightContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    gap: 32px;
+  }
+  .addTaskMainDiv {
+    margin-top: 192px;
+    padding-left: 0px;
+    margin-right: 0px;
+    padding-bottom: 32px;
+  }
+  .priority {
+    display: flex;
+    flex-direction: column;
+  }
+  .priorityBtnContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+  .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+  }
 }
 @media (max-width: 350px) {
 }
-
-
-
