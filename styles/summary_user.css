@@ -1,11 +1,11 @@
 .summary-main-div {
-    margin-top: 192px;
+    margin-top: 100px;
     padding-left: 296px;
-    margin-right: 64px;
     padding-bottom: 32px;
     font-family: 'Inter';
     display: flex;
     align-items: center;
+    height: 100%;
 }
 
 .seperator {
@@ -125,7 +125,6 @@
 }
 
 .stats-first{
-    width: 100%;
     display: flex;
     gap: 10px;
     align-items: center;
@@ -153,7 +152,6 @@
 }
 
 .stats-second{
-    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -182,7 +180,7 @@
 }
 
 .stats-icon-urgent{
-    height: 60px;
+    height: 69px;
 }
 
 .stats-urgent-icon-div{
@@ -204,7 +202,6 @@
 }
 
 .stats-third{
-    width: 100%;
     display: flex;
     gap: 10px;
     align-items: center;
@@ -261,7 +258,7 @@
 
 
 .fullscreen-greeting-overlay {
-    display: none; 
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -273,7 +270,10 @@
     flex-direction: column;
     font-size: 2rem;
     z-index: 999;
+    pointer-events: none; 
+    animation: fadeInOut 3s forwards;
 }
+
 
 @media (max-width: 1210px) {
     .greeting-text {
@@ -302,23 +302,6 @@
     .greeting-div{
         display: none;
     }
-
-    .stats-div{
-        display: flex;
-        flex-direction: column;
-    }
-
-    .stats-first{
-        justify-content: normal;
-    }
-
-    .stats-second{
-        justify-content: normal;
-    }
-
-    .stats-third{
-        justify-content: normal;
-    }
 }
 
 @media (max-width: 800px) {
@@ -340,6 +323,12 @@
     .stats-header{
         flex-direction: column;
         align-items: normal;
+        margin-left: 40px;
+    }
+
+    .stats-header-text{
+        margin-block-start: 0em;
+        margin-block-end: 0em;
     }
 
     .stats-cap{
@@ -348,14 +337,25 @@
     }
 
     .seperator{
+        display: none;
+    }
+
+    .seperator-horizontal{
         height: 3px;
         width: 59px;
+        background-color: #29ABE2;
+        margin-top: 10px;
+        margin-bottom: 20px;
     }
 }
 
 @media (max-width: 650px) {
     .stats-div{
         width: 500px;
+    }
+
+    .stats-header{
+        margin-left: 0px;
     }
 }
 
@@ -369,5 +369,72 @@
     .stats-div{
         width: 300px;
     }
+
+    .stats-cap{
+        font-size: 51px;
+    }
+
+    .stats-first{
+        margin-bottom: 10px;
+    }
+
+    .stats-second{
+        margin-bottom: 10px;
+    }
+
+    .stats-button-to-do{
+        height: 105px;
+    }
+
+    .stats-button-done{
+        height: 105px;
+    }
+
+    .summary-icon{
+        height: 59px;
+        width: 59px;
+    }
+
+    .number-div{
+        font-size: 52px;
+    }
+
+    .stats-icon-urgent{
+        height: 59px;
+        width: 59px;
+    }
+
+    .number-caption-span{
+        font-size: 15px;
+    }
+
+    .date-text{
+        font-size: 15px;
+    }
+
+    .upcoming-text{
+        font-size: 11px;
+    }
+
+    .third-button-text{
+        font-size: 13px;
+    }
+
+    .stats-third-button{
+        height: 105px;
+    }
+
+    .stats-button-urgent{
+        height: 105px;
+    }
+
+    .seperator-gray{
+        height: 75px;
+    }
+
+    .summary-main-div{
+        margin-top: 100px;
+    }
+    
 }
 

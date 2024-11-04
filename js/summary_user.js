@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-
 document.addEventListener('DOMContentLoaded', function() {
     const image = document.getElementById('summary-icon-check');
     const originalSrc = './assets/img/summary-button-check.png';
@@ -28,5 +27,3 @@ document.addEventListener('DOMContentLoaded', function() {
         image.src = originalSrc; 
     });
 });
-
-
