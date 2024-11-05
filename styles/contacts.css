@@ -40,7 +40,7 @@ button {
     margin-right: auto;
     height: 44px;
     width: 70%;
-    max-width: 400px;
+    max-width: 300px;
     background-color: rgb(42, 54, 71);
     border: none;
     border-radius: 12px;
@@ -73,9 +73,12 @@ button:hover {
     border: none;
     width: 60%;
     height: 80vh;
-    background-color: rgba(250, 250, 250, 0.274);
-    box-shadow: -1px 0px 4px rgba(0, 0, 0, 0.5); 
-    border-left: 2px solid #000;
+    background-color: rgba(134, 178, 199, 0.274);
+    box-shadow: -1px 0px 2px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Sorgt für linksbündige Ausrichtung */
+    padding-left: 40px; /* Optional: Abstand vom Rand */
 }
 
 .contact-headline {
@@ -94,8 +97,8 @@ button:hover {
 
 .blue-line-responsive {
     display: none;
-    height: 2px;
-    width: 40px;
+    height: 1px;
+    width: 60px;
     background-color: rgb(41,171,226);
 }
 
@@ -323,7 +326,7 @@ button {
     cursor: pointer;
     position: absolute;
     bottom: 11%;
-    right: 4%;
+    right: 2%;
     transition: transform 0.3s ease;
 }
 
@@ -358,8 +361,10 @@ h4 {
 .list {
     width: 80%;
     margin: 0;
+    margin-top: 30px;
     padding: 0;
     padding-right: 24px;
+    max-height: 80%;
     overflow: auto;
 }
 
@@ -371,7 +376,6 @@ ul {
     font-size: 1em;
     margin-top: 20px;
 }
-
 
 .contact-card {
     cursor: pointer;
@@ -388,6 +392,10 @@ ul {
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+.contact-card.active {
+    background-color: rgb(42,54,71)
+}
+
 .contact-card h3 {
     margin-top: 0;
     margin-bottom: 0;
@@ -401,9 +409,131 @@ ul {
     font-size: 12px;
 }
 
+.overlay-contact {
+    background-color: rgba(0, 0, 0, 0.7); /* Halbdurchsichtiger Hintergrund */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.second-overlay-contact {
+    display: flex;
+    border-color: transparent;
+    width: 100%;
+    height: 70%;
+    border: 2px solid rgbargb(42,54,71); 
+}
+
+.second-overlay-content {
+    margin-top: 10px;
+    position: relative;
+}
+
+.custom-badge {
+    margin-top: 1%;
+    height: 90px;
+    width: 90px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.3em;
+}
+
+.detail-content {
+    position: absolute;
+    top: 5%;
+    left: 30%;
+}
+
+.detail-content h1 {
+    font-size: 2em;
+    margin: 0;
+    font-weight: 400;
+}
+
+.sub-content p {
+    color: black;
+}
+
+.edit-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 20px;
+    width: 100px;
+}
+
+.edit-button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.delete-button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.edit-button-container p, 
+.delete-button-container p {
+    color: rgba(0, 0, 0, 0.678); 
+}
+
+.delete-button-container p:hover, 
+.edit-button-container p:hover {
+    cursor: pointer;
+    color: rgb(41,171,226);
+}
+
+img.edit-image {
+    width: 20px;
+    height: 20px;
+}
+
+img.delete-image {
+    width: 20px;
+    height: 20px;
+}
+
+.sub-content {
+    margin-top: 40px;
+}
+
+.sub-info {
+    margin-bottom: 30px;
+}
+
+.email {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+p.contact-email {
+    color: rgb(41,171,226);
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.phone {
+    display: flex;
+    flex-direction: column;
+}
+
 @media(max-width: 1015px) {
     .contact-headline {
         flex-direction: column;
+        margin: auto;
+    }
+    h1, h3 {
+        margin: 0;
     }
     .blue-line {
         display: none;
@@ -474,5 +604,11 @@ ul {
     }
     .add-new-button {
         display: none;
+    }
+}
+
+@media(max-width: 650px) {
+    .list {
+        max-height: 70%;
     }
 }
