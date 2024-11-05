@@ -196,6 +196,11 @@
         display: flex;
         align-items: center;
         gap: 16px;
+        padding-right: 12px;
+    }
+
+    .dropdown-content{
+        margin-right: 30px;
     }
     .profilPic{
         color: #29ABE2;
@@ -358,6 +363,7 @@
     }
     .profilPic:hover{
         background-color: #0C2E621F;
+        cursor: pointer;
     }
     .profilText{
         font-weight: bold;
@@ -373,3 +379,45 @@
         transition: 750;
     }
 }
+
+.dropdown-content {
+    display: none; 
+    position: absolute;
+    top: 106px; 
+    right: 20px; 
+    background-color: #2A3647;
+    min-width: 150px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 12px;
+    z-index: 1;
+    border-radius: 20px;
+    border-top-right-radius: 0;
+    height: 158px;
+    width: 150px;
+  }
+
+  .dropdown-links{
+    font-size: 16px;
+    font-weight: 400;
+      padding-top: 16px;  
+      padding-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+    align-items: flex-start;
+   
+  }
+
+
+  .dropdown-content a {
+    transition: background-color 0.3s ease, color 0.3s ease;
+    padding: 10px;
+    width: 90%;
+    color: #CDCDCD;
+    text-decoration: none;
+    display: block;
+
+  }
+
+  .dropdown-content a:hover {
+    background-color: #0e5c7690;
+  }
