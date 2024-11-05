@@ -296,6 +296,7 @@
         gap: 15px;
         text-decoration: none;
         color: #CDCDCD;
+        cursor: pointer;
     }
     span{
         font-size: 16px;
@@ -307,10 +308,12 @@
         display: flex;
         align-items: center;
         gap: 15px;
+        cursor: pointer;
     }
 
     .priv-legal-link :hover{
         color: #29ABE2;
+        transform: scale(1.05);
     }
 
     .priv-legal-div{

@@ -84,6 +84,7 @@
     text-decoration: none;
     color: black;
     transition: transform 0.3s ease;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
 }
 
 .stats-button-done{   
@@ -98,35 +99,36 @@
     text-decoration: none;
     color: black;
     transition: transform 0.3s ease;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
 }
 
 .stats-button-done:hover{
-    transform: scale(1.1);
+    transform: scale(1.05);
     background-color: #2A3647;
     color: #ffffff;
 }
 
 .stats-button-to-do:hover{
-    transform: scale(1.1);
+    transform: scale(1.05);
     background-color: #2A3647;
     color: #ffffff;
 }
 
 .stats-button-urgent:hover{
-    transform: scale(1.1);
+    transform: scale(1.05);
     background-color: #2A3647;
     color: #ffffff;
 }
 
 .stats-third-button:hover{
-    transform: scale(1.1);
+    transform: scale(1.05);
     background-color: #2A3647;
     color: #ffffff;
 }
 
 .stats-first{
     display: flex;
-    gap: 10px;
+    gap: 20px;
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
@@ -162,7 +164,7 @@
 }
 
 .stats-button-urgent{
-    width: 490px;
+    width: 500px;
     height: 150px;
     border-radius: 30px;
     display: flex;
@@ -172,6 +174,7 @@
     text-decoration: none;
     color: black;
     transition: transform 0.3s ease;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
 }
 
 .stats-button-urgent-left{
@@ -203,7 +206,7 @@
 
 .stats-third{
     display: flex;
-    gap: 10px;
+    gap: 20px;
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
@@ -222,6 +225,7 @@
     justify-content: center;
     align-items: center;
     transition: transform 0.3s ease;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
 }
 
 .third-button-text{
@@ -301,6 +305,23 @@
 
     .greeting-div{
         display: none;
+    }
+
+    .stats-first{
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    .stats-second{
+        margin-bottom: 10px;
+    }
+
+    .stats-third{
+        gap: 10px;
+    }
+
+    .stats-button-urgent{
+        width: 490px;
     }
 }
 
