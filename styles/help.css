@@ -1,0 +1,84 @@
+body{
+    font-size: 16px;
+}
+
+.help-header{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.help-main-div{
+    margin-top: 192px;
+    padding-left: 100px;
+    margin-right: 100px;
+    padding-bottom: 32px;
+}
+
+h1{
+    font-size: 60px;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-bottom: 30px;
+}
+
+b{
+    color: #29ABE2;
+}
+
+.welcome{
+    padding-bottom: 10px;
+}
+
+h2{
+    font-size: 30px;
+}
+
+h3{
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    padding-top: 10px;
+    font-size: 25px;
+}
+
+.how-to{
+    display:flex;
+}
+
+.how-to-numbers{
+    font-size: 45px;
+    font-weight: bold;
+    align-items: start;
+    display: flex;
+}
+
+.how-to-text{
+    padding-left: 35px;
+}
+
+@media (max-width: 800px) {
+    .help-main-div{
+        padding-left: 32px;
+        margin-right: 32px;
+        padding-bottom: 100px;
+    }
+}
+
+@media (max-width: 500px) {
+    h1{
+        font-size: 50px;
+    }
+
+    h2{
+        font-size: 25px;
+    }
+
+    h3{
+        font-size: 20px;
+    }
+
+    .how-to-numbers{
+        font-size: 25px;
+        padding-top: 8px;
+    }
+}

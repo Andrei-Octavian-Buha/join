@@ -111,6 +111,19 @@
     display: none;
   }
 
+  .profilhelp{
+    display: none;
+  }
+
+  .help-link-dd{
+    display: block;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    padding: 10px;
+    width: 90%;
+    color: #cdcdcd;
+    text-decoration: none;
+  }
+
   .navSection {
     width: 100%;
     position: fixed;
@@ -192,6 +205,7 @@
 
   .dropdown-content {
     margin-right: 30px;
+    height: 190px !important;
   }
   .profilPic {
     color: #29abe2;
@@ -280,6 +294,9 @@
     padding-top: 243px;
     color: #cdcdcd;
     margin-bottom: 200px;
+  }
+  .help-link-dd{
+    display: none;
   }
 
   .aLink {
@@ -391,7 +408,7 @@
   align-items: flex-start;
 }
 
-.dropdown-content a {
+.other-link-dd {
   transition: background-color 0.3s ease, color 0.3s ease;
   padding: 10px;
   width: 90%;
