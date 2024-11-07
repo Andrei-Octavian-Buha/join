@@ -17,6 +17,12 @@ a{
     color: #29ABE2;;
 }
 
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 @media (max-width: 800px) {
     .legal-notice-main-div{
         padding-left: 64px;
