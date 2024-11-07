@@ -8,14 +8,79 @@
 }
 
 @media (max-width: 770px) {
-  .inputStyle {
+  .firstLetterCircle {
+    height: 42px;
+  }
+  /* DE AICI DE CONTINUAT */
+  .dropDownContactContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 56px;
+  }
+  .dropDownGroup {
+    height: 336px;
+    background-color: #ffffff;
+    border-radius: 10px;
+  }
+  .dropDownHeader {
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 1px solid #d1d1d1;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+  }
+  .dropDownBody {
+    background-color: #ffffff;
+    height: calc(100% - 50px);
+    padding-top: 25px;
+    border: 1px solid #ffffff;
+    border-radius: 10px;
+  }
+  .addTaskMainDiv {
+    margin-top: 82px;
+    padding-left: 0px;
+    margin-right: 0px;
+    padding-bottom: 32px;
+  }
+  .containerTitle {
     width: 100%;
   }
-  .containerR {
+  .h1style {
+    margin-top: 48px;
+    margin-bottom: 8px;
+  }
+  .testA {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+  }
+  textarea {
+    height: 80px;
+  }
+  .inputStyle {
+    width: calc(100% - 42px);
+    padding: 10px 21px;
+    border-radius: 10px;
+    border: 1px solid #d1d1d1;
+    color: #000000;
+    resize: none;
+    outline: none;
+  }
+  .inputStyle::placeholder {
+    color: #d1d1d1;
+  }
+  .containeR {
     display: flex;
     flex-direction: column;
     padding-left: 16px;
     padding-right: 16px;
+    padding-bottom: 55px;
+    gap: 32px;
   }
   .leftContainer {
     display: flex;
@@ -23,6 +88,8 @@
     justify-content: center;
     flex-direction: column;
     width: 100%;
+    gap: 32px;
+    margin-bottom: 32px;
   }
   .rightContainer {
     display: flex;
@@ -32,12 +99,7 @@
     width: 100%;
     gap: 32px;
   }
-  .addTaskMainDiv {
-    margin-top: 192px;
-    padding-left: 0px;
-    margin-right: 0px;
-    padding-bottom: 32px;
-  }
+
   .priority {
     display: flex;
     flex-direction: column;
@@ -53,6 +115,12 @@
     align-items: center;
     justify-content: center;
     gap: 32px;
+  }
+  input {
+    outline: none;
+  }
+  .req {
+    color: #ff8190;
   }
 }
 @media (max-width: 350px) {

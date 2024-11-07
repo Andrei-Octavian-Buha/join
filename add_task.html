@@ -15,94 +15,123 @@
     <link rel="stylesheet" href="./styles/buttons.css" />
     <script src="./script.js"></script>
 
-
     <title>Add Task</title>
   </head>
   <body onload="includeHTML()">
     <div class="" w3-include-html="./templates/header.html"></div>
     <div class="addTaskMainDiv">
-      <div class="containerR">
-        <div class="leftContainer">
-          <h1>Add Task</h1>
-          <div>
-            <span>Title</span>
-            <input type="text" class="inputStyle" placeholder="Enter a title" />
+      <div class="containeR">
+        <form action="">
+          <div class="leftContainer">
+            <div class="containerTitle">
+              <h1 class="h1style">Add Task</h1>
+            </div>
+
+            <div class="testA">
+              <label for="addTaskTittle"
+                >Title<span class="req">*</span>
+              </label>
+              <input
+                id="addTaskTittle"
+                type="text"
+                class="inputStyle"
+                placeholder="Enter a title"
+                required
+              />
+            </div>
+            <div class="testA">
+              <label for="addTaskTittle">Description</label>
+              <textarea
+                name=""
+                id=""
+                placeholder="Enter a Description"
+                class="inputStyle"
+              ></textarea>
+            </div>
+            <div class="testA">
+              <label for="">Assignet To</label>
+              <div class="dropDownGroup">
+                <div class="dropDownHeader">
+                  <span>Select contacts to assign</span>
+                  <img src="./assets/menu/arrow_drop_down.svg" alt="" />
+                </div>
+                <div class="dropDownBody">
+                  <div class="dropDownContactContainer">
+                    <div>
+                      <span class="firstLetterCircle">SM</span>
+                      <span>Sofia Muller</span>
+                    </div>
+                    <div>
+                      <input type="checkbox" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div>
-            <span>Description</span>
-            <input
-              type="text"
-              class="inputStyle"
-              placeholder="Enter a Description"
-            />
-          </div>
-          <div>
-            <label for="cars">Assignet To</label><br />
-            <select name="cars" id="cars" class="inputStyle">
-              <option value="" disabled selected>
-                Select contacts to assign
-              </option>
-              <option value="saab">Saab</option>
-              <option value="mercedes">Mercedes</option>
-              <option value="audi">Audi</option>
-            </select>
-          </div>
-        </div>
-        <div class="rightContainer">
-          <div>
-              <span>To due Date</span>
+          <div class="rightContainer">
+            <div class="testA">
+              <span>Due date<span class="required">*</span></span>
               <input type="date" class="inputStyle" />
-          </div>
-          <div class="priority">
+            </div>
+            <div class="priority">
               <span>Prio</span>
               <div class="priorityBtnContainer">
-                  <div>
+                <div>
                   <button class="btnPriority">
                     Urgent<img src="./assets/priority/urgent.svg" alt="" />
                   </button>
-              </div>
-              <div>
+                </div>
+                <div>
                   <button class="btnPriority">
                     Medium<img src="./assets/priority/medium.svg" alt="" />
                   </button>
-              </div>
-              <div>
+                </div>
+                <div>
                   <button class="btnPriority">
                     Low<img src="./assets/priority/low.svg" alt="" />
                   </button>
+                </div>
               </div>
-          </div>
-          <div>
-              <h3>Category</h3>
-              <label for="cars">Assignet To</label><br />
-              <select class="form-select form-select-sm" aria-label="Small select example">
+              <div class="testA">
+                <h3>Category</h3>
+                <label for="cars">Assignet To</label><br />
+                <select
+                  class="form-select form-select-sm"
+                  aria-label="Small select example"
+                >
                   <option disabled selected>Select task category</option>
                   <option value="1">One</option>
                   <option value="2">Two</option>
                   <option value="3">Three</option>
-              </select>
-          </div>
-          <div>
-            <p>Title</p>
-            <div class="containerInputSignUp">
-                <input
-                  type="text"
-                  class="loginInputFeld"
-                  placeholder="Add a new subtask"
-                  required
-                />
-                <img class="inputWithImg" src="./assets/menu/add.svg" alt="" />
+                </select>
+              </div>
+              <div class="testA">
+                <p>Title</p>
+                <div class="containerInputSignUp">
+                  <input
+                    type="text"
+                    class="loginInputFeld"
+                    placeholder="Add a new subtask"
+                    required
+                  />
+                  <img
+                    class="inputWithImg"
+                    src="./assets/menu/add.svg"
+                    alt=""
+                  />
+                </div>
+              </div>
             </div>
           </div>
           <div class="buttons">
-              <button class="btnSecundary">Clear</button>
-              <button class="btnPrimary">Create Task <img src="" alt="" /></button>
+            <button class="btnSecundary">Clear</button>
+            <button class="btnPrimary">
+              Create Task <img src="" alt="" />
+            </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </body>
 </html>
-
-
-
