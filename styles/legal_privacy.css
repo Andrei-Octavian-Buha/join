@@ -1,0 +1,42 @@
+.privacy-main-div{
+    margin-top: 192px;
+    padding-left: 296px;
+    margin-right: 64px;
+    padding-bottom: 32px;
+}
+
+.legal-notice-main-div{
+    margin-top: 192px;
+    padding-left: 296px;
+    margin-right: 64px;
+    padding-bottom: 32px;
+}
+
+a{
+    text-decoration: none;
+    color: #29ABE2;;
+}
+
+@media (max-width: 800px) {
+    .legal-notice-main-div{
+        padding-left: 64px;
+        margin-right: 64px;
+    }
+
+    .privacy-main-div{
+        padding-left: 64px;
+        padding-bottom: 80px;
+    }
+}
+
+@media (max-width: 800px) {
+    .legal-notice-main-div{
+        padding-left: 25px;
+        margin-right: 25px;
+    }
+
+    .privacy-main-div{
+        padding-left: 25px;
+        margin-right: 25px;
+    }
+}
