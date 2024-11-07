@@ -13,7 +13,9 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="./styles/add_task.css" />
     <link rel="stylesheet" href="./styles/buttons.css" />
+    <link rel="stylesheet" href="./styles/radio_button.css">
     <script src="./script.js"></script>
+    <script src="./js/add_task.js"></script>
 
     <title>Add Task</title>
   </head>
@@ -49,22 +51,105 @@
               ></textarea>
             </div>
             <div class="testA">
-              <label for="">Assignet To</label>
+              <span>Assignet To</span>
               <div class="dropDownGroup">
-                <div class="dropDownHeader">
+                <div id="dropDownHeaderId" class="dropDownHeader">
                   <span>Select contacts to assign</span>
                   <img src="./assets/menu/arrow_drop_down.svg" alt="" />
                 </div>
-                <div class="dropDownBody">
-                  <div class="dropDownContactContainer">
-                    <div>
-                      <span class="firstLetterCircle">SM</span>
-                      <span>Sofia Muller</span>
+                <div id="dropDownBodyId" class="dropDownBody dNone">
+                  <div
+                    id="dropDownContactContainerId"
+                    class="dropDownContactContainer"
+                  >
+                    <div class="dropDownContactName">
+                      <p class="firstLetterCircle">SM</p>
+                      <p class="dropDownFullName">Sofia Muller</p>
                     </div>
-                    <div>
-                      <input type="checkbox" />
-                    </div>
+                    <input
+                      type="checkbox"
+                      class="contactCheckbox"
+                      id="contactIdCheckbox"
+                    />
                   </div>
+                  <div
+                    id="dropDownContactContainerId"
+                    class="dropDownContactContainer"
+                  >
+                    <div class="dropDownContactName">
+                      <p class="firstLetterCircle">SM</p>
+                      <p class="dropDownFullName">Sofia Muller</p>
+                    </div>
+                    <input
+                      type="checkbox"
+                      class="contactCheckbox"
+                      id="contactIdCheckbox"
+                    />
+                  </div>
+                  <div
+                    id="dropDownContactContainerId"
+                    class="dropDownContactContainer"
+                  >
+                    <div class="dropDownContactName">
+                      <p class="firstLetterCircle">SM</p>
+                      <p class="dropDownFullName">Sofia Muller</p>
+                    </div>
+                    <input
+                      type="checkbox"
+                      class="contactCheckbox"
+                      id="contactIdCheckbox"
+                    />
+                  </div>
+                  <div
+                    id="dropDownContactContainerId"
+                    class="dropDownContactContainer"
+                  >
+                    <div class="dropDownContactName">
+                      <p class="firstLetterCircle">SM</p>
+                      <p class="dropDownFullName">Sofia Muller</p>
+                    </div>
+                    <input
+                      type="checkbox"
+                      class="contactCheckbox"
+                      id="contactIdCheckbox"
+                    />
+                  </div>
+                  <div
+                    id="dropDownContactContainerId"
+                    class="dropDownContactContainer"
+                  >
+                    <div class="dropDownContactName">
+                      <p class="firstLetterCircle">SM</p>
+                      <p class="dropDownFullName">Sofia Muller</p>
+                    </div>
+                    <input
+                      type="checkbox"
+                      class="contactCheckbox"
+                      id="contactIdCheckbox"
+                    />
+                  </div>
+                  <div
+                    id="dropDownContactContainerId"
+                    class="dropDownContactContainer"
+                  >
+                    <div class="dropDownContactName">
+                      <p class="firstLetterCircle">SM</p>
+                      <p class="dropDownFullName">Anton Muller</p>
+                    </div>
+                    <input
+                      type="checkbox"
+                      class="contactCheckbox"
+                      id="contactIdCheckbox2"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="addFisrtLetterContainer">
+                  <p class="firstLetterCircle">SM</p>
+                  <p class="firstLetterCircle">AM</p>
+                  <p class="firstLetterCircle">BO</p>
+                  <p class="firstLetterCircle">SF</p>
                 </div>
               </div>
             </div>
@@ -76,26 +161,25 @@
             </div>
             <div class="priority">
               <span>Prio</span>
-              <div class="priorityBtnContainer">
-                <div>
-                  <button class="btnPriority">
-                    Urgent<img src="./assets/priority/urgent.svg" alt="" />
-                  </button>
-                </div>
-                <div>
-                  <button class="btnPriority">
-                    Medium<img src="./assets/priority/medium.svg" alt="" />
-                  </button>
-                </div>
-                <div>
-                  <button class="btnPriority">
-                    Low<img src="./assets/priority/low.svg" alt="" />
-                  </button>
-                </div>
+              <div class="radio-group">
+                <label class="custom-radio-urgent" for="urgentBtn">
+                  <input type="radio" name="group1" value="urgent" id="urgentBtn"/>
+                  <span class="radio-btn-urgent">Urgent<img src="./assets/priority/urgent.svg" alt=""></span>
+                </label>
+                
+                <label class="custom-radio-medium">
+                  <input type="radio" name="group1" value="medium" />
+                  <span class="radio-btn-medium">Medium <img src="./assets/priority/medium.svg" alt=""></span>
+                </label>
+                <label class="custom-radio-low">
+                  <input type="radio" name="group1" value="low" />
+                  <span class="radio-btn-low">Low <img src="./assets/priority/low.svg" alt=""></span>
+                </label>
+              </div>
               </div>
               <div class="testA">
                 <h3>Category</h3>
-                <label for="cars">Assignet To</label><br />
+                <span>Assignet To</span><br />
                 <select
                   class="form-select form-select-sm"
                   aria-label="Small select example"
@@ -133,5 +217,9 @@
         </form>
       </div>
     </div>
+    <script>
+      startEventListner();
+      startEvent();
+    </script>
   </body>
 </html>

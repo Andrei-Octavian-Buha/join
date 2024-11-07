@@ -1,3 +1,7 @@
+.checkedBgColor {
+  background-color: #2a3647;
+}
+
 @media (min-width: 771px) {
   .addTaskMainDiv {
     margin-top: 192px;
@@ -8,18 +12,40 @@
 }
 
 @media (max-width: 770px) {
-  .firstLetterCircle {
-    height: 42px;
+  .addFisrtLetterContainer {
+    display: flex;
+    gap: 8px;
   }
-  /* DE AICI DE CONTINUAT */
+  .firstLetterCircle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    background-color: #00bee8;
+    margin: 0px;
+    color: #ffffff;
+    font-size: 12px;
+  }
+  .dropDownFullName {
+    margin: 0;
+  }
   .dropDownContactContainer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 56px;
+    max-height: 56px;
+    padding: 7px 16px;
+  }
+
+  .dropDownContactName {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
   }
   .dropDownGroup {
-    height: 336px;
     background-color: #ffffff;
     border-radius: 10px;
   }
@@ -39,6 +65,8 @@
     padding-top: 25px;
     border: 1px solid #ffffff;
     border-radius: 10px;
+    overflow-y: auto;
+    height: 288px;
   }
   .addTaskMainDiv {
     margin-top: 82px;

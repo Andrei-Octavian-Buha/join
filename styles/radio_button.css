@@ -1,0 +1,40 @@
+.radio-group {
+  display: flex;
+  gap: 16px;
+}
+/* Ascunde butonul radio implicit */
+.custom-radio-urgent input[type="radio"],
+.custom-radio-medium input[type="radio"],
+.custom-radio-low input[type="radio"] {
+  display: none;
+}
+
+/* Creează un stil personalizat pentru butonul radio */
+.custom-radio-urgent,
+.custom-radio-medium,
+.custom-radio-low {
+  background-color: #ffffff;
+  padding: 10px 18px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+/* Dacă butonul radio este selectat, schimbi imaginea sau adaugi alte efecte */
+.custom-radio-urgent input[type="radio"]:checked + .radio-btn-urgent {
+  background-color: #ff3b3b;
+  border-radius: 10px;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.custom-radio-medium input[type="radio"]:checked + span {
+  background-color: #f8b410;
+  border-radius: 10px;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.custom-radio-low input[type="radio"]:checked + span {
+  background-color: #56c13d;
+  border-radius: 10px;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+}
