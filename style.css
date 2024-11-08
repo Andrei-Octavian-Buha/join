@@ -1,25 +1,32 @@
-body{
+body {
     margin: 0;
     background-color: #f6f7f8;
     font-family: 'Inter';
 }
 
-p{
+p {
     font-size: 20px;
     font-weight: 400;
 }
 
-.dNone{
+.dNone {
     display: none;
 }
 
-.logo2sec{
+.logo2sec {
     position: fixed;
     z-index: 999;
     width: 274px;
     height: 344px;
     top: 50%;
-    left: 50%; 
+    left: 50%;
     transform: translate(-50%, -50%);
 }
 
+#summaryPage .navLink .navBtn:nth-child(1),
+#boardPage .navLink .navBtn:nth-child(2),
+#addTaskPage .navLink .navBtn:nth-child(3),
+#contactsPage .navLink .navBtn:nth-child(4) {
+    background-color: #091931;
+    border-radius: 4px;
+}
