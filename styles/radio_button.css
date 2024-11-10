@@ -1,5 +1,8 @@
 .radio-group {
+  height: 40px;
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 16px;
 }
 /* Ascunde butonul radio implicit */
@@ -9,32 +12,60 @@
   display: none;
 }
 
-/* Creează un stil personalizat pentru butonul radio */
-.custom-radio-urgent,
-.custom-radio-medium,
-.custom-radio-low {
+.radio-btn-urgent,
+.radio-btn-medium,
+.radio-btn-low {
   background-color: #ffffff;
-  padding: 10px 18px;
   border-radius: 10px;
+  padding: 10px 18px;
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
 }
 
-/* Dacă butonul radio este selectat, schimbi imaginea sau adaugi alte efecte */
-.custom-radio-urgent input[type="radio"]:checked + .radio-btn-urgent {
+.custom-radio-urgent input[type="radio"]:checked + span {
   background-color: #ff3b3b;
+  color: #ffffff;
+  padding: 10px 18px;
   border-radius: 10px;
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
 }
 
 .custom-radio-medium input[type="radio"]:checked + span {
   background-color: #f8b410;
+  color: #ffffff;
   border-radius: 10px;
+  padding: 10px 18px;
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
 }
 
 .custom-radio-low input[type="radio"]:checked + span {
   background-color: #56c13d;
+  color: #ffffff;
   border-radius: 10px;
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+}
+.imgCheckedUrgent {
+  fill: #ff3b3b;
+}
+.imgCheckedMedium {
+  fill: #ffa800;
+}
+.imgCheckedLow {
+  fill: #56c13d;
+}
+
+.custom-radio-urgent input[type="radio"]:checked + span.radio-btn-urgent svg {
+  fill: #ffffff;
+}
+
+.custom-radio-medium input[type="radio"]:checked + span.radio-btn-medium svg {
+  fill: #ffffff;
+}
+
+.custom-radio-low input[type="radio"]:checked + span.radio-btn-low svg {
+  fill: #ffffff;
 }

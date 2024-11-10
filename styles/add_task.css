@@ -129,8 +129,11 @@
   }
 
   .priority {
+    width: 100%;
     display: flex;
     flex-direction: column;
+    gap: 8px;
+    text-align: left;
   }
   .priorityBtnContainer {
     display: flex;
@@ -149,6 +152,17 @@
   }
   .req {
     color: #ff8190;
+  }
+  .containerInputSignUp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  .inputWithImg {
+    position: absolute;
+    right: 24px;
+    cursor: pointer;
   }
 }
 @media (max-width: 350px) {
