@@ -1,23 +1,23 @@
 const BASE_URL = 'https://join-store-ae38e-default-rtdb.europe-west1.firebasedatabase.app';
-const AUDIO_CLICK = new Audio('assets/sound/click.mp3');
+let contacts = [];
 
 
 // Initialisierungsfunktion
 function init() {
     fetchContactsData();
+    deleteContact('-OBVSNIVg4rkyJsSCk2a');
 }
 
 
-function openOverlay() {
-    const overlay = document.getElementById("overlay");
+function openOverlay(overlayId) {
+    const overlay = document.getElementById(overlayId);
     overlay.style.display = "flex"; // Overlay sichtbar machen
     overlay.classList.add("show");  // Animation hinzufügen
 }
 
-
-// Funktion zum Schließen des Overlays
-function closeOverlay() {
-    const overlay = document.getElementById("overlay");
+// Funktion zum Schließen eines Overlays
+function closeOverlay(overlayId) {
+    const overlay = document.getElementById(overlayId);
     overlay.classList.remove("show"); // Klasse zum Einblenden entfernen
     overlay.classList.add("hide"); // Klasse zum Ausblenden hinzufügen
 
@@ -119,7 +119,6 @@ function createContactCard(contact) {
     const card = document.createElement('div');
     card.classList.add('contact-card'); // Card-Design-Klasse
     card.onclick = function() {
-        AUDIO_CLICK.play();
         setActiveContact(card); // Übergebe die gesamte Karte
         openContactOverlay(contact.id, contact.name, contact.email, contact.phone);
     };
@@ -143,8 +142,6 @@ function createContactCard(contact) {
 
     return card;
 }
-
-
 
 
 function setActiveContact(element) {
@@ -184,60 +181,107 @@ function createInitialsBadge(name, className = 'default-badge') {
     return badge;
 }
 
-function openContactOverlay(contactId, contactName, contactEmail, contactPhone) {
-    // Wähle hier die gewünschte Badge-Klasse
-    const badge = createInitialsBadge(contactName, 'custom-badge'); // Andere Klasse für spezifischen Stil
+// Funktion zum Generieren des HTML-Codes für das Overlay
+function generateContactOverlayHTML(contactId, contactName, contactEmail, contactPhone) {
+    return `
+        <div class="second-overlay-content">
+                <div class="badge-and-name">
+                    <div class="badge">
+                        ${createInitialsBadge(contactName, 'custom-badge').outerHTML}
+                        <h1 class="contact-name">${contactName}</h1>
+                    </div>
 
-    const overlayContent = document.createElement('div');
-    overlayContent.classList.add('second-overlay-content');
-    overlayContent.appendChild(badge);
-
-    overlayContent.innerHTML += `
-        <div class="detail-content">
-            <h1 class="contact-name">${contactName}</h1>
-                <div class="edit-container">
-
-                        <div class="edit-button-container">
-                            <img src="assets/img/edit-pencil.png" alt="Edit" class="edit-image" onclick="editContact(${contactId})" />
-                            <p class="edit-label">Edit</p>
+                    <div class="detail">
+                        <div class="detail-content">
+                            <div class="edit-container">
+                                <div class="edit-button-container">
+                                    <img src="assets/img/edit-pencil.png" alt="Edit" class="edit-image" />
+                                    <p class="edit-label" onclick="editContact('${contactId}')">Edit</p>
+                                </div>
+                                <div class="delete-button-container">
+                                    <img src="assets/img/trash-can-icon..png" alt="Delete" class="delete-image" />
+                                    <p class="delete-label" onclick="deleteContact('${contactId}')">Delete</p>
+                                </div>
+                            </div>
                         </div>
-
-
-                        <div class="delete-button-container">
-                            <img src="assets/img/trash-can-icon..png" alt="Delete" class="delete-image" onclick="deleteContact(${contactId})" />
-                            <p class="delete-label">Delete</p>
-                        </div>
+                    </div>
                 </div>
-        </div>
 
-        <div class="sub-content">
-            <h3 class="sub-info">Contact Information</h3>
-            <div class="email">
-                <p class="contact-email-label">Email:</p>
-                <p class="contact-email">${contactEmail}</p>
+
+            <div class="sub-content">
+                <h3 class="sub-info">Contact Information</h3>
+                <div class="email">
+                    <p class="contact-email-label">Email:</p>
+                    <p class="contact-email">${contactEmail}</p>
+                </div>
+                <div class="phone">    
+                    <p class="contact-phone-label">Telefon: </p>
+                    <p class="contact-phone">+49 ${contactPhone}</p>
+                </div> 
+                    <div class="three-points" onclick="toggleMenu()">
+                        <img src="assets/img/threePoints.png" alt="Menu" class="small-img">
+                    </div>
+                    <div class="menu hidden-menu">
+                        <div class="edit-button-container hidden">
+                            <img src="assets/img/edit-pencil.png" alt="Edit" class="edit-image hidden" />
+                            <p class="edit-label" onclick="editContact('${contactId}')">Edit</p>
+                        </div>
+                        <div class="delete-button-container hidden">
+                            <img src="assets/img/trash-can-icon..png" alt="Delete" class="delete-image" />
+                            <p class="delete-label" onclick="deleteContact('${contactId}')">Delete</p>
+                        </div>
+                    </div>   
             </div>
-            <div class="phone">    
-                <p class="contact-phone-label">Telefon: </p>
-                <p class="contact-phone">+49 ${contactPhone}</p>
-            </div>    
-        </div>    
+        </div>
     `;
-
-    const contactOverlay = document.getElementById('contact-overlay');
-    contactOverlay.innerHTML = '';
-    contactOverlay.appendChild(overlayContent);
-    contactOverlay.style.display = 'block';
 }
 
 
-// Funktion zum Berechnen der Initialen
+// Hauptfunktion, um das Overlay zu öffnen
+function openContactOverlay(contactId, contactName, contactEmail, contactPhone) {
+    const overlayContent = document.createElement('div');
+    overlayContent.innerHTML = generateContactOverlayHTML(contactId, contactName, contactEmail, contactPhone);
+    const contactOverlay = document.getElementById('contact-overlay');
+    contactOverlay.innerHTML = '';
+    contactOverlay.appendChild(overlayContent);
+    contactOverlay.style.display = 'block'; // Zeigt das Overlay an
+    const rightContent = document.querySelector('.right-content');
+    
+    if (window.innerWidth <= 920) {
+        rightContent.classList.add('show');
+        rightContent.style.display = 'flex'; // Zeigt den Container an
+    } else {
+        rightContent.classList.remove('show');
+        rightContent.style.display = ''; // Setzt den Container zurück auf den Standardwert
+    }
+}
+
+
+function closeContactOverlay() {
+    const rightContent = document.querySelector('.right-content');
+    rightContent.classList.remove('show');
+    rightContent.style.display = ''; // Setzt auf den Standardwert zurück
+}
+
+
+function editContact(contactId) {
+    const editContactOverlay = document.getElementById('edit-contact-overlay');
+    
+    if (editContactOverlay) {
+        editContactOverlay.style.display = 'block'; // Zeigt den Container an
+    } else {
+        console.error('Element mit der ID "edit-contact-overlay" wurde nicht gefunden.');
+    }
+}
+
+
+
 function getInitials(name) {
     const nameParts = name.split(" ");
     return (nameParts[0][0] + (nameParts[1] ? nameParts[1][0] : '')).toUpperCase();
 }
 
 
-// Funktion, um Farbe basierend auf dem ersten Buchstaben des Vornamens zuzuweisen
 function getColorForInitial(initial) {
     const colors = {
         A: '#FF5733', B: '#FFBD33', C: '#DBFF33', D: '#75FF33', E: '#33FF57', 
@@ -262,16 +306,65 @@ function addContactToFirebase(contact) {
     .then(response => response.json())
     .then(data => {
         console.log('Kontakt erfolgreich hinzugefügt:', data);
+        
+        // Die generierte ID von Firebase
+        const generatedId = data.name;
+        console.log('Generierte Kontakt-ID:', generatedId);
+        
         alert('Kontakt erfolgreich gespeichert!');
         
-        // Aktualisiere die Kontaktliste, um alphabetisch zu bleiben
-        fetchContactsData();
+        // Optional: Speichere diese ID, um sie später zu verwenden
+        contact.id = generatedId; // Speichere die ID im Kontakt-Objekt
         
-        // Eingabemaske ausblenden
-        closeOverlay();
+        fetchContactsData();
+        closeOverlay("overlay");
     })
     .catch(error => console.error('Fehler beim Speichern des Kontakts:', error));
 }
+
+
+
+
+function deleteContact(contactId) {
+    console.log('Kontakt-ID zum Löschen:', contactId); // ID in der Konsole prüfen
+
+    const confirmDelete = confirm("Möchten Sie den Kontakt wirklich löschen?");
+    
+    if (confirmDelete) {
+        fetch(`${BASE_URL}/contacts/${contactId}.json`, {
+            method: 'DELETE',
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log('Kontakt erfolgreich gelöscht');
+                alert('Kontakt wurde erfolgreich gelöscht!');
+                
+                fetchContactsData(); // Kontaktliste nach dem Löschen aktualisieren
+            } else {
+                throw new Error('Fehler beim Löschen des Kontakts');
+            }
+        })
+        .catch(error => {
+            console.error('Fehler beim Löschen des Kontakts:', error);
+            alert('Fehler beim Löschen des Kontakts.');
+        });
+    }
+}
+
+
+contacts.forEach(contact => {
+    const deleteButton = document.createElement('p');
+    deleteButton.className = 'delete-label';
+    deleteButton.textContent = 'Delete';
+    
+    // Den OnClick-Handler setzen, um die ID korrekt zu übergeben
+    deleteButton.onclick = () => deleteContact(contact.id); // Übergabe der ID an die deleteContact Funktion
+
+    document.body.appendChild(deleteButton);
+});
+
+
+
 
 
 // Funktion zum Hinzufügen eines Kontakts ohne Neuladen
@@ -289,5 +382,20 @@ function addContact(event) {
 }
 
 
-// Eventlistener für Seiteninitialisierung
-window.onload = init;
+function toggleMenu() {
+    const menu = document.querySelector('.menu');
+    menu.classList.toggle('visible');
+
+    document.addEventListener('click', function handleOutsideClick(event) {
+        if (!menu.contains(event.target) && !event.target.closest('.three-points')) {
+            menu.classList.remove('visible');
+            // Event-Listener entfernen, nachdem das Menü geschlossen wurde
+            document.removeEventListener('click', handleOutsideClick);
+        }
+    });
+}
+
+
+
+
+

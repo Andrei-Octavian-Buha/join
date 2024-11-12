@@ -81,12 +81,28 @@ button:hover {
     padding-left: 40px; 
 }
 
+.right-content.show {
+    display: none;
+}
+
 .contact-headline {
     margin-top: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 20px;
+}
+
+.back-arrow {
+    cursor: pointer;
+    display: none;
+    position: absolute;
+    right: 5%;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.back-arrow:hover {
+    transform: scale(1.2);
 }
 
 .blue-line {
@@ -97,13 +113,13 @@ button:hover {
 
 .blue-line-responsive {
     display: none;
-    height: 1px;
-    width: 60px;
+    height: 2px;
+    width: 80px;
     background-color: rgb(41,171,226);
 }
 
 h1 {
-    font-size: 50px;
+    font-size: 42px;
     font-weight: bold;
 }
 
@@ -126,7 +142,6 @@ h3 {
     transition: opacity 0.6s ease;
     z-index: 999;
     border-radius: 25px;
-
 }
 
 .overlay-content {
@@ -383,12 +398,14 @@ ul {
 .letter-header {
     font-size: 1em;
     margin-top: 20px;
+    margin-left: 10px;
 }
 
 .contact-card {
     cursor: pointer;
     border-radius: 8px;
-    padding: 6px;
+    padding: 8px;
+    padding-left: 0;
     margin-top: 20px;
     display: flex;
     align-items: center;
@@ -443,8 +460,28 @@ ul {
     position: relative;
 }
 
+.badge-and-name {
+    display: flex;
+    flex-direction: column;
+}
+
+.badge {
+    display: flex;
+    align-items: center;
+}
+
+.contact-name {
+    margin-left: 10px;
+    margin: 0;
+}
+
+.detail {
+    margin-left: 24%;
+}
+
 .custom-badge {
     margin-top: 1%;
+    margin-right: 20px;
     height: 90px;
     width: 90px;
     border-radius: 50%;
@@ -452,12 +489,6 @@ ul {
     align-items: center;
     justify-content: center;
     font-size: 2.3em;
-}
-
-.detail-content {
-    position: absolute;
-    top: 5%;
-    left: 30%;
 }
 
 .detail-content h1 {
@@ -517,7 +548,13 @@ img.delete-image {
 }
 
 .sub-content {
+    position: relative;
     margin-top: 40px;
+}
+
+.sub-content p {
+    margin: 0;
+    margin-bottom: 6px;
 }
 
 .sub-info {
@@ -534,7 +571,6 @@ p.contact-email {
     color: rgba(90, 141, 238, 1);
     font-size: 16px;
     font-weight: 500;
-    margin: 0;
 }
 
 .phone {
@@ -542,10 +578,54 @@ p.contact-email {
     flex-direction: column;
 }
 
+p.contact-phone {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.three-points {
+    display: none;
+    position: fixed;
+    right: 3%;
+    bottom: 14%;
+}
+
+.small-img {
+    width: 40px; /* Passe die Breite an */
+    height: 40px; /* Passe die Höhe an */
+}
+
+.menu {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    right: -200px; /* Start außerhalb des sichtbaren Bereichs */
+    bottom:  14%; /* Anpassung je nach gewünschter Position */
+    width: 100px;
+    background-color: #ffffff;
+    border: 1px solid rgba(211, 211, 211, 0.411);
+    border-radius: 5px;
+    box-shadow: -4px 6px 5px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s ease;
+    padding: 10px;
+}
+
+.menu.visible {
+    right: 10px; /* Endposition im sichtbaren Bereich */
+}
+
+.hidden p {
+    font-weight: bold;
+}
+
 @media(max-width: 1015px) {
     .contact-headline {
         flex-direction: column;
         margin: auto;
+        align-items: baseline;
+        margin-left: 0;
     }
     h1, h3 {
         margin: 0;
@@ -558,13 +638,59 @@ p.contact-email {
     }
 }
 
-@media(max-width: 920px) {
+/* Blendet .right-content.show bei größeren Bildschirmen aus */
+@media (min-width: 921px) {
+    .right-content.show {
+        display: none;
+    }
+}
+
+@media (max-width: 920px) {
     .right-content {
         display: none;
+    }
+    .overlay-contact-mobile {
+        display: block;
     }
     .left-content {
         width: 90%;
         margin: auto;
+    }
+    .edit-container {
+        display: none;
+    }
+    .back-arrow {
+        display: block;
+    }
+    .three-points {
+        display: block;
+    }
+}
+
+@media (max-width: 920px) {
+    .right-content.show {
+        margin: auto;
+        display: flex; 
+        position: fixed;
+        top: 14%; 
+        bottom: 12%; 
+        left: 0; 
+        right: 0; 
+        width: auto; 
+        height: auto; 
+        max-width: 700px;
+        background-color: rgb(255, 255, 255); 
+        z-index: 999; 
+        padding-left: 40px;
+        flex-direction: column; 
+        justify-content: center; 
+        align-items: center; 
+    }
+}
+
+@media (min-width: 800px) {
+    .right-content.show {
+        left: 29%;
     }
 }
 
@@ -625,5 +751,25 @@ p.contact-email {
 @media(max-width: 650px) {
     .list {
         max-height: 70%;
+    }
+}
+
+@media(max-width: 420px) {
+    .contact-headline {
+        gap: 2px;
+    }
+    h1 .detail-content {
+        font-size: 20px;
+    }
+    .custom-badge {
+        height: 70px;
+        width: 70px;
+    }
+    h1 {
+        font-size: 22px;
+    }
+    h3 {
+        font-size: 12px;
+        margin-bottom: 4px;
     }
 }
