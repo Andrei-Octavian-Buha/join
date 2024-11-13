@@ -97,6 +97,7 @@ function whenChecked(contactId) {
 
 // SUBTASK
 let subtasks = [];
+
 function subtasktrigger() {
   hideSubTaskAddBtn();
   deleteInputSubTask();
@@ -131,54 +132,75 @@ function addSubTask() {
   let btn = document.getElementById("AddSubTaskStep2Add");
   let inputText = document.getElementById("inputSubTask");
   btn.addEventListener("click", () => {
-    subtasks.push(inputText.value);
+    if (inputText.value) {
+      subtasks.push(inputText.value);
+    } else {
+      console.log("i will please you to add some text");
+    }
     hideEditAddBtn();
     rendSubTask();
     console.log(subtasks);
-    deleteSubTask();
   });
 }
 
-function deleteSubTask() {
-  const index = subtasks.indexOf();
-  let btn = document.getElementById("subTaskDeleteBtn");
-  console.log("aici este subtask inaine sa fie cv", subtasks);
-  btn.addEventListener("click", () => {
-    subtasks.splice(index, 1);
-    console.log("aici a fost deja modificat ", subtasks);
-    rendSubTask();
-  });
+function deleteSubTask(index) {
+  subtasks.splice(index, 1);
+  rendSubTask();
+}
+
+function editAddedSubTask(index) {
+  let inputToEdit = document.getElementById(`toEditInputSubTask-${index}`);
+  let newValueInput;
+  changeEditWithCheck(index);
+  inputToEdit.classList.remove("inputsubTask");
+  inputToEdit.removeAttribute("readonly");
+  inputToEdit.value = subtasks[index];
+}
+
+function changeEditWithCheck(index) {
+  document.getElementById(`AddSubTaskStep2-${index}`).classList.remove("dNone");
+  document.getElementById(`subTaskEditBtn-${index}`).classList.add("dNone");
+  document.getElementById(`idSpanSubTaskEdit${index}`).classList.add("dNone");
 }
 
 function rendSubTask() {
   let toRender = document.getElementById("renderSubTask");
   toRender.innerHTML = "";
-  for (let i = 0; i < subtasks.length; i++) {
+  subtasks.forEach((subtask, index) => {
     toRender.innerHTML += `<div class="subtaskContainer">
-                  <div class="subtaskInputWithDot">
-                    <span class="dot"></span>
-                    <input
-                      type="text"
-                      class="inputsubTask"
-                      readonly
-                      placeholder="${subtasks[i]}"
-                    />
-                  </div>
-                  <div class="subtaskEdiBtns">
-                    <img
-                      id
-                      class="cursor"
-                      src="./assets/priority/edit.svg"
-                      alt=""
-                    />
-                    <img src="./assets/priority/bar.svg" alt="" />
-                    <img
-                      id="subTaskDeleteBtn"
-                      class="cursor"
-                      src="./assets/priority/delete.svg"
-                      alt=""
-                    />
-                  </div>
-                </div>`;
-  }
+    <div class="subtaskInputWithDot">
+      <span id="idSpanSubTaskEdit${index}" class="dot"></span>
+      <input
+        id="toEditInputSubTask-${index}"
+        type="text"
+        class="inputsubTask"
+        readonly
+        placeholder="${subtask}"
+      />
+    </div>
+    <div class="subtaskEdiBtns">
+      <img
+        id="subTaskEditBtn-${index}"
+        class="cursor"
+        src="./assets/priority/edit.svg"
+        alt="Edit"
+        onclick="editAddedSubTask(${index})"
+      />
+      <img
+      id="AddSubTaskStep2-${index}"
+      class="cursor dNone"
+      src="./assets/subtask/check.svg"
+      alt=""
+      />
+      <img src="./assets/priority/bar.svg" alt="Separator" />
+      <img
+        id="subTaskDeleteBtn-${index}"
+        class="cursor"
+        src="./assets/priority/delete.svg"
+        alt="Delete"
+        onclick="deleteSubTask(${index})"
+      />
+    </div>
+  </div>`;
+  });
 }
