@@ -1,82 +1,93 @@
-.btnPrimary{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    height: 48px;
-    font-weight: 700;
-    font-size: 21px;
-    border-radius: 8px;
-    color: #ffffff;
-    background-color: #2A3647;
-    padding: 15px 24px;
-    border: 0px;
+.btnPrimary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 48px;
+  font-weight: 700;
+  font-size: 21px;
+  border-radius: 8px;
+  color: #ffffff;
+  background-color: #2a3647;
+  padding: 15px 24px;
+  border: 0px;
+  gap: 4px;
 }
-.btnPrimary:hover{
-    font-weight: 700;
-    font-size: 21px;
-    border-radius: 8px;
-    border: 0px;
-    color: #ffffff;
-    background-color: #29ABE2;
-    padding: 15px 24px;
-    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5);
+.btnPrimary:hover {
+  font-weight: 700;
+  font-size: 21px;
+  border-radius: 8px;
+  border: 0px;
+  color: #ffffff;
+  background-color: #29abe2;
+  padding: 15px 24px;
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5);
 }
-.btnSecundary{
-    display: flex;
-    align-items: center;
-    text-align: center;
-    height: 48px;
-    font-weight: 700;
-    font-size: 21px;
-    padding: 15px 24px;
-    border: 0px;
-    border-radius: 8px;
-    color: #2A3647;
-    background-color: #ffffff;
-    border: 1px solid #2A3647;
+.btnSecundary {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  height: 48px;
+  font-weight: 700;
+  font-size: 21px;
+  padding: 15px 24px;
+  border: 0px;
+  border-radius: 8px;
+  color: #2a3647;
+  background-color: #ffffff;
+  border: 1px solid #2a3647;
+  gap: 4px;
 }
-.btnSecundary:hover{
-    font-weight: 700;
-    border: 0px;
-    font-size: 21px;
-    padding: 15px 24px;
-    border-radius: 8px;
-    color: #29ABE2;
-    background-color: #ffffff;
-    border: 1px solid #29ABE2;
-    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5);
+.btnSecundary:hover {
+  font-weight: 700;
+  border: 0px;
+  font-size: 21px;
+  padding: 15px 24px;
+  border-radius: 8px;
+  color: #29abe2;
+  background-color: #ffffff;
+  border: 1px solid #29abe2;
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5);
 }
-.btnPriorityMedium{
-    font-weight: 400;
-    border: 0px;
-    font-size: 16px;
-    padding: 15px 24px;
-    border-radius: 8px;
-    color: #ffffff;
-    background-color: #FFA800;
-    border: 1px solid #FFA800;
-    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+.btnPriorityMedium {
+  font-weight: 400;
+  border: 0px;
+  font-size: 16px;
+  padding: 15px 24px;
+  border-radius: 8px;
+  color: #ffffff;
+  background-color: #ffa800;
+  border: 1px solid #ffa800;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
 }
-.btnPriority{
-    font-weight: 400;
-    border: 0px;
-    font-size: 16px;
-    padding: 15px 24px;
-    border-radius: 8px;
-    color: #000000;
-    background-color: #ffffff;
-    border: 1px solid #ffffff;
-    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+.btnPriority {
+  font-weight: 400;
+  border: 0px;
+  font-size: 16px;
+  padding: 15px 24px;
+  border-radius: 8px;
+  color: #000000;
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
 }
-.btnPriority:active{
-    font-weight: 400;
-    border: 0px;
-    font-size: 16px;
-    padding: 15px 24px;
-    border-radius: 8px;
-    color: #000000;
-    background-color: #ff0000;
-    border: 1px solid #ffffff;
-    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+.btnPriority:active {
+  font-weight: 400;
+  border: 0px;
+  font-size: 16px;
+  padding: 15px 24px;
+  border-radius: 8px;
+  color: #000000;
+  background-color: #ff0000;
+  border: 1px solid #ffffff;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: #2a3647;
+  border-radius: 50%; /* Makes it a circle */
+  margin-right: 8px; /* Space between dot and text */
 }

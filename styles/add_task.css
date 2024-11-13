@@ -4,6 +4,28 @@
   background-color: #2a3647 !important;
 }
 @media (min-width: 800px) {
+  .subtaskEdiBtns {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .subtaskInputWithDot {
+    display: flex;
+    align-items: center;
+  }
+  .subtaskContainer {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 16px;
+    align-items: center;
+  }
+  .inputsubTask {
+    background-color: #f6f7f8;
+    border: none;
+    font-size: 16px;
+    font-weight: 400;
+  }
+
   .desktopBtnContainer {
     width: 100%;
     display: flex;
@@ -19,13 +41,13 @@
   .addTaskMainDiv {
     display: flex;
     flex-direction: column;
-    padding-top: 192px;
-    padding-left: 296px;
-    padding-right: 64px;
-    padding-bottom: 32px;
+    align-items: center;
+    margin-top: 192px;
+    margin-left: 296px;
+    margin-right: 64px;
+    margin-bottom: 32px;
     height: calc(100dvh - 224px);
     max-width: 1440px;
-    margin: 0 auto;
   }
   select {
     border-radius: 10px;
@@ -77,7 +99,8 @@
     gap: 16px;
   }
   .dropDownGroup {
-    width: calc(100% - 74px);
+    display: flex;
+    flex-direction: column;
     background-color: #ffffff;
     border-radius: 10px;
   }
@@ -127,11 +150,22 @@
     resize: none;
     outline: none;
   }
+  .inputStyleWithBtn {
+    padding: 10px 21px;
+    border-radius: 10px;
+    border: 1px solid #d1d1d1;
+    color: #000000;
+    resize: none;
+    outline: none;
+    width: 100%;
+    position: relative;
+  }
   .inputStyle::placeholder {
     color: #d1d1d1;
   }
   .desktopView {
     display: flex;
+    justify-content: center;
     gap: 48px;
   }
   .desktopTrenBar {
@@ -150,14 +184,12 @@
   .leftContainer {
     display: flex;
     flex-direction: column;
-    max-width: 440px;
+    width: 440px;
     gap: 32px;
-    margin-bottom: 32px;
   }
   .rightContainer {
     display: flex;
     flex-direction: column;
-    max-width: 440px;
     gap: 32px;
   }
 
@@ -188,15 +220,20 @@
   }
   .containerInputSignUp {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
     width: 100%;
+    position: relative;
   }
   .inputWithImg {
     position: relative;
-    right: 24px;
     cursor: pointer;
+  }
+  .imgContainer {
+    position: absolute;
+    right: 21px; /* Position the image at the end of the input */
+    transform: translateY(-50%);
+    top: 50%;
+    display: flex;
+    align-items: center;
   }
 }
 /* @media (max-width: 799px) {

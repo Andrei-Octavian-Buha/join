@@ -5,6 +5,7 @@ let contacts = [];
 
 function init() {
   loadContacts();
+  subtasktrigger();
 }
 
 async function loadContacts() {
@@ -91,5 +92,93 @@ function whenChecked(contactId) {
     text.innerHTML = "Select contacts to assign";
     assignet.innerHTML = "";
     console.log(checked);
+  }
+}
+
+// SUBTASK
+let subtasks = [];
+function subtasktrigger() {
+  hideSubTaskAddBtn();
+  deleteInputSubTask();
+  addSubTask();
+}
+function hideSubTaskAddBtn() {
+  let btn1 = document.getElementById("AddSubTaskStep1");
+  let btn2 = document.getElementById("AddSubTaskStep2");
+  btn1.addEventListener("click", () => {
+    btn1.classList.add("dNone");
+    btn2.classList.remove("dNone");
+  });
+}
+
+function hideEditAddBtn() {
+  document.getElementById("AddSubTaskStep1").classList.remove("dNone");
+  document.getElementById("AddSubTaskStep2").classList.add("dNone");
+  let inputText = document.getElementById("inputSubTask");
+  inputText.value = "";
+}
+
+function deleteInputSubTask() {
+  let btn = document.getElementById("AddSubTaskStep2Delete");
+  let inputText = document.getElementById("inputSubTask");
+  btn.addEventListener("click", () => {
+    inputText.value = "";
+    hideEditAddBtn();
+  });
+}
+
+function addSubTask() {
+  let btn = document.getElementById("AddSubTaskStep2Add");
+  let inputText = document.getElementById("inputSubTask");
+  btn.addEventListener("click", () => {
+    subtasks.push(inputText.value);
+    hideEditAddBtn();
+    rendSubTask();
+    console.log(subtasks);
+    deleteSubTask();
+  });
+}
+
+function deleteSubTask() {
+  const index = subtasks.indexOf();
+  let btn = document.getElementById("subTaskDeleteBtn");
+  console.log("aici este subtask inaine sa fie cv", subtasks);
+  btn.addEventListener("click", () => {
+    subtasks.splice(index, 1);
+    console.log("aici a fost deja modificat ", subtasks);
+    rendSubTask();
+  });
+}
+
+function rendSubTask() {
+  let toRender = document.getElementById("renderSubTask");
+  toRender.innerHTML = "";
+  for (let i = 0; i < subtasks.length; i++) {
+    toRender.innerHTML += `<div class="subtaskContainer">
+                  <div class="subtaskInputWithDot">
+                    <span class="dot"></span>
+                    <input
+                      type="text"
+                      class="inputsubTask"
+                      readonly
+                      placeholder="${subtasks[i]}"
+                    />
+                  </div>
+                  <div class="subtaskEdiBtns">
+                    <img
+                      id
+                      class="cursor"
+                      src="./assets/priority/edit.svg"
+                      alt=""
+                    />
+                    <img src="./assets/priority/bar.svg" alt="" />
+                    <img
+                      id="subTaskDeleteBtn"
+                      class="cursor"
+                      src="./assets/priority/delete.svg"
+                      alt=""
+                    />
+                  </div>
+                </div>`;
   }
 }

@@ -168,45 +168,50 @@
               <span>Subtask<span class="req">*</span></span>
               <div class="containerInputSignUp">
                 <input
+                  id="inputSubTask"
                   type="text"
-                  class="inputStyle"
+                  class="inputStyleWithBtn"
                   placeholder="Add a new subtask"
                   required
                 />
-                <img class="inputWithImg" src="./assets/menu/add.svg" alt="" />
+                <div id="AddSubTaskStep1" class="imgContainer">
+                  <img
+                    id="AddSubTaskStep1Add"
+                    class="inputWithImg"
+                    src="./assets/menu/add.svg"
+                    alt=""
+                  />
+                </div>
+                <div id="AddSubTaskStep2" class="imgContainer dNone">
+                  <img
+                    id="AddSubTaskStep2Delete"
+                    class="cursor"
+                    src="./assets/subtask/x.svg"
+                    alt=""
+                  />
+                  <span>|</span>
+                  <img
+                    id="AddSubTaskStep2Add"
+                    class="cursor"
+                    src="./assets/subtask/check.svg"
+                    alt=""
+                  />
+                </div>
               </div>
-              <div>
-                <ul>
-                  <li class="liEdit">
-                    Contact Form
-                    <div>
-                      <img
-                        class="cursor"
-                        src="./assets/priority/edit.svg"
-                        alt=""
-                      />
-                      <img src="./assets/priority/bar.svg" alt="" />
-                      <img
-                        class="cursor"
-                        src="./assets/priority/delete.svg"
-                        alt=""
-                      />
-                    </div>
-                  </li>
-                  <li>Write Legal Imprint</li>
-                </ul>
-              </div>
+              <div id="renderSubTask"></div>
             </div>
           </div>
         </div>
         <div class="desktopBtnContainer">
-          <div style="display: flex">
+          <div style="display: flex; align-items: end">
             <span><span class="req">*</span>This field is required</span>
           </div>
           <div class="buttons">
-            <button class="btnSecundary">Clear</button>
+            <button class="btnSecundary">
+              Clear <img src="./assets/priority/iconoir_cancel.svg" alt="" />
+            </button>
             <button class="btnPrimary">
-              Create Task <img src="" alt="" />
+              Create Task <img src="./assets/priority/check.svg" alt="" />
             </button>
           </div>
         </div>
