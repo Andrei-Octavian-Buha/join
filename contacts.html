@@ -11,12 +11,13 @@
     <link rel="stylesheet" href="./styles/header.css" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="styles/contacts.css">
+    <link rel="stylesheet" href="styles/contacts-edit.css">
     <script src="./script.js"></script>
-    <script src="js/contacts.js"></script>
+    <script src="js/contacts.js" defer></script>
     <link rel="icon" href="assets/img/logo2.svg">
     <title>Contacts</title>
 </head>
-<body id="contactsPage" onload="includeHTML(); init();">
+<body onload="includeHTML(); init();">
     <div class="" w3-include-html="./templates/header.html"></div>
     <div class="content">
 
@@ -28,7 +29,7 @@
 
             <div class="left-content">
                 <div class="button-wrapper">
-                    <button class="add-new-button" onclick="openOverlay()">
+                    <button class="add-new-button" onclick="openOverlay('overlay')">
                         <span>Add new Contact</span>
                         <span class="button-icon"></span>
                         <span class="plus-icon">+</span>
@@ -42,11 +43,11 @@
 
 
             <!-- Overlay für das Formular -->
-            <div id="overlay" class="overlay">
+            <div id="overlay" class="overlay slide-from-right">
                     <div class="overlay-content">
                             <!-- Linke Spalte für das Formular -->
                             <div class="info-container">
-                                <div class="close" onclick="closeOverlay()" >X</div>
+                                <div class="close" onclick="closeOverlay('overlay')" >X</div>
                                 <div class="responsive-container">
                                     <img src="assets/img/logo2.svg" alt="">
                                     <h2>Add Contact</h2>
@@ -66,7 +67,7 @@
                                 <input type="text" class="input-mail" id="email" placeholder="Email" required>
                                 <input type="text" class="input-phone" id="phone" placeholder="Phone" required>
                                 <div class="button-container">
-                                    <button class="cancel" type="button" onclick="closeOverlay()">Cancel X</button>
+                                    <button class="cancel" type="button" onclick="closeOverlay('overlay')">Cancel X</button>
                                     <button class="create" type="submit">Create Contact</button>
                                 </div>
                             </form>
@@ -75,21 +76,58 @@
             </div>
 
             <div class="contact-button">
-                <img src="assets/img/mobil-button-contact.png" onclick="openOverlay()" alt="Kontakt">
+                <img src="assets/img/mobil-button-contact.png" onclick="openOverlay('overlay')" alt="Kontakt">
             </div>
 
             <div class="right-content">
                 <div class="contact-headline">
                     <h1>Contacts</h1>
                     <div class="blue-line"></div>
-                    <div class="blue-line-responsive"></div>
                     <h3>Better with a Team</h3>
+                    <div class="blue-line-responsive"></div>
+                    <div class="back-arrow" >
+                        <img src="assets/img/arrow-left-line.png" alt="Zurück" onclick="closeContactOverlay()">
+                    </div>
                 </div> 
                 <div id="contact-overlay" class="second-overlay-contact">
-                    
-                </div>            
+                </div>
+            </div>
+
+        </div>
+
+
+        <div id="edit-contact-overlay" class="edit-overlay-contact slide-from-bottom">
+            <div class="edit-content">
+                <div class="edit-info">
+                    <div class="close" onclick="closeOverlay('edit-contact-overlay')" >X</div>
+                    <div class="responsive-container">
+                        <img src="assets/img/logo2.svg" alt="">
+                        <h2>Edit Contact</h2>
+                        <div class="blue-underline"></div>
+                    </div>
+                </div>
+
+
+                <div class="form-container">
+                    <div class="form-img">
+                        <img src="assets/img/icons8.png" alt="Bild">
+                    </div>
+                    <form id="editContactForm" onsubmit="handleFormSubmit(event)">
+                        <input type="text" class="input-name" id="name" placeholder="Name" required>
+                        <input type="text" class="input-mail" id="email" placeholder="Email" required>
+                        <input type="text" class="input-phone" id="phone" placeholder="Phone" required>
+                        <div class="button-container">
+                            <button class="cancel" type="button" onclick="closeOverlay('edit-contact-overlay')">Cancel</button>
+                            <button id="submitButton" class="create" type="submit">Update Contact</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
+
     </div>
+
+
+
 </body>
 </html>
