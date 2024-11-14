@@ -3,7 +3,7 @@
   color: #fff;
   background-color: #2a3647 !important;
 }
-@media (min-width: 800px) {
+@media (min-width: 1150px) {
   .subtaskEdiBtns {
     display: flex;
     align-items: center;
@@ -236,7 +236,36 @@
     align-items: center;
   }
 }
-/* @media (max-width: 799px) {
+
+@media (max-width: 1149px) {
+  .subtaskEdiBtns {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .subtaskInputWithDot {
+    display: flex;
+    align-items: center;
+  }
+  .subtaskContainer {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 16px;
+    align-items: center;
+  }
+  .inputsubTask {
+    background-color: #f6f7f8;
+    border: none;
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+  .desktopBtnContainer {
+    width: 100%;
+    display: flex;
+
+    justify-content: space-between;
+  }
   li {
     list-style-type: disc;
     display: flex;
@@ -349,6 +378,17 @@
     resize: none;
     outline: none;
   }
+  .inputStyleWithBtn {
+    padding: 10px 21px;
+    border-radius: 10px;
+    width: 100%;
+    border: 1px solid #d1d1d1;
+    color: #000000;
+    resize: none;
+    outline: none;
+    position: relative;
+  }
+
   .inputStyle::placeholder {
     color: #d1d1d1;
   }
@@ -405,13 +445,19 @@
   }
   .containerInputSignUp {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     width: 100%;
+    position: relative;
   }
   .inputWithImg {
-    position: absolute;
-    right: 24px;
+    position: relative;
     cursor: pointer;
   }
-} */
+  .imgContainer {
+    position: absolute;
+    right: 21px; /* Position the image at the end of the input */
+    transform: translateY(-50%);
+    top: 50%;
+    display: flex;
+    align-items: center;
+  }
+}

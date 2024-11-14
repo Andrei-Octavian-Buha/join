@@ -42,7 +42,7 @@
               <label for="addTaskTittle">Description</label>
               <textarea
                 name=""
-                id=""
+                id="addTaskDescription"
                 placeholder="Enter a Description"
                 class="inputStyle"
               ></textarea>
@@ -80,7 +80,7 @@
           <div class="rightContainer">
             <div class="testA">
               <span>Due date<span class="required">*</span></span>
-              <input type="date" class="inputStyle" />
+              <input type="date" class="inputStyle" id="addTaskDate" />
             </div>
             <div class="priority">
               <span>Prio</span>
@@ -158,6 +158,7 @@
               <select
                 class="form-select form-select-sm"
                 aria-label="Small select example"
+                id="categorySelectId"
               >
                 <option disabled selected>Select task category</option>
                 <option value="1">Technical Task</option>
@@ -172,7 +173,6 @@
                   type="text"
                   class="inputStyleWithBtn"
                   placeholder="Add a new subtask"
-                  required
                 />
                 <div id="AddSubTaskStep1" class="imgContainer">
                   <img
@@ -210,7 +210,7 @@
             <button class="btnSecundary">
               Clear <img src="./assets/priority/iconoir_cancel.svg" alt="" />
             </button>
-            <button class="btnPrimary">
+            <button class="btnPrimary" onclick="addDataToFireBase()">
               Create Task <img src="./assets/priority/check.svg" alt="" />
             </button>
           </div>

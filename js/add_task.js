@@ -73,7 +73,7 @@ function whenChecked(contactId) {
   assignet.innerHTML = "";
   if (ck.checked) {
     if (!checked.includes(contactId.id)) {
-      checked.push(contactId.cont.name);
+      checked.push({ name: contactId.cont.name, key: contactId.id });
     }
     container.classList.add("checkedBgColor");
     console.log(`Added checkedBgColor to ContainerID${contactId.id}`);
@@ -150,7 +150,6 @@ function deleteSubTask(index) {
 
 function editAddedSubTask(index) {
   let inputToEdit = document.getElementById(`toEditInputSubTask-${index}`);
-  let newValueInput;
   changeEditWithCheck(index);
   inputToEdit.classList.remove("inputsubTask");
   inputToEdit.removeAttribute("readonly");
@@ -161,6 +160,26 @@ function changeEditWithCheck(index) {
   document.getElementById(`AddSubTaskStep2-${index}`).classList.remove("dNone");
   document.getElementById(`subTaskEditBtn-${index}`).classList.add("dNone");
   document.getElementById(`idSpanSubTaskEdit${index}`).classList.add("dNone");
+}
+function finishEditWithCheck(index) {
+  document.getElementById(`AddSubTaskStep2-${index}`).classList.add("dNone");
+  document.getElementById(`subTaskEditBtn-${index}`).classList.remove("dNone");
+  document
+    .getElementById(`idSpanSubTaskEdit${index}`)
+    .classList.remove("dNone");
+}
+
+function addeditcheck(index) {
+  let btn = document.getElementById(`AddSubTaskStep2-${index}`);
+  let inputText = document.getElementById(`toEditInputSubTask-${index}`);
+  btn.addEventListener("click", () => {
+    if (inputText.value) {
+      subtasks[index] = inputText.value;
+    } else {
+      deleteSubTask(index);
+    }
+    console.log(subtasks);
+  });
 }
 
 function rendSubTask() {
@@ -191,6 +210,7 @@ function rendSubTask() {
       class="cursor dNone"
       src="./assets/subtask/check.svg"
       alt=""
+      onclick="addeditcheck(${index})"
       />
       <img src="./assets/priority/bar.svg" alt="Separator" />
       <img
@@ -204,3 +224,64 @@ function rendSubTask() {
   </div>`;
   });
 }
+
+//  DATA TO FireBASE upload
+
+async function uploadToFireBase(path = "", data = {}) {
+  let response = await fetch(`${BASE_URL}` + path + ".json", {
+    method: "POST",
+    header: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return (responseJs = await response.json());
+}
+
+function getPriorityValue() {
+  const priorityRadios = document.querySelectorAll(
+    ".radio-group input[type='radio']"
+  );
+  let selectedPriority;
+  priorityRadios.forEach((radio) => {
+    if (radio.checked) {
+      selectedPriority = radio.value;
+    }
+  });
+  return selectedPriority;
+}
+function variableId() {
+  title = document.getElementById("addTaskTittle").value;
+  description = document.getElementById("addTaskDescription").value;
+  assignet = checked;
+  date = document.getElementById("addTaskDate").value;
+  prio = getPriorityValue();
+  category = document.getElementById("categorySelectId").value;
+  subtask = subtasks;
+
+  return { title, description, assignet, date, prio, category, subtask };
+}
+
+function addDataToFireBase() {
+  const taskData = variableId();
+  uploadToFireBase("task", {
+    title: taskData.title,
+    description: taskData.description,
+    assignet: taskData.assignet,
+    date: taskData.date,
+    prio: taskData.prio,
+    category: taskData.category,
+    subtask: taskData.subtask,
+  });
+  console.log(addTask);
+}
+
+// trebuie sa urc sus
+
+// Title
+// Description
+// Assignet To
+// Due Date
+// Prio
+// Category
+// SubTask

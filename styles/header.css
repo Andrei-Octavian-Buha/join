@@ -102,7 +102,7 @@
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1149px) {
   .content {
     margin-top: 120px;
     margin-left: 0px;
@@ -111,11 +111,11 @@
     display: none;
   }
 
-  .profilhelp{
+  .profilhelp {
     display: none;
   }
 
-  .help-link-dd{
+  .help-link-dd {
     display: block;
     transition: background-color 0.3s ease, color 0.3s ease;
     padding: 10px;
@@ -236,7 +236,7 @@
   }
 }
 
-@media (min-width: 800px) {
+@media (min-width: 1150px) {
   .content {
     margin-top: 120px;
     margin-left: 240px;
@@ -295,7 +295,7 @@
     color: #cdcdcd;
     margin-bottom: 200px;
   }
-  .help-link-dd{
+  .help-link-dd {
     display: none;
   }
 
