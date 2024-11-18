@@ -136,6 +136,21 @@
         position: absolute;
         right: 24px;
     }
+
+    .logoCentered {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 200px; 
+        z-index: 1000;
+        transition: all 2s ease-in-out; 
+    }
+    
+    
+    .logoMoved {
+        width: 120px;
+    }
 }
 
 

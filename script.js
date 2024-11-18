@@ -12,15 +12,20 @@ async function includeHTML() {
     }
   }
 
-  function test(){
-    let ov = document.getElementById('overlayId');
-    let logo = document.getElementById('imgHeader1');
-    logo.classList.add('logo2sec');
-    setTimeout(() => {
-      logo.classList.remove('logo2sec');
-      ov.classList.add('dNone');
-    }, 2000);
-  }
+  function test() {
+    const overlay = document.getElementById('overlayId'); 
+    const logo = document.getElementById('imgHeader1');  
+    const target = logo.getBoundingClientRect();         
+    const animatedLogo = logo.cloneNode(true);
+    animatedLogo.classList.add('logoCentered'); 
+    document.body.appendChild(animatedLogo);   
+    setTimeout(() => {animatedLogo.style.top = `${target.top}px`;
+        animatedLogo.style.left = `${target.left}px`;
+        animatedLogo.style.transform = 'translate(0, 0)'; 
+        animatedLogo.style.width = `${target.width}px`;}, 100); 
+    setTimeout(() => {animatedLogo.remove();         
+        overlay.classList.add('dNone'); }, 2000); 
+}
 
   function toggleDropdown() {
     const dropdown = document.getElementById('dropdown');
