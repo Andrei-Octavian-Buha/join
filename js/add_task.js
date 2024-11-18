@@ -3,16 +3,21 @@ const BASE_URL =
 
 let contacts = [];
 
-function init() {
-  loadContacts();
-  subtasktrigger();
+async function init() {
+  await loadContacts();
+}
+function subtasktrigger() {
+  hideSubTaskAddBtn();
+  deleteInputSubTask();
+  addSubTask();
+  startEventListner();
 }
 
 async function loadContacts() {
   let ContactResponse = await getAllContacts("contacts");
   let UserKeyArray = Object.keys(ContactResponse);
   let dropdown = document.getElementById("dropDownBodyId");
-  dropdown.innerHTML = ""; // Golim dropdown-ul
+  dropdown.innerHTML = "";
   contacts = UserKeyArray.map((id) => ({
     id: id,
     cont: ContactResponse[id],
@@ -32,21 +37,8 @@ async function loadContacts() {
         id="CheckboxID${element.id}"
       />
     `;
-    dropdown.appendChild(container); // Adăugăm containerul în dropdown
-    startEvent(element); // Atașăm event listener după ce elementul este în DOM
-  });
-}
-
-async function getAllContacts(path = "") {
-  let response = await fetch(`${BASE_URL}` + path + ".json");
-  return (responseJs = await response.json());
-}
-
-function startEventListner() {
-  let clickHeader = document.getElementById("dropDownHeaderId");
-  let body = document.getElementById("dropDownBodyId");
-  clickHeader.addEventListener("click", () => {
-    body.classList.toggle("dNone");
+    dropdown.appendChild(container);
+    startEvent(element);
   });
 }
 
@@ -62,7 +54,40 @@ function startEvent(contactId) {
   }
 }
 
+async function getAllContacts(path = "") {
+  let response = await fetch(`${BASE_URL}` + path + ".json");
+  return (responseJs = await response.json());
+}
+
+function startEventListner() {
+  let clickHeader = document.getElementById("dropDownHeaderId");
+  let body = document.getElementById("dropDownBodyId");
+  if (clickHeader) {
+    clickHeader.addEventListener("click", () => {
+      body.classList.toggle("dNone");
+    });
+  }
+}
+
 let checked = [];
+
+async function resetForm(event) {
+  let assignet = document.getElementById("whoIsAssignet");
+  document.getElementById("dropDownBodyId").classList.add("dNone");
+  let text = document.getElementById("dinamicText");
+  text.innerHTML = "Select contacts to assign";
+  event.preventDefault();
+  const form = document.getElementById("addTaskForm");
+  form.setAttribute("novalidate", true);
+  form.reset();
+  form.removeAttribute("novalidate");
+  subtasks = [];
+  rendSubTask();
+  checked = [];
+  await loadContacts();
+  assignet.innerHTML = "";
+  console.log(checked);
+}
 
 function whenChecked(contactId) {
   let ck = document.getElementById(`CheckboxID${contactId.id}`);
@@ -74,13 +99,15 @@ function whenChecked(contactId) {
   if (ck.checked) {
     if (!checked.includes(contactId.id)) {
       checked.push({ name: contactId.cont.name, key: contactId.id });
+      console.log("we have add", checked);
     }
     container.classList.add("checkedBgColor");
     console.log(`Added checkedBgColor to ContainerID${contactId.id}`);
   } else {
-    const index = checked.indexOf(contactId.cont.name);
+    const index = checked.findIndex((item) => item.key === contactId.id);
     if (index > -1) {
       checked.splice(index, 1);
+      console.log("Object removed:", checked);
     }
     container.classList.remove("checkedBgColor");
   }
@@ -94,15 +121,9 @@ function whenChecked(contactId) {
     console.log(checked);
   }
 }
-
 // SUBTASK
 let subtasks = [];
 
-function subtasktrigger() {
-  hideSubTaskAddBtn();
-  deleteInputSubTask();
-  addSubTask();
-}
 function hideSubTaskAddBtn() {
   let btn1 = document.getElementById("AddSubTaskStep1");
   let btn2 = document.getElementById("AddSubTaskStep2");
@@ -150,8 +171,10 @@ function deleteSubTask(index) {
 
 function editAddedSubTask(index) {
   let inputToEdit = document.getElementById(`toEditInputSubTask-${index}`);
-  changeEditWithCheck(index);
   inputToEdit.classList.remove("inputsubTask");
+  inputToEdit.classList.add("inputsubTaskActive");
+  backgroundEdit(index);
+  changeEditWithCheck(index);
   inputToEdit.removeAttribute("readonly");
   inputToEdit.value = subtasks[index];
 }
@@ -161,20 +184,14 @@ function changeEditWithCheck(index) {
   document.getElementById(`subTaskEditBtn-${index}`).classList.add("dNone");
   document.getElementById(`idSpanSubTaskEdit${index}`).classList.add("dNone");
 }
-function finishEditWithCheck(index) {
-  document.getElementById(`AddSubTaskStep2-${index}`).classList.add("dNone");
-  document.getElementById(`subTaskEditBtn-${index}`).classList.remove("dNone");
-  document
-    .getElementById(`idSpanSubTaskEdit${index}`)
-    .classList.remove("dNone");
-}
 
-function addeditcheck(index) {
+function addEditcheck(index) {
   let btn = document.getElementById(`AddSubTaskStep2-${index}`);
   let inputText = document.getElementById(`toEditInputSubTask-${index}`);
   btn.addEventListener("click", () => {
     if (inputText.value) {
       subtasks[index] = inputText.value;
+      rendSubTask();
     } else {
       deleteSubTask(index);
     }
@@ -182,11 +199,16 @@ function addeditcheck(index) {
   });
 }
 
+function backgroundEdit(index) {
+  let conteinerId = document.getElementById(`subtaskContainerId${index}`);
+  conteinerId.classList.add("backgroundSubTaskEdit");
+}
+
 function rendSubTask() {
   let toRender = document.getElementById("renderSubTask");
   toRender.innerHTML = "";
   subtasks.forEach((subtask, index) => {
-    toRender.innerHTML += `<div class="subtaskContainer">
+    toRender.innerHTML += `<div class="subtaskContainer" id="subtaskContainerId${index}">
     <div class="subtaskInputWithDot">
       <span id="idSpanSubTaskEdit${index}" class="dot"></span>
       <input
@@ -210,7 +232,7 @@ function rendSubTask() {
       class="cursor dNone"
       src="./assets/subtask/check.svg"
       alt=""
-      onclick="addeditcheck(${index})"
+      onclick="addEditcheck(${index})"
       />
       <img src="./assets/priority/bar.svg" alt="Separator" />
       <img
@@ -225,8 +247,7 @@ function rendSubTask() {
   });
 }
 
-//  DATA TO FireBASE upload
-
+//  Data to fireBase
 async function uploadToFireBase(path = "", data = {}) {
   let response = await fetch(`${BASE_URL}` + path + ".json", {
     method: "POST",
@@ -250,6 +271,7 @@ function getPriorityValue() {
   });
   return selectedPriority;
 }
+
 function variableId() {
   title = document.getElementById("addTaskTittle").value;
   description = document.getElementById("addTaskDescription").value;
@@ -273,15 +295,4 @@ function addDataToFireBase() {
     category: taskData.category,
     subtask: taskData.subtask,
   });
-  console.log(addTask);
 }
-
-// trebuie sa urc sus
-
-// Title
-// Description
-// Assignet To
-// Due Date
-// Prio
-// Category
-// SubTask

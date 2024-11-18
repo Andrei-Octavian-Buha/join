@@ -1,3 +1,8 @@
+.backgroundSubTaskEdit {
+  background-color: #fff;
+  border-bottom: 1px solid #00bee8;
+}
+
 .checkedBgColor {
   border-radius: 10px;
   color: #fff;
@@ -19,17 +24,23 @@
     padding: 4px 16px;
     align-items: center;
   }
+  .inputsubTaskActive {
+    background-color: #ffffff;
+    border: none;
+    font-size: 16px;
+    font-weight: 400;
+    outline: none;
+  }
   .inputsubTask {
     background-color: #f6f7f8;
     border: none;
     font-size: 16px;
     font-weight: 400;
+    outline: none;
   }
-
   .desktopBtnContainer {
     width: 100%;
     display: flex;
-
     justify-content: space-between;
   }
   li {

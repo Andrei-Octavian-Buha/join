@@ -21,9 +21,10 @@
   </head>
   <body id="addTaskPage" onload="includeHTML(), init()">
     <div class="" w3-include-html="./templates/header.html"></div>
+
     <div class="addTaskMainDiv">
       <div class="containerTitle"><h1 class="h1style">Add Task</h1></div>
-      <form action="" class="containeR">
+      <form class="containeR" id="addTaskForm">
         <div class="desktopView">
           <div class="leftContainer">
             <div class="testA">
@@ -39,7 +40,7 @@
               />
             </div>
             <div class="testA">
-              <label for="addTaskTittle">Description</label>
+              <label for="addTaskDescription">Description</label>
               <textarea
                 name=""
                 id="addTaskDescription"
@@ -79,7 +80,7 @@
           <span class="desktopTrenBar"> </span>
           <div class="rightContainer">
             <div class="testA">
-              <span>Due date<span class="required">*</span></span>
+              <span>Due date<span class="req">*</span></span>
               <input type="date" class="inputStyle" id="addTaskDate" />
             </div>
             <div class="priority">
@@ -207,7 +208,7 @@
             <span><span class="req">*</span>This field is required</span>
           </div>
           <div class="buttons">
-            <button class="btnSecundary">
+            <button class="btnSecundary" onclick="resetForm(event)">
               Clear <img src="./assets/priority/iconoir_cancel.svg" alt="" />
             </button>
             <button class="btnPrimary" onclick="addDataToFireBase()">
@@ -218,7 +219,7 @@
       </form>
     </div>
     <script>
-      startEventListner();
+      subtasktrigger();
     </script>
   </body>
 </html>
