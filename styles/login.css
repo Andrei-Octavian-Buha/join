@@ -137,22 +137,52 @@
         right: 24px;
     }
 
-    .logoCentered {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 200px; 
-        z-index: 1000;
-        transition: all 2s ease-in-out; 
-    }
-    
-    
-    .logoMoved {
-        width: 120px;
+
+}
+
+.logoCentered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px; 
+    z-index: 1000;
+    transition: all 2s ease-in-out; 
+}
+
+
+.logoMoved {
+    width: 120px;
+}
+
+#overlayId {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff; /* Standardfarbe: Weiß */
+    z-index: 999;
+    transition: background-color 0.3s ease-in-out; /* Glatter Übergang */
+}
+
+/* Für Bildschirme kleiner als 770px: Ändere die Hintergrundfarbe */
+@media (max-width: 770px) {
+    #overlayId {
+        background-color: #2A3647; /* Dunklere Farbe */
     }
 }
 
+/* Logo in Weiß anzeigen, wenn es in der Mitte ist */
+.logoCentered img {
+    filter: brightness(0) invert(1); /* Ändert die Farbe zu Weiß */
+    transition: filter 2s ease-in-out; /* Fließender Farbwechsel */
+}
+
+/* Zielzustand: Originalfarbe wiederherstellen */
+.logoMoved img {
+    filter: none; /* Zurück zur Originalfarbe */
+}
 
 
 @media (max-width: 770px) {
