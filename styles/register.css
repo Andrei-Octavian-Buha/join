@@ -5,6 +5,21 @@
     }
 }
 
+.hide {
+    display: none;
+  }
+  
+  .passwordError {
+    color: #ff001f;
+    font-size: 12px;
+    margin-top: 5px;
+    display: none;
+    gap: 0 !important; /* Verhindert, dass der gap-Wert hier angewendet wird */
+  }
+  .loginInputFeld.error {
+    border: 1px solid #ff001f;
+  }
+  
 
 
 @media (min-width: 771px) {
@@ -84,7 +99,6 @@
     .loginInput{
         display: flex;
         flex-direction: column;
-        gap: 32px;
     }
     .loginBtnContainer{
         display: flex;
@@ -147,6 +161,12 @@
     }
 
     .containerInputSignUp{
+        position: relative;
+        display: flex;
+        align-items: center;
+        margin-bottom: 32px;
+    }
+    .containerInputSignUplast{
         position: relative;
         display: flex;
         align-items: center;

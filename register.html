@@ -13,11 +13,11 @@
     <link rel="stylesheet" href="./styles/register.css" />
     <link rel="stylesheet" href="./styles/buttons.css" />
     <link rel="stylesheet" href="./styles/desktop_join_overlay.css" />
-    <script src="./script.js"></script>
+  
     <script src="./js/register.js"></script>
     <title>Join - Sign up</title>
   </head>
-  <body onload="includeHTML()">
+  <body>
     <main class="maxWidth">
       <div class="loginHeaderContainer">
         <div class="loginHeader">
@@ -57,22 +57,27 @@
             </div>
             <div class="containerInputSignUp">
               <input
-              type="password"
-              class="loginInputFeld"
-              placeholder="Password"
-              required
-            />
-            <img class="inputWithImg" src="./assets/menu/lock.svg" alt="">
+                type="password"
+                class="loginInputFeld"
+                placeholder="Password"
+                required
+                id="passwordField1"
+              />
+              <img class="inputWithImg" src="./assets/menu/lock.svg" alt="" onclick="togglePassword('passwordField1', this)" />
             </div>
-            <div class="containerInputSignUp">
-            <input
-            type="password"
-            class="loginInputFeld"
-            placeholder="Confirm Password"
-            required
-          />
-          <img class="inputWithImg" src="./assets/menu/lock.svg" alt="">
-        </div>
+            <div class="containerInputSignUplast">
+              <input
+                type="password"
+                class="loginInputFeld"
+                placeholder="Confirm Password"
+                required
+                id="passwordField2"
+              />
+              <img class="inputWithImg" src="./assets/menu/lock.svg" alt="" onclick="togglePassword('passwordField2', this)" />
+            </div>
+            <div id="passwordError" class="passwordError hide">
+              Your passwords don't match. Please try again.
+            </div>
           </div>
           <div>
             <input
@@ -84,20 +89,21 @@
             <label for="checkbox">I accept the <a href="./privacy.html">Privacy policy</a></label>
           </div>
           <div class="loginBtnContainer">
-            <button class="btnPrimary btnMobileSettings">Log in</button>
-            <button class="btnSecundary btnMobileSettings">Guest Log in</button>
+            <button id="signupButton" class="btnPrimary btnMobileSettings" type="button">Sign up</button>
           </div>
         </form>
       </div>
-      <div class="loginHeaderBtn desktopMobileDnone">
-        <p>Not a Join user ?</p>
-        <button class="btnPrimary">Sign up</button>
-      </div>
+   
         <div class="privacyBtn">
           <a class="privacyLink" href="./privacy.html">Privacy Policy</a>
           <a class="privacyLink" href="./legal.html">Legal notice</a>
         </div>
     </div>
+    <div id="signUpPopup" class="signUpPopup hide">
+      <div id="signUpAproval" class="signUpAproval">
+          <h2>You Signed Up successfully</h2>
+      </div>
+  </div>
     </main>
     <script>
       backToLogin();
