@@ -14,13 +14,11 @@
     font-size: 12px;
     margin-top: 5px;
     display: none;
-    gap: 0 !important; /* Verhindert, dass der gap-Wert hier angewendet wird */
   }
+
   .loginInputFeld.error {
     border: 1px solid #ff001f;
   }
-  
-
 
 @media (min-width: 771px) {
     .privacyBtn{

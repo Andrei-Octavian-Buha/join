@@ -31,21 +31,18 @@ function getSignUpInputs() {
   };
 }
 
-// Funktion zur Validierung der Eingaben
+// Function to validate inputs
 function validateInputs(inputs) {
-    // Überprüfen, ob alle Felder ausgefüllt sind
     if (!inputs.name || !inputs.email || !inputs.password || !inputs.confirmPassword) {
       alert("Please fill in all fields.");
       return false;
     }
   
-    // Überprüfen, ob der Nutzer die Datenschutzrichtlinie akzeptiert hat
     if (!inputs.isChecked) {
       alert("You must accept the Privacy Policy.");
       return false;
     }
   
-    // Überprüfen, ob die Passwörter übereinstimmen
     if (inputs.password !== inputs.confirmPassword) {
       showPasswordError();
       return false;
@@ -54,15 +51,13 @@ function validateInputs(inputs) {
     return true;
   }
   
-// Funktion zur Anzeige der Fehlermeldung
+//function that shows error if passwords dont match
 function showPasswordError() {
     const errorContainer = document.getElementById("passwordError");
     const passwordInputs = document.querySelectorAll('input[type="password"]');
   
-    // Zeige die Fehlermeldung an
     errorContainer.style.display = "block";
   
-    // Füge den "error" Stil zu den Passwortfeldern hinzu
     passwordInputs.forEach(input => {
       input.classList.add("error");
     });
@@ -74,7 +69,7 @@ function createUserObject(inputs) {
   return {
     name: inputs.name,
     email: inputs.email,
-    password: inputs.password, // Consider hashing for real applications
+    password: inputs.password,
   };
 }
 
