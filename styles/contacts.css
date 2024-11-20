@@ -591,8 +591,8 @@ p.contact-phone {
 }
 
 .small-img {
-    width: 40px; /* Passe die Breite an */
-    height: 40px; /* Passe die Höhe an */
+    width: 40px; 
+    height: 40px; 
 }
 
 .menu {
@@ -601,8 +601,8 @@ p.contact-phone {
     flex-direction: column;
     align-items: center;
     gap: 8px;
-    right: -200px; /* Start außerhalb des sichtbaren Bereichs */
-    bottom:  14%; /* Anpassung je nach gewünschter Position */
+    right: -200px; 
+    bottom:  14%; 
     width: 100px;
     background-color: #ffffff;
     border: 1px solid rgba(211, 211, 211, 0.411);
@@ -613,7 +613,7 @@ p.contact-phone {
 }
 
 .menu.visible {
-    right: 10px; /* Endposition im sichtbaren Bereich */
+    right: 10px; 
 }
 
 .hidden p {
@@ -638,7 +638,7 @@ p.contact-phone {
     }
 }
 
-/* Blendet .right-content.show bei größeren Bildschirmen aus */
+
 @media (min-width: 921px) {
     .right-content.show {
         display: none;

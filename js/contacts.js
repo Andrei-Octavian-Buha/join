@@ -1,189 +1,186 @@
-const BASE_URL =
-  "https://join-store-ae38e-default-rtdb.europe-west1.firebasedatabase.app";
-let contacts = [];
+const BASE_URL = 'https://join-store-ae38e-default-rtdb.europe-west1.firebasedatabase.app';
 
-// Initialisierungsfunktion
 function init() {
-  fetchContactsData();
-  deleteContact("-OBVSNIVg4rkyJsSCk2a");
+    fetchContactsData();
 }
 
 function openOverlay(overlayId) {
-  const overlay = document.getElementById(overlayId);
-  overlay.style.display = "flex"; // Overlay sichtbar machen
-  overlay.classList.add("show"); // Animation hinzufügen
+    const overlay = document.getElementById(overlayId);
+    overlay.style.display = "flex"; 
+    overlay.classList.add("show");  
 }
 
-// Funktion zum Schließen eines Overlays
 function closeOverlay(overlayId) {
-  const overlay = document.getElementById(overlayId);
-  overlay.classList.remove("show"); // Klasse zum Einblenden entfernen
-  overlay.classList.add("hide"); // Klasse zum Ausblenden hinzufügen
-
-  // Warte auf die Animation und blende dann das Overlay aus
-  setTimeout(() => {
-    overlay.style.display = "none"; // Nach der Animation ausblenden
-    overlay.classList.remove("hide"); // Klasse entfernen, um für die nächste Anzeige bereit zu sein
-  }, 800); // Dauer muss mit der CSS-Transition übereinstimmen
+    const overlay = document.getElementById(overlayId);
+    overlay.classList.remove("show");
+    overlay.classList.add("hide"); 
+    setTimeout(() => {
+        overlay.style.display = "none"; 
+        overlay.classList.remove("hide"); 
+    }, 800); 
 }
 
-// Funktion zum Abrufen und Anzeigen der Kontakte
+
+function closeContactOverlay() {
+    const rightContent = document.querySelector('.right-content');
+    rightContent.classList.remove('show');
+    rightContent.style.display = ''; 
+}
+
+
 async function fetchContactsData() {
-  try {
-    const response = await fetch(`${BASE_URL}/contacts.json`);
-    const data = await response.json();
-    renderContactList(data);
-    return data;
-  } catch (error) {
-    console.error("Fehler beim Abrufen der Kontakte:", error);
-    return null;
-  }
-}
+    try {
+        const response = await fetch(`${BASE_URL}/contacts.json`);
+        if (!response.ok) {
+            throw new Error('Fehler beim Abrufen der Kontaktdaten');
+        }
+        const data = await response.json();
+        const contactArray = Array.isArray(data) ? data : Object.keys(data).map(key => {
+            return { ...data[key], id: key };
+        });
 
-function renderContactList(data) {
-  const contactList = document.getElementById("contactList");
-  contactList.innerHTML = ""; // Liste leeren
-
-  if (data) {
-    const sortedContacts = sortContacts(data);
-    renderSortedContacts(contactList, sortedContacts);
-  } else {
-    displayNoContactsMessage(contactList);
-  }
-}
-
-// Funktion zum Sortieren der Kontakte nach Namen
-function sortContacts(data) {
-  return Object.values(data).sort((a, b) =>
-    a.name.localeCompare(b.name, "de", { sensitivity: "base" })
-  );
-}
-
-// Funktion zum Rendern der sortierten Kontakte und Gruppierung nach Anfangsbuchstaben
-function renderSortedContacts(contactList, sortedContacts) {
-  let currentLetter = "";
-
-  sortedContacts.forEach((contact) => {
-    const firstLetter = contact.name[0].toUpperCase();
-
-    if (firstLetter !== currentLetter) {
-      currentLetter = firstLetter;
-      addLetterHeader(contactList, currentLetter);
-      addSilverline(contactList);
+        displayContacts(contactArray);
+    } catch (error) {
+        console.error('Fehler beim Laden der Kontaktdaten:', error);
     }
-
-    const card = createContactCard(contact);
-    contactList.appendChild(card);
-  });
 }
 
-// Funktion zum Hinzufügen eines Buchstaben-Headers
+
+function displayContacts(data) {
+    const contactList = document.getElementById('contactList');
+    contactList.innerHTML = '';
+    const contactArray = Array.isArray(data) ? data : Object.values(data);
+
+    const sortedContacts = sortContacts(contactArray);
+    renderSortedContacts(contactList, sortedContacts);
+}
+
+
+function sortContacts(contacts) {
+    return contacts.sort((a, b) => a.name.localeCompare(b.name));
+}
+
+
+function renderSortedContacts(contactList, sortedContacts) {
+    let currentLetter = '';
+
+    sortedContacts.forEach(contact => {
+        console.log('Kontakt ID:', contact.id);
+
+        const firstLetter = contact.name[0].toUpperCase();
+
+        if (firstLetter !== currentLetter) {
+            currentLetter = firstLetter;
+            addLetterHeader(contactList, currentLetter);
+            addSilverline(contactList);
+        }
+
+        const card = createContactCard(contact);
+        contactList.appendChild(card);
+    });
+}
+
+
 function addLetterHeader(contactList, letter) {
-  const letterHeader = document.createElement("h4");
-  letterHeader.classList.add("letter-header");
-  letterHeader.textContent = letter;
-  contactList.appendChild(letterHeader);
+    const letterHeader = document.createElement('h4');
+    letterHeader.classList.add('letter-header');
+    letterHeader.textContent = letter;
+    contactList.appendChild(letterHeader);
 }
 
-// Funktion zum Hinzufügen einer Silverline
+
 function addSilverline(contactList) {
-  const silverline = document.createElement("div");
-  silverline.classList.add("silverline");
-  contactList.appendChild(silverline);
+    const silverline = document.createElement('div');
+    silverline.classList.add('silverline');
+    contactList.appendChild(silverline);
 }
 
-// Funktion zum Anzeigen der Nachricht, wenn keine Kontakte vorhanden sind
-function displayNoContactsMessage(contactList) {
-  contactList.innerHTML = "<div>Keine Kontakte vorhanden</div>";
-}
-
-function createContactCardHTML(contact) {
-  return `
-    <div class="contact-details">
-        <h3>${contact.name}</h3>
-        <p>Email: ${contact.email}</p>
-    </div>
-    `;
-}
 
 function createContactCard(contact) {
-  const card = document.createElement("div");
-  card.classList.add("contact-card"); // Card-Design-Klasse
-  card.onclick = function () {
-    setActiveContact(card); // Übergebe die gesamte Karte
-    openContactOverlay(contact.id, contact.name, contact.email, contact.phone);
-  };
-
-  // Initialen aus Vor- und Nachnamen berechnen
-  const initials = getInitials(contact.name);
-
-  // Erstelle das Badge-Element für die Initialen
-  const badge = document.createElement("div");
-  badge.classList.add("initials-badge");
-  badge.textContent = initials;
-
-  // Farbe basierend auf der Initiale des Vornamens setzen
-  badge.style.backgroundColor = getColorForInitial(initials[0]);
-
-  // Füge das Badge-Element zur Karte hinzu
-  card.appendChild(badge);
-
-  // Struktur der Karte aus HTML-Template erhalten und hinzufügen
-  card.innerHTML += createContactCardHTML(contact);
-
-  return card;
+    const card = document.createElement('div');
+    card.classList.add('contact-card'); 
+    const initials = getInitials(contact.name);
+    const badge = document.createElement('div');
+    badge.classList.add('initials-badge');
+    badge.textContent = initials;
+    badge.style.backgroundColor = getColorForInitial(initials[0]);
+    card.appendChild(badge);
+    card.innerHTML += createContactCardHTML(contact);
+    card.onclick = () => {
+        setActiveContact(card); 
+        handleCardClick(contact.id); 
+    };
+    return card;
 }
+
 
 function setActiveContact(element) {
-  // Entferne die 'active'-Klasse von allen Kontaktkarten
-  const contactCards = document.querySelectorAll("div"); // Hier können wir alle div-Elemente abfragen
-  contactCards.forEach((card) => {
-    card.classList.remove("active");
-  });
+    const contactCards = document.querySelectorAll('.contact-card');
+    contactCards.forEach(card => {
+        card.classList.remove('active');
+    });
 
-  // Füge die 'active'-Klasse zum aktuell geklickten Element hinzu
-  element.classList.add("active");
+    element.classList.add('active');
 }
 
-function createInitialsBadge(contactName) {
-  // Berechnen Sie die Initialen und die Badge-Farbe
-  const initials = getInitials(contactName); // Funktion, um die Initialen zu berechnen
-  const badgeColor = getColorForInitial(initials[0]); // Farbe basierend auf der Initiale
 
-  // Badge-Element erstellen
-  const badge = document.createElement("div");
-  badge.classList.add("initials-badge");
-  badge.textContent = initials;
-  badge.style.backgroundColor = badgeColor; // Badge-Farbe setzen
+function openContactOverlay(contactId, contactName, contactEmail, contactPhone) {
+    const overlayContent = document.createElement('div');
+    overlayContent.innerHTML = generateContactOverlayHTML(contactId, contactName, contactEmail, contactPhone);
+    const contactOverlay = document.getElementById('contact-overlay');
+    contactOverlay.innerHTML = '';  
+    contactOverlay.appendChild(overlayContent);
+    contactOverlay.style.display = 'block'; 
 
-  return badge; // Rückgabe des Badge-Elements
+    const rightContent = document.querySelector('.right-content');
+    if (window.innerWidth <= 920) {
+        rightContent.classList.add('show');
+        rightContent.style.display = 'flex';  
+    } else {
+        rightContent.classList.remove('show');
+        rightContent.style.display = '';  
+    }
 }
 
-// Funktion zur Erstellung des Badge-Elements mit einer anpassbaren Klasse
-function createInitialsBadge(name, className = "default-badge") {
-  const initials = getInitials(name);
-  const badge = document.createElement("div");
-  badge.classList.add(className); // Verwende den übergebenen Klassennamen
-  badge.textContent = initials;
-  badge.style.backgroundColor = getColorForInitial(initials[0]);
-  return badge;
+
+async function handleCardClick(contactId) {
+    console.log('Karte angeklickt, Kontakt-ID:', contactId);
+
+    try {
+        const response = await fetch(`${BASE_URL}/contacts/${contactId}.json`);
+        if (!response.ok) {
+            throw new Error('Fehler beim Abrufen der Kontaktdaten');
+        }
+
+        const contact = await response.json();
+
+        if (contact) {
+            openContactOverlay(contactId, contact.name, contact.email, contact.phone);
+        } else {
+            console.error('Kontakt nicht gefunden:', contactId);
+        }
+    } catch (error) {
+        console.error('Fehler beim Abrufen der Kontaktdaten:', error);
+    }
 }
 
-// Funktion zum Generieren des HTML-Codes für das Overlay
-function generateContactOverlayHTML(
-  contactId,
-  contactName,
-  contactEmail,
-  contactPhone
-) {
-  return `
+
+function createInitialsBadge(name, className = 'default-badge') {
+    const initials = getInitials(name);
+    const badge = document.createElement('div');
+    badge.classList.add(className); 
+    badge.textContent = initials;
+    badge.style.backgroundColor = getColorForInitial(initials[0]);
+    return badge;
+}
+
+
+function generateContactOverlayHTML(contactId, contactName, contactEmail, contactPhone) {
+    return `
         <div class="second-overlay-content">
                 <div class="badge-and-name">
                     <div class="badge">
-                        ${
-                          createInitialsBadge(contactName, "custom-badge")
-                            .outerHTML
-                        }
+                        ${createInitialsBadge(contactName, 'custom-badge').outerHTML}
                         <h1 class="contact-name">${contactName}</h1>
                     </div>
 
@@ -232,184 +229,239 @@ function generateContactOverlayHTML(
     `;
 }
 
-// Hauptfunktion, um das Overlay zu öffnen
-function openContactOverlay(
-  contactId,
-  contactName,
-  contactEmail,
-  contactPhone
-) {
-  const overlayContent = document.createElement("div");
-  overlayContent.innerHTML = generateContactOverlayHTML(
-    contactId,
-    contactName,
-    contactEmail,
-    contactPhone
-  );
-  const contactOverlay = document.getElementById("contact-overlay");
-  contactOverlay.innerHTML = "";
-  contactOverlay.appendChild(overlayContent);
-  contactOverlay.style.display = "block"; // Zeigt das Overlay an
-  const rightContent = document.querySelector(".right-content");
-
-  if (window.innerWidth <= 920) {
-    rightContent.classList.add("show");
-    rightContent.style.display = "flex"; // Zeigt den Container an
-  } else {
-    rightContent.classList.remove("show");
-    rightContent.style.display = ""; // Setzt den Container zurück auf den Standardwert
-  }
-}
-
-function closeContactOverlay() {
-  const rightContent = document.querySelector(".right-content");
-  rightContent.classList.remove("show");
-  rightContent.style.display = ""; // Setzt auf den Standardwert zurück
-}
-
-function editContact(contactId) {
-  const editContactOverlay = document.getElementById("edit-contact-overlay");
-
-  if (editContactOverlay) {
-    editContactOverlay.style.display = "block"; // Zeigt den Container an
-  } else {
-    console.error(
-      'Element mit der ID "edit-contact-overlay" wurde nicht gefunden.'
-    );
-  }
-}
 
 function getInitials(name) {
-  const nameParts = name.split(" ");
-  return (
-    nameParts[0][0] + (nameParts[1] ? nameParts[1][0] : "")
-  ).toUpperCase();
+    const nameParts = name.split(" ");
+    return (nameParts[0][0] + (nameParts[1] ? nameParts[1][0] : '')).toUpperCase();
 }
+
+
+function createContactCardHTML(contact) {
+    return `
+    <div class="contact-details">
+        <h3>${contact.name}</h3>
+        <p>Email: ${contact.email}</p>
+    </div>
+    `;
+}
+
+
+async function addContact(event) {
+    event.preventDefault();
+    const contact = gatherContactData();
+    try {
+        const response = await sendContactData(contact);
+        if (response.ok) {
+            handleSuccess();
+        } else {
+            handleError(response.statusText);
+        }
+    } catch (error) {
+        handleNetworkError(error);
+    }
+}
+
+
+function gatherContactData() {
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+
+    return {
+        name: name,
+        email: email,
+        phone: phone
+    };
+}
+
+
+async function sendContactData(contact) {
+    const response = await fetch(`${BASE_URL}/contacts.json`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(contact)
+    });
+    return response;
+}
+
+
+function handleSuccess() {
+    console.log('Kontakt erfolgreich hinzugefügt!');
+    document.getElementById('contactForm').reset(); 
+    closeOverlay('overlay'); 
+    fetchContactsData(); 
+}
+
+
+function handleError(errorMessage) {
+    console.error('Fehler beim Hinzufügen des Kontakts:', errorMessage);
+}
+
+function handleNetworkError(error) {
+    console.error('Netzwerkfehler:', error);
+}
+
+
 
 function getColorForInitial(initial) {
-  const colors = {
-    A: "#FF5733",
-    B: "#FFBD33",
-    C: "#DBFF33",
-    D: "#75FF33",
-    E: "#33FF57",
-    F: "#33FFBD",
-    G: "#33DBFF",
-    H: "#3375FF",
-    I: "#5733FF",
-    J: "#BD33FF",
-    K: "#FF33DB",
-    L: "#FF3375",
-    M: "#FF3333",
-    N: "#FF6633",
-    O: "#FF9933",
-    P: "#FFCC33",
-    Q: "#FFFF33",
-    R: "#CCFF33",
-    S: "#99FF33",
-    T: "#66FF33",
-    U: "#33FF66",
-    V: "#33FF99",
-    W: "#33FFCC",
-    X: "#33FFFF",
-    Y: "#33CCFF",
-    Z: "#3399FF",
-  };
-  return colors[initial] || "#333333"; // Standardfarbe, falls kein Eintrag
+    const colors = {
+        A: '#FF5733', B: '#FFBD33', C: '#DBFF33', D: '#75FF33', E: '#33FF57', 
+        F: '#33FFBD', G: '#33DBFF', H: '#3375FF', I: '#5733FF', J: '#BD33FF', 
+        K: '#FF33DB', L: '#FF3375', M: '#FF3333', N: '#FF6633', O: '#FF9933', 
+        P: '#FFCC33', Q: '#FFFF33', R: '#CCFF33', S: '#99FF33', T: '#66FF33', 
+        U: '#33FF66', V: '#33FF99', W: '#33FFCC', X: '#33FFFF', Y: '#33CCFF', 
+        Z: '#3399FF'
+    };
+    return colors[initial] || '#333333'; 
 }
 
-function addContactToFirebase(contact) {
-  fetch(`${BASE_URL}/contacts.json`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(contact),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("Kontakt erfolgreich hinzugefügt:", data);
 
-      // Die generierte ID von Firebase
-      const generatedId = data.name;
-      console.log("Generierte Kontakt-ID:", generatedId);
-
-      alert("Kontakt erfolgreich gespeichert!");
-
-      // Optional: Speichere diese ID, um sie später zu verwenden
-      contact.id = generatedId; // Speichere die ID im Kontakt-Objekt
-
-      fetchContactsData();
-      closeOverlay("overlay");
-    })
-    .catch((error) =>
-      console.error("Fehler beim Speichern des Kontakts:", error)
-    );
-}
-
-function deleteContact(contactId) {
-  console.log("Kontakt-ID zum Löschen:", contactId); // ID in der Konsole prüfen
-
-  const confirmDelete = confirm("Möchten Sie den Kontakt wirklich löschen?");
-
-  if (confirmDelete) {
-    fetch(`${BASE_URL}/contacts/${contactId}.json`, {
-      method: "DELETE",
-    })
-      .then((response) => {
-        if (response.ok) {
-          console.log("Kontakt erfolgreich gelöscht");
-          alert("Kontakt wurde erfolgreich gelöscht!");
-
-          fetchContactsData(); // Kontaktliste nach dem Löschen aktualisieren
-        } else {
-          throw new Error("Fehler beim Löschen des Kontakts");
+async function deleteContact(contactId) {
+    const confirmDelete = confirm('Möchten Sie diesen Kontakt wirklich löschen?');
+    if (!confirmDelete) {
+        console.log('Löschen abgebrochen');
+        return; 
+    }
+    try {
+        const response = await fetch(`${BASE_URL}/contacts/${contactId}.json`, {
+            method: 'DELETE',
+        });
+        if (!response.ok) {
+            throw new Error('Fehler beim Löschen des Kontakts');
         }
-      })
-      .catch((error) => {
-        console.error("Fehler beim Löschen des Kontakts:", error);
-        alert("Fehler beim Löschen des Kontakts.");
-      });
-  }
+        alert('Der Kontakt wurde erfolgreich gelöscht.');
+        const contactOverlay = document.getElementById('contact-overlay');
+        contactOverlay.classList.remove('visible');
+        contactOverlay.innerHTML = '';
+        fetchContactsData();
+    } catch (error) {
+        console.error('Fehler beim Löschen des Kontakts:', error);
+        alert('Es ist ein Fehler beim Löschen des Kontakts aufgetreten.');
+    }
 }
 
-contacts.forEach((contact) => {
-  const deleteButton = document.createElement("p");
-  deleteButton.className = "delete-label";
-  deleteButton.textContent = "Delete";
-
-  // Den OnClick-Handler setzen, um die ID korrekt zu übergeben
-  deleteButton.onclick = () => deleteContact(contact.id); // Übergabe der ID an die deleteContact Funktion
-
-  document.body.appendChild(deleteButton);
-});
-
-// Funktion zum Hinzufügen eines Kontakts ohne Neuladen
-function addContact(event) {
-  event.preventDefault();
-
-  const name = document.getElementById("name").value;
-  const email = document.getElementById("email").value;
-  const phone = document.getElementById("phone").value;
-
-  const contact = { name, email, phone };
-  addContactToFirebase(contact);
-
-  document.getElementById("contactForm").reset(); // Formular zurücksetzen
-}
 
 function toggleMenu() {
-  const menu = document.querySelector(".menu");
-  menu.classList.toggle("visible");
+    const menu = document.querySelector('.menu');
+    menu.classList.toggle('visible');
 
-  document.addEventListener("click", function handleOutsideClick(event) {
-    if (
-      !menu.contains(event.target) &&
-      !event.target.closest(".three-points")
-    ) {
-      menu.classList.remove("visible");
-      // Event-Listener entfernen, nachdem das Menü geschlossen wurde
-      document.removeEventListener("click", handleOutsideClick);
+    document.addEventListener('click', function handleOutsideClick(event) {
+        if (!menu.contains(event.target) && !event.target.closest('.three-points')) {
+            menu.classList.remove('visible');
+            document.removeEventListener('click', handleOutsideClick);
+        }
+    });
+}
+
+
+function editContact(contactId) {
+    const editContactOverlay = document.getElementById('edit-contact-overlay');
+    
+    if (editContactOverlay) {
+        editContactOverlay.style.display = 'block'; 
+    } else {
+        console.error('Element mit der ID "edit-contact-overlay" wurde nicht gefunden.');
     }
-  });
+}
+
+
+function showEditContactOverlay() {
+    const editContactOverlay = document.getElementById('edit-contact-overlay');
+    
+    if (editContactOverlay) {
+        console.log('Overlay gefunden, wird angezeigt.');
+        editContactOverlay.style.display = 'block'; 
+    } else {
+        console.error('Element mit der ID "edit-contact-overlay" wurde nicht gefunden.');
+    }
+}
+
+
+async function fetchAndFillContactData(contactId) {
+    try {
+        console.log(`Abrufe der Kontaktdaten für Kontakt-ID: ${contactId}`);
+        const response = await fetch(`${BASE_URL}/contacts/${contactId}.json`);
+        if (!response.ok) {
+            throw new Error('Fehler beim Abrufen der Kontaktdaten');
+        }
+        const contact = await response.json();
+        console.log('Kontaktdaten erfolgreich abgerufen:', contact);
+
+        document.getElementById('inputName').value = contact.name;
+        document.getElementById('inputMail').value = contact.email;
+        document.getElementById('inputPhone').value = contact.phone;
+
+        const editContactOverlay = document.getElementById('edit-contact-overlay');
+        if (editContactOverlay) {
+            editContactOverlay.dataset.contactId = contactId;
+        }
+        console.log('Formular mit den Kontaktdaten gefüllt.');
+    } catch (error) {
+        console.error('Fehler beim Abrufen der Kontaktdaten:', error);
+    }
+}
+
+
+async function editContact(contactId) {
+    showEditContactOverlay(); 
+    await fetchAndFillContactData(contactId); 
+}
+
+
+async function updateContactOnServer(contactId, name, email, phone) {
+    try {
+        const response = await fetch(`${BASE_URL}/contacts/${contactId}.json`, {
+            method: 'PUT', // PUT für Update
+            body: JSON.stringify({ name, email, phone }),
+            headers: { 'Content-Type': 'application/json' },
+        });
+
+        if (!response.ok) {
+            throw new Error('Fehler beim Speichern der Kontaktdaten');
+        }
+
+        const updatedContact = await response.json();
+        console.log('Kontakt erfolgreich aktualisiert:', updatedContact);
+        return updatedContact;
+
+    } catch (error) {
+        console.error('Fehler beim Aktualisieren des Kontakts:', error);
+        throw error; 
+    }
+}
+
+
+function updateContactOverlay(updatedContact) {
+    closeOverlay('edit-contact-overlay');
+    alert('Kontakt wurde erfolgreich aktualisiert.');
+
+    const contactOverlay = document.getElementById('contact-overlay');
+    if (contactOverlay) {
+        contactOverlay.querySelector('.contact-name').textContent = updatedContact.name;
+        contactOverlay.querySelector('.contact-email').textContent = updatedContact.email;
+        contactOverlay.querySelector('.contact-phone').textContent = '+49 ' + updatedContact.phone;
+    }
+
+    fetchContactsData(); 
+}
+
+
+async function handleFormSubmit(event) {
+    event.preventDefault();
+
+    const contactId = document.getElementById('edit-contact-overlay').dataset.contactId;
+    const name = document.getElementById('inputName').value;
+    const email = document.getElementById('inputMail').value;
+    const phone = document.getElementById('inputPhone').value;
+
+    try {
+        const updatedContact = await updateContactOnServer(contactId, name, email, phone);
+
+        updateContactOverlay(updatedContact);
+
+    } catch (error) {
+        console.error('Fehler beim Aktualisieren des Kontakts:', error);
+    }
 }
