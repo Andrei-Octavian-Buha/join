@@ -728,7 +728,11 @@ p.contact-phone {
         width: 100%;
         flex-direction: column;
     }
-    .form-img {
+    .position-1 {
+        position: absolute;
+        top: 23%;
+    }
+    .position-2 {
         position: absolute;
         top: 38%;
     }
