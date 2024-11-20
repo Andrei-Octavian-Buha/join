@@ -389,19 +389,25 @@ async function fetchAndFillContactData(contactId) {
         const contact = await response.json();
         console.log('Kontaktdaten erfolgreich abgerufen:', contact);
 
+        // Kontaktdaten ins Formular einfügen
         document.getElementById('inputName').value = contact.name;
         document.getElementById('inputMail').value = contact.email;
         document.getElementById('inputPhone').value = contact.phone;
 
+        // Optional: Kontakt-ID ins Overlay-Daten-Attribut setzen
         const editContactOverlay = document.getElementById('edit-contact-overlay');
         if (editContactOverlay) {
             editContactOverlay.dataset.contactId = contactId;
         }
         console.log('Formular mit den Kontaktdaten gefüllt.');
+
+        // Badge im vorgesehenen Container anzeigen
+        displayBadgeInContainer(contact.name); // Badge für den Kontaktname erzeugen
     } catch (error) {
         console.error('Fehler beim Abrufen der Kontaktdaten:', error);
     }
 }
+
 
 
 async function editContact(contactId) {
@@ -483,3 +489,45 @@ function toggleDropdown() {
       }
     }
   };
+
+function displayBadgeInContainer(contactName) {
+    // 1. Badge dynamisch erstellen
+    const badge = createInitialsBadge(contactName, 'custom-badge');
+    if (!badge) {
+        console.error('Badge konnte nicht erstellt werden.');
+        return;
+    }
+
+    // 2. Container für das Badge finden
+    const badgeContainer = document.getElementById('edit-badge-container');
+    if (!badgeContainer) {
+        console.error('Container mit ID "edit-badge-container" nicht gefunden.');
+        return;
+    }
+
+    // 3. Ursprüngliches Bild ausblenden
+    const imgContainer = document.getElementById('edit-img-container');
+    if (imgContainer) {
+        imgContainer.style.display = 'none'; // Bild ausblenden
+    }
+
+    // 4. Hintergrund des Badge-Containers entfernen
+    badgeContainer.style.backgroundColor = 'transparent'; // Hintergrundfarbe auf transparent setzen
+
+    // 5. Badge einfügen
+    try {
+        badgeContainer.innerHTML = ''; // Container leeren
+        badgeContainer.appendChild(badge); // Badge hinzufügen
+        badgeContainer.style.display = 'block'; // Badge sichtbar machen
+        console.log('Badge erfolgreich hinzugefügt:', badge.outerHTML);
+    } catch (error) {
+        console.error('Fehler beim Hinzufügen des Badges:', error);
+    }
+}
+
+
+
+
+
+
+

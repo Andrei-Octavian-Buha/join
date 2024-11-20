@@ -109,8 +109,11 @@
 
 
                 <div class="form-container">
-                    <div class="form-img">
+                    <div class="form-img" id="edit-img-container">
                         <img src="assets/img/icons8.png" alt="Bild">
+                    </div>
+                    <div class="form-img" id="edit-badge-container" style="display: none;">
+                        <!-- Badge wird hier dynamisch eingefügt -->
                     </div>
                     <form id="editContactForm" onsubmit="handleFormSubmit(event)">
                         <input type="text" class="input-name" id="inputName" placeholder="Name" required>

@@ -689,9 +689,7 @@ p.contact-phone {
 }
 
 @media (min-width: 800px) {
-    .right-content.show {
-        left: 29%;
-    }
+
 }
 
 @media(max-width: 796px) {
@@ -732,7 +730,7 @@ p.contact-phone {
     }
     .form-img {
         position: absolute;
-        top: 23%;
+        top: 38%;
     }
     form {
         margin-top: 60px;
