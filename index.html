@@ -46,15 +46,19 @@
             />
             <img class="inputWithImg" src="./assets/menu/mail.svg" alt="">
             </div>
-            <div class="containerInputSignUp">
+            <div class="containerInputSignUpPw">
               <input
               type="password"
               class="loginInputFeld"
               placeholder="Password"
               required
+              id="passwordFieldLogin"
             />
-            <img class="inputWithImg" src="./assets/menu/lock.svg" alt="">
+            <img class="inputWithImg" src="./assets/menu/lock.svg" alt="" onclick="togglePassword('passwordFieldLogin', this)">
             </div>
+            <div class="invalid-login-container" id="error-container">
+              Check your email and password. Please try again.
+          </div>
           </div>
           <div>
             <input
@@ -66,9 +70,9 @@
             <label for="checkbox">Remember Me</label>
           </div>
           <div class="loginBtnContainer">
-            <button class="btnPrimary btnMobileSettings">Log in</button>
-            <button class="btnSecundary btnMobileSettings">Guest Log in</button>
-          </div>
+            <button class="btnPrimary btnMobileSettings" onclick="handleLoginClick(event)">Log in</button>
+            <button class="btnSecundary btnMobileSettings"  onclick="handleGuestLoginClick()">Guest Log in</button>
+          </div>          
         </form>
       </div>
       <div class="loginHeaderBtn desktopMobileDnone">

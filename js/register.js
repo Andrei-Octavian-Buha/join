@@ -34,12 +34,10 @@ function getSignUpInputs() {
 // Function to validate inputs
 function validateInputs(inputs) {
     if (!inputs.name || !inputs.email || !inputs.password || !inputs.confirmPassword) {
-      alert("Please fill in all fields.");
       return false;
     }
   
     if (!inputs.isChecked) {
-      alert("You must accept the Privacy Policy.");
       return false;
     }
   
@@ -129,6 +127,20 @@ function togglePassword(inputId, icon) {
     input.type = isPassword ? 'text' : 'password';
     icon.src = isPassword ? './assets/menu/visibility-off.png' : './assets/menu/lock.svg';
   }
+
+  function validatePasswords() {
+    var passwordField1 = document.getElementById('passwordField1');
+    var passwordField2 = document.getElementById('passwordField2');
+    
+    if (passwordField1.value !== passwordField2.value) {
+      passwordField1.style.border = "1px solid red";
+      passwordField2.style.border = "1px solid red";
+    } else {
+      passwordField1.style.border = "";
+      passwordField2.style.border = "";
+    }
+  }
+  
 
 
 
