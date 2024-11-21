@@ -1,0 +1,48 @@
+.addTaskOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+  height: 100dvh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.addTaskContainer {
+  width: 1149px;
+  background-color: #fff;
+  border-radius: 30px;
+  padding: 64px 74px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.h1styleCard {
+  font-size: 61px;
+  display: block;
+  font-size: 2em;
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+  unicode-bidi: isolate;
+}
+.containerTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.closeAddTaskBoardX {
+  width: 24px;
+  color: #2a3647;
+}
+.closeAddTaskBoardX:hover {
+  display: flex;
+  width: 24px;
+  border-radius: 50%;
+  background-color: #ebebeb;
+}

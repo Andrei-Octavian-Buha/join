@@ -180,6 +180,7 @@
     gap: 48px;
   }
   .desktopTrenBar {
+    width: 0px;
     height: 424px;
     border: 1px solid;
     background-color: #d1d1d1;
@@ -274,7 +275,6 @@
   .desktopBtnContainer {
     width: 100%;
     display: flex;
-
     justify-content: space-between;
   }
   li {

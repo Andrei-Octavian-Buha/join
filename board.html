@@ -1,82 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-        rel="stylesheet">
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./styles/header.css" />
+    <link rel="stylesheet" href="styles/board.css" />
+    <link rel="stylesheet" href="./styles/buttons.css" />
+    <link rel="stylesheet" href="./styles/board-add-task.css" />
+    <link rel="stylesheet" href="./styles/add_task.css" />
+    <link rel="stylesheet" href="./styles/radio_button.css" />
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="styles/board.css">
+
+    <script src="./js/board.js"></script>
+    <script src="./js/add_task.js"></script>
+    <script src="./js/board-add-task.js"></script>
+    <script src="./js/add-task-template-html.js"></script>
     <script src="./script.js"></script>
-    <script src="js/board.js"></script>
     <title>Board</title>
-</head>
-<body id="boardPage" onload="includeHTML()">
+  </head>
+  <body id="boardPage" onload="includeHTML(), init()">
     <div class="" w3-include-html="./templates/header.html"></div>
     <div class="content">
-        <div class="content-wrapper">
-            <div class="top-content">
-                <h1>Board</h1>
-                <div class="right-content">
-                    <input type="text" placeholder="find task">
-                    <button id="addCardButton" onclick="newPost()" class="add-new-button">Add Task <span class="plus">+</span></button>
-                </div>
-            </div>
-    
-            <div class="wrapper">
-                <div class="column">
-                    <div class="head-content">
-                        <h3>To do</h3>
-                        <div class="add-new">
-                            <img src="assets/img/plus.png" id="addCardButton" onclick="newPost()" alt="Plus">
-                        </div>
-                    </div>
-                    <div class="drag-area" id="open" ondrop="moveTo('open')" ondragleave="removeHighlight('open')" ondragover="allowDrop(event); highlight('open')">
-                    </div>
-                </div>
-    
-                <div class="column">
-                    <div class="head-content">
-                        <h3>In progress</h3>
-                        <div class="add-new">
-                            <img src="assets/img/plus.png" id="addCardButton" onclick="newProgress()" alt="Plus">
-                        </div>
-                    </div>
-                    <div class="drag-area" id="closed" ondrop="moveTo('closed')" ondragleave="removeHighlight('closed')" ondragover="allowDrop(event); highlight('closed')"></div>
-                </div>
-        
-                <div class="column">
-                    <div class="head-content">
-                        <h3>Await feedback</h3>
-                        <div class="add-new">
-                            <img src="assets/img/plus.png" id="addCardButton" onclick="newFeedback()" alt="Plus">
-                        </div>
-                    </div>
-                    <div class="drag-area" id="wait" ondrop="moveTo('wait')" ondragleave="removeHighlight('wait')" ondragover="allowDrop(event); highlight('wait')"></div>
-                </div>
-    
-                <div class="column">
-                    <div class="head-content">
-                        <h3>Done</h3>
-                    </div>
-                    <div class="drag-area" id="done" ondrop="moveTo('wait')" ondragleave="removeHighlight('wait')" ondragover="allowDrop(event); highlight('wait')"></div>
-                </div>
-            </div>
-        </div>   
-    </div>
-
-    <template id="cardTemplate">
-        <div class="card-content" contenteditable="true">
-            <h4>Name der Aufgabe</h4>
-            <p>Bezeichnung der Aufgabe</p>
-            <p>Subtasks</p>
-            <p>Mitarbeiter</p>
+      <div class="content-wrapper">
+        <div class="top-content">
+          <h1>Board</h1>
+          <div class="right-content">
+            <input class="searchinput" type="text" placeholder="find task" />
+            <button
+              id="addCardButton"
+              onclick="showOverlayAddTask()"
+              class="btnPrimary"
+            >
+              Add Task <span class="plus">+</span>
+            </button>
+          </div>
         </div>
+
+        <div class="wrapper">
+          <div class="column">
+            <div class="head-content">
+              <h3>To do</h3>
+              <div class="add-new">
+                <img
+                  src="assets/img/plus.png"
+                  id="addCardButton"
+                  onclick="newPost()"
+                  alt="Plus"
+                />
+              </div>
+            </div>
+            <div
+              class="drag-area"
+              id="open"
+              ondrop="moveTo('open')"
+              ondragleave="removeHighlight('open')"
+              ondragover="allowDrop(event); highlight('open')"
+            ></div>
+          </div>
+
+          <div class="column">
+            <div class="head-content">
+              <h3>In progress</h3>
+              <div class="add-new">
+                <img
+                  src="assets/img/plus.png"
+                  id="addCardButton"
+                  onclick="newProgress()"
+                  alt="Plus"
+                />
+              </div>
+            </div>
+            <div
+              class="drag-area"
+              id="closed"
+              ondrop="moveTo('closed')"
+              ondragleave="removeHighlight('closed')"
+              ondragover="allowDrop(event); highlight('closed')"
+            ></div>
+          </div>
+
+          <div class="column">
+            <div class="head-content">
+              <h3>Await feedback</h3>
+              <div class="add-new">
+                <img
+                  src="assets/img/plus.png"
+                  id="addCardButton"
+                  onclick="newFeedback()"
+                  alt="Plus"
+                />
+              </div>
+            </div>
+            <div
+              class="drag-area"
+              id="wait"
+              ondrop="moveTo('wait')"
+              ondragleave="removeHighlight('wait')"
+              ondragover="allowDrop(event); highlight('wait')"
+            ></div>
+          </div>
+
+          <div class="column">
+            <div class="head-content">
+              <h3>Done</h3>
+            </div>
+            <div
+              class="drag-area"
+              id="done"
+              ondrop="moveTo('wait')"
+              ondragleave="removeHighlight('wait')"
+              ondragover="allowDrop(event); highlight('wait')"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <template id="cardTemplate">
+      <div class="card-content" contenteditable="true">
+        <h4>Name der Aufgabe</h4>
+        <p>Bezeichnung der Aufgabe</p>
+        <p>Subtasks</p>
+        <p>Mitarbeiter</p>
+      </div>
     </template>
-    
-</body>
+    <div id="add-task-template" class="dNone"></div>
+    <script>
+      addTaskTemplate();
+    </script>
+  </body>
 </html>

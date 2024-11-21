@@ -42,7 +42,11 @@ function createContactElement(element) {
   container.classList.add("dropDownContactContainer");
 
   // Extrahiere die Initialen des Kontakts
-  let initials = element.cont.name.split(" ").map(word => word[0].toUpperCase()).join("").slice(0, 2);
+  let initials = element.cont.name
+    .split(" ")
+    .map((word) => word[0].toUpperCase())
+    .join("")
+    .slice(0, 2);
 
   // Hol die Farbe für die Initialen
   let color = getColorForInitial(initials[0]); // Verwende nur den ersten Buchstaben für die Farbe
@@ -76,18 +80,39 @@ async function loadContacts() {
   let contactsData = await loadContactsData(); // Daten abrufen
   let sortedContacts = sortContacts(contactsData); // Kontakte sortieren
   renderContacts(sortedContacts); // Kontakte rendern
+  subtasktrigger();
 }
 
 function getColorForInitial(initial) {
   const colors = {
-      A: '#FF5733', B: '#FFBD33', C: '#DBFF33', D: '#75FF33', E: '#33FF57', 
-      F: '#33FFBD', G: '#33DBFF', H: '#3375FF', I: '#5733FF', J: '#BD33FF', 
-      K: '#FF33DB', L: '#FF3375', M: '#FF3333', N: '#FF6633', O: '#FF9933', 
-      P: '#FFCC33', Q: '#FFFF33', R: '#CCFF33', S: '#99FF33', T: '#66FF33', 
-      U: '#33FF66', V: '#33FF99', W: '#33FFCC', X: '#33FFFF', Y: '#33CCFF', 
-      Z: '#3399FF'
+    A: "#FF5733",
+    B: "#FFBD33",
+    C: "#DBFF33",
+    D: "#75FF33",
+    E: "#33FF57",
+    F: "#33FFBD",
+    G: "#33DBFF",
+    H: "#3375FF",
+    I: "#5733FF",
+    J: "#BD33FF",
+    K: "#FF33DB",
+    L: "#FF3375",
+    M: "#FF3333",
+    N: "#FF6633",
+    O: "#FF9933",
+    P: "#FFCC33",
+    Q: "#FFFF33",
+    R: "#CCFF33",
+    S: "#99FF33",
+    T: "#66FF33",
+    U: "#33FF66",
+    V: "#33FF99",
+    W: "#33FFCC",
+    X: "#33FFFF",
+    Y: "#33CCFF",
+    Z: "#3399FF",
   };
-  return colors[initial] || '#333333'; 
+  return colors[initial] || "#333333";
 }
 
 function startEvent(contactId) {
@@ -134,7 +159,6 @@ async function resetForm(event) {
   checked = [];
   await loadContacts();
   assignet.innerHTML = "";
-  console.log(checked);
 }
 
 function whenChecked(contactId) {
