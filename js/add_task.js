@@ -142,8 +142,15 @@ function whenChecked(contactId) {
   let container = document.getElementById(`ContainerID${contactId.id}`);
   let text = document.getElementById("dinamicText");
   let assignet = document.getElementById("whoIsAssignet");
-  text.innerHTML = "";
-  assignet.innerHTML = "";
+
+  // Entferne alle Inhalte der "dinamicText"- und "whoIsAssignet"-Container nur, wenn keine Checkbox markiert ist
+  if (checked.length === 0) {
+    text.innerHTML = "Select contacts to assign";
+    assignet.innerHTML = "";
+  } else {
+    text.innerHTML = "An |";
+  }
+
   if (ck.checked) {
     if (!checked.includes(contactId.id)) {
       checked.push({ name: contactId.cont.name, key: contactId.id });
@@ -159,16 +166,22 @@ function whenChecked(contactId) {
     }
     container.classList.remove("checkedBgColor");
   }
+
+  // Badges (Initialen) für alle markierten Kontakte anzeigen
+  assignet.innerHTML = ""; // Nur bei Änderungen den Inhalt löschen, nicht bei jedem Durchlauf
   checked.forEach((element) => {
-    assignet.innerHTML += `<p class="firstLetterCircle">${element}</p>`;
+    // Extrahiere die Initialen des Kontakts
+    let initials = element.name.split(" ").map(word => word[0].toUpperCase()).join("").slice(0, 2);
+    
+    // Hole die Farbe für die Initialen
+    let color = getColorForInitial(initials[0]); // Wir verwenden nur den ersten Buchstaben für die Farbe
+
+    // Erstelle das Badge mit den Initialen und der entsprechenden Farbe
+    assignet.innerHTML += `<p class="firstLetterCircle" style="background-color: ${color};">${initials}</p>`;
   });
-  text.innerHTML = "An |";
-  if (checked <= 0) {
-    text.innerHTML = "Select contacts to assign";
-    assignet.innerHTML = "";
-    console.log(checked);
-  }
 }
+
+
 // SUBTASK
 let subtasks = [];
 
