@@ -132,13 +132,35 @@ async function getAllContacts(path = "") {
   return (responseJs = await response.json());
 }
 
+// function startEventListner() {
+//   let clickHeader = document.getElementById("dropDownHeaderId");
+//   let body = document.getElementById("dropDownBodyId");
+//   if (clickHeader) {
+//     clickHeader.addEventListener("click", () => {
+//       if (body.classList.contains("dNone")) {
+//         body.classList.remove("dNone");
+//       } else {
+//         body.classList.add("dNone");
+//       }
+//     });
+//   }
+// }
+
 function startEventListner() {
   let clickHeader = document.getElementById("dropDownHeaderId");
   let body = document.getElementById("dropDownBodyId");
-  if (clickHeader) {
+
+  if (clickHeader && body) {
+    // Verificăm că ambele elemente există
     clickHeader.addEventListener("click", () => {
-      body.classList.toggle("dNone");
+      if (body.classList.contains("dNone")) {
+        body.classList.remove("dNone"); // Eliminăm clasa "dNone"
+      } else {
+        body.classList.add("dNone"); // Adăugăm clasa "dNone"
+      }
     });
+  } else {
+    console.error("Elementele nu au fost găsite în DOM."); // Mesaj pentru debugging
   }
 }
 
