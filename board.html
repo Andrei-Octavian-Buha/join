@@ -16,11 +16,13 @@
     <link rel="stylesheet" href="./styles/add_task.css" />
     <link rel="stylesheet" href="./styles/radio_button.css" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./styles/board-cards.css" />
 
     <script src="./js/board.js"></script>
     <script src="./js/add_task.js"></script>
     <script src="./js/board-add-task.js"></script>
     <script src="./js/add-task-template-html.js"></script>
+    <script src="./js/board-loading-data.js"></script>
     <script src="./script.js"></script>
     <title>Board</title>
   </head>
@@ -57,7 +59,7 @@
             </div>
             <div
               class="drag-area"
-              id="open"
+              id="todoColumn"
               ondrop="moveTo('open')"
               ondragleave="removeHighlight('open')"
               ondragover="allowDrop(event); highlight('open')"
@@ -78,7 +80,7 @@
             </div>
             <div
               class="drag-area"
-              id="closed"
+              id="inprogressColumn"
               ondrop="moveTo('closed')"
               ondragleave="removeHighlight('closed')"
               ondragover="allowDrop(event); highlight('closed')"
@@ -99,7 +101,7 @@
             </div>
             <div
               class="drag-area"
-              id="wait"
+              id="awaitfeedbackColumn"
               ondrop="moveTo('wait')"
               ondragleave="removeHighlight('wait')"
               ondragover="allowDrop(event); highlight('wait')"
@@ -112,7 +114,7 @@
             </div>
             <div
               class="drag-area"
-              id="done"
+              id="doneColumn"
               ondrop="moveTo('wait')"
               ondragleave="removeHighlight('wait')"
               ondragover="allowDrop(event); highlight('wait')"
@@ -121,14 +123,6 @@
         </div>
       </div>
     </div>
-    <template id="cardTemplate">
-      <div class="card-content" contenteditable="true">
-        <h4>Name der Aufgabe</h4>
-        <p>Bezeichnung der Aufgabe</p>
-        <p>Subtasks</p>
-        <p>Mitarbeiter</p>
-      </div>
-    </template>
     <div id="add-task-template" class="dNone"></div>
     <script>
       addTaskTemplate();

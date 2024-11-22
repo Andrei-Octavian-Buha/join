@@ -195,8 +195,12 @@ function whenChecked(contactId) {
   assignet.innerHTML = ""; // Nur bei Änderungen den Inhalt löschen, nicht bei jedem Durchlauf
   checked.forEach((element) => {
     // Extrahiere die Initialen des Kontakts
-    let initials = element.name.split(" ").map(word => word[0].toUpperCase()).join("").slice(0, 2);
-    
+    let initials = element.name
+      .split(" ")
+      .map((word) => word[0].toUpperCase())
+      .join("")
+      .slice(0, 2);
+
     // Hole die Farbe für die Initialen
     let color = getColorForInitial(initials[0]); // Wir verwenden nur den ersten Buchstaben für die Farbe
 
@@ -204,7 +208,6 @@ function whenChecked(contactId) {
     assignet.innerHTML += `<p class="firstLetterCircle" style="background-color: ${color};">${initials}</p>`;
   });
 }
-
 
 // SUBTASK
 let subtasks = [];
@@ -379,6 +382,7 @@ function addDataToFireBase() {
     prio: taskData.prio,
     category: taskData.category,
     subtask: taskData.subtask,
+    progress: "todo",
   });
 }
 
