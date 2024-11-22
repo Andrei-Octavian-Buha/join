@@ -100,15 +100,39 @@ function showSubTasks(task) {
 
 function showAssignet(task) {
   let asignedDiv = document.getElementById(`asigned${task.id}`);
-  asignedDiv.innerHTML = "";
+  asignedDiv.innerHTML = ""; // Vorherigen Inhalt löschen
   let assigned = task.task.assignet;
+
   if (assigned) {
     assigned.forEach((person) => {
-      asignedDiv.innerHTML += `<div id="${person.key}" class="assignetPersonKreis">PTR</div>`;
+      // Initialen der Person extrahieren
+      let initials = person.name.split(" ").map(word => word[0].toUpperCase()).join("").slice(0, 2);
+
+      // Farbe basierend auf dem ersten Buchstaben der Initialen abrufen
+      let color = getColorForInitial(initials[0]);
+
+      // Hinzufügen des farblich hinterlegten Divs
+      asignedDiv.innerHTML += `
+        <div id="${person.key}" class="assignetPersonKreis" style="background-color: ${color};">
+          ${initials}
+        </div>
+      `;
     });
   } else {
     return "don't Assignet Person";
   }
+}
+
+function getColorForInitial(initial) {
+  const colors = {
+      A: '#FF5733', B: '#FFBD33', C: '#DBFF33', D: '#75FF33', E: '#33FF57', 
+      F: '#33FFBD', G: '#33DBFF', H: '#3375FF', I: '#5733FF', J: '#BD33FF', 
+      K: '#FF33DB', L: '#FF3375', M: '#FF3333', N: '#FF6633', O: '#FF9933', 
+      P: '#FFCC33', Q: '#FFFF33', R: '#CCFF33', S: '#99FF33', T: '#66FF33', 
+      U: '#33FF66', V: '#33FF99', W: '#33FFCC', X: '#33FFFF', Y: '#33CCFF', 
+      Z: '#3399FF'
+  };
+  return colors[initial] || '#333333'; 
 }
 
 function showPrioIcon(task) {
