@@ -241,7 +241,7 @@ function addSubTask() {
   let btn = document.getElementById("AddSubTaskStep2Add");
   let inputText = document.getElementById("inputSubTask");
   btn.addEventListener("click", () => {
-    if (inputText.value) {
+    if (inputText.value && subtasks.length <= 1) {
       subtasks.push(inputText.value);
     } else {
       console.log("i will please you to add some text");
