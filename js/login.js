@@ -81,10 +81,8 @@ function processValidLogin(rememberMe, user) {
     clearLoginData();
   }
 
-  // Set current user in localStorage
   localStorage.setItem("currentUser", JSON.stringify({ name: user.name, email: user.email }));
   
-  // Redirect to the summary page
   window.location.href = "./summary_user.html";
 }
 
