@@ -45,3 +45,27 @@ function toggleDropdown() {
       }
     }
   };
+
+  // Funktion, um den aktuellen Benutzer aus dem Local Storage zu laden
+function getCurrentUser() {
+  const user = localStorage.getItem("currentUser");
+  return user ? JSON.parse(user) : null; 
+}
+
+function insertUserName() {
+  const user = getCurrentUser();
+  if (user) {
+    document.querySelector(".greeting-name").textContent = user.name;
+    document.querySelector(".fullscreen-greeting-name").textContent = user.name;
+  } else {
+    document.querySelector(".greeting-name").textContent = "Guest";
+    document.querySelector(".fullscreen-greeting-name").textContent = "Guest";
+  }
+}
+
+
+// Führt die Funktion aus, wenn die Seite geladen wird
+document.addEventListener("DOMContentLoaded", () => {
+  insertUserName();
+});
+

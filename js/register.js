@@ -2,7 +2,13 @@
 const BASE_URL =
   "https://join-store-ae38e-default-rtdb.europe-west1.firebasedatabase.app";
 
-// Main signup handler
+  let currentUser = null; // Globale Variable für den aktuellen Nutzer
+
+// Nach erfolgreichem Registrieren
+function storeUserInLocalStorage(user) {
+  localStorage.setItem("currentUser", JSON.stringify({ name: user.name, email: user.email }));
+}
+
 async function handleSignUp() {
   const inputs = getSignUpInputs();
   if (!validateInputs(inputs)) return;
@@ -10,6 +16,7 @@ async function handleSignUp() {
 
   try {
     await pushUserToDatabase(user);
+    storeUserInLocalStorage(user); // Speichert Name und Email
     showSignUpPopup();
     redirectToHome();
   } catch (error) {
@@ -17,6 +24,7 @@ async function handleSignUp() {
     alert("An error occurred. Please try again.");
   }
 }
+
 
 // Collect input values
 function getSignUpInputs() {
@@ -33,34 +41,33 @@ function getSignUpInputs() {
 
 // Function to validate inputs
 function validateInputs(inputs) {
-    if (!inputs.name || !inputs.email || !inputs.password || !inputs.confirmPassword) {
-      return false;
-    }
-  
-    if (!inputs.isChecked) {
-      return false;
-    }
-  
-    if (inputs.password !== inputs.confirmPassword) {
-      showPasswordError();
-      return false;
-    }
-  
-    return true;
+  if (!inputs.name || !inputs.email || !inputs.password || !inputs.confirmPassword) {
+    return false;
   }
-  
-//function that shows error if passwords dont match
+
+  if (!inputs.isChecked) {
+    return false;
+  }
+
+  if (inputs.password !== inputs.confirmPassword) {
+    showPasswordError();
+    return false;
+  }
+
+  return true;
+}
+
+// Function that shows error if passwords don't match
 function showPasswordError() {
-    const errorContainer = document.getElementById("passwordError");
-    const passwordInputs = document.querySelectorAll('input[type="password"]');
-  
-    errorContainer.style.display = "block";
-  
-    passwordInputs.forEach(input => {
-      input.classList.add("error");
-    });
-  }
-  
+  const errorContainer = document.getElementById("passwordError");
+  const passwordInputs = document.querySelectorAll('input[type="password"]');
+
+  errorContainer.style.display = "block";
+
+  passwordInputs.forEach(input => {
+    input.classList.add("error");
+  });
+}
 
 // Create a user object
 function createUserObject(inputs) {
@@ -86,6 +93,20 @@ async function pushUserToDatabase(user) {
   }
 }
 
+// Save current user in Local Storage
+function saveCurrentUser(user) {
+  const currentUser = {
+    name: user.name,
+    email: user.email,
+  };
+  localStorage.setItem("currentUser", JSON.stringify(currentUser));
+}
+
+// Redirect to Summary Page
+function redirectToHome() {
+  window.location.href = "summary_user.html";
+}
+
 // Display signup success popup
 function showSignUpPopup() {
   const popup = document.getElementById("signUpPopup");
@@ -103,6 +124,8 @@ function showSignUpPopup() {
     zIndex: "1000",
   });
 }
+
+
 
 // Redirect to home page after a delay
 function redirectToHome() {
