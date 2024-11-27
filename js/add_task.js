@@ -425,3 +425,21 @@ window.onclick = function (event) {
     }
   }
 };
+
+document.addEventListener("DOMContentLoaded", () => {
+  const dropDownHeader = document.getElementById("dropDownHeaderId");
+  const dropDownBody = document.getElementById("dropDownBodyId");
+  const dropDownArrow = dropDownHeader.querySelector("img");
+
+  dropDownHeader.addEventListener("click", () => {
+    // Toggle die Klasse, um das Dropdown anzuzeigen/verbergen
+    dropDownBody.classList.toggle("dNone");
+
+    // Rotieren des Pfeils basierend auf dem Zustand des Dropdowns
+    if (!dropDownBody.classList.contains("dNone")) {
+      dropDownArrow.style.transform = "rotate(180deg)";
+    } else {
+      dropDownArrow.style.transform = "rotate(0deg)";
+    }
+  });
+});
