@@ -8,6 +8,7 @@
   color: #fff;
   background-color: #2a3647 !important;
 }
+
 @media (min-width: 1150px) {
   .subtaskEdiBtns {
     display: flex;
@@ -474,4 +475,8 @@
     display: flex;
     align-items: center;
   }
+}
+
+.dNone {
+  display: none;
 }

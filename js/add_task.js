@@ -146,23 +146,23 @@ async function getAllContacts(path = "") {
 //   }
 // }
 
-function startEventListner() {
-  let clickHeader = document.getElementById("dropDownHeaderId");
-  let body = document.getElementById("dropDownBodyId");
+// function startEventListner() {
+//   let clickHeader = document.getElementById("dropDownHeaderId");
+//   let body = document.getElementById("dropDownBodyId");
 
-  if (clickHeader && body) {
-    // Verificăm că ambele elemente există
-    clickHeader.addEventListener("click", () => {
-      if (body.classList.contains("dNone")) {
-        body.classList.remove("dNone"); // Eliminăm clasa "dNone"
-      } else {
-        body.classList.add("dNone"); // Adăugăm clasa "dNone"
-      }
-    });
-  } else {
-    console.error("Elementele nu au fost găsite în DOM."); // Mesaj pentru debugging
-  }
-}
+//   if (clickHeader && body) {
+//     // Verificăm că ambele elemente există
+//     clickHeader.addEventListener("click", () => {
+//       if (body.classList.contains("dNone")) {
+//         body.classList.remove("dNone"); // Eliminăm clasa "dNone"
+//       } else {
+//         body.classList.add("dNone"); // Adăugăm clasa "dNone"
+//       }
+//     });
+//   } else {
+//     console.error("Elementele nu au fost găsite în DOM."); // Mesaj pentru debugging
+//   }
+// }
 
 let checked = [];
 

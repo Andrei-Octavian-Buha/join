@@ -9,10 +9,6 @@ p {
   font-weight: 400;
 }
 
-.dNone {
-  display: none;
-}
-
 .logo2sec {
   position: fixed;
   z-index: 999;
