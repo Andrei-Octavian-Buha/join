@@ -137,32 +137,30 @@ async function getAllContacts(path = "") {
 //   let body = document.getElementById("dropDownBodyId");
 //   if (clickHeader) {
 //     clickHeader.addEventListener("click", () => {
-//       if (body.classList.contains("dNone")) {
-//         body.classList.remove("dNone");
-//       } else {
-//         body.classList.add("dNone");
-//       }
+//       body.classList.toggle("dNone");
 //     });
 //   }
 // }
 
-// function startEventListner() {
-//   let clickHeader = document.getElementById("dropDownHeaderId");
-//   let body = document.getElementById("dropDownBodyId");
+function startEventListner() {
+  document.addEventListener("DOMContentLoaded", () => {
+    const dropDownHeader = document.getElementById("dropDownHeaderId");
+    const dropDownBody = document.getElementById("dropDownBodyId");
+    const dropDownArrow = dropDownHeader.querySelector("img");
 
-//   if (clickHeader && body) {
-//     // Verificăm că ambele elemente există
-//     clickHeader.addEventListener("click", () => {
-//       if (body.classList.contains("dNone")) {
-//         body.classList.remove("dNone"); // Eliminăm clasa "dNone"
-//       } else {
-//         body.classList.add("dNone"); // Adăugăm clasa "dNone"
-//       }
-//     });
-//   } else {
-//     console.error("Elementele nu au fost găsite în DOM."); // Mesaj pentru debugging
-//   }
-// }
+    dropDownHeader.addEventListener("click", () => {
+      // Toggle die Klasse, um das Dropdown anzuzeigen/verbergen
+      dropDownBody.classList.toggle("dNone");
+
+      // Rotieren des Pfeils basierend auf dem Zustand des Dropdowns
+      if (!dropDownBody.classList.contains("dNone")) {
+        dropDownArrow.style.transform = "rotate(180deg)";
+      } else {
+        dropDownArrow.style.transform = "rotate(0deg)";
+      }
+    });
+  });
+}
 
 let checked = [];
 
