@@ -103,25 +103,25 @@
 }
 
 .stats-button-done:hover{
-    transform: scale(1.05);
+    transform: scale(1.04);
     background-color: #2A3647;
     color: #ffffff;
 }
 
 .stats-button-to-do:hover{
-    transform: scale(1.05);
+    transform: scale(1.04);
     background-color: #2A3647;
     color: #ffffff;
 }
 
 .stats-button-urgent:hover{
-    transform: scale(1.05);
+    transform: scale(1.04);
     background-color: #2A3647;
     color: #ffffff;
 }
 
 .stats-third-button:hover{
-    transform: scale(1.05);
+    transform: scale(1.04);
     background-color: #2A3647;
     color: #ffffff;
 }

@@ -6,15 +6,46 @@ document.addEventListener("DOMContentLoaded", prefillLoginData);
 
 async function handleLoginClick(event) {
   event.preventDefault();
-  const { email, password, rememberMe } = getLoginInput();
+  const input = getLoginInput();
+  if (isInvalidLoginInput(input)) return;
+
+  const user = await attemptLogin(input.email, input.password);
+  user ? handleSuccessfulLogin(user, input.rememberMe) : handleFailedLogin();
+}
+
+function isInvalidLoginInput({ email, password }) {
   const errorContainer = document.getElementById("error-container");
-
+  if (isInvalidInput(email, password, errorContainer)) return true;
   hideErrorContainer(errorContainer);
+  return false;
+}
 
-  if (isInvalidInput(email, password, errorContainer)) return;
+async function attemptLogin(email, password) {
+  try {
+    return await findUser(email, password);
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    return null;
+  }
+}
 
-  const user = await findUser(email, password);
-  user ? processValidLogin(rememberMe) : showErrorContainer(errorContainer, "Incorrect email or password.");
+function handleSuccessfulLogin(user, rememberMe) {
+  rememberMe ? saveLoginData(user.email, user.password) : clearLoginData();
+  storeUserInLocalStorage(user);
+  redirectToSummary();
+}
+
+function handleFailedLogin() {
+  const errorContainer = document.getElementById("error-container");
+  showErrorContainer(errorContainer, "Incorrect email or password.");
+}
+
+function redirectToSummary() {
+  window.location.href = "./summary_user.html";
+}
+
+function storeUserInLocalStorage(user) {
+  localStorage.setItem("currentUser", JSON.stringify({ name: user.name, email: user.email }));
 }
 
 function getLoginInput() {
@@ -26,7 +57,7 @@ function getLoginInput() {
 }
 
 function handleGuestLoginClick() {
-  localStorage.setItem("currentUser", JSON.stringify({ email: "Guest" }));
+  localStorage.setItem("currentUser", JSON.stringify({ name: "Guest" }));
   window.location.href = "./summary_user.html";
 }
 
@@ -43,17 +74,26 @@ async function findUser(email, password) {
   return users.find(user => user.email === email && user.password === password);
 }
 
-function processValidLogin(rememberMe) {
-  const { email, password } = getLoginInput();
-  rememberMe ? saveLoginData(email, password) : clearLoginData();
-  localStorage.setItem("currentUser", JSON.stringify({ email }));
+function processValidLogin(rememberMe, user) {
+  if (rememberMe) {
+    saveLoginData(user.email, user.password); // Save email and password
+  } else {
+    clearLoginData();
+  }
+
+  localStorage.setItem("currentUser", JSON.stringify({ name: user.name, email: user.email }));
+  
   window.location.href = "./summary_user.html";
 }
 
-function fetchUsers() {
-  const BASE_URL = "https://join-store-ae38e-default-rtdb.europe-west1.firebasedatabase.app";
-  return fetch(`${BASE_URL}/users.json`).then(response => response.json());
+
+async function fetchUsers() {
+  const response = await fetch(`${BASE_URL}/users.json`);
+  if (!response.ok) throw new Error("Failed to fetch users.");
+  const data = await response.json();
+  return data ? Object.values(data) : [];
 }
+
 
 function showErrorContainer(container, message) {
   container.textContent = message;
