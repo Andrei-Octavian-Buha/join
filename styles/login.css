@@ -204,6 +204,10 @@
     width: 120px;
 }
 
+.dNone{
+    display: none;
+}
+
 #overlayId {
     position: fixed;
     top: 0;

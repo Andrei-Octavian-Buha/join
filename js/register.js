@@ -164,15 +164,6 @@ function togglePassword(inputId, icon) {
     }
   }
   
-
-
-
-
-
-
-
-
-
 function backToLogin(){
     let backToLogin = document.getElementById("backToLogin");
     backToLogin.addEventListener("click", ()=>{
