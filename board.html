@@ -10,24 +10,25 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles/header.css" />
-    <link rel="stylesheet" href="styles/board.css" />
     <link rel="stylesheet" href="./styles/buttons.css" />
-    <link rel="stylesheet" href="./styles/board-add-task.css" />
     <link rel="stylesheet" href="./styles/add_task.css" />
+    <link rel="stylesheet" href="./styles/board.css" />
     <link rel="stylesheet" href="./styles/radio_button.css" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./styles/board-add-task.css" />
     <link rel="stylesheet" href="./styles/board-cards.css" />
+    <link rel="stylesheet" href="./styles/board-overlay.css" />
+    <link rel="stylesheet" href="style.css" />
 
     <script src="./js/board.js"></script>
     <script src="./js/add_task.js"></script>
-    <script src="./js/board-add-task.js"></script>
+    <script src="./js/board-logic.js"></script>
     <script src="./js/add-task-template-html.js"></script>
     <script src="./js/board-loading-data.js"></script>
     <script src="./script.js"></script>
     <title>Board</title>
-    <link rel="icon" href="./assets/img/logo2.svg">
+    <link rel="icon" href="./assets/img/logo2.svg" />
   </head>
-  <body id="boardPage" onload="includeHTML(), init()">
+  <body id="boardPage" onload="includeHTML(), taskInit()">
     <div class="" w3-include-html="./templates/header.html"></div>
     <div class="content">
       <div class="content-wrapper">
@@ -124,6 +125,8 @@
         </div>
       </div>
     </div>
+
+    <div id="taskInfoCard" class=""></div>
     <div id="add-task-template" class="dNone"></div>
     <script>
       addTaskTemplate();

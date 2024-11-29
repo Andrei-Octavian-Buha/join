@@ -1,106 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-        rel="stylesheet">
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./styles/header.css" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="./styles/summary_user.css" />
     <script src="./script.js"></script>
     <script src="./js/summary_user.js"></script>
     <title>Summary</title>
-    <link rel="icon" href="./assets/img/logo2.svg">
+    <link rel="icon" href="./assets/img/logo2.svg" />
+  </head>
 
-</head>
-
-<body id="summaryPage" onload="includeHTML();">
+  <body id="summaryPage" onload="includeHTML()">
     <div class="" w3-include-html="./templates/header.html"></div>
     <div class="summary-main-div">
-        <div class="stats-div">
-            <div class="stats-header">
-                <h1 class="stats-cap">Join 381</h1>
-                <div class="seperator"></div>
-                <p class="stats-header-text">Key Metrics at a Glance</p>
-                <div class="seperator-horizontal"></div>
-            </div>
-            <div class="stats-first">
-                <a href="board.html" class="stats-button-to-do">
-                    <div class="stats-icon-div">
-                        <div>
-                            <img class="summary-icon" id="summary-icon-pen" src="assets/img/summary-button-pen.png" alt="">
-                        </div>
-                        <div class="stats-icon-text">
-                            <span class="number-div">1</span>
-                            <span class="number-caption-span">To-Do</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="board.html" class="stats-button-done">
-                    <div class="stats-icon-div">
-                        <div>
-                            <img class="summary-icon" id="summary-icon-check" src="assets/img/summary-button-check.png" alt="">
-                        </div>
-                        <div class="stats-icon-text">
-                            <span class="number-div">2</span>
-                            <span class="number-caption-span">Done</span>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="stats-second">
-                <a class="stats-button-urgent" href="board.html"> 
-                <div class="stats-button-urgent-left">
-                    <div class="stats-urgent-icon-div">
-                        <img class="stats-icon-urgent" src="./assets/img/summary-urgent.png" alt="">
-                    </div>
-                    <div class="stats-icon-text">
-                        <span class="number-div">1</span>
-                        <span class="number-caption-span">Urgent</span>
-                    </div>
-                </div>
-                <div class="seperator-gray"></div>
-                <div class="stats-urgent-text-div">
-                    <p class="date-text">October 16, 2022</p>
-                    <p class="upcoming-text">Upcoming Deadline</p>
-                </div>
-                </a>
-            </div>
-            <div class="stats-third">
-                <a class="stats-third-button" href="board.html">
-                    <div class="stats-icon-text">
-                        <span class="number-div">5</span>
-                        <span class="third-button-text">Tasks in Board</span>
-                    </div>
-                </a>
-                <a class="stats-third-button" href="board.html">
-                    <div class="stats-icon-text">
-                        <span class="number-div">2</span>
-                        <span class="third-button-text">Tasks in Progress</span>
-                    </div>
-                </a>
-                <a class="stats-third-button" href="board.html">
-                    <div class="stats-icon-text">
-                        <span class="number-div">2</span>
-                        <span class="third-button-text">Awaiting Feedback</span>
-                    </div>
-                </a>                  
-            </div>
+      <div class="stats-div">
+        <div class="stats-header">
+          <h1 class="stats-cap">Join 381</h1>
+          <div class="seperator"></div>
+          <p class="stats-header-text">Key Metrics at a Glance</p>
+          <div class="seperator-horizontal"></div>
         </div>
-        <div class="greeting-div">
-            <p class="greeting-text">Good morning,</p>
-            <p class="greeting-name">Max Mustermann</p>
+        <div class="stats-first">
+          <a href="board.html" class="stats-button-to-do">
+            <div class="stats-icon-div">
+              <div>
+                <img
+                  class="summary-icon"
+                  id="summary-icon-pen"
+                  src="assets/img/summary-button-pen.png"
+                  alt=""
+                />
+              </div>
+              <div class="stats-icon-text">
+                <span class="number-div">1</span>
+                <span class="number-caption-span">To-Do</span>
+              </div>
+            </div>
+          </a>
+          <a href="board.html" class="stats-button-done">
+            <div class="stats-icon-div">
+              <div>
+                <img
+                  class="summary-icon"
+                  id="summary-icon-check"
+                  src="assets/img/summary-button-check.png"
+                  alt=""
+                />
+              </div>
+              <div class="stats-icon-text">
+                <span class="number-div">2</span>
+                <span class="number-caption-span">Done</span>
+              </div>
+            </div>
+          </a>
         </div>
+        <div class="stats-second">
+          <a class="stats-button-urgent" href="board.html">
+            <div class="stats-button-urgent-left">
+              <div class="stats-urgent-icon-div">
+                <img
+                  class="stats-icon-urgent"
+                  src="./assets/img/summary-urgent.png"
+                  alt=""
+                />
+              </div>
+              <div class="stats-icon-text">
+                <span class="number-div">1</span>
+                <span class="number-caption-span">Urgent</span>
+              </div>
+            </div>
+            <div class="seperator-gray"></div>
+            <div class="stats-urgent-text-div">
+              <p class="date-text">October 16, 2022</p>
+              <p class="upcoming-text">Upcoming Deadline</p>
+            </div>
+          </a>
+        </div>
+        <div class="stats-third">
+          <a class="stats-third-button" href="board.html">
+            <div class="stats-icon-text">
+              <span class="number-div">5</span>
+              <span class="third-button-text">Tasks in Board</span>
+            </div>
+          </a>
+          <a class="stats-third-button" href="board.html">
+            <div class="stats-icon-text">
+              <span class="number-div">2</span>
+              <span class="third-button-text">Tasks in Progress</span>
+            </div>
+          </a>
+          <a class="stats-third-button" href="board.html">
+            <div class="stats-icon-text">
+              <span class="number-div">2</span>
+              <span class="third-button-text">Awaiting Feedback</span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="greeting-div">
+        <p class="greeting-text">Good morning,</p>
+        <p class="greeting-name">Max Mustermann</p>
+      </div>
     </div>
     <div class="fullscreen-greeting-overlay">
-        <div class="fullscreen-greeting">Good morning,</div>
-        <div class="fullscreen-greeting-name">Guest</div>
+      <div class="fullscreen-greeting">Good morning,</div>
+      <div class="fullscreen-greeting-name">Guest</div>
     </div>
-</body>
-
+  </body>
 </html>
