@@ -48,7 +48,7 @@ function toggleDropdown() {
 
   // Funktion, um den aktuellen Benutzer aus dem Local Storage zu laden
 function getCurrentUser() {
-  const user = localStorage.getItem("currentUser");
+  const user = sessionStorage.getItem("currentUser");
   return user ? JSON.parse(user) : null; 
 }
 
@@ -79,7 +79,7 @@ function getInitials(name) {
 
 // Funktion, um den Namen aus dem Local Storage zu laden und Initialen einzusetzen
 function setUserInitials() {
-  const userData = localStorage.getItem("currentUser"); // Daten aus dem Local Storage abrufen
+  const userData = sessionStorage.getItem("currentUser"); // Daten aus dem Local Storage abrufen
   if (userData) {
       try {
           const user = JSON.parse(userData); // JSON-String in ein Objekt umwandeln
@@ -137,8 +137,8 @@ document.addEventListener("DOMContentLoaded", () => {
 };
 
 // Retrieve sorted tasks from localStorage
-function getSortedTasksFromLocalStorage() {
-  let sortedTasks = JSON.parse(localStorage.getItem('sortedTasks'));
+function getSortedTasksFromSessionStorage() {
+  let sortedTasks = JSON.parse(sessionStorage.getItem('sortedTasks'));
   if (!sortedTasks) {
     console.log("No sorted tasks found in localStorage");
     return null;
