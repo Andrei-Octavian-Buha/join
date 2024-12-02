@@ -324,6 +324,7 @@ function showInfoAssignet(task) {
   } else {
     return "don't Assignet Person";
   }
+}
 function storeTasksInLocalStorage() {
   // Sort tasks by their progress (status)
   let sortedTasks = {
@@ -332,10 +333,10 @@ function storeTasksInLocalStorage() {
     awaitfeedback: [],
     done: [],
     urgent: [],
-    all: []
+    all: [],
   };
 
-  tasks.forEach(task => {
+  tasks.forEach((task) => {
     // Sort tasks by progress status
     if (task.task.progress === "todo") {
       sortedTasks.todo.push(task);
@@ -357,7 +358,7 @@ function storeTasksInLocalStorage() {
   });
 
   // Store the sorted tasks in localStorage
-  localStorage.setItem('sortedTasks', JSON.stringify(sortedTasks));
+  localStorage.setItem("sortedTasks", JSON.stringify(sortedTasks));
 
   console.log("Tasks sorted and stored in localStorage");
 }
