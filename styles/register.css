@@ -5,6 +5,15 @@
     }
 }
 
+a{
+    text-decoration: none;
+    color: #40B3E9;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
 .hide {
     display: none;
   }
