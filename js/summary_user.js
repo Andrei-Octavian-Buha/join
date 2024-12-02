@@ -106,3 +106,43 @@ document.addEventListener("DOMContentLoaded", () => {
       }
   }, 100); 
 });
+
+
+ function tasksIntoDisplay() {
+  // Retrieve the sorted tasks from localStorage
+  let sortedTasks = getSortedTasksFromLocalStorage();
+  
+  if (sortedTasks) {
+    // Calculate the task counts
+    let toDoCount = sortedTasks.todo.length;
+    let doneCount = sortedTasks.done.length;
+    let urgentCount = sortedTasks.urgent.length;
+    let allTasksCount = sortedTasks.all.length;
+    let inProgressCount = sortedTasks.inprogress.length;
+    let awaitingFeedbackCount = sortedTasks.awaitfeedback.length;
+    
+    // Update the HTML elements with the task counts
+    document.getElementById("summary-icon-pen").innerText = toDoCount; // To-Do tasks
+    document.getElementById("summary-icon-check").innerText = doneCount; // Done tasks
+    document.getElementById("summary-icon-urgent").innerText = urgentCount; // Urgent tasks
+    document.getElementById("stats-button-to-do").innerText = toDoCount; // To-Do link count
+    document.getElementById("stats-button-done").innerText = doneCount; // Done link count
+    document.getElementById("stats-button-urgent").innerText = urgentCount; // Urgent link count
+    document.getElementById("stats-third-button-tasks-board").innerText = allTasksCount; // All tasks
+    document.getElementById("stats-third-button-in-progress").innerText = inProgressCount; // In Progress
+    document.getElementById("stats-third-button-await-feedback").innerText = awaitingFeedbackCount; // Awaiting Feedback
+  } else {
+    console.log("No sorted tasks found in localStorage");
+  }
+};
+
+// Retrieve sorted tasks from localStorage
+function getSortedTasksFromLocalStorage() {
+  let sortedTasks = JSON.parse(localStorage.getItem('sortedTasks'));
+  if (!sortedTasks) {
+    console.log("No sorted tasks found in localStorage");
+    return null;
+  }
+  return sortedTasks;
+}
+

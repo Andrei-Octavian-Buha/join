@@ -184,6 +184,7 @@ function showPrioIcon(task) {
   return `<img src="${iconPath}" alt="${prio} priority icon" style="width:20px; height:20px;">`;
 }
 
+<<<<<<< Updated upstream
 // Info card data
 
 async function deleteContact(contactId) {
@@ -324,4 +325,42 @@ function showInfoAssignet(task) {
   } else {
     return "don't Assignet Person";
   }
+=======
+function storeTasksInLocalStorage() {
+  // Sort tasks by their progress (status)
+  let sortedTasks = {
+    todo: [],
+    inprogress: [],
+    awaitfeedback: [],
+    done: [],
+    urgent: [],
+    all: []
+  };
+
+  tasks.forEach(task => {
+    // Sort tasks by progress status
+    if (task.task.progress === "todo") {
+      sortedTasks.todo.push(task);
+    } else if (task.task.progress === "inprogress") {
+      sortedTasks.inprogress.push(task);
+    } else if (task.task.progress === "awaitfeedback") {
+      sortedTasks.awaitfeedback.push(task);
+    } else if (task.task.progress === "done") {
+      sortedTasks.done.push(task);
+    }
+
+    // Also categorize tasks by urgency
+    if (task.task.prio === "urgent") {
+      sortedTasks.urgent.push(task);
+    }
+
+    // Include all tasks in the "all" category
+    sortedTasks.all.push(task);
+  });
+
+  // Store the sorted tasks in localStorage
+  localStorage.setItem('sortedTasks', JSON.stringify(sortedTasks));
+
+  console.log("Tasks sorted and stored in localStorage");
+>>>>>>> Stashed changes
 }
