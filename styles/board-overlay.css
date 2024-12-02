@@ -13,7 +13,6 @@
 .taskContainer {
   background-color: #fff;
   width: 525px;
-  height: 40%;
   display: flex;
   flex-direction: column;
   padding: 48px 40px;

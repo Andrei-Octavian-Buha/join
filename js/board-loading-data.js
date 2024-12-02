@@ -214,17 +214,7 @@ function editListDataCard(taskId) {
   if (!task) return;
   let cardRender = document.getElementById("taskInfoCard");
   cardRender.innerHTML = "";
-  cardRender.innerHTML += `       
-      <div class="boardOverlay">
-          <div class="taskContainer">
-              <div class="taskHeder">
-                  <div class="boardCategoryCard cat${task.task.category}">
-                  </div>
-                  <span onclick="hideOverlayInfoCard()" class="cursor">X</span>
-              </div>
-              <div class="" w3-include-html="./templates/editFormBoardList.html"></div>
-          </div>
-      </div>`;
+  cardRender.innerHTML += showEditCard(task);
 }
 
 function listDataCard(taskId) {
