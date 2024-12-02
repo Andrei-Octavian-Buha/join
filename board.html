@@ -61,12 +61,12 @@
               </div>
             </div>
             <div
-              class="drag-area"
-              id="todoColumn"
-              ondrop="moveTo('open')"
-              ondragleave="removeHighlight('open')"
-              ondragover="allowDrop(event); highlight('open')"
-            ></div>
+            class="drag-area"
+            id="todoColumn"
+            ondrop="moveTo('todo', event)"
+            ondragleave="removeHighlight('todo')"
+            ondragover="allowDrop(event)"
+          ></div>
           </div>
 
           <div class="column">
@@ -82,12 +82,12 @@
               </div>
             </div>
             <div
-              class="drag-area"
-              id="inprogressColumn"
-              ondrop="moveTo('closed')"
-              ondragleave="removeHighlight('closed')"
-              ondragover="allowDrop(event); highlight('closed')"
-            ></div>
+            class="drag-area"
+            id="inprogressColumn"
+            ondrop="moveTo('inprogress', event)"
+            ondragleave="removeHighlight('inprogress')"
+            ondragover="allowDrop(event)"
+          ></div>
           </div>
 
           <div class="column">
@@ -103,12 +103,12 @@
               </div>
             </div>
             <div
-              class="drag-area"
-              id="awaitfeedbackColumn"
-              ondrop="moveTo('wait')"
-              ondragleave="removeHighlight('wait')"
-              ondragover="allowDrop(event); highlight('wait')"
-            ></div>
+            class="drag-area"
+            id="awaitfeedbackColumn"
+            ondrop="moveTo('awaitfeedback', event)"
+            ondragleave="removeHighlight('awaitfeedback')"
+            ondragover="allowDrop(event)"
+          ></div>
           </div>
 
           <div class="column">
@@ -116,12 +116,12 @@
               <h3>Done</h3>
             </div>
             <div
-              class="drag-area"
-              id="doneColumn"
-              ondrop="moveTo('wait')"
-              ondragleave="removeHighlight('wait')"
-              ondragover="allowDrop(event); highlight('wait')"
-            ></div>
+            class="drag-area"
+            id="doneColumn"
+            ondrop="moveTo('done', event)"
+            ondragleave="removeHighlight('done')"
+            ondragover="allowDrop(event)"
+          ></div>
           </div>
         </div>
       </div>

@@ -1,87 +1,154 @@
-// function newPost() {
-//     const template = document.getElementById("cardTemplate");
-//     const newCard = template.content.cloneNode(true);
-//     const container = document.getElementById("open");
+// Array für die Aufgaben
+let todos = [];
 
-//     container.insertBefore(newCard, container.firstChild);
+// Funktion zum Laden der Aufgaben aus Firebase
+async function loadTasksFromFirebase() {
+  try {
+      const response = await fetch(
+          "https://join-store-ae38e-default-rtdb.europe-west1.firebasedatabase.app/task.json"
+      );
+      const data = await response.json();
 
-//     const addedCard = container.firstChild;
-//     addDragFunctionality(addedCard);
-// }
-
-function newProgress() {
-  const template = document.getElementById("cardTemplate");
-  const newCard = template.content.cloneNode(true);
-  const container = document.getElementById("closed");
-
-  container.insertBefore(newCard, container.firstChild);
-
-  const addedCard = container.firstChild;
-  addDragFunctionality(addedCard);
+      if (data) {
+          todos = Object.keys(data).map((key) => {
+              return { id: key, ...data[key] };
+          });
+          console.log("Aufgaben erfolgreich geladen:", todos);
+          updateHTML(); // HTML nach dem Laden der Aufgaben aktualisieren
+      } else {
+          console.error("Keine Aufgaben gefunden.");
+      }
+  } catch (error) {
+      console.error("Fehler beim Laden der Aufgaben:", error);
+  }
 }
 
-function newFeedback() {
-  const template = document.getElementById("cardTemplate");
-  const newCard = template.content.cloneNode(true);
-  const container = document.getElementById("wait");
 
-  container.insertBefore(newCard, container.firstChild);
+// Funktion zum Aktualisieren des HTML-Inhalts
+// Funktion zum Aktualisieren des HTML-Inhalts
+function updateHTML() {
+  const categories = {
+    "1": "open",  // Mapping der Kategorien zur Anzeige
+    "2": "inprogress",
+    "3": "awaitfeedback",
+    "4": "done",
+  };
 
-  const addedCard = container.firstChild;
-  addDragFunctionality(addedCard);
+  // Jede Kategorie durchgehen und Spalte aktualisieren
+  Object.keys(categories).forEach((categoryKey) => {
+    const category = categories[categoryKey];  // Hole den Spaltennamen (z. B. "open")
+    const column = document.getElementById(`${category}Column`);
+    
+    if (column) {
+      column.innerHTML = ""; // Spalte leeren
+
+      todos
+        .filter((task) => task.category == categoryKey)  // Vergleiche mit der richtigen Kategorie
+        .forEach((task) => {
+          const taskCard = document.createElement("div");
+          taskCard.classList.add("task-card");
+          taskCard.setAttribute("id", `task-${task.id}`);
+          taskCard.setAttribute("draggable", "true");
+          taskCard.setAttribute("ondragstart", "dragStart(event)");  // Funktionsaufruf zum Starten
+          taskCard.setAttribute("ondragend", "dragEnd(event)");  // Funktionsaufruf zum Beenden
+          taskCard.innerHTML = `
+            <h4>${task.title}</h4>
+            <p>Priorität: ${task.prio}</p>
+            <p>Fällig: ${task.date}</p>
+          `;
+          column.appendChild(taskCard);
+        });
+    }
+  });
 }
 
-function toggleDropdown() {
-  const dropdown = document.getElementById("dropdown");
-  dropdown.style.display =
-    dropdown.style.display === "block" ? "none" : "block";
+
+// Drag-and-Drop-Events
+
+// Erlaubt das Ablegen von Elementen in der Spalte
+function allowDrop(event) {
+  event.preventDefault(); // Standardverhalten des Browsers verhindern
+  const column = event.target;
+
+  // Überprüfe, ob es sich um eine Spalte handelt, in die abgelegt werden kann
+  if (column.classList.contains("drag-area")) {
+    column.classList.add("drag-area-highlight"); // Füge die Highlight-Klasse hinzu
+  }
 }
 
-window.onclick = function (event) {
-  if (
-    !event.target.matches(".profilPic") &&
-    !event.target.closest(".profilPic")
-  ) {
-    const dropdown = document.getElementById("dropdown");
-    if (dropdown.style.display === "block") {
-      dropdown.style.display = "none";
+// Wenn ein Element gezogen wird, speichern wir die ID
+function dragStart(event) {
+  console.log("Drag gestartet für Element: " + event.target.id);
+  event.dataTransfer.setData("text", event.target.id); // Speichern der ID des Elements
+}
+
+// Drag-Ende Event (kann genutzt werden, um Styling zurückzusetzen)
+function dragEnd(event) {
+  console.log(`Drag beendet für Element: ${event.target.id}`);
+  event.target.style.opacity = ""; // Optionales Styling zurücksetzen
+  event.target.classList.remove("drag-area-highlight");  // Entferne das Highlight
+}
+
+// Verschieben der Aufgabe in eine neue Kategorie
+async function moveTo(status, event) {
+  event.preventDefault();
+  const data = event.dataTransfer.getData("text");
+  const card = document.getElementById(data);
+  const taskId = data.replace("task-", "");  // Stelle sicher, dass die ID korrekt extrahiert wird
+  const task = todos.find(t => t.id === taskId); // Suche die Aufgabe im todos Array
+
+  if (task) {
+    const categoryMapping = {
+      "open": "1",
+      "inprogress": "2",
+      "awaitfeedback": "3",
+      "done": "4",
+    };
+
+    task.category = categoryMapping[status]; // Neue Kategorie setzen
+
+    try {
+      // Aufgabe in Firebase aktualisieren
+      await fetch(`https://join-store-ae38e-default-rtdb.europe-west1.firebasedatabase.app/task/${taskId}.json`, {
+        method: "PATCH",
+        body: JSON.stringify({ category: task.category }),
+      });
+
+      console.log(`Aufgabe ${taskId} erfolgreich aktualisiert.`);
+      updateHTML(); // HTML nach dem Verschieben aktualisieren
+
+      // Verschiebe die Karte in die neue Spalte im DOM
+      const newColumn = document.getElementById(`${status}Column`);
+      if (newColumn) {
+        newColumn.appendChild(card);  // Füge das Element in die neue Spalte hinzu
+      }
+
+    } catch (error) {
+      console.error("Fehler beim Aktualisieren der Aufgabe:", error);
     }
   }
-};
-
-function getInitials(name) {
-  if (!name) return "??"; // Fallback, falls der Name nicht existiert
-  const nameParts = name.trim().split(" "); // Name in Teile (z. B. Vorname, Nachname) aufteilen
-  const initials = nameParts.map(part => part.charAt(0).toUpperCase()); // Initialen aus den ersten Buchstaben erstellen
-  return initials.slice(0, 2).join(""); // Maximal 2 Initialen zurückgeben
 }
 
-// Funktion, um den Namen aus dem Local Storage zu laden und Initialen einzusetzen
-function setUserInitials() {
-  const userData = sessionStorage.getItem("currentUser"); // Daten aus dem Local Storage abrufen
-  if (userData) {
-      try {
-          const user = JSON.parse(userData); // JSON-String in ein Objekt umwandeln
-          const initials = getInitials(user.name); // Initialen generieren
-          const profileTextElement = document.getElementById("profileText"); // Element mit der ID 'profileText' finden
-          if (profileTextElement) {
-              profileTextElement.innerHTML = initials; // Initialen in das Element einfügen
-          }
-      } catch (error) {
-          console.error("Fehler beim Verarbeiten der Benutzerdaten:", error);
-      }
-  } else {
-      console.warn("Keine Benutzerdaten im Local Storage unter 'currentUser' gefunden.");
+
+function highlightColumn(status, event) {
+  const column = document.getElementById(`${status}Column`);
+  if (column) {
+    column.classList.add("drag-area-highlight");  // Füge die Highlight-Klasse hinzu
   }
 }
 
 
-document.addEventListener("DOMContentLoaded", () => {
-  const checkHeaderInterval = setInterval(() => {
-      const profileTextElement = document.getElementById("profileText");
-      if (profileTextElement) {
-          clearInterval(checkHeaderInterval); 
-          setUserInitials(); 
-      }
-  }, 100); 
-});
+function removeHighlight(status) {
+  const column = document.getElementById(`${status}Column`);
+  if (column) {
+    column.classList.remove("drag-area-highlight");  // Entferne die Highlight-Klasse
+  }
+}
+
+
+// Seite initialisieren
+window.onload = () => {
+  includeHTML();
+  addTaskTemplate();
+  loadTasksFromFirebase(); // Lädt die Aufgaben und ruft anschließend updateHTML auf
+};

@@ -70,28 +70,34 @@ function renderCard(task) {
     task.task.description,
     maxDescriptionLength
   );
-  return `<div class="boardTaskCard" id="${task.id}" onclick="listDataCard('${
-    task.id
-  }')">
-          <div    id="Category${task.task.category}" 
-                  class="boardCategoryCard cat${task.task.category}">
-                  ${fromNumberToName(task)}</div>
-          <div>
-            <span>${task.id}</span>
-              <h3 class="boardCardTitle">${truncatedTitle}</h3>
-              <p class="boardCardDescription">${truncatedDescription}</p>
-          </div>
-          <div class="progresBar">
-                <div style="font-size: 12px;"> ProgresBar with setting 0 50 and 100 </div>
-                <div style="font-size: 12px;">${showSubTasks(
-                  task
-                )} /2 Subtasks</div>
-          </div>
-          <div class="assignetPersonContainer">
-              <div id="asigned${task.id}" class="assignetPersonCard"></div>
-              <div>${showPrioIcon(task)}</div>
-          </div>
-      </div>`;
+
+  return `
+    <div 
+      class="boardTaskCard" 
+      id="${task.id}" 
+      draggable="true" 
+      ondragstart="dragStart(event, '${task.id}')"
+      ondragend="dragEnd(event)"
+      onclick="listDataCard('${task.id}')"
+    >
+      <div 
+        id="Category${task.task.category}" 
+        class="boardCategoryCard cat${task.task.category}">
+        ${fromNumberToName(task)}
+      </div>
+      <div>
+        <h3 class="boardCardTitle">${truncatedTitle}</h3>
+        <p class="boardCardDescription">${truncatedDescription}</p>
+      </div>
+      <div class="progresBar">
+        <div style="font-size: 12px;"> ProgresBar with setting 0 50 and 100 </div>
+        <div style="font-size: 12px;">${showSubTasks(task)} /2 Subtasks</div>
+      </div>
+      <div class="assignetPersonContainer">
+        <div id="asigned${task.id}" class="assignetPersonCard"></div>
+        <div>${showPrioIcon(task)}</div>
+      </div>
+    </div>`;
 }
 
 function showSubTasks(task) {
