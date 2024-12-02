@@ -184,7 +184,6 @@ function showPrioIcon(task) {
   return `<img src="${iconPath}" alt="${prio} priority icon" style="width:20px; height:20px;">`;
 }
 
-<<<<<<< Updated upstream
 // Info card data
 
 async function deleteContact(contactId) {
@@ -325,7 +324,6 @@ function showInfoAssignet(task) {
   } else {
     return "don't Assignet Person";
   }
-=======
 function storeTasksInLocalStorage() {
   // Sort tasks by their progress (status)
   let sortedTasks = {
@@ -362,5 +360,4 @@ function storeTasksInLocalStorage() {
   localStorage.setItem('sortedTasks', JSON.stringify(sortedTasks));
 
   console.log("Tasks sorted and stored in localStorage");
->>>>>>> Stashed changes
 }
