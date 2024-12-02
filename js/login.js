@@ -30,8 +30,13 @@ async function attemptLogin(email, password) {
 }
 
 function handleSuccessfulLogin(user, rememberMe) {
-  rememberMe ? saveLoginData(user.email, user.password) : clearLoginData();
-  storeUserInLocalStorage(user);
+  if (rememberMe) {
+    saveLoginData(user.email, user.password);
+    storeUserInLocalStorage(user);
+  } else {
+    clearLoginData();
+    storeUserInSession(user);
+  }
   redirectToSummary();
 }
 
@@ -48,6 +53,10 @@ function storeUserInLocalStorage(user) {
   localStorage.setItem("currentUser", JSON.stringify({ name: user.name, email: user.email }));
 }
 
+function storeUserInSession(user) {
+  sessionStorage.setItem("currentUser", JSON.stringify({ name: user.name, email: user.email }));
+}
+
 function getLoginInput() {
   return {
     email: document.querySelector('input[type="email"]').value.trim(),
@@ -57,7 +66,7 @@ function getLoginInput() {
 }
 
 function handleGuestLoginClick() {
-  localStorage.setItem("currentUser", JSON.stringify({ name: "Guest" }));
+  sessionStorage.setItem("currentUser", JSON.stringify({ name: "Guest" }));
   window.location.href = "./summary_user.html";
 }
 
@@ -150,8 +159,9 @@ async function fetchUsers() {
   return Object.values(await response.json() || {});
 }
 
+
 function saveCurrentUser(user) {
-  localStorage.setItem("currentUser", JSON.stringify(user));
+  sessionStorage.setItem("currentUser", JSON.stringify(user));
 }
 
 function showErrorContainer(container, message) {

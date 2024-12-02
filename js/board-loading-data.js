@@ -315,7 +315,7 @@ function showInfoAssignet(task) {
     return "don't Assignet Person";
   }
 }
-function storeTasksInLocalStorage() {
+function storeTasksInSessionStorage() {
   // Sort tasks by their progress (status)
   let sortedTasks = {
     todo: [],
@@ -348,7 +348,7 @@ function storeTasksInLocalStorage() {
   });
 
   // Store the sorted tasks in localStorage
-  localStorage.setItem("sortedTasks", JSON.stringify(sortedTasks));
+  sessionStorage.setItem('sortedTasks', JSON.stringify(sortedTasks));
 
-  console.log("Tasks sorted and stored in localStorage");
+  console.log("Tasks sorted and stored in sessionStorage");
 }

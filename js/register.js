@@ -2,11 +2,11 @@
 const BASE_URL =
   "https://join-store-ae38e-default-rtdb.europe-west1.firebasedatabase.app";
 
-  let currentUser = null; // Globale Variable für den aktuellen Nutzer
+let currentUser = null; // Globale Variable für den aktuellen Nutzer
 
 // Nach erfolgreichem Registrieren
-function storeUserInLocalStorage(user) {
-  localStorage.setItem("currentUser", JSON.stringify({ name: user.name, email: user.email }));
+function storeUserInSessionStorage(user) {
+  sessionStorage.setItem("currentUser", JSON.stringify({ name: user.name, email: user.email }));
 }
 
 async function handleSignUp() {
@@ -16,7 +16,7 @@ async function handleSignUp() {
 
   try {
     await pushUserToDatabase(user);
-    storeUserInLocalStorage(user); // Speichert Name und Email
+    storeUserInSessionStorage(user); // Speichert Name und Email in Session Storage
     showSignUpPopup();
     redirectToHome();
   } catch (error) {
@@ -24,7 +24,6 @@ async function handleSignUp() {
     alert("An error occurred. Please try again.");
   }
 }
-
 
 // Collect input values
 function getSignUpInputs() {
@@ -93,13 +92,13 @@ async function pushUserToDatabase(user) {
   }
 }
 
-// Save current user in Local Storage
+// Save current user in Session Storage
 function saveCurrentUser(user) {
   const currentUser = {
     name: user.name,
     email: user.email,
   };
-  localStorage.setItem("currentUser", JSON.stringify(currentUser));
+  sessionStorage.setItem("currentUser", JSON.stringify(currentUser));
 }
 
 // Redirect to Summary Page
@@ -125,8 +124,6 @@ function showSignUpPopup() {
   });
 }
 
-
-
 // Redirect to home page after a delay
 function redirectToHome() {
   setTimeout(() => {
@@ -145,30 +142,30 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function togglePassword(inputId, icon) {
-    var input = document.getElementById(inputId);
-    var isPassword = input.type === 'password';
-    input.type = isPassword ? 'text' : 'password';
-    icon.src = isPassword ? './assets/menu/visibility-off.png' : './assets/menu/lock.svg';
-  }
+  var input = document.getElementById(inputId);
+  var isPassword = input.type === 'password';
+  input.type = isPassword ? 'text' : 'password';
+  icon.src = isPassword ? './assets/menu/visibility-off.png' : './assets/menu/lock.svg';
+}
 
-  function validatePasswords() {
-    var passwordField1 = document.getElementById('passwordField1');
-    var passwordField2 = document.getElementById('passwordField2');
-    
-    if (passwordField1.value !== passwordField2.value) {
-      passwordField1.style.border = "1px solid red";
-      passwordField2.style.border = "1px solid red";
-    } else {
-      passwordField1.style.border = "";
-      passwordField2.style.border = "";
-    }
-  }
+function validatePasswords() {
+  var passwordField1 = document.getElementById('passwordField1');
+  var passwordField2 = document.getElementById('passwordField2');
   
+  if (passwordField1.value !== passwordField2.value) {
+    passwordField1.style.border = "1px solid red";
+    passwordField2.style.border = "1px solid red";
+  } else {
+    passwordField1.style.border = "";
+    passwordField2.style.border = "";
+  }
+}
+
 function backToLogin(){
-    let backToLogin = document.getElementById("backToLogin");
-    backToLogin.addEventListener("click", ()=>{
-        window.location.href = "index.html";
-    })
+  let backToLogin = document.getElementById("backToLogin");
+  backToLogin.addEventListener("click", ()=>{
+    window.location.href = "index.html";
+  })
 }
 
 

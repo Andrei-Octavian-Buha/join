@@ -534,7 +534,7 @@ function getInitials(name) {
   
   // Funktion, um den Namen aus dem Local Storage zu laden und Initialen einzusetzen
   function setUserInitials() {
-    const userData = localStorage.getItem("currentUser"); // Daten aus dem Local Storage abrufen
+    const userData = sessionStorage.getItem("currentUser"); // Daten aus dem Local Storage abrufen
     if (userData) {
         try {
             const user = JSON.parse(userData); // JSON-String in ein Objekt umwandeln
