@@ -333,10 +333,10 @@ function storeTasksInSessionStorage() {
     awaitfeedback: [],
     done: [],
     urgent: [],
-    all: []
+    all: [],
   };
 
-  tasks.forEach(task => {
+  tasks.forEach((task) => {
     // Sort tasks by progress status
     if (task.task.progress === "todo") {
       sortedTasks.todo.push(task);
