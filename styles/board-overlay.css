@@ -23,10 +23,16 @@
   display: flex;
   justify-content: space-between;
 }
+.taskTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
 .direction-column {
   display: flex;
   flex-direction: column;
   align-items: start;
+  gap: 4px;
 }
 .dflex {
   display: flex;
@@ -37,4 +43,25 @@
   display: flex;
   align-items: center;
   gap: 8px;
+}
+.btnBoardOk {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+.margin0 {
+  margin: 0;
+}
+.prioContainer {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.subtaskItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.pLeft16 {
+  padding-left: 16px;
 }

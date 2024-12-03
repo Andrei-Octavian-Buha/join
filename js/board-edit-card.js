@@ -46,6 +46,7 @@ function showEditCard(task) {
                     name="group1"
                     value="urgent"
                     id="urgentBtn"
+                    ${task.task.prio === "urgent" ? "checked" : ""}
                   />
                   <span class="radio-btn-urgent">
                     Urgent
@@ -67,7 +68,9 @@ function showEditCard(task) {
                 </label>
 
                 <label class="custom-radio-medium">
-                  <input type="radio" name="group1" value="medium" checked />
+                  <input type="radio" name="group1" value="medium" ${
+                    task.task.prio === "medium" ? "checked" : ""
+                  }/>
                   <span class="radio-btn-medium">
                     Medium
                     <svg
@@ -87,7 +90,9 @@ function showEditCard(task) {
                   </span>
                 </label>
                 <label class="custom-radio-low">
-                  <input type="radio" name="group1" value="low" />
+                  <input type="radio" name="group1" value="low"  ${
+                    task.task.prio === "low" ? "checked" : ""
+                  }/>
                   <span class="radio-btn-low">
                     Low
                     <svg
@@ -119,13 +124,11 @@ function showEditCard(task) {
                 <div id="dropDownBodyId" class="dropDownBody dNone"></div>
               </div>
               <div>
-                <div id="whoIsAssignet" class="addFisrtLetterContainer">${showInfoAssignet(
-                  task
-                )}</div>
+                <div id="whoIsAssignet" class="addFisrtLetterContainer"></div>
               </div>
             </div>
 
-                        <div class="testA">
+            <div class="testA">
               <span>Subtask<span class="req">*</span></span>
               <div class="containerInputSignUp">
                 <input
@@ -160,6 +163,12 @@ function showEditCard(task) {
               </div>
               <div id="renderSubTask"></div>
             </div>
+                <div class="btnBoardOk">
+                    <button class="btnPrimary" onclick="addDataToFireBase()">
+                      Ok <img src="./assets/priority/check.svg" alt="" />
+                    </button>
+                </div>
+          </div>
           </div>
       </div>`;
 }
