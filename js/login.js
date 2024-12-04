@@ -33,6 +33,7 @@ function handleSuccessfulLogin(user, rememberMe) {
   if (rememberMe) {
     saveLoginData(user.email, user.password);
     storeUserInLocalStorage(user);
+    storeUserInSession(user);
   } else {
     clearLoginData();
     storeUserInSession(user);
@@ -109,19 +110,23 @@ function showErrorContainer(container, message) {
   container.style.display = "block";
 }
 
+
 function hideErrorContainer(container) {
   container.style.display = "none";
 }
+
 
 function saveLoginData(email, password) {
   localStorage.setItem("loginEmail", email);
   localStorage.setItem("loginPassword", password);
 }
 
+
 function clearLoginData() {
   localStorage.removeItem("loginEmail");
   localStorage.removeItem("loginPassword");
 }
+
 
 function prefillLoginData() {
   const savedEmail = localStorage.getItem("loginEmail");
@@ -147,16 +152,11 @@ function validateUser(users, email, password, errorContainer) {
   }
 }
 
+
 function onLoginSuccess(user) {
   currentUser = user;
   saveCurrentUser(user);
   window.location.href = "summary_user.html";
-}
-
-async function fetchUsers() {
-  const response = await fetch(`${BASE_URL}/users.json`);
-  if (!response.ok) throw new Error("Failed to fetch users.");
-  return Object.values(await response.json() || {});
 }
 
 
@@ -164,10 +164,12 @@ function saveCurrentUser(user) {
   sessionStorage.setItem("currentUser", JSON.stringify(user));
 }
 
+
 function showErrorContainer(container, message) {
   container.textContent = message; // Fehlermeldung einfügen
   container.style.display = "block"; // Sichtbar machen
 }
+
 
 function hideErrorContainer(container) {
   container.style.display = "none"; // Verbergen
@@ -180,6 +182,7 @@ function addEvent(){
         window.location.href = "register.html";
     })
 }
+
 
 function test() {
     const overlay = document.getElementById('overlayId');
@@ -226,6 +229,7 @@ function finalizeAnimation(animatedLogo, overlay) {
     animatedLogo.remove();
     overlay.classList.add('dNone');
 }
+
 
 function togglePassword(inputId, icon) {
     var input = document.getElementById(inputId);

@@ -14,7 +14,11 @@
 
 a{
     text-decoration: none;
-    color: #29ABE2;;
+    color: #29ABE2;
+}
+
+b{
+    color: #29ABE2;
 }
 
 .header{
