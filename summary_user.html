@@ -18,7 +18,7 @@
     <link rel="icon" href="./assets/img/logo2.svg" />
   </head>
 
-  <body id="summaryPage" onload="includeHTML();">
+  <body id="summaryPage" onload="includeHTML();fillInTasks()">
     <div class="" w3-include-html="./templates/header.html"></div>
     <div class="summary-main-div">
         <div class="stats-div">
@@ -71,21 +71,21 @@
                 </a>
             </div>
             <div class="stats-third">
-                <a class="stats-third-button" href="board.html" id="stats-third-button-tasks-board">
+                <a class="stats-third-button" href="board.html" >
                     <div class="stats-icon-text">
-                        <span class="number-div">5</span>
+                        <span id="stats-third-button-tasks-board" class="number-div">5</span>
                         <span class="third-button-text">Tasks in Board</span>
                     </div>
                 </a>
-                <a class="stats-third-button" href="board.html" id="stats-third-button-in-progress">
+                <a class="stats-third-button" href="board.html" >
                     <div class="stats-icon-text">
-                        <span class="number-div">2</span>
+                        <span id="stats-third-button-in-progress" class="number-div">2</span>
                         <span class="third-button-text">Tasks in Progress</span>
                     </div>
                 </a>
-                <a class="stats-third-button" href="board.html" id="stats-third-button-await-feedback">
+                <a class="stats-third-button" href="board.html" >
                     <div class="stats-icon-text">
-                        <span class="number-div">2</span>
+                        <span id="stats-third-button-await-feedback" class="number-div">2</span>
                         <span class="third-button-text">Awaiting Feedback</span>
                     </div>
                 </a>                  
