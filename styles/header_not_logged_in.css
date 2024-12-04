@@ -1,0 +1,427 @@
+@media (max-width: 355px) {
+    .content {
+      margin-top: 120px;
+      margin-left: 0px;
+    }
+    .mobileDisplayNone {
+      display: none;
+    }
+    .navSection {
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      background-color: #2a3647;
+    }
+    .navLink {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      margin-block-start: 0em;
+      margin-block-end: 0em;
+      margin-inline-start: 0px;
+      margin-inline-end: 0px;
+      padding-inline-start: 0px;
+    }
+    .navBtn {
+      color: #cdcdcd;
+      border-radius: 8px;
+      padding: 4px;
+    }
+    .navBtn:hover {
+      color: white;
+      background-color: #2a3d59;
+      border-radius: 8px;
+    }
+    .vectorImgColor {
+      color: white;
+      width: 10px;
+    }
+    .vectorImgColor:hover {
+      color: white;
+    }
+    .aLink {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 15px;
+      text-decoration: none;
+      color: #cdcdcd;
+    }
+    span {
+      font-size: 8px;
+    }
+  
+    .topNav {
+      position: fixed;
+      z-index: 998;
+      width: 100%;
+      top: 0;
+      left: 0;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      padding-right: 40px;
+      background-color: #ffffff;
+      display: flex;
+      align-items: start;
+      justify-content: end;
+      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+    }
+    .profilBtn {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .profilPic {
+      color: #29abe2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border: 3px solid #2a3647;
+      border-radius: 50%;
+      transition: background-color 0.75s ease;
+    }
+    .profilPic:hover {
+      background-color: #0c2e621f;
+    }
+    .profilText {
+      font-weight: bold;
+    }
+    .profilhelp {
+      width: 32px;
+      height: 32px;
+      transition: width 0.75s ease, height 0.75s ease;
+    }
+    .profilhelp:hover {
+      width: 40px;
+      height: 40px;
+      transition: 750;
+    }
+  }
+  
+  @media (max-width: 1149px) {
+    .content {
+      margin-top: 120px;
+      margin-left: 0px;
+    }
+    .mobileDisplayNone {
+      display: none;
+    }
+  
+    .profilhelp {
+      display: none;
+    }
+  
+    .help-link-dd {
+      display: block;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      padding: 10px;
+      width: 90%;
+      color: #cdcdcd;
+      text-decoration: none;
+    }
+  
+    .navSection {
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      background-color: #2a3647;
+    }
+    .navLink {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      width: 100%;
+      margin-block-start: 0em;
+      margin-block-end: 0em;
+      margin-inline-start: 0px;
+      margin-inline-end: 0px;
+      padding-inline-start: 0px;
+    }
+    .navBtn {
+      color: #cdcdcd;
+      font-weight: 400;
+      font-size: 14px;
+      border-radius: 8px;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .navBtn:hover {
+      color: white;
+      background-color: #2a3d59;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .vectorImgColor {
+      color: #cdcdcd;
+      width: 24px;
+      height: 24px;
+    }
+    .vectorImgColor:hover {
+      color: yellowgreen;
+    }
+  
+    .aLink {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 15px;
+      text-decoration: none;
+      color: #cdcdcd;
+    }
+  
+    .topNav {
+      position: fixed;
+      z-index: 998;
+      width: 100%;
+      top: 0;
+      left: 0;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      padding-right: 40px;
+      background-color: #ffffff;
+      display: flex;
+      align-items: start;
+      justify-content: end;
+      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+    }
+    .profilBtn {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding-right: 12px;
+    }
+  
+    .dropdown-content {
+      margin-right: 30px;
+      height: 190px !important;
+    }
+    .profilPic {
+      color: #29abe2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border: 3px solid #2a3647;
+      border-radius: 50%;
+      transition: background-color 0.75s ease;
+    }
+    .profilPic:hover {
+      background-color: #0c2e621f;
+    }
+    .profilText {
+      font-weight: bold;
+    }
+    .profilhelp {
+      width: 32px;
+      height: 32px;
+      transition: width 0.75s ease, height 0.75s ease;
+    }
+    .profilhelp:hover {
+      width: 40px;
+      height: 40px;
+      transition: 750;
+    }
+  }
+  
+  @media (min-width: 1150px) {
+    .content {
+      margin-top: 120px;
+      margin-left: 240px;
+    }
+    .desktopLogoVector {
+      margin-top: 64px;
+    }
+    .navSection {
+      width: 232px;
+      position: fixed;
+      z-index: 999;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      background-color: #2a3647;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+    }
+    .navLink {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-block-start: 0em;
+      margin-block-end: 0em;
+      padding-inline-start: 0px;
+      margin-top: 114px;
+    }
+    .navBtn {
+      color: #cdcdcd;
+      font-weight: 400;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      padding: 8px 56px;
+      gap: 8px;
+    }
+    .navBtn:hover {
+      color: white;
+      background-color: #2a3d59;
+    }
+    .vectorImgColor {
+      color: white;
+      width: 30px;
+      height: 30px;
+    }
+    .vectorImgColor:hover {
+      color: white;
+    }
+    .desktopPrivacy {
+      margin-top: 50px;
+      padding-top: 243px;
+      color: #cdcdcd;
+      margin-bottom: 200px;
+    }
+    .help-link-dd {
+      display: none;
+    }
+  
+    .aLink {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      text-decoration: none;
+      color: #cdcdcd;
+      cursor: pointer;
+    }
+    span {
+      font-size: 16px;
+    }
+  
+    .priv-legal-link {
+      text-decoration: none;
+      color: #cdcdcd;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      cursor: pointer;
+    }
+  
+    .priv-legal-link :hover {
+      color: #29abe2;
+      transform: scale(1.05);
+    }
+  
+    .priv-legal-div {
+      text-decoration: none;
+      padding: 8px;
+      gap: 8px;
+    }
+  
+    .topNav {
+      position: fixed;
+      z-index: 998;
+      width: calc(100% - 388px);
+      top: 0;
+      left: 0;
+      padding-left: 348px;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      padding-right: 40px;
+      background-color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+    }
+    .profilBtn {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .profilPic {
+      color: #29abe2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border: 3px solid #000000;
+      border-radius: 50%;
+      transition: background-color 0.75s ease;
+    }
+    .profilPic:hover {
+      background-color: #0c2e621f;
+      cursor: pointer;
+    }
+    .profilText {
+      font-weight: bold;
+    }
+    .profilhelp {
+      width: 32px;
+      height: 32px;
+      transition: width 0.75s ease, height 0.75s ease;
+    }
+    .profilhelp:hover {
+      width: 40px;
+      height: 40px;
+      transition: 750;
+    }
+  }
+
+  .dNone{
+    display: none;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 106px;
+    right: 20px;
+    background-color: #2a3647;
+    min-width: 150px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    padding: 12px 12px;
+    z-index: 1;
+    border-radius: 20px;
+    border-top-right-radius: 0;
+    height: 158px;
+    width: 150px;
+  }
+  
+  .dropdown-links {
+    font-size: 16px;
+    font-weight: 400;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .other-link-dd {
+    transition: background-color 0.3s ease, color 0.3s ease;
+    padding: 10px;
+    width: 90%;
+    color: #cdcdcd;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #0e5c7690;
+  }
+  
