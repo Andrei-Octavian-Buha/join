@@ -71,22 +71,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Funktion, um Initialen aus dem Namen zu generieren
 function getInitials(name) {
-  if (!name) return "??"; // Fallback, falls der Name nicht existiert
-  const nameParts = name.trim().split(" "); // Name in Teile (z. B. Vorname, Nachname) aufteilen
-  const initials = nameParts.map(part => part.charAt(0).toUpperCase()); // Initialen aus den ersten Buchstaben erstellen
-  return initials.slice(0, 2).join(""); // Maximal 2 Initialen zurückgeben
+  if (!name) return "??"; 
+  const nameParts = name.trim().split(" ");
+  const initials = nameParts.map(part => part.charAt(0).toUpperCase()); 
+  return initials.slice(0, 2).join(""); 
 }
 
 // Funktion, um den Namen aus dem Local Storage zu laden und Initialen einzusetzen
 function setUserInitials() {
-  const userData = sessionStorage.getItem("currentUser"); // Daten aus dem Local Storage abrufen
+  const userData = sessionStorage.getItem("currentUser");
   if (userData) {
       try {
-          const user = JSON.parse(userData); // JSON-String in ein Objekt umwandeln
-          const initials = getInitials(user.name); // Initialen generieren
-          const profileTextElement = document.getElementById("profileText"); // Element mit der ID 'profileText' finden
+          const user = JSON.parse(userData); 
+          const initials = getInitials(user.name);
+          const profileTextElement = document.getElementById("profileText"); 
           if (profileTextElement) {
-              profileTextElement.innerHTML = initials; // Initialen in das Element einfügen
+              profileTextElement.innerHTML = initials; 
           }
       } catch (error) {
           console.error("Fehler beim Verarbeiten der Benutzerdaten:", error);
