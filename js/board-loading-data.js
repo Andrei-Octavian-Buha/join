@@ -221,7 +221,6 @@ function editListDataCard(taskId) {
   let cardRender = document.getElementById("taskInfoCard");
   cardRender.innerHTML = "";
   cardRender.innerHTML += showEditCard(task);
-  showInfoAssignet(task);
 }
 
 function listDataCard(taskId) {
@@ -230,65 +229,7 @@ function listDataCard(taskId) {
   showOverlayInfoCard();
   let cardRender = document.getElementById("taskInfoCard");
   cardRender.innerHTML = "";
-  cardRender.innerHTML += `       
-      <div class="boardOverlay">
-          <div id="showListCard" class="taskContainer">
-              <div class="taskHeder">
-                  <div class="boardCategoryCard cat${task.task.category}">
-                      ${fromNumberToName(task)}
-                  </div>
-                  <span onclick="hideOverlayInfoCard()" class="cursor">X</span>
-              </div>
-              <div class="taskTitle">
-                  <h1 class="margin0">${task.task.title}</h1>
-                  <p class="margin0">${task.task.description}</p>
-                  <span>Due date: ${task.task.date}</span>
-                  <div class="prioContainer">
-                      <div class="gap8">
-                          <p class="margin0">Priority:</p>
-                          ${capitalizeFirstLetter(
-                            task.task.prio
-                          )}${showPrioIcon(task)}
-                      </div>
-                  </div>
-                  <div class="direction-column ">
-                    <p class="margin0">Assigned To:</p>
-                    <div id="asignedd${task.id}" 
-                    class="assignetPersonCard direction-column pLeft16"></div>
-                  </div>
-                  <div class="boardCardSubtaskContainer">
-                      <p class="margin0">Subtasks</p>
-                      <div id="subtaskList" class="pLeft16"></div>
-                  </div>
-                  <div class="dflex gap8">
-                      <div class="gap8 cursor btnDeleteEdit" 
-                            onclick="deleteContact('${task.id}')">
-                          <div>
-                                                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="custom-svg">
-                                <mask id="mask0_251030_8603" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
-                                <rect x="0.000976562" width="24" height="24" fill="#D9D9D9"/>
-                                </mask>
-                                <g mask="url(#mask0_251030_8603)">
-                                <path d="M7.00098 21C6.45098 21 5.98014 20.8042 5.58848 20.4125C5.19681 20.0208 5.00098 19.55 5.00098 19V6C4.71764 6 4.48014 5.90417 4.28848 5.7125C4.09681 5.52083 4.00098 5.28333 4.00098 5C4.00098 4.71667 4.09681 4.47917 4.28848 4.2875C4.48014 4.09583 4.71764 4 5.00098 4H9.00098C9.00098 3.71667 9.09681 3.47917 9.28848 3.2875C9.48014 3.09583 9.71764 3 10.001 3H14.001C14.2843 3 14.5218 3.09583 14.7135 3.2875C14.9051 3.47917 15.001 3.71667 15.001 4H19.001C19.2843 4 19.5218 4.09583 19.7135 4.2875C19.9051 4.47917 20.001 4.71667 20.001 5C20.001 5.28333 19.9051 5.52083 19.7135 5.7125C19.5218 5.90417 19.2843 6 19.001 6V19C19.001 19.55 18.8051 20.0208 18.4135 20.4125C18.0218 20.8042 17.551 21 17.001 21H7.00098ZM7.00098 6V19H17.001V6H7.00098ZM9.00098 16C9.00098 16.2833 9.09681 16.5208 9.28848 16.7125C9.48014 16.9042 9.71764 17 10.001 17C10.2843 17 10.5218 16.9042 10.7135 16.7125C10.9051 16.5208 11.001 16.2833 11.001 16V9C11.001 8.71667 10.9051 8.47917 10.7135 8.2875C10.5218 8.09583 10.2843 8 10.001 8C9.71764 8 9.48014 8.09583 9.28848 8.2875C9.09681 8.47917 9.00098 8.71667 9.00098 9V16ZM13.001 16C13.001 16.2833 13.0968 16.5208 13.2885 16.7125C13.4801 16.9042 13.7176 17 14.001 17C14.2843 17 14.5218 16.9042 14.7135 16.7125C14.9051 16.5208 15.001 16.2833 15.001 16V9C15.001 8.71667 14.9051 8.47917 14.7135 8.2875C14.5218 8.09583 14.2843 8 14.001 8C13.7176 8 13.4801 8.09583 13.2885 8.2875C13.0968 8.47917 13.001 8.71667 13.001 9V16Z"/>
-                                </g>
-                                </svg>
-                          </div>
-                            Delete
-                      </div>
-                      <img src="./assets/subtask/bar1.svg" alt="" />
-                      <div class="gap8 cursor btnDeleteEdit" 
-                            onclick="editListDataCard('${task.id}')">
-                        <div style="fill:#2A3647">
-                        <svg width="19" height="19" viewBox="0 0 19 19" fill="#2A3647" xmlns="http://www.w3.org/2000/svg" class="custom-svg">
-                        <path d="M2.00098 17H3.40098L12.026 8.375L10.626 6.975L2.00098 15.6V17ZM16.301 6.925L12.051 2.725L13.451 1.325C13.8343 0.941667 14.3051 0.75 14.8635 0.75C15.4218 0.75 15.8926 0.941667 16.276 1.325L17.676 2.725C18.0593 3.10833 18.2593 3.57083 18.276 4.1125C18.2926 4.65417 18.1093 5.11667 17.726 5.5L16.301 6.925ZM14.851 8.4L4.25098 19H0.000976562V14.75L10.601 4.15L14.851 8.4Z"/>
-                        </svg>
-                        </div>
-                        Edit
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>`;
+  cardRender.innerHTML += showInfoCard(task);
   showInfoAssignet(task);
   showSubTasksString(task);
 }
