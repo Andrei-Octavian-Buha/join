@@ -8,7 +8,7 @@ async function getAllContacts(path = "") {
 }
 let tasks = [];
 
-async function loadContactsData() {
+async function loadTaskData() {
   let ContactResponse = await getAllContacts("task");
   let UserKeyArray = Object.keys(ContactResponse);
   tasks = UserKeyArray.map((id) => ({
@@ -19,7 +19,7 @@ async function loadContactsData() {
 }
 
 async function loadContactss() {
-  let tasksData = await loadContactsData(); // Daten abrufen
+  let tasksData = await loadTaskData(); // Daten abrufen
   let todoId = document.getElementById("todoColumn");
   let awaitfeedbackId = document.getElementById("awaitfeedbackColumn");
   let inprogressId = document.getElementById("inprogressColumn");

@@ -114,7 +114,24 @@ function showEditCard(task) {
               </div>
             </div>
 
-                        <div class="testA">
+            <div class="testA">
+                <span>Assignet To</span>
+                <div class="dropDownGroup">
+                    <div id="dropDownHeaderId" class="dropDownHeader">
+                        <span id="dinamicText">Select contacts to assign</span>
+                        <img src="./assets/menu/arrow_drop_down.svg" alt="" />
+                    </div>
+                    <div id="dropDownBodyId" class="dropDownBody dNone"></div>
+                </div>
+                <div>
+                    <div id="whoIsAssignet" class="addFisrtLetterContainer ">
+                    ${task.task.assignet}
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="testA">
               <span>Assignet To</span>
               <div class="dropDownGroup">
                 <div id="dropDownHeaderId" class="dropDownHeader">
@@ -124,12 +141,9 @@ function showEditCard(task) {
                 <div id="dropDownBodyId" class="dropDownBody dNone"></div>
               </div>
               <div>
-                <div id="whoIsAssignet" class="addFisrtLetterContainer">
-                ${task.task.assignet}
-                </div>
+                <div id="whoIsAssignet" class="addFisrtLetterContainer"></div>
               </div>
             </div>
-
 
                         <div class="testA">
               <span>Subtask<span class="req">*</span></span>

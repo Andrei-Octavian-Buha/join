@@ -1,8 +1,6 @@
 const BASE_URL =
   "https://join-store-ae38e-default-rtdb.europe-west1.firebasedatabase.app/";
 
-let contacts = [];
-
 async function init() {
   await loadContacts();
 }
@@ -11,15 +9,6 @@ function subtasktrigger() {
   deleteInputSubTask();
   addSubTask();
   // startEventListner();
-}
-
-async function loadContactsData() {
-  let ContactResponse = await getAllContacts("contacts");
-  let UserKeyArray = Object.keys(ContactResponse);
-  return UserKeyArray.map((id) => ({
-    id: id,
-    cont: ContactResponse[id],
-  }));
 }
 
 function sortContacts(contacts) {
@@ -76,6 +65,15 @@ function renderContacts(contacts) {
   });
 }
 
+async function loadContactsData() {
+  let ContactResponse = await getAllContacts("contacts");
+  let UserKeyArray = Object.keys(ContactResponse);
+  return UserKeyArray.map((id) => ({
+    id: id,
+    cont: ContactResponse[id],
+  }));
+}
+
 async function loadContacts() {
   let contactsData = await loadContactsData(); // Daten abrufen
   let sortedContacts = sortContacts(contactsData); // Kontakte sortieren
@@ -130,36 +128,6 @@ async function getAllContacts(path = "") {
   let response = await fetch(`${BASE_URL}` + path + ".json");
   return (responseJs = await response.json());
 }
-
-// function startEventListner() {
-//   let clickHeader = document.getElementById("dropDownHeaderId");
-//   let body = document.getElementById("dropDownBodyId");
-//   if (clickHeader) {
-//     clickHeader.addEventListener("click", () => {
-//       body.classList.toggle("dNone");
-//     });
-//   }
-// }
-
-// function startEventListner() {
-//   document.addEventListener("DOMContentLoaded", () => {
-//     const dropDownHeader = document.getElementById("dropDownHeaderId");
-//     const dropDownBody = document.getElementById("dropDownBodyId");
-//     const dropDownArrow = dropDownHeader.querySelector("img");
-
-//     dropDownHeader.addEventListener("click", () => {
-//       // Toggle die Klasse, um das Dropdown anzuzeigen/verbergen
-//       dropDownBody.classList.toggle("dNone");
-
-//       // Rotieren des Pfeils basierend auf dem Zustand des Dropdowns
-//       if (!dropDownBody.classList.contains("dNone")) {
-//         dropDownArrow.style.transform = "rotate(180deg)";
-//       } else {
-//         dropDownArrow.style.transform = "rotate(0deg)";
-//       }
-//     });
-//   });
-// }
 
 let checked = [];
 
