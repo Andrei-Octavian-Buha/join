@@ -297,6 +297,19 @@
     }
 }
 
+@media (max-width: 1149px) {
+    .summary-main-div {
+        margin-top: 120px;
+        padding-left: 0px;
+        margin-right: 0px;
+        padding-bottom: 32px;
+        font-family: 'Inter';
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
 @media (max-width: 1050px) {
     .fullscreen-greeting-overlay {
         display: flex; 

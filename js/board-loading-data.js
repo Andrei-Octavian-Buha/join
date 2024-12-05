@@ -8,7 +8,7 @@ async function getAllContacts(path = "") {
 }
 let tasks = [];
 
-async function loadContactsData() {
+async function loadTaskData() {
   let ContactResponse = await getAllContacts("task");
   let UserKeyArray = Object.keys(ContactResponse);
   tasks = UserKeyArray.map((id) => ({
@@ -19,7 +19,7 @@ async function loadContactsData() {
 }
 
 async function loadContactss() {
-  let tasksData = await loadContactsData(); // Daten abrufen
+  let tasksData = await loadTaskData(); // Daten abrufen
   let todoId = document.getElementById("todoColumn");
   let awaitfeedbackId = document.getElementById("awaitfeedbackColumn");
   let inprogressId = document.getElementById("inprogressColumn");
@@ -56,11 +56,15 @@ function fromNumberToName(task) {
 }
 
 function truncateText(text, maxLength) {
+  if (!text || typeof text !== "string") {
+    return ""; // Rückgabe eines leeren Strings, wenn text nicht gültig ist
+  }
   if (text.length > maxLength) {
-    return text.substring(0, maxLength) + "..."; // Taie și adaugă "..."
+    return text.substring(0, maxLength) + "...";
   }
   return text;
 }
+
 
 function renderCard(task) {
   const maxTitleLength = 30;
@@ -229,60 +233,40 @@ function listDataCard(taskId) {
   showOverlayInfoCard();
   let cardRender = document.getElementById("taskInfoCard");
   cardRender.innerHTML = "";
-  cardRender.innerHTML += `       
-      <div class="boardOverlay">
-          <div id="showListCard" class="taskContainer">
-              <div class="taskHeder">
-                  <div class="boardCategoryCard cat${task.task.category}">
-                      ${fromNumberToName(task)}
-                  </div>
-                  <span onclick="hideOverlayInfoCard()" class="cursor">X</span>
-              </div>
-              <div class="taskTitle">
-                  <h1>${task.task.title}</h1>
-                  <p>${task.task.description}</p>
-                  <span>Due date: ${task.task.date}</span>
-                  <div>
-                      <span>Priority:</span>
-                      ${task.task.prio}${showPrioIcon(task)}
-                  </div>
-                  <div class="assignetPersonContainer direction-column">
-                    <span>Assigned To:</span>
-                    <div id="asignedd${
-                      task.id
-                    }" class="assignetPersonCard direction-column"></div>
-                  </div>
-                  <div>
-                      <h4>Subtasks</h4>
-                      <div id="subtaskList"></div>
-                  </div>
-                  <div class="dflex gap8">
-                      <div class="gap8 cursor" 
-                            onclick="deleteContact('${task.id}')">
-                                <img src="./assets/subtask/delete.svg" alt="" />Delete
-                      </div>
-                      <img src="./assets/subtask/bar1.svg" alt="" />
-                      <div class="gap8 cursor" 
-                            onclick="editListDataCard('${task.id}')">
-                        <img src="./assets/subtask/edit.svg" alt="" />Edit
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>`;
+  cardRender.innerHTML += showInfoCard(task);
   showInfoAssignet(task);
   showSubTasksString(task);
+}
+
+function capitalizeFirstLetter(text) {
+  if (!text) return "";
+  return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
 }
 
 function showSubTasksString(task) {
   let subtasks = task.task.subtask;
   let subtasklist = document.getElementById("subtaskList");
+  subtasklist.innerHTML = "";
   if (subtasks && subtasks.length > 0) {
     subtasks.forEach((subtask) => {
-      subtasklist.innerHTML += `<div class="subtaskItem">${subtask}</div>`;
+      subtasklist.innerHTML += `
+        <div class="subtaskItem">
+            <img src="./assets/subtask/checkbox.svg" alt="" class="cursor" onclick="toggleImage(this)"  id="checkbox" />${subtask}
+        </div>`;
     });
   } else {
     subtasklist.innerHTML = "<p>No subtasks available.</p>";
+  }
+}
+
+function toggleImage(imageElement) {
+  const checkedSrc = "checkbox-checked.svg";
+  const uncheckedSrc = "checkbox.svg";
+  const currentSrc = imageElement.src.split("/").pop();
+  if (currentSrc === uncheckedSrc) {
+    imageElement.src = "./assets/subtask/" + checkedSrc;
+  } else {
+    imageElement.src = "./assets/subtask/" + uncheckedSrc;
   }
 }
 
@@ -321,40 +305,4 @@ function showInfoAssignet(task) {
     return "don't Assignet Person";
   }
 }
-function storeTasksInSessionStorage() {
-  // Sort tasks by their progress (status)
-  let sortedTasks = {
-    todo: [],
-    inprogress: [],
-    awaitfeedback: [],
-    done: [],
-    urgent: [],
-    all: [],
-  };
 
-  tasks.forEach((task) => {
-    // Sort tasks by progress status
-    if (task.task.progress === "todo") {
-      sortedTasks.todo.push(task);
-    } else if (task.task.progress === "inprogress") {
-      sortedTasks.inprogress.push(task);
-    } else if (task.task.progress === "awaitfeedback") {
-      sortedTasks.awaitfeedback.push(task);
-    } else if (task.task.progress === "done") {
-      sortedTasks.done.push(task);
-    }
-
-    // Also categorize tasks by urgency
-    if (task.task.prio === "urgent") {
-      sortedTasks.urgent.push(task);
-    }
-
-    // Include all tasks in the "all" category
-    sortedTasks.all.push(task);
-  });
-
-  // Store the sorted tasks in localStorage
-  sessionStorage.setItem('sortedTasks', JSON.stringify(sortedTasks));
-
-  console.log("Tasks sorted and stored in sessionStorage");
-}

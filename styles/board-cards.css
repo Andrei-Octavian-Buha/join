@@ -68,3 +68,33 @@
   font-size: 12px;
   margin-right: 2px;
 }
+.boardCardSubtaskContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.btnDeleteEdit {
+  display: flex; /* Pentru a alinia SVG-ul și textul */
+  align-items: center;
+  gap: 8px; /* Spațiu între SVG și text */
+  color: #2a3647; /* Culoare implicită pentru text */
+  cursor: pointer;
+  transition: color 0.3s ease; /* Tranziție lină */
+}
+
+.btnDeleteEdit .custom-svg {
+  fill: #2a3647; /* Culoare implicită SVG */
+  transition: fill 0.3s ease; /* Tranziție lină */
+}
+
+.btnDeleteEdit:hover {
+  color: #29abe2;
+  font-weight: 700; /* Culoare la hover pentru text */
+}
+
+.btnDeleteEdit:hover .custom-svg {
+  fill: #29abe2; /* Culoare la hover pentru SVG */
+}
+.h161 {
+  font-size: 61px;
+}
