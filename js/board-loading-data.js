@@ -56,11 +56,15 @@ function fromNumberToName(task) {
 }
 
 function truncateText(text, maxLength) {
+  if (!text || typeof text !== "string") {
+    return ""; // Rückgabe eines leeren Strings, wenn text nicht gültig ist
+  }
   if (text.length > maxLength) {
-    return text.substring(0, maxLength) + "..."; // Taie și adaugă "..."
+    return text.substring(0, maxLength) + "...";
   }
   return text;
 }
+
 
 function renderCard(task) {
   const maxTitleLength = 30;
