@@ -20,6 +20,8 @@
   animation: bounceIn 0.5s ease-out;
 }
 .boardTaskCard:hover {
+  background-color: #2A3647;
+  color: white;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 0 10px rgba(0, 128, 255, 0.5);
   cursor: pointer;
 }
