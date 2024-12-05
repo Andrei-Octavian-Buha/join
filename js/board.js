@@ -25,7 +25,6 @@ async function loadTasksFromFirebase() {
 
 
 // Funktion zum Aktualisieren des HTML-Inhalts
-// Funktion zum Aktualisieren des HTML-Inhalts
 function updateHTML() {
   const categories = {
     "1": "open",  // Mapping der Kategorien zur Anzeige
