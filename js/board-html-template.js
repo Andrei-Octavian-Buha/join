@@ -1,3 +1,179 @@
+function test(task) {
+  return `<div class="boardOverlay">
+          <div class="taskContainer">
+          <form class="containeR" id="addTaskForm">
+  <div class="desktopView">
+    <div class="leftContainer">
+      <div class="testA">
+        <label for="addTaskTittle">
+          Title<span class="req">*</span>
+        </label>
+        <input
+          id="addTaskTittle"
+          type="text"
+          class="inputStyle"
+          placeholder="Enter a title"
+          required
+        />
+      </div>
+      <div class="testA">
+        <label for="addTaskDescription">Description</label>
+        <textarea
+          name=""
+          id="addTaskDescription"
+          placeholder="Enter a Description"
+          class="inputStyle"
+        ></textarea>
+      </div>
+      <div class="testA">
+        <span>Assignet To</span>
+        <div class="dropDownGroup">
+          <div id="dropDownHeaderId" class="dropDownHeader">
+            <span id="dinamicText">Select contacts to assign</span>
+            <img src="./assets/menu/arrow_drop_down.svg" alt="" />
+          </div>
+          <div id="dropDownBodyId" class="dropDownBody dNone"></div>
+        </div>
+        <div>
+          <div id="whoIsAssignet" class="addFisrtLetterContainer"></div>
+        </div>
+      </div>
+    </div>
+    <span class="desktopTrenBar"> </span>
+    <div class="rightContainer">
+      <div class="testA">
+        <span>
+          Due date<span class="req">*</span>
+        </span>
+        <input type="date" class="inputStyle" id="addTaskDate" />
+      </div>
+      <div class="priority">
+        <span>Prio</span>
+        <div class="radio-group">
+          <label class="custom-radio-urgent" for="urgentBtn">
+            <input type="radio" name="group1" value="urgent" id="urgentBtn" />
+            <span class="radio-btn-urgent">
+              Urgent
+              <svg
+                class="imgCheckedUrgent"
+                width="21"
+                height="15"
+                viewBox="0 0 21 15"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M19.5708 14.755C19.3361 14.7554 19.1076 14.6805 18.9187 14.5414L10.6666 8.45824L2.4146 14.5414C2.29874 14.627 2.16716 14.6889 2.02736 14.7237C1.88756 14.7584 1.74228 14.7653 1.59981 14.7439C1.45734 14.7226 1.32048 14.6734 1.19703 14.5992C1.07359 14.525 0.965978 14.4272 0.880349 14.3114C0.79472 14.1957 0.732748 14.0642 0.697971 13.9245C0.663194 13.7848 0.656294 13.6396 0.677664 13.4973C0.720823 13.2097 0.876514 12.9511 1.11049 12.7783L10.0146 6.20786C10.2033 6.06826 10.4319 5.99292 10.6666 5.99292C10.9014 5.99292 11.13 6.06826 11.3187 6.20786L20.2228 12.7783C20.4087 12.9153 20.5466 13.1074 20.6168 13.3272C20.6869 13.5471 20.6858 13.7835 20.6135 14.0027C20.5411 14.2219 20.4014 14.4126 20.2141 14.5477C20.0269 14.6828 19.8017 14.7554 19.5708 14.755Z" />
+                <path d="M19.5708 9.00581C19.3361 9.00621 19.1076 8.93136 18.9187 8.79226L10.6667 2.7091L2.4146 8.79226C2.18063 8.96507 1.88754 9.03793 1.59981 8.9948C1.31209 8.95167 1.05329 8.7961 0.880353 8.5623C0.707418 8.3285 0.63451 8.03563 0.677669 7.74811C0.720828 7.4606 0.876518 7.20199 1.11049 7.02919L10.0146 0.45871C10.2033 0.319119 10.4319 0.243774 10.6667 0.243774C10.9014 0.243774 11.13 0.319119 11.3187 0.45871L20.2228 7.02919C20.4087 7.1661 20.5466 7.35822 20.6168 7.5781C20.6869 7.79797 20.6858 8.03438 20.6135 8.25356C20.5412 8.47274 20.4014 8.6635 20.2141 8.79859C20.0269 8.93368 19.8017 9.0062 19.5708 9.00581Z" />
+              </svg>
+            </span>
+          </label>
+
+          <label class="custom-radio-medium">
+            <input type="radio" name="group1" value="medium" checked />
+            <span class="radio-btn-medium">
+              Medium
+              <svg
+                class="imgCheckedMedium"
+                width="21"
+                height="8"
+                viewBox="0 0 21 8"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M19.7596 7.91693H1.95136C1.66071 7.91693 1.38197 7.80063 1.17645 7.59362C0.970928 7.3866 0.855469 7.10584 0.855469 6.81308C0.855469 6.52032 0.970928 6.23955 1.17645 6.03254C1.38197 5.82553 1.66071 5.70923 1.95136 5.70923H19.7596C20.0502 5.70923 20.329 5.82553 20.5345 6.03254C20.74 6.23955 20.8555 6.52032 20.8555 6.81308C20.8555 7.10584 20.74 7.3866 20.5345 7.59362C20.329 7.80063 20.0502 7.91693 19.7596 7.91693Z" />
+                <path d="M19.7596 2.67376H1.95136C1.66071 2.67376 1.38197 2.55746 1.17645 2.35045C0.970928 2.14344 0.855469 1.86267 0.855469 1.56991C0.855469 1.27715 0.970928 0.996386 1.17645 0.789374C1.38197 0.582363 1.66071 0.466064 1.95136 0.466064L19.7596 0.466064C20.0502 0.466064 20.329 0.582363 20.5345 0.789374C20.74 0.996386 20.8555 1.27715 20.8555 1.56991C20.8555 1.86267 20.74 2.14344 20.5345 2.35045C20.329 2.55746 20.0502 2.67376 19.7596 2.67376Z" />
+              </svg>
+            </span>
+          </label>
+          <label class="custom-radio-low">
+            <input type="radio" name="group1" value="low" />
+            <span class="radio-btn-low">
+              Low
+              <svg
+                class="imgCheckedLow"
+                width="21"
+                height="15"
+                viewBox="0 0 21 15"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M10.334 9.00589C10.0994 9.0063 9.87085 8.93145 9.682 8.79238L0.778897 2.22264C0.663059 2.13708 0.565219 2.02957 0.490964 1.90623C0.416709 1.78289 0.367492 1.64614 0.346125 1.50379C0.30297 1.21631 0.37587 0.923473 0.548786 0.689701C0.721702 0.455928 0.980471 0.300371 1.26817 0.257248C1.55586 0.214126 1.84891 0.286972 2.08286 0.45976L10.334 6.54224L18.5851 0.45976C18.7009 0.374204 18.8325 0.312285 18.9723 0.277538C19.1121 0.242791 19.2574 0.235896 19.3998 0.257248C19.5423 0.2786 19.6791 0.32778 19.8025 0.401981C19.926 0.476181 20.0336 0.573948 20.1192 0.689701C20.2048 0.805453 20.2668 0.936923 20.3015 1.07661C20.3363 1.21629 20.3432 1.36145 20.3218 1.50379C20.3005 1.64614 20.2513 1.78289 20.177 1.90623C20.1027 2.02957 20.0049 2.13708 19.8891 2.22264L10.986 8.79238C10.7971 8.93145 10.5686 9.0063 10.334 9.00589Z" />
+                <path d="M10.334 14.7544C10.0994 14.7548 9.87085 14.68 9.682 14.5409L0.778897 7.97117C0.544952 7.79839 0.389279 7.53981 0.346125 7.25233C0.30297 6.96485 0.37587 6.67201 0.548786 6.43824C0.721702 6.20446 0.980471 6.04891 1.26817 6.00578C1.55586 5.96266 1.84891 6.03551 2.08286 6.2083L10.334 12.2908L18.5851 6.2083C18.8191 6.03551 19.1121 5.96266 19.3998 6.00578C19.6875 6.04891 19.9463 6.20446 20.1192 6.43824C20.2921 6.67201 20.365 6.96485 20.3218 7.25233C20.2787 7.53981 20.123 7.79839 19.8891 7.97117L10.986 14.5409C10.7971 14.68 10.5686 14.7548 10.334 14.7544Z" />
+              </svg>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="testA">
+        <span>Category</span>
+        <select
+          class="form-select form-select-sm"
+          aria-label="Small select example"
+          id="categorySelectId"
+        >
+          <option disabled selected>
+            Select task category
+          </option>
+          <option value="1">Technical Task</option>
+          <option value="2">User Story</option>
+        </select>
+      </div>
+      <div class="testA">
+        <span>
+          Subtask<span class="req">*</span>
+        </span>
+        <div class="containerInputSignUp">
+          <input
+            id="inputSubTask"
+            type="text"
+            class="inputStyleWithBtn"
+            placeholder="Add a new subtask"
+          />
+          <div id="AddSubTaskStep1" class="imgContainer">
+            <img
+              id="AddSubTaskStep1Add"
+              class="inputWithImg"
+              src="./assets/menu/add.svg"
+              alt=""
+            />
+          </div>
+          <div id="AddSubTaskStep2" class="imgContainer dNone">
+            <img
+              id="AddSubTaskStep2Delete"
+              class="cursor"
+              src="./assets/subtask/x.svg"
+              alt=""
+            />
+            <span>|</span>
+            <img
+              id="AddSubTaskStep2Add"
+              class="cursor"
+              src="./assets/subtask/check.svg"
+              alt=""
+            />
+          </div>
+        </div>
+        <div id="renderSubTask"></div>
+      </div>
+    </div>
+  </div>
+  <div class="desktopBtnContainer">
+    <div style="display: flex; align-items: end">
+      <span>
+        <span class="req">*</span>This field is required
+      </span>
+    </div>
+    <div class="buttons">
+      <button class="btnSecundary" onclick="resetForm(event)">
+        Clear <img src="./assets/priority/iconoir_cancel.svg" alt="" />
+      </button>
+      <button class="btnPrimary" onclick="addDataToFireBase()">
+        Create Task <img src="./assets/priority/check.svg" alt="" />
+      </button>
+    </div>
+  </div>
+</form>
+          </div>
+          </div>`;
+}
+
 function showEditCard(task) {
   return ` <div class="boardOverlay">
           <div class="taskContainer">
@@ -114,24 +290,8 @@ function showEditCard(task) {
               </div>
             </div>
 
-            <div class="testA">
-                <span>Assignet To</span>
-                <div class="dropDownGroup">
-                    <div id="dropDownHeaderId" class="dropDownHeader">
-                        <span id="dinamicText">Select contacts to assign</span>
-                        <img src="./assets/menu/arrow_drop_down.svg" alt="" />
-                    </div>
-                    <div id="dropDownBodyId" class="dropDownBody dNone"></div>
-                </div>
-                <div>
-                    <div id="whoIsAssignet" class="addFisrtLetterContainer ">
-                    ${task.task.assignet}
-                    </div>
-                </div>
-            </div>
 
-
-            <div class="testA">
+                     <div class="testA">
               <span>Assignet To</span>
               <div class="dropDownGroup">
                 <div id="dropDownHeaderId" class="dropDownHeader">
@@ -144,7 +304,9 @@ function showEditCard(task) {
                 <div id="whoIsAssignet" class="addFisrtLetterContainer"></div>
               </div>
             </div>
-
+                 
+            
+            
                         <div class="testA">
               <span>Subtask<span class="req">*</span></span>
               <div class="containerInputSignUp">
