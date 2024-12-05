@@ -29,7 +29,7 @@
     <title>Board</title>
     <link rel="icon" href="./assets/img/logo2.svg" />
   </head>
-  <body id="boardPage" onload="includeHTML(); taskInit(); init();">
+  <body id="boardPage" onload="includeHTML(), taskInit(), updateHTML()">
     <div class="" w3-include-html="./templates/header.html"></div>
     <div class="content">
       <div class="content-wrapper">
@@ -60,13 +60,11 @@
                 />
               </div>
             </div>
-            <div
-              class="drag-area"
-              id="todoColumn"
-              ondrop="moveTo('todo', event)"
-              ondragleave="removeHighlight('todo')"
-              ondragover="allowDrop(event)"
-            ></div>
+            <div class="drag-area" id="todoColumn" 
+            ondrop="moveTo('todoColumn', event)" 
+            ondragover="allowDrop(event)">
+            <!-- Aufgaben hier anzeigen -->
+            </div>
           </div>
 
           <div class="column">
@@ -81,13 +79,11 @@
                 />
               </div>
             </div>
-            <div
-              class="drag-area"
-              id="inprogressColumn"
-              ondrop="moveTo('inprogress', event)"
-              ondragleave="removeHighlight('inprogress')"
-              ondragover="allowDrop(event)"
-            ></div>
+            <div class="drag-area" id="inprogressColumn" 
+            ondrop="moveTo('inprogressColumn', event)" 
+            ondragover="allowDrop(event)">
+            <!-- Aufgaben hier anzeigen -->
+            </div>
           </div>
 
           <div class="column">
@@ -102,26 +98,22 @@
                 />
               </div>
             </div>
-            <div
-              class="drag-area"
-              id="awaitfeedbackColumn"
-              ondrop="moveTo('awaitfeedback', event)"
-              ondragleave="removeHighlight('awaitfeedback')"
-              ondragover="allowDrop(event)"
-            ></div>
+            <div class="drag-area" id="awaitfeedbackColumn" 
+            ondrop="moveTo('awaitfeedbackColumn', event)" 
+            ondragover="allowDrop(event)">
+            <!-- Aufgaben hier anzeigen -->
+            </div>
           </div>
 
           <div class="column">
             <div class="head-content">
               <h3>Done</h3>
             </div>
-            <div
-              class="drag-area"
-              id="doneColumn"
-              ondrop="moveTo('done', event)"
-              ondragleave="removeHighlight('done')"
-              ondragover="allowDrop(event)"
-            ></div>
+            <div class="drag-area" id="doneColumn" 
+            ondrop="moveTo('doneColumn', event)" 
+            ondragover="allowDrop(event)">
+            <!-- Aufgaben hier anzeigen -->
+            </div>
           </div>
         </div>
       </div>
@@ -131,7 +123,7 @@
     <div id="add-task-template" class="dNone"></div>
     <script>
       addTaskTemplate();
-      loadTasksForSorting();
+      loadTasksForSorting()
     </script>
   </body>
 </html>

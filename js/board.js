@@ -1,130 +1,156 @@
-// Array für die Aufgaben
-let todos = [];
-
-// Funktion zum Laden der Aufgaben aus Firebase
+// Funktion zum Laden der Aufgaben aus Firebase und Aktualisieren des HTML
 async function loadTasksFromFirebase() {
   try {
       const response = await fetch(
           "https://join-store-ae38e-default-rtdb.europe-west1.firebasedatabase.app/task.json"
       );
+
+      if (!response.ok) {
+          throw new Error("Netzwerkantwort war nicht ok");
+      }
+
       const data = await response.json();
 
-      if (data) {
-          todos = Object.keys(data).map((key) => {
-              return { id: key, ...data[key] };
-          });
-          console.log("Aufgaben erfolgreich geladen:", todos);
-          updateHTML(); // HTML nach dem Laden der Aufgaben aktualisieren
+      if (data && Object.keys(data).length > 0) {
+          updateHTML(data); // HTML direkt mit den geladenen Daten aktualisieren
+          console.log("Aufgaben erfolgreich geladen.");
       } else {
-          console.error("Keine Aufgaben gefunden.");
+          console.warn("Keine Aufgaben gefunden.");
       }
   } catch (error) {
       console.error("Fehler beim Laden der Aufgaben:", error);
   }
 }
 
+// HTML aktualisieren, basierend auf den Daten aus Firebase
+function updateHTML(data) {
+  if (!data || Object.keys(data).length === 0) {
+      console.warn("Keine Aufgaben gefunden oder Daten sind leer.");
+      return;
+  }
 
-// Funktion zum Aktualisieren des HTML-Inhalts
-function updateHTML() {
-  const categories = {
-    "1": "open",  // Mapping der Kategorien zur Anzeige
-    "2": "inprogress",
-    "3": "awaitfeedback",
-    "4": "done",
-  };
+  const categories = ['todoColumn', 'inprogressColumn', 'awaitfeedbackColumn', 'doneColumn'];
 
-  // Jede Kategorie durchgehen und Spalte aktualisieren
-  Object.keys(categories).forEach((categoryKey) => {
-    const category = categories[categoryKey];  // Hole den Spaltennamen (z. B. "open")
-    const column = document.getElementById(`${category}Column`);
-    
-    if (column) {
-      column.innerHTML = ""; // Spalte leeren
+  categories.forEach(category => {
+      const container = document.getElementById(category);
 
-      todos
-        .filter((task) => task.category == categoryKey)  // Vergleiche mit der richtigen Kategorie
-        .forEach((task) => {
-          const taskCard = document.createElement("div");
-          taskCard.classList.add("task-card");
-          taskCard.setAttribute("id", `task-${task.id}`);
-          taskCard.setAttribute("draggable", "true");
-          taskCard.setAttribute("ondragstart", "dragStart(event)");  // Funktionsaufruf zum Starten
-          taskCard.setAttribute("ondragend", "dragEnd(event)");  // Funktionsaufruf zum Beenden
-          taskCard.innerHTML = `
-            <h4>${task.title}</h4>
-            <p>Priorität: ${task.prio}</p>
-            <p>Fällig: ${task.date}</p>
-          `;
-          column.appendChild(taskCard);
-        });
-    }
+      if (container) {
+          container.innerHTML = ''; // Vorhandene Inhalte löschen
+
+          Object.keys(data).forEach(key => {
+              const task = data[key];
+
+              // Verhindert das Hinzufügen von Aufgaben, wenn der progresswert nicht übereinstimmt
+              if (task.progress && task.progress.toLowerCase() === category.replace('Column', '').toLowerCase()) {
+                  container.innerHTML += generateTodoHTML({ id: key, ...task });
+              }
+          });
+      }
   });
 }
 
 
-// Drag-and-Drop-Events
+let currentDraggedElement; // Referenz des aktuell gezogenen Elements
 
-// Erlaubt das Ablegen von Elementen in der Spalte
+// Drag-Start: Speichern der gezogenen Karte
+function dragStart(event, id) {
+  currentDraggedElement = document.querySelector(`#${id}`);
+  event.dataTransfer.setData('text', id);
+  event.target.style.opacity = "0.5";
+}
+
+// Drag-End: Setzen der Sichtbarkeit zurück
+function dragEnd(event) {
+  event.target.style.opacity = "1";
+}
+
+// Ermöglicht das Ablegen von Aufgaben
 function allowDrop(event) {
-  event.preventDefault(); // Standardverhalten des Browsers verhindern
-  const column = event.target;
+  event.preventDefault();
+}
 
-  // Überprüfe, ob es sich um eine Spalte handelt, in die abgelegt werden kann
-  if (column.classList.contains("drag-area")) {
-    column.classList.add("drag-area-highlight"); // Füge die Highlight-Klasse hinzu
+// Aufgaben in eine andere Kategorie verschieben
+async function moveTo(category, event) {
+  event.preventDefault();
+  if (!currentDraggedElement) return;
+
+  const targetColumn = document.getElementById(category);
+  if (!targetColumn) {
+      console.error("Ungültige Zielspalte:", category);
+      return;
+  }
+
+  targetColumn.appendChild(currentDraggedElement);
+
+  const taskId = currentDraggedElement.id;
+
+  const progressMapping = {
+      todoColumn: "todo",
+      inprogressColumn: "inprogress",
+      awaitfeedbackColumn: "awaitfeedback",
+      doneColumn: "done",
+  };
+
+  const newProgress = progressMapping[category];
+  if (!newProgress) {
+      console.error("Ungültige Kategorie:", category);
+      return;
+  }
+
+  // Bestehende Daten der Aufgabe abrufen
+  const existingTaskData = await getTaskData(taskId);
+
+  // Progress in der Firebase-Datenbank aktualisieren
+  if (existingTaskData) {
+      await updateTaskProgressInFirebase(taskId, newProgress, existingTaskData);
+      console.log(`Task ${taskId} erfolgreich in Kategorie ${newProgress} verschoben.`);
   }
 }
 
-// Wenn ein Element gezogen wird, speichern wir die ID
-function dragStart(event) {
-  console.log("Drag gestartet für Element: " + event.target.id);
-  event.dataTransfer.setData("text", event.target.id); // Speichern der ID des Elements
-}
-
-// Drag-Ende Event (kann genutzt werden, um Styling zurückzusetzen)
-function dragEnd(event) {
-  console.log(`Drag beendet für Element: ${event.target.id}`);
-  event.target.style.opacity = ""; // Optionales Styling zurücksetzen
-  event.target.classList.remove("drag-area-highlight");  // Entferne das Highlight
-}
-
-// Verschieben der Aufgabe in eine neue Kategorie
-async function moveTo(status, event) {
-  event.preventDefault();
-  const data = event.dataTransfer.getData("text");
-  const card = document.getElementById(data);
-  const taskId = data.replace("task-", "");  // Stelle sicher, dass die ID korrekt extrahiert wird
-  const task = todos.find(t => t.id === taskId); // Suche die Aufgabe im todos Array
-
-  if (task) {
-    const categoryMapping = {
-      "open": "1",
-      "inprogress": "2",
-      "awaitfeedback": "3",
-      "done": "4",
-    };
-
-    task.category = categoryMapping[status]; // Neue Kategorie setzen
-
-    try {
-      // Aufgabe in Firebase aktualisieren
-      await fetch(`https://join-store-ae38e-default-rtdb.europe-west1.firebasedatabase.app/task/${taskId}.json`, {
-        method: "PATCH",
-        body: JSON.stringify({ category: task.category }),
-      });
-
-      console.log(`Aufgabe ${taskId} erfolgreich aktualisiert.`);
-      updateHTML(); // HTML nach dem Verschieben aktualisieren
-
-      // Verschiebe die Karte in die neue Spalte im DOM
-      const newColumn = document.getElementById(`${status}Column`);
-      if (newColumn) {
-        newColumn.appendChild(card);  // Füge das Element in die neue Spalte hinzu
+// Funktion zum Abrufen bestehender Daten einer Aufgabe
+async function getTaskData(taskId) {
+  try {
+      const response = await fetch(
+          `https://join-store-ae38e-default-rtdb.europe-west1.firebasedatabase.app/task/${taskId}.json`
+      );
+      if (response.ok) {
+          return await response.json();
+      } else {
+          console.error("Fehler beim Abrufen der bestehenden Daten.");
+          return null;
       }
+  } catch (error) {
+      console.error("Fehler beim Abrufen der Aufgabe:", error);
+      return null;
+  }
+}
 
-    } catch (error) {
-      console.error("Fehler beim Aktualisieren der Aufgabe:", error);
-    }
+// Funktion zum Aktualisieren des Progress in Firebase
+async function updateTaskProgressInFirebase(taskId, newProgress, existingTaskData) {
+  try {
+      const updatedTaskData = {
+          ...existingTaskData,
+          progress: newProgress,
+      };
+
+      const response = await fetch(
+          `https://join-store-ae38e-default-rtdb.europe-west1.firebasedatabase.app/task/${taskId}.json`,
+          {
+              method: 'PUT', // Ändere PATCH zu PUT
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(updatedTaskData),
+          }
+      );
+
+      if (response.ok) {
+          console.log(`Progress der Aufgabe ${taskId} erfolgreich auf ${newProgress} aktualisiert.`);
+      } else {
+          console.error("Fehler beim Aktualisieren des Progress in Firebase.");
+      }
+  } catch (error) {
+      console.error("Fehler beim Firebase-Update:", error);
   }
 }
 

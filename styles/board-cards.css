@@ -16,7 +16,7 @@
   max-width: 400px;
   max-height: 300px;
   transition: transform 0.3s ease, background-color 0.3s ease;
-  transition: box-shadow 0.3 ease;
+  transition: box-shadow 0.3s ease;
   animation: bounceIn 0.5s ease-out;
 }
 .boardTaskCard:hover {
@@ -25,16 +25,16 @@
 }
 @keyframes bounceIn {
   0% {
-    transform: scale(0.5);
-    opacity: 0;
+      transform: scale(0.5);
+      opacity: 0;
   }
   50% {
-    transform: scale(1.2);
-    opacity: 0.8;
+      transform: scale(1.2);
+      opacity: 0.8;
   }
   100% {
-    transform: scale(1);
-    opacity: 1;
+      transform: scale(1);
+      opacity: 1;
   }
 }
 .boardCategoryCard {
