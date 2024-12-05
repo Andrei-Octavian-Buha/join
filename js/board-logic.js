@@ -1,9 +1,12 @@
 function showOverlayAddTask() {
+  addTaskTemplate();
   document.getElementById("add-task-template").classList.remove("dNone");
 }
 
 function hideOverlayAddTask() {
-  document.getElementById("add-task-template").classList.add("dNone");
+  let template = document.getElementById("add-task-template");
+  template.innerHTML = "";
+  template.classList.add("dNone");
 }
 
 function showOverlayInfoCard() {

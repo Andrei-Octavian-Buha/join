@@ -65,7 +65,6 @@ function truncateText(text, maxLength) {
   return text;
 }
 
-
 function renderCard(task) {
   const maxTitleLength = 30;
   const maxDescriptionLength = 35;
@@ -223,8 +222,9 @@ function editListDataCard(taskId) {
   const task = tasks.find((t) => t.id === taskId);
   if (!task) return;
   let cardRender = document.getElementById("taskInfoCard");
+  hideOverlayAddTask();
   cardRender.innerHTML = "";
-  cardRender.innerHTML += showEditCard(task);
+  cardRender.innerHTML += test(task);
 }
 
 function listDataCard(taskId) {
@@ -305,4 +305,3 @@ function showInfoAssignet(task) {
     return "don't Assignet Person";
   }
 }
-

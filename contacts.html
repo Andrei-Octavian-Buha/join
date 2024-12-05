@@ -45,14 +45,14 @@
 
             <!-- Overlay für das Formular -->
             <div id="overlay" class="overlay slide-from-right">
-                    <div class="overlay-content">
+                    <div id="overlay-content" class="overlay-content">
                             <!-- Linke Spalte für das Formular -->
                             <div class="info-container">
                                 <div class="close" onclick="closeOverlay('overlay')" >X</div>
                                 <div class="responsive-container">
                                     <img src="assets/img/logo2.svg" alt="">
                                     <h2>Add Contact</h2>
-                                    <p>Tasks are better with a Team!</p>
+                                    <p class="white-text">Tasks are better with a Team!</p>
                                     <div class="blue-underline"></div>
                                 </div>
                             </div>
@@ -68,7 +68,7 @@
                                 <input type="text" class="input-mail" id="email" placeholder="Email" required>
                                 <input type="text" class="input-phone" id="phone" placeholder="Phone" required>
                                 <div class="button-container">
-                                    <button class="cancel" type="button" onclick="closeOverlay('overlay')">Cancel X</button>
+                                    <button class="cancel" type="button" onclick="closeOverlay('overlay')">Cancel </button>
                                     <button class="create" type="submit">Create Contact</button>
                                 </div>
                             </form>
