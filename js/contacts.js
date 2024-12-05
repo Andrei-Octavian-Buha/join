@@ -6,9 +6,22 @@ function init() {
 
 function openOverlay(overlayId) {
     const overlay = document.getElementById(overlayId);
+    const overlaycontent = document.getElementById("overlay-content")
     overlay.style.display = "flex"; 
     overlay.classList.add("show");  
+
+    const handleClickOutside = (event) => {
+        if (!overlaycontent.contains(event.target)) { 
+            closeOverlay(overlayId); 
+            document.removeEventListener('click', handleClickOutside); 
+        }
+    };
+
+    setTimeout(() => {
+        document.addEventListener('click', handleClickOutside);
+    }, 0); 
 }
+
 
 function closeOverlay(overlayId) {
     const overlay = document.getElementById(overlayId);
@@ -319,11 +332,6 @@ function getColorForInitial(initial) {
 
 
 async function deleteContact(contactId) {
-    const confirmDelete = confirm('Möchten Sie diesen Kontakt wirklich löschen?');
-    if (!confirmDelete) {
-        console.log('Löschen abgebrochen');
-        return; 
-    }
     try {
         const response = await fetch(`${BASE_URL}/contacts/${contactId}.json`, {
             method: 'DELETE',
@@ -331,14 +339,12 @@ async function deleteContact(contactId) {
         if (!response.ok) {
             throw new Error('Fehler beim Löschen des Kontakts');
         }
-        alert('Der Kontakt wurde erfolgreich gelöscht.');
         const contactOverlay = document.getElementById('contact-overlay');
         contactOverlay.classList.remove('visible');
         contactOverlay.innerHTML = '';
         fetchContactsData();
     } catch (error) {
         console.error('Fehler beim Löschen des Kontakts:', error);
-        alert('Es ist ein Fehler beim Löschen des Kontakts aufgetreten.');
     }
 }
 
@@ -441,7 +447,6 @@ async function updateContactOnServer(contactId, name, email, phone) {
 
 function updateContactOverlay(updatedContact) {
     closeOverlay('edit-contact-overlay');
-    alert('Kontakt wurde erfolgreich aktualisiert.');
 
     const contactOverlay = document.getElementById('contact-overlay');
     if (contactOverlay) {
