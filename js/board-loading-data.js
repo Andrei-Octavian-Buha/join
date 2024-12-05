@@ -104,7 +104,6 @@ function renderCard(task) {
     </div>`;
 }
 
-
 function showSubTasks(task) {
   if (task.task.subtask && task.task.subtask.length > 0) {
     return task.task.subtask.length;
