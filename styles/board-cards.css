@@ -14,6 +14,28 @@
   overflow: hidden;
   width: 100%;
   max-width: 400px;
+  max-height: 300px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  transition: box-shadow 0.3 ease;
+  animation: bounceIn 0.5s ease-out;
+}
+.boardTaskCard:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 0 10px rgba(0, 128, 255, 0.5);
+  cursor: pointer;
+}
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 .boardCategoryCard {
   border-radius: 24px;
