@@ -3,10 +3,39 @@
   border-bottom: 1px solid #00bee8;
 }
 
+<<<<<<< Updated upstream
 .checkedBgColor {
   border-radius: 10px;
   color: #fff;
   background-color: #2a3647 !important;
+=======
+@media (max-width: 770px) {
+    .addTaskMainDiv{
+        margin-top: 192px;
+        padding-left: 0px;
+        margin-right: 0px;
+        padding-bottom: 32px;
+    }
+    .priority{
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+    .priorityBtnContainer{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+    }
+    .buttons{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+    }
+}
+@media (max-width: 350px) {
+>>>>>>> Stashed changes
 }
 
 @media (min-width: 1150px) {
