@@ -29,7 +29,11 @@
     <title>Board</title>
     <link rel="icon" href="./assets/img/logo2.svg" />
   </head>
+<<<<<<< Updated upstream
   <body id="boardPage" onload="includeHTML(); taskInit(); init()">
+=======
+  <body id="boardPage" onload="taskInit()">
+>>>>>>> Stashed changes
     <div class="" w3-include-html="./templates/header.html"></div>
     <div class="content">
       <div class="content-wrapper">
@@ -61,12 +65,22 @@
               </div>
             </div>
             <div
+<<<<<<< Updated upstream
               class="drag-area"
               id="todoColumn"
               ondrop="moveTo('todo', event)"
               ondragleave="removeHighlight('todo')"
               ondragover="allowDrop(event)"
             ></div>
+=======
+            class="drag-area"
+            id="todoColumn"
+            ondrop="moveTo('todo', event)"
+            ondragleave="removeHighlight('todo')"
+            ondragover="allowDrop(event)"
+            ondragenter="highlightColumn('todo', event)"
+          ></div>
+>>>>>>> Stashed changes
           </div>
 
           <div class="column">
@@ -82,12 +96,22 @@
               </div>
             </div>
             <div
+<<<<<<< Updated upstream
               class="drag-area"
               id="inprogressColumn"
               ondrop="moveTo('inprogress', event)"
               ondragleave="removeHighlight('inprogress')"
               ondragover="allowDrop(event)"
             ></div>
+=======
+            class="drag-area"
+            id="inprogressColumn"
+            ondrop="moveTo('inprogress', event)"
+            ondragleave="removeHighlight('inprogress')"
+            ondragover="allowDrop(event)"
+            ondragenter="highlightColumn('inprogress', event)"
+          ></div>
+>>>>>>> Stashed changes
           </div>
 
           <div class="column">
@@ -103,12 +127,22 @@
               </div>
             </div>
             <div
+<<<<<<< Updated upstream
               class="drag-area"
               id="awaitfeedbackColumn"
               ondrop="moveTo('awaitfeedback', event)"
               ondragleave="removeHighlight('awaitfeedback')"
               ondragover="allowDrop(event)"
             ></div>
+=======
+            class="drag-area"
+            id="awaitfeedbackColumn"
+            ondrop="moveTo('awaitfeedback', event)"
+            ondragleave="removeHighlight('awaitfeedback')"
+            ondragover="allowDrop(event)"
+            ondragenter="highlightColumn('awaitfeedback', event)"
+          ></div>
+>>>>>>> Stashed changes
           </div>
 
           <div class="column">
@@ -116,12 +150,22 @@
               <h3>Done</h3>
             </div>
             <div
+<<<<<<< Updated upstream
               class="drag-area"
               id="doneColumn"
               ondrop="moveTo('done', event)"
               ondragleave="removeHighlight('done')"
               ondragover="allowDrop(event)"
             ></div>
+=======
+            class="drag-area"
+            id="doneColumn"
+            ondrop="moveTo('done', event)"
+            ondragleave="removeHighlight('done')"
+            ondragover="allowDrop(event)"
+            ondragenter="highlightColumn('done', event)"
+          ></div>
+>>>>>>> Stashed changes
           </div>
         </div>
       </div>

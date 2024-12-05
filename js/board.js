@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 // Array für die Aufgaben
 let todos = [];
 
@@ -129,6 +130,69 @@ async function moveTo(status, event) {
 }
 
 
+=======
+// Array mit Aufgaben
+let todos = [
+  { id: 1, title: "Task 1", category: "open" },
+  { id: 2, title: "Task 2", category: "inprogress" },
+  { id: 3, title: "Task 3", category: "open" },
+];
+
+// Funktion zum Aktualisieren der HTML-Inhalte
+function updateHTML() {
+  const openTasks = todos.filter(t => t['category'] == 'open'); // Filter für "open"
+  const todoColumn = document.getElementById('todoColumn');
+
+  // Inhalt leeren
+  todoColumn.innerHTML = '';
+
+  // Gefilterte Aufgaben hinzufügen
+  openTasks.forEach(task => {
+      const taskCard = document.createElement('div');
+      taskCard.classList.add('task-card');
+      taskCard.setAttribute('id', `task-${task.id}`);
+      taskCard.setAttribute('draggable', 'true');
+      taskCard.setAttribute('ondragstart', 'drag(event)');
+      taskCard.setAttribute('ondragend', 'dragEnd(event)'); // Neu hinzugefügt
+      taskCard.innerHTML = `
+          <h4>${task.title}</h4>
+      `;
+      todoColumn.appendChild(taskCard);
+  });
+}
+
+// Beispiel-Drag-and-Drop-Logik
+function allowDrop(event) {
+  event.preventDefault();
+}
+
+function drag(event) {
+  event.dataTransfer.setData("text", event.target.id);
+}
+
+function dragEnd(event) {
+  console.log(`Drag beendet für Element: ${event.target.id}`);
+  // Optional: Visuelles Feedback oder Bereinigung
+  // z.B. Entfernen von Highlights oder Rücksetzen des Drag-Styles
+  event.target.style.opacity = ""; // Beispiel: Rücksetzen der Opazität nach dem Drag
+}
+
+function moveTo(status, event) {
+  const data = event.dataTransfer.getData("text");
+  const card = document.getElementById(data);
+
+  // Kategorie des verschobenen Tasks aktualisieren
+  const taskId = parseInt(data.replace('task-', ''), 10);
+  const task = todos.find(t => t.id === taskId);
+  if (task) {
+      task.category = status;
+  }
+
+  // HTML aktualisieren
+  updateHTML();
+}
+
+>>>>>>> Stashed changes
 function highlightColumn(status, event) {
   const column = document.getElementById(`${status}Column`);
   if (column) {
@@ -144,6 +208,7 @@ function removeHighlight(status) {
   }
 }
 
+<<<<<<< Updated upstream
 
 // Seite initialisieren
 window.onload = () => {
@@ -202,4 +267,10 @@ function countTasksByCategory() {
   // Store the counts in sessionStorage
   sessionStorage.setItem("taskCounts", JSON.stringify(counts));
 }
+=======
+// Initiale HTML-Aktualisierung
+updateHTML();
+
+
+>>>>>>> Stashed changes
 
