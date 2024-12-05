@@ -113,9 +113,9 @@ h3 {
 
 .drag-area {
   display: flex;
-  gap: 16px; /* Flexbox für die Kinder-Elemente */
-  flex-wrap: wrap; /* Erlaubt das Umfließen der Karten in die nächste Zeile */
-  justify-content: center;
+  gap: 16px; /* Einheitlicher Abstand zwischen den Karten */
+  flex-wrap: wrap;
+  justify-content: flex-start; /* Karten vom Anfang aus ausrichten */
   width: 100%;
   min-height: 40px;
   background-color: #fffbfb56;
