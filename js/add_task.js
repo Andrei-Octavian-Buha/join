@@ -368,6 +368,29 @@ function addDataToFireBase() {
   });
 }
 
+function handleFormSubmit(event) {
+  event.preventDefault(); // Verhindert das automatische Neuladen der Seite
+  addDataToFireBase(); // Speichere die Daten in Firebase
+  showPopupAndRedirect(); // Zeige das Pop-up und leite weiter
+}
+
+function showPopupAndRedirect() {
+  const popup = document.getElementById("popup");
+
+  // Pop-up anzeigen
+  popup.classList.remove("hidden");
+  popup.classList.add("visible");
+
+  // Nach 2.5 Sekunden Weiterleitung, passend zur Animation
+  setTimeout(() => {
+    window.location.href = "board.html";
+  }, 2500); // Wartezeit für die gesamte Animation
+}
+
+
+
+
+
 function toggleDropdown() {
   const dropdown = document.getElementById("dropdown");
   dropdown.style.display =
@@ -392,10 +415,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const dropDownArrow = dropDownHeader.querySelector("img");
 
   dropDownHeader.addEventListener("click", () => {
-    // Toggle die Klasse, um das Dropdown anzuzeigen/verbergen
     dropDownBody.classList.toggle("dNone");
 
-    // Rotieren des Pfeils basierend auf dem Zustand des Dropdowns
     if (!dropDownBody.classList.contains("dNone")) {
       dropDownArrow.style.transform = "rotate(180deg)";
     } else {
@@ -405,22 +426,21 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function getInitials(name) {
-  if (!name) return "??"; // Fallback, falls der Name nicht existiert
-  const nameParts = name.trim().split(" "); // Name in Teile (z. B. Vorname, Nachname) aufteilen
-  const initials = nameParts.map((part) => part.charAt(0).toUpperCase()); // Initialen aus den ersten Buchstaben erstellen
-  return initials.slice(0, 2).join(""); // Maximal 2 Initialen zurückgeben
+  if (!name) return "??"; 
+  const nameParts = name.trim().split(" "); 
+  const initials = nameParts.map((part) => part.charAt(0).toUpperCase()); 
+  return initials.slice(0, 2).join(""); 
 }
 
-// Funktion, um den Namen aus dem Local Storage zu laden und Initialen einzusetzen
 function setUserInitials() {
-  const userData = sessionStorage.getItem("currentUser"); // Daten aus dem Local Storage abrufen
+  const userData = sessionStorage.getItem("currentUser"); 
   if (userData) {
     try {
-      const user = JSON.parse(userData); // JSON-String in ein Objekt umwandeln
-      const initials = getInitials(user.name); // Initialen generieren
-      const profileTextElement = document.getElementById("profileText"); // Element mit der ID 'profileText' finden
+      const user = JSON.parse(userData); 
+      const initials = getInitials(user.name); 
+      const profileTextElement = document.getElementById("profileText"); 
       if (profileTextElement) {
-        profileTextElement.innerHTML = initials; // Initialen in das Element einfügen
+        profileTextElement.innerHTML = initials; 
       }
     } catch (error) {
       console.error("Fehler beim Verarbeiten der Benutzerdaten:", error);

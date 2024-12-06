@@ -197,11 +197,7 @@ function showPrioIcon(task) {
 
 async function deleteContact(contactId) {
   console.log(contactId);
-  const confirmDelete = confirm("Möchten Sie diesen Kontakt wirklich löschen?");
-  if (!confirmDelete) {
-    console.log("Löschen abgebrochen");
-    return;
-  }
+
   try {
     const response = await fetch(`${BASE_URL}/task/${contactId}.json`, {
       method: "DELETE",
@@ -209,7 +205,7 @@ async function deleteContact(contactId) {
     if (!response.ok) {
       throw new Error("Fehler beim Löschen des Kontakts");
     }
-    alert("Der Kontakt wurde erfolgreich gelöscht.");
+  
     taskInit();
     hideOverlayInfoCard();
   } catch (error) {

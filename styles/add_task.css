@@ -480,3 +480,55 @@
 .dNone {
   display: none;
 }
+
+.imgPopUp{
+  padding-left: 16px;
+}
+
+/* Pop-up Styles */
+#popup {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  bottom: -100px; /* Start unterhalb des Bildschirms */
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 20px 40px;
+  background-color: #2A3647;
+  color: white;
+  font-size: 16px;
+  border-radius: 10px;
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  z-index: 1000;
+}
+
+/* Pop-up sichtbar mit Animation */
+#popup.visible {
+  opacity: 1;
+  transform: translate(-50%, -50%); /* Mittig im Bildschirm */
+  bottom: 50%; /* Zielposition */
+  animation: fly-in-out 2.5s ease forwards;
+}
+
+/* Fly-in und Fly-out Animation */
+@keyframes fly-in-out {
+  0% {
+    bottom: -100px; /* Startpunkt */
+    opacity: 0;
+  }
+  20% {
+    bottom: 50%; /* Mittig im Bildschirm */
+    opacity: 1;
+  }
+  80% {
+    bottom: 50%; /* Bleibt in der Mitte */
+    opacity: 1;
+  }
+  100% {
+    bottom: -100px; /* Zurück nach unten */
+    opacity: 0;
+  }
+}
+
+
