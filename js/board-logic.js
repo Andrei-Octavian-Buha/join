@@ -1,11 +1,9 @@
 function showOverlayAddTask() {
-  addTaskTemplate();
   document.getElementById("add-task-template").classList.remove("dNone");
 }
 
 function hideOverlayAddTask() {
   let template = document.getElementById("add-task-template");
-  template.innerHTML = "";
   template.classList.add("dNone");
 }
 

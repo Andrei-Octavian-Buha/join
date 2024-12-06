@@ -23,7 +23,7 @@ function test(task) {
           id="addTaskDescription"
           placeholder="Enter a Description"
           class="inputStyle"
-        ></textarea>
+        >${task.task.description}</textarea>
       </div>
       <div class="testA">
         <span>Assignet To</span>
@@ -35,7 +35,7 @@ function test(task) {
           <div id="dropDownBodyId" class="dropDownBody dNone"></div>
         </div>
         <div>
-          <div id="whoIsAssignet" class="addFisrtLetterContainer"></div>
+        <div id="asigned${task.id}" class="assignetPersonCard"></div>
         </div>
       </div>
     </div>
