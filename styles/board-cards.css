@@ -2,6 +2,7 @@
   border-radius: 24px;
   padding: 4px 16px;
 }
+
 .boardTaskCard {
   display: flex;
   flex-direction: column;
@@ -19,11 +20,13 @@
   transition: box-shadow 0.3s ease;
   animation: bounceIn 0.5s ease-out;
 }
+
 .boardTaskCard:hover {
   background-color: #67696d38;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 0 10px rgba(0, 128, 255, 0.5);
   cursor: pointer;
 }
+
 @keyframes bounceIn {
   0% {
       transform: scale(0.5);
@@ -38,17 +41,21 @@
       opacity: 1;
   }
 }
+
 .boardCategoryCard {
   border-radius: 24px;
 }
+
 .cat1 {
   color: #fff;
   background-color: #1fd7c1;
 }
+
 .cat2 {
   color: #fff;
   background-color: #0038ff;
 }
+
 .boardCardTitle {
   font-weight: 700;
   color: #2a3647;
@@ -58,28 +65,33 @@
   margin-block-start: 0em;
   margin-block-end: 0em;
 }
+
 .boardCardDescription {
   max-width: 100%;
   font-size: 16px;
   font-weight: 400;
   color: #a8a8a8;
 }
+
 .progresBar {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .assignetPersonContainer {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
 }
+
 .assignetPersonCard {
   display: flex;
   gap: -8px;
 }
+
 .assignetPersonKreis {
   display: flex;
   align-items: center;
@@ -91,11 +103,13 @@
   font-size: 12px;
   margin-right: 2px;
 }
+
 .boardCardSubtaskContainer {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
+
 .btnDeleteEdit {
   display: flex; /* Pentru a alinia SVG-ul și textul */
   align-items: center;
@@ -118,45 +132,44 @@
 .btnDeleteEdit:hover .custom-svg {
   fill: #29abe2; /* Culoare la hover pentru SVG */
 }
+
 .h161 {
   font-size: 61px;
 }
 
-/* Grundlegende Positionierung der Info-Card */
 #taskInfoCard {
   position: fixed;
   top: 20%;
-  right: -400px;  /* Ausgangsposition der Card (außerhalb des Bildschirms) */
+  right: -400px;  
   transform: translateY(-50%);
-  width: 300px;  /* Breite der Card anpassen */
+  width: 300px;  
   height: auto;
-  /* oder dein gewünschtes Design */
+
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
   padding: 20px;
   transition: all 0.5s ease-in-out;
-  z-index: 1000;  /* Sicherstellen, dass sie über dem restlichen Inhalt bleibt */
+  z-index: 1000;  
 }
 
-/* Animations-Definitionen */
 @keyframes slideIn {
   0% {
-    right: -400px; /* Anfang außerhalb des Bildschirms */
+    right: -400px; 
   }
   100% {
-    right: 50%; /* Mitte des Bildschirms */
-    transform: translate(50%, -50%); /* Mittig positionieren */
+    right: 50%; 
+    transform: translate(50%, -50%); 
   }
 }
 
 @keyframes slideOut {
   0% {
     right: 50%;
-    transform: translate(50%, -50%); /* Mittig */
+    transform: translate(50%, -50%); 
   }
   100% {
-    right: -400px; /* Wieder außerhalb des Bildschirms */
-    transform: translateY(-50%); /* Vertikal zentrieren */
+    right: -400px; 
+    transform: translateY(-50%); 
   }
 }
 
@@ -168,7 +181,6 @@
   animation: slideOut 0.5s forwards;
 }
 
-/* Überlagerung (Hintergrund-Dimming) für das Schließen der Card */
 #overlay {
   position: fixed;
   top: 0;
@@ -176,6 +188,6 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;  /* Überlagerung muss unter der Card sein */
+  z-index: 999; 
   display: none;
 }

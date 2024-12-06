@@ -22,8 +22,7 @@ function toggleDropdown() {
     const initials = nameParts.map(part => part.charAt(0).toUpperCase()); // Initialen aus den ersten Buchstaben erstellen
     return initials.slice(0, 2).join(""); // Maximal 2 Initialen zurückgeben
   }
-  
-  // Funktion, um den Namen aus dem Local Storage zu laden und Initialen einzusetzen
+
   function setUserInitials() {
     const userData = sessionStorage.getItem("currentUser"); // Daten aus dem Local Storage abrufen
     if (userData) {
@@ -41,7 +40,6 @@ function toggleDropdown() {
         console.warn("Keine Benutzerdaten im Local Storage unter 'currentUser' gefunden.");
     }
   }
-  
   
   document.addEventListener("DOMContentLoaded", () => {
     const checkHeaderInterval = setInterval(() => {

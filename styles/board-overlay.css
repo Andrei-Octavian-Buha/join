@@ -1,5 +1,4 @@
 .boardOverlay {
-
   width: 100%;
   height: auto;
   position: fixed;
@@ -10,6 +9,7 @@
   align-items: center;
   justify-content: center;
 }
+
 .taskContainer {
   background-color: #fff;
   width: 525px;
@@ -19,49 +19,59 @@
   border-radius: 30px;
   gap: 24px;
 }
+
 .taskHeder {
   display: flex;
   justify-content: space-between;
 }
+
 .taskTitle {
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
+
 .direction-column {
   display: flex;
   flex-direction: column;
   align-items: start;
   gap: 4px;
 }
+
 .dflex {
   display: flex;
   align-items: center;
   justify-content: end;
 }
+
 .gap8 {
   display: flex;
   align-items: center;
   gap: 8px;
 }
+
 .btnBoardOk {
   display: flex;
   align-items: center;
   justify-content: end;
 }
+
 .margin0 {
   margin: 0;
 }
+
 .prioContainer {
   display: flex;
   align-items: center;
   gap: 24px;
 }
+
 .subtaskItem {
   display: flex;
   align-items: center;
   gap: 16px;
 }
+
 .pLeft16 {
   padding-left: 16px;
 }

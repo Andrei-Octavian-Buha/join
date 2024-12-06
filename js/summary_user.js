@@ -46,7 +46,6 @@ function toggleDropdown() {
     }
   };
 
-  // Funktion, um den aktuellen Benutzer aus dem Local Storage zu laden
 function getCurrentUser() {
   const user = sessionStorage.getItem("currentUser");
   return user ? JSON.parse(user) : null; 
@@ -63,13 +62,10 @@ function insertUserName() {
   }
 }
 
-
-// Führt die Funktion aus, wenn die Seite geladen wird
 document.addEventListener("DOMContentLoaded", () => {
   insertUserName();
 });
 
-// Funktion, um Initialen aus dem Namen zu generieren
 function getInitials(name) {
   if (!name) return "??"; 
   const nameParts = name.trim().split(" ");
@@ -77,7 +73,6 @@ function getInitials(name) {
   return initials.slice(0, 2).join(""); 
 }
 
-// Funktion, um den Namen aus dem Local Storage zu laden und Initialen einzusetzen
 function setUserInitials() {
   const userData = sessionStorage.getItem("currentUser");
   if (userData) {
@@ -96,7 +91,6 @@ function setUserInitials() {
   }
 }
 
-
 document.addEventListener("DOMContentLoaded", () => {
   const checkHeaderInterval = setInterval(() => {
       const profileTextElement = document.getElementById("profileText");
@@ -106,7 +100,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
   }, 100); 
 });
-
 
 function fillInTasks(){
   const taskCounts = JSON.parse(sessionStorage.getItem("taskCounts")) || {};
@@ -136,4 +129,52 @@ function fillInTasks(){
   }
 };
 
+async function loadTasksForSorting() {
+  try {
+    const response = await fetch(
+      "https://join-store-ae38e-default-rtdb.europe-west1.firebasedatabase.app/task.json"
+    );
+    const data = await response.json();
+
+    if (data) {
+      todos = Object.keys(data).map((key) => {
+        return { id: key, ...data[key] };
+      });
+
+      console.log("Aufgaben erfolgreich geladen:", todos);
+      
+      // Aufgaben zählen und in sessionStorage speichern
+      countTasksByCategory();
+
+      updateHTML(); // HTML nach dem Laden der Aufgaben aktualisieren
+    } else {
+      console.error("Keine Aufgaben gefunden.");
+    }
+  } catch (error) {
+    console.error("Fehler beim Laden der Aufgaben:", error);
+  }
+}
+
+function countTasksByCategory() {
+  const counts = {
+    todo: 0,
+    inprogress: 0,
+    awaitfeedback: 0,
+    done: 0,
+    urgent: 0,
+    total: 0, // Add a field for total count
+  };
+
+  todos.forEach((task) => {
+    counts.total++; 
+
+    if (task.category === "1") counts.todo++;
+    if (task.category === "2") counts.inprogress++;
+    if (task.category === "3") counts.awaitfeedback++;
+    if (task.category === "4") counts.done++;
+    if (task.prio === "urgent") counts.urgent++;
+  });
+
+  sessionStorage.setItem("taskCounts", JSON.stringify(counts));
+}
 

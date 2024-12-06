@@ -92,10 +92,9 @@ function processValidLogin(rememberMe, user) {
   }
 
   localStorage.setItem("currentUser", JSON.stringify({ name: user.name, email: user.email }));
-  
+
   window.location.href = "./summary_user.html";
 }
-
 
 async function fetchUsers() {
   const response = await fetch(`${BASE_URL}/users.json`);
@@ -104,29 +103,24 @@ async function fetchUsers() {
   return data ? Object.values(data) : [];
 }
 
-
 function showErrorContainer(container, message) {
   container.textContent = message;
   container.style.display = "block";
 }
 
-
 function hideErrorContainer(container) {
   container.style.display = "none";
 }
-
 
 function saveLoginData(email, password) {
   localStorage.setItem("loginEmail", email);
   localStorage.setItem("loginPassword", password);
 }
 
-
 function clearLoginData() {
   localStorage.removeItem("loginEmail");
   localStorage.removeItem("loginPassword");
 }
-
 
 function prefillLoginData() {
   const savedEmail = localStorage.getItem("loginEmail");
@@ -138,7 +132,6 @@ function prefillLoginData() {
     document.getElementById("checkbox").checked = true; // Checkbox aktivieren
   }
 }
-
 
 function validateUser(users, email, password, errorContainer) {
   const matchingUser = users.find(
@@ -152,88 +145,77 @@ function validateUser(users, email, password, errorContainer) {
   }
 }
 
-
 function onLoginSuccess(user) {
   currentUser = user;
   saveCurrentUser(user);
   window.location.href = "summary_user.html";
 }
 
-
 function saveCurrentUser(user) {
   sessionStorage.setItem("currentUser", JSON.stringify(user));
 }
-
 
 function showErrorContainer(container, message) {
   container.textContent = message; // Fehlermeldung einfügen
   container.style.display = "block"; // Sichtbar machen
 }
 
-
 function hideErrorContainer(container) {
   container.style.display = "none"; // Verbergen
 }
 
-
-function addEvent(){
-    let signUp = document.getElementById("loginToSignUp");
-    signUp.addEventListener("click", ()=>{
-        window.location.href = "register.html";
-    })
+function addEvent() {
+  let signUp = document.getElementById("loginToSignUp");
+  signUp.addEventListener("click", () => {
+    window.location.href = "register.html";
+  })
 }
-
 
 function test() {
-    const overlay = document.getElementById('overlayId');
-    const logo = document.getElementById('imgHeader1');
-    const animatedLogo = setupAnimatedLogo(logo);
+  const overlay = document.getElementById('overlayId');
+  const logo = document.getElementById('imgHeader1');
+  const animatedLogo = setupAnimatedLogo(logo);
 
-    applyOverlayColor(overlay);
-    animateLogoToTarget(animatedLogo, logo.getBoundingClientRect());
+  applyOverlayColor(overlay);
+  animateLogoToTarget(animatedLogo, logo.getBoundingClientRect());
 
-    setTimeout(() => finalizeAnimation(animatedLogo, overlay), 2000);
+  setTimeout(() => finalizeAnimation(animatedLogo, overlay), 2000);
 }
-
 
 function setupAnimatedLogo(logo) {
-    const animatedLogo = logo.cloneNode(true);
-    animatedLogo.classList.add('logoCentered'); 
-    document.body.appendChild(animatedLogo);
-    return animatedLogo;
+  const animatedLogo = logo.cloneNode(true);
+  animatedLogo.classList.add('logoCentered');
+  document.body.appendChild(animatedLogo);
+  return animatedLogo;
 }
-
 
 function applyOverlayColor(overlay) {
-    if (window.innerWidth < 770) {
-        overlay.style.backgroundColor = '#2A3647'; 
-    } else {
-        overlay.style.backgroundColor = '#ffffff'; 
-    }
-    overlay.classList.remove('dNone');
+  if (window.innerWidth < 770) {
+    overlay.style.backgroundColor = '#2A3647';
+  } else {
+    overlay.style.backgroundColor = '#ffffff';
+  }
+  overlay.classList.remove('dNone');
 }
-
 
 function animateLogoToTarget(animatedLogo, target) {
-    setTimeout(() => {
-        animatedLogo.style.top = `${target.top}px`;
-        animatedLogo.style.left = `${target.left}px`;
-        animatedLogo.style.transform = 'translate(0, 0)';
-        animatedLogo.style.width = `${target.width}px`;
-        animatedLogo.classList.add('logoMoved'); 
-    }, 100); 
+  setTimeout(() => {
+    animatedLogo.style.top = `${target.top}px`;
+    animatedLogo.style.left = `${target.left}px`;
+    animatedLogo.style.transform = 'translate(0, 0)';
+    animatedLogo.style.width = `${target.width}px`;
+    animatedLogo.classList.add('logoMoved');
+  }, 100);
 }
-
 
 function finalizeAnimation(animatedLogo, overlay) {
-    animatedLogo.remove();
-    overlay.classList.add('dNone');
+  animatedLogo.remove();
+  overlay.classList.add('dNone');
 }
 
-
 function togglePassword(inputId, icon) {
-    var input = document.getElementById(inputId);
-    var isPassword = input.type === 'password';
-    input.type = isPassword ? 'text' : 'password';
-    icon.src = isPassword ? './assets/menu/visibility-off.png' : './assets/menu/lock.svg';
-  }
+  var input = document.getElementById(inputId);
+  var isPassword = input.type === 'password';
+  input.type = isPassword ? 'text' : 'password';
+  icon.src = isPassword ? './assets/menu/visibility-off.png' : './assets/menu/lock.svg';
+}

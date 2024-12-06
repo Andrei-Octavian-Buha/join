@@ -6,6 +6,7 @@ async function getAllContacts(path = "") {
   let response = await fetch(`${BASE_URL}` + path + ".json");
   return (responseJs = await response.json());
 }
+
 let tasks = [];
 
 async function loadTaskData() {
@@ -24,7 +25,6 @@ async function loadContactss() {
   let awaitfeedbackId = document.getElementById("awaitfeedbackColumn");
   let inprogressId = document.getElementById("inprogressColumn");
   let doneId = document.getElementById("doneColumn");
-
   todoId.innerHTML = "";
   awaitfeedbackId.innerHTML = "";
   inprogressId.innerHTML = "";
@@ -192,8 +192,6 @@ function showPrioIcon(task) {
   }
   return `<img src="${iconPath}" alt="${prio} priority icon" style="width:20px; height:20px;">`;
 }
-
-// Info card data
 
 async function deleteContact(contactId) {
   console.log(contactId);

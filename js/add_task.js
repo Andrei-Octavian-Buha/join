@@ -175,7 +175,6 @@ function whenChecked(contactId) {
     container.classList.remove("checkedBgColor");
   }
 
-  // Badges (Initialen) für alle markierten Kontakte anzeigen
   assignet.innerHTML = ""; // Nur bei Änderungen den Inhalt löschen, nicht bei jedem Durchlauf
   checked.forEach((element) => {
     // Extrahiere die Initialen des Kontakts
@@ -185,15 +184,12 @@ function whenChecked(contactId) {
       .join("")
       .slice(0, 2);
 
-    // Hole die Farbe für die Initialen
     let color = getColorForInitial(initials[0]); // Wir verwenden nur den ersten Buchstaben für die Farbe
 
-    // Erstelle das Badge mit den Initialen und der entsprechenden Farbe
     assignet.innerHTML += `<p class="firstLetterCircle" style="background-color: ${color};">${initials}</p>`;
   });
 }
 
-// SUBTASK
 let subtasks = [];
 
 function hideSubTaskAddBtn() {
@@ -317,7 +313,6 @@ function rendSubTask() {
   });
 }
 
-//  Data to fireBase
 async function uploadToFireBase(path = "", data = {}) {
   let response = await fetch(`${BASE_URL}` + path + ".json", {
     method: "POST",
@@ -386,10 +381,6 @@ function showPopupAndRedirect() {
     window.location.href = "board.html";
   }, 2500); // Wartezeit für die gesamte Animation
 }
-
-
-
-
 
 function toggleDropdown() {
   const dropdown = document.getElementById("dropdown");
