@@ -121,3 +121,61 @@
 .h161 {
   font-size: 61px;
 }
+
+/* Grundlegende Positionierung der Info-Card */
+#taskInfoCard {
+  position: fixed;
+  top: 20%;
+  right: -400px;  /* Ausgangsposition der Card (außerhalb des Bildschirms) */
+  transform: translateY(-50%);
+  width: 300px;  /* Breite der Card anpassen */
+  height: auto;
+  /* oder dein gewünschtes Design */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 20px;
+  transition: all 0.5s ease-in-out;
+  z-index: 1000;  /* Sicherstellen, dass sie über dem restlichen Inhalt bleibt */
+}
+
+/* Animations-Definitionen */
+@keyframes slideIn {
+  0% {
+    right: -400px; /* Anfang außerhalb des Bildschirms */
+  }
+  100% {
+    right: 50%; /* Mitte des Bildschirms */
+    transform: translate(50%, -50%); /* Mittig positionieren */
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    right: 50%;
+    transform: translate(50%, -50%); /* Mittig */
+  }
+  100% {
+    right: -400px; /* Wieder außerhalb des Bildschirms */
+    transform: translateY(-50%); /* Vertikal zentrieren */
+  }
+}
+
+.showCard {
+  animation: slideIn 0.5s forwards;
+}
+
+.hideCard {
+  animation: slideOut 0.5s forwards;
+}
+
+/* Überlagerung (Hintergrund-Dimming) für das Schließen der Card */
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;  /* Überlagerung muss unter der Card sein */
+  display: none;
+}
