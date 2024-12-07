@@ -187,6 +187,9 @@ p {
   input {
     width: 180px;
   }
+  .drag-area {
+    justify-content: center;
+  }
 }
 
 @media (max-width: 600px) {
