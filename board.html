@@ -36,7 +36,7 @@
         <div class="top-content">
           <h1>Board</h1>
           <div class="right-content">
-            <input class="searchinput" type="text" placeholder="find task" />
+            <input class="searchinput" type="text" placeholder="find task" oninput="filterTasks()" />
             <button
               id="addCardButton"
               onclick="showOverlayAddTask()"
@@ -135,7 +135,6 @@
     <div id="add-task-template" class="dNone"></div>
     <script>
       addTaskTemplate();
-      loadTasksForSorting();
     </script>
   </body>
 </html>

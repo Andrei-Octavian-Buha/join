@@ -1,26 +1,29 @@
 // Funktion zum Laden der Aufgaben aus Firebase und Aktualisieren des HTML
 async function loadTasksFromFirebase() {
-  try {
-      const response = await fetch(
-          "https://join-store-ae38e-default-rtdb.europe-west1.firebasedatabase.app/task.json"
-      );
+    try {
+        const response = await fetch(
+            "https://join-store-ae38e-default-rtdb.europe-west1.firebasedatabase.app/task.json"
+        );
 
-      if (!response.ok) {
-          throw new Error("Netzwerkantwort war nicht ok");
-      }
+        if (!response.ok) {
+            throw new Error("Netzwerkantwort war nicht ok");
+        }
 
-      const data = await response.json();
+        const data = await response.json();
 
-      if (data && Object.keys(data).length > 0) {
-          updateHTML(data); // HTML direkt mit den geladenen Daten aktualisieren
-          console.log("Aufgaben erfolgreich geladen.");
-      } else {
-          console.warn("Keine Aufgaben gefunden.");
-      }
-  } catch (error) {
-      console.error("Fehler beim Laden der Aufgaben:", error);
-  }
+        console.log("Geladene Daten:", data); // Daten prüfen
+
+        if (data && Object.keys(data).length > 0) {
+            updateHTML(data); // HTML aktualisieren
+            console.log("Aufgaben erfolgreich geladen.");
+        } else {
+            console.warn("Keine Aufgaben gefunden.");
+        }
+    } catch (error) {
+        console.error("Fehler beim Laden der Aufgaben:", error);
+    }
 }
+
 
 // HTML aktualisieren, basierend auf den Daten aus Firebase
 function updateHTML(data) {
@@ -47,6 +50,37 @@ function updateHTML(data) {
           });
       }
   });
+}
+
+
+function filterTasks() {
+    const searchInput = document.querySelector('.searchinput').value.toLowerCase();
+    console.log("Suchbegriff:", searchInput);
+
+    // Kategorien durchlaufen
+    const categories = ['todoColumn', 'inprogressColumn', 'awaitfeedbackColumn', 'doneColumn'];
+
+    categories.forEach(category => {
+        const container = document.getElementById(category);
+
+        if (container) {
+            const tasks = container.querySelectorAll('.boardTaskCard'); // Filtert Cards mit der Klasse "boardTaskCard"
+
+            tasks.forEach(task => {
+                const taskTitle = task.querySelector('.boardCardTitle')?.textContent.toLowerCase();
+                const taskDescription = task.querySelector('.boardCardDescription')?.textContent.toLowerCase();
+
+                if (
+                    taskTitle?.includes(searchInput) ||
+                    taskDescription?.includes(searchInput)
+                ) {
+                    task.style.display = ''; // Zeige die Card an
+                } else {
+                    task.style.display = 'none'; // Verstecke die Card
+                }
+            });
+        }
+    });
 }
 
 
