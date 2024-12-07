@@ -321,9 +321,9 @@ function handleNetworkError(error) {
 function getColorForInitial(initial) {
     const colors = {
         A: '#FF5733', B: '#FFBD33', C: '#DBFF33', D: '#75FF33', E: '#33FF57', 
-        F: '#33FFBD', G: '#33DBFF', H: '#3375FF', I: '#5733FF', J: '#BD33FF', 
+        F: '#33FFBD', G: '#3399FF', H: '#3375FF', I: '#5733FF', J: '#BD33FF', 
         K: '#FF33DB', L: '#FF3375', M: '#FF3333', N: '#FF6633', O: '#FF9933', 
-        P: '#FFCC33', Q: '#FFFF33', R: '#CCFF33', S: '#99FF33', T: '#66FF33', 
+        P: '#FFCC33', Q: '#FFFF33', R: '#CCFF33', S: '#66CC33', T: '#66FF33', 
         U: '#33FF66', V: '#33FF99', W: '#33FFCC', X: '#33FFFF', Y: '#33CCFF', 
         Z: '#3399FF'
     };
