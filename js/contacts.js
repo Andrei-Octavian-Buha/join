@@ -332,6 +332,9 @@ function getColorForInitial(initial) {
 
 
 async function deleteContact(contactId) {
+    const shouldDelete = confirm('Kontakt wirklich löschen, oder noch einmal die Konsequenzen überdenken?');
+    if (!shouldDelete) return; // Abbrechen, wenn der Nutzer "Abbrechen" klickt
+
     try {
         const response = await fetch(`${BASE_URL}/contacts/${contactId}.json`, {
             method: 'DELETE',
@@ -343,10 +346,15 @@ async function deleteContact(contactId) {
         contactOverlay.classList.remove('visible');
         contactOverlay.innerHTML = '';
         fetchContactsData();
+
+        // Erfolgsnachricht
+        alert('Kontakt wurde unwiderruflich gelöscht.');
     } catch (error) {
         console.error('Fehler beim Löschen des Kontakts:', error);
     }
 }
+
+
 
 
 function toggleMenu() {
