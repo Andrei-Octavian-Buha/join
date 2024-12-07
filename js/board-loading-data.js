@@ -157,7 +157,7 @@ function getColorForInitial(initial) {
     E: "#33FF57",
     F: "#33FFBD",
     G: "#3399FF",
-    H: "#3375FF",
+    H: "#8A2BE2",
     I: "#5733FF",
     J: "#BD33FF",
     K: "#FF33DB",
