@@ -168,7 +168,7 @@ function getColorForInitial(initial) {
     P: "#FFCC33",
     Q: "#FFFF33",
     R: "#CCFF33",
-    S: '#66CC33',
+    S: "#66CC33",
     T: "#66FF33",
     U: "#33FF66",
     V: "#33FF99",
@@ -203,11 +203,10 @@ async function deleteContact(contactId) {
     if (!response.ok) {
       throw new Error("Fehler beim Löschen des Kontakts");
     }
-  
+
     taskInit();
     hideOverlayInfoCard();
-  } catch (error) {
-  }
+  } catch (error) {}
 }
 
 function editListDataCard(taskId) {
@@ -217,8 +216,10 @@ function editListDataCard(taskId) {
   let template = document.getElementById("add-task-template");
   template.innerHTML = "";
   cardRender.innerHTML = "";
-  cardRender.innerHTML += test(task);
+  cardRender.innerHTML += showEditCard(task);
   showAssignet(task);
+  setupDropdownEvents();
+  init();
 }
 
 function listDataCard(taskId) {

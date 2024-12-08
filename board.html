@@ -29,14 +29,19 @@
     <title>Board</title>
     <link rel="icon" href="./assets/img/logo2.svg" />
   </head>
-  <body id="boardPage" onload="includeHTML(), taskInit(), updateHTML(), init()">
+  <body id="boardPage" onload="includeHTML(), taskInit()">
     <div class="" w3-include-html="./templates/header.html"></div>
     <div class="content">
       <div class="content-wrapper">
         <div class="top-content">
           <h1>Board</h1>
           <div class="right-content">
-            <input class="searchinput" type="text" placeholder="find task" oninput="filterTasks()" />
+            <input
+              class="searchinput"
+              type="text"
+              placeholder="find task"
+              oninput="filterTasks()"
+            />
             <button
               id="addCardButton"
               onclick="showOverlayAddTask()"
@@ -133,8 +138,5 @@
     <div id="overlay"></div>
     <div id="taskInfoCard" class=""></div>
     <div id="add-task-template" class="dNone"></div>
-    <script>
-      addTaskTemplate();
-    </script>
   </body>
 </html>
