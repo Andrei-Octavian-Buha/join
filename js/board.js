@@ -1,21 +1,15 @@
-// Funktion zum Laden der Aufgaben aus Firebase und Aktualisieren des HTML
+
 async function loadTasksFromFirebase() {
     try {
         const response = await fetch(
             "https://join-store-ae38e-default-rtdb.europe-west1.firebasedatabase.app/task.json"
         );
-
         if (!response.ok) {
             throw new Error("Netzwerkantwort war nicht ok");
         }
-
         const data = await response.json();
-
-        console.log("Geladene Daten:", data); // Daten prüfen
-
         if (data && Object.keys(data).length > 0) {
-            updateHTML(data); // HTML aktualisieren
-            console.log("Aufgaben erfolgreich geladen.");
+            updateHTML(data); 
         } else {
             console.warn("Keine Aufgaben gefunden.");
         }
@@ -25,38 +19,50 @@ async function loadTasksFromFirebase() {
 }
 
 
-function filterTasks() {
-    const searchInput = document.querySelector('.searchinput').value.toLowerCase();
-    console.log("Suchbegriff:", searchInput);
+function getSearchInput(selector) {
+    const input = document.querySelector(selector);
+    return input ? input.value.toLowerCase() : '';
+}
 
-    // Kategorien durchlaufen
-    const categories = ['todoColumn', 'inprogressColumn', 'awaitfeedbackColumn', 'doneColumn'];
 
-    categories.forEach(category => {
-        const container = document.getElementById(category);
+function filterTasksInCategory(containerId, searchInput) {
+    const container = document.getElementById(containerId);
+    if (!container) {
+        console.warn(`Container mit der ID '${containerId}' wurde nicht gefunden.`);
+        return;
+    }
 
-        if (container) {
-            const tasks = container.querySelectorAll('.boardTaskCard'); // Filtert Cards mit der Klasse "boardTaskCard"
+    const tasks = container.querySelectorAll('.boardTaskCard');
 
-            tasks.forEach(task => {
-                const taskTitle = task.querySelector('.boardCardTitle')?.textContent.toLowerCase();
-                const taskDescription = task.querySelector('.boardCardDescription')?.textContent.toLowerCase();
+    tasks.forEach(task => {
+        const taskTitle = task.querySelector('.boardCardTitle')?.textContent.toLowerCase();
+        const taskDescription = task.querySelector('.boardCardDescription')?.textContent.toLowerCase();
 
-                if (
-                    taskTitle?.includes(searchInput) ||
-                    taskDescription?.includes(searchInput)
-                ) {
-                    task.style.display = ''; // Zeige die Card an
-                } else {
-                    task.style.display = 'none'; // Verstecke die Card
-                }
-            });
+        if (taskTitle?.includes(searchInput) || taskDescription?.includes(searchInput)) {
+            task.style.display = ''; 
+        } else {
+            task.style.display = 'none'; 
         }
     });
 }
 
 
-let currentDraggedElement; // Referenz des aktuell gezogenen Elements
+function filterTasksInAllCategories(categories, searchInput) {
+    categories.forEach(category => {
+        filterTasksInCategory(category, searchInput);
+    });
+}
+
+
+function filterTasks() {
+    const searchInput = getSearchInput('.searchinput');
+    const categories = ['todoColumn', 'inprogressColumn', 'awaitfeedbackColumn', 'doneColumn'];
+    filterTasksInAllCategories(categories, searchInput);
+}
+
+
+
+let currentDraggedElement; 
 
 // Drag-Start: Speichern der gezogenen Karte
 function dragStart(event, id) {
