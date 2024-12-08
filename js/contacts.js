@@ -557,8 +557,6 @@ function getInitials(name) {
         } catch (error) {
             console.error("Fehler beim Verarbeiten der Benutzerdaten:", error);
         }
-    } else {
-        console.warn("Keine Benutzerdaten im Local Storage unter 'currentUser' gefunden.");
     }
   }
   

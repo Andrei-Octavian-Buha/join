@@ -21,24 +21,17 @@ function showOverlayInfoCard() {
 function hideOverlayInfoCard() {
   const overlay = document.getElementById("overlay");
   const card = document.getElementById("taskInfoCard");
-
-  // Overlay und Info-Card ausblenden
   overlay.style.display = "none";
   card.classList.remove("showCard");
   card.classList.add("hideCard");
-
-  // Nach kurzer Zeit die versteckte Klasse entfernen
   setTimeout(() => {
       card.classList.remove("hideCard");
   }, 500);
 
-  // Eingabefeld leeren
   const searchInputElement = document.querySelector('.searchinput');
   if (searchInputElement) {
       searchInputElement.value = '';
   }
-
-  // Ursprungszustand des Boards wiederherstellen
   const categories = ['todoColumn', 'inprogressColumn', 'awaitfeedbackColumn', 'doneColumn'];
   categories.forEach(category => {
       const container = document.getElementById(category);

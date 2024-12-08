@@ -207,8 +207,6 @@ async function deleteContact(contactId) {
     taskInit();
     hideOverlayInfoCard();
   } catch (error) {
-    console.error("Fehler beim Löschen des Kontakts:", error);
-    alert("Es ist ein Fehler beim Löschen des Kontakts aufgetreten.");
   }
 }
 
