@@ -64,60 +64,83 @@ function filterTasks() {
 
 let currentDraggedElement; 
 
-// Drag-Start: Speichern der gezogenen Karte
+
 function dragStart(event, id) {
   currentDraggedElement = document.querySelector(`#${id}`);
   event.dataTransfer.setData('text', id);
   event.target.style.opacity = "0.5";
 }
 
-// Drag-End: Setzen der Sichtbarkeit zurück
+
 function dragEnd(event) {
   event.target.style.opacity = "1";
 }
 
-// Ermöglicht das Ablegen von Aufgaben
+
 function allowDrop(event) {
   event.preventDefault();
 }
 
-// Aufgaben in eine andere Kategorie verschieben
-async function moveTo(category, event) {
-  event.preventDefault();
-  if (!currentDraggedElement) return;
 
-  const targetColumn = document.getElementById(category);
-  if (!targetColumn) {
-      console.error("Ungültige Zielspalte:", category);
-      return;
-  }
-
-  targetColumn.appendChild(currentDraggedElement);
-
-  const taskId = currentDraggedElement.id;
-
-  const progressMapping = {
-      todoColumn: "todo",
-      inprogressColumn: "inprogress",
-      awaitfeedbackColumn: "awaitfeedback",
-      doneColumn: "done",
-  };
-
-  const newProgress = progressMapping[category];
-  if (!newProgress) {
-      console.error("Ungültige Kategorie:", category);
-      return;
-  }
-
-  // Bestehende Daten der Aufgabe abrufen
-  const existingTaskData = await getTaskData(taskId);
-
-  // Progress in der Firebase-Datenbank aktualisieren
-  if (existingTaskData) {
-      await updateTaskProgressInFirebase(taskId, newProgress, existingTaskData);
-      console.log(`Task ${taskId} erfolgreich in Kategorie ${newProgress} verschoben.`);
-  }
+function getTargetColumn(category) {
+    const targetColumn = document.getElementById(category);
+    if (!targetColumn) {
+        console.error("Ungültige Zielspalte:", category);
+    }
+    return targetColumn;
 }
+
+
+function getNewProgress(category) {
+    const progressMapping = {
+        todoColumn: "todo",
+        inprogressColumn: "inprogress",
+        awaitfeedbackColumn: "awaitfeedback",
+        doneColumn: "done",
+    };
+
+    const newProgress = progressMapping[category];
+    if (!newProgress) {
+        console.error("Ungültige Kategorie:", category);
+    }
+    return newProgress;
+}
+
+
+function moveElementToColumn(targetColumn, element) {
+    targetColumn.appendChild(element);
+}
+
+
+async function updateTaskProgress(taskId, newProgress) {
+    const existingTaskData = await getTaskData(taskId);
+    if (existingTaskData) {
+        await updateTaskProgressInFirebase(taskId, newProgress, existingTaskData);
+        console.log(`Task ${taskId} erfolgreich in Kategorie ${newProgress} verschoben.`);
+    } else {
+        console.error(`Keine Daten für Task ${taskId} gefunden.`);
+    }
+}
+
+
+async function moveTo(category, event) {
+    event.preventDefault();
+    if (!currentDraggedElement) return;
+
+    const targetColumn = getTargetColumn(category);
+    if (!targetColumn) return;
+
+    moveElementToColumn(targetColumn, currentDraggedElement);
+
+    const taskId = currentDraggedElement.id;
+    const newProgress = getNewProgress(category);
+    if (!newProgress) return;
+
+    await updateTaskProgress(taskId, newProgress);
+}
+
+
+
 
 // Funktion zum Abrufen bestehender Daten einer Aufgabe
 async function getTaskData(taskId) {
