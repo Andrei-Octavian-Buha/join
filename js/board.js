@@ -25,34 +25,6 @@ async function loadTasksFromFirebase() {
 }
 
 
-// HTML aktualisieren, basierend auf den Daten aus Firebase
-function updateHTML(data) {
-  if (!data || Object.keys(data).length === 0) {
-      console.warn("Keine Aufgaben gefunden oder Daten sind leer.");
-      return;
-  }
-
-  const categories = ['todoColumn', 'inprogressColumn', 'awaitfeedbackColumn', 'doneColumn'];
-
-  categories.forEach(category => {
-      const container = document.getElementById(category);
-
-      if (container) {
-          container.innerHTML = ''; // Vorhandene Inhalte löschen
-
-          Object.keys(data).forEach(key => {
-              const task = data[key];
-
-              // Verhindert das Hinzufügen von Aufgaben, wenn der progresswert nicht übereinstimmt
-              if (task.progress && task.progress.toLowerCase() === category.replace('Column', '').toLowerCase()) {
-                  container.innerHTML += generateTodoHTML({ id: key, ...task });
-              }
-          });
-      }
-  });
-}
-
-
 function filterTasks() {
     const searchInput = document.querySelector('.searchinput').value.toLowerCase();
     console.log("Suchbegriff:", searchInput);

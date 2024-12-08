@@ -347,8 +347,6 @@ async function deleteContact(contactId) {
         contactOverlay.innerHTML = '';
         fetchContactsData();
 
-        // Erfolgsnachricht
-        alert('Kontakt wurde unwiderruflich gelöscht.');
     } catch (error) {
         console.error('Fehler beim Löschen des Kontakts:', error);
     }
@@ -532,7 +530,6 @@ function displayBadgeInContainer(contactName) {
         badgeContainer.innerHTML = ''; // Container leeren
         badgeContainer.appendChild(badge); // Badge hinzufügen
         badgeContainer.style.display = 'block'; // Badge sichtbar machen
-        console.log('Badge erfolgreich hinzugefügt:', badge.outerHTML);
     } catch (error) {
         console.error('Fehler beim Hinzufügen des Badges:', error);
     }

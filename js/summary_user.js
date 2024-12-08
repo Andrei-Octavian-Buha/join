@@ -86,8 +86,6 @@ function setUserInitials() {
       } catch (error) {
           console.error("Fehler beim Verarbeiten der Benutzerdaten:", error);
       }
-  } else {
-      console.warn("Keine Benutzerdaten im Local Storage unter 'currentUser' gefunden.");
   }
 }
 
@@ -140,19 +138,34 @@ async function loadTasksForSorting() {
       todos = Object.keys(data).map((key) => {
         return { id: key, ...data[key] };
       });
-
-      console.log("Aufgaben erfolgreich geladen:", todos);
-      
-      // Aufgaben zählen und in sessionStorage speichern
       countTasksByCategory();
-
-      updateHTML(); // HTML nach dem Laden der Aufgaben aktualisieren
+      updateHTML(); 
     } else {
       console.error("Keine Aufgaben gefunden.");
     }
   } catch (error) {
     console.error("Fehler beim Laden der Aufgaben:", error);
   }
+}
+
+function updateHTML(data) {
+  if (!data || Object.keys(data).length === 0) {
+      console.warn("Keine Aufgaben gefunden oder Daten sind leer.");
+      return;
+  }
+  const categories = ['todoColumn', 'inprogressColumn', 'awaitfeedbackColumn', 'doneColumn'];
+  categories.forEach(category => {
+      const container = document.getElementById(category);
+      if (container) {
+          container.innerHTML = ''; // Vorhandene Inhalte löschen
+          Object.keys(data).forEach(key => {
+              const task = data[key];
+              if (task.progress && task.progress.toLowerCase() === category.replace('Column', '').toLowerCase()) {
+                  container.innerHTML += generateTodoHTML({ id: key, ...task });
+              }
+          });
+      }
+  });
 }
 
 function countTasksByCategory() {
@@ -164,17 +177,14 @@ function countTasksByCategory() {
     urgent: 0,
     total: 0, // Add a field for total count
   };
-
   todos.forEach((task) => {
     counts.total++; 
-
-    if (task.category === "1") counts.todo++;
-    if (task.category === "2") counts.inprogress++;
-    if (task.category === "3") counts.awaitfeedback++;
-    if (task.category === "4") counts.done++;
+    if (task.progress === "todo") counts.todo++;
+    if (task.progress === "inprogress") counts.inprogress++;
+    if (task.progress === "awaitfeedback") counts.awaitfeedback++;
+    if (task.progress === "done") counts.done++;
     if (task.prio === "urgent") counts.urgent++;
   });
-
   sessionStorage.setItem("taskCounts", JSON.stringify(counts));
 }
 
