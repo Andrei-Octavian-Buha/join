@@ -22,7 +22,6 @@ function openOverlay(overlayId) {
     }, 0); 
 }
 
-
 function closeOverlay(overlayId) {
     const overlay = document.getElementById(overlayId);
     overlay.classList.remove("show");
@@ -30,8 +29,10 @@ function closeOverlay(overlayId) {
     setTimeout(() => {
         overlay.style.display = "none"; 
         overlay.classList.remove("hide"); 
+        document.removeEventListener('click', handleClickOutside);  // Event Listener entfernen
     }, 800); 
 }
+
 
 
 function closeContactOverlay() {
@@ -571,7 +572,6 @@ function getInitials(name) {
         }
     }, 100); 
   });
-
 
 
 
