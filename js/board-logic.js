@@ -84,3 +84,75 @@ function closeOverlayInfoCard() {
 function hideshowListCard() {
   document.getElementById("showListCard").classList.add("dNone");
 }
+
+function rendEditSubTask(task) {
+  subtasks = task.task.subtask;
+
+  let toRender = document.getElementById("renderSubTask2");
+  toRender.innerHTML = "";
+  subtasks.forEach((subtask, index) => {
+    toRender.innerHTML += `<div class="subtaskContainer" id="subtaskContainerId${index}">
+      <div class="subtaskInputWithDot">
+        <span id="idSpanSubTaskEdit${index}" class="dot"></span>
+        <input
+          id="toEditInputSubTask-${index}"
+          type="text"
+          class="inputsubTask"
+          readonly
+          placeholder="${subtask}"
+        />
+      </div>
+      <div class="subtaskEdiBtns">
+        <img
+          id="subTaskEditBtn-${index}"
+          class="cursor"
+          src="./assets/priority/edit.svg"
+          alt="Edit"
+          onclick="editAddedSubTask(${index})"
+        />
+        <img
+        id="AddSubTaskStep2-${index}"
+        class="cursor dNone"
+        src="./assets/subtask/check.svg"
+        alt=""
+        onclick="addEditSubTaskcheck(${index})"
+        />
+        <img src="./assets/priority/bar.svg" alt="Separator" />
+        <img
+          id="subTaskDeleteBtn-${index}"
+          class="cursor"
+          src="./assets/priority/delete.svg"
+          alt="Delete"
+          onclick="deleteEditTask(${index})"
+        />
+      </div>
+    </div>`;
+  });
+}
+
+function deleteEditTask(index) {
+  subtasks.splice(index, 1);
+  rendEditSubTask({ task: { subtask: subtasks } });
+}
+
+function addEditSubTaskcheck(index) {
+  let btn = document.getElementById(`AddSubTaskStep2-${index}`);
+  let inputText = document.getElementById(`toEditInputSubTask-${index}`);
+  btn.addEventListener("click", () => {
+    if (inputText.value) {
+      subtasks[index] = inputText.value;
+      rendEditSubTask({ task: { subtask: subtasks } });
+    } else {
+      deleteEditTask(index);
+    }
+  });
+}
+
+function addEditSubTask() {
+  let inputText = document.getElementById("inputSubTask");
+  if (inputText.value && subtasks.length <= 1) {
+    subtasks.push(inputText.value);
+  }
+  hideEditAddBtn();
+  rendEditSubTask({ task: { subtask: subtasks } });
+}

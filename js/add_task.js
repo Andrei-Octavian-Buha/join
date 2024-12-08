@@ -417,21 +417,21 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function getInitials(name) {
-  if (!name) return "??"; 
-  const nameParts = name.trim().split(" "); 
-  const initials = nameParts.map((part) => part.charAt(0).toUpperCase()); 
-  return initials.slice(0, 2).join(""); 
+  if (!name) return "??";
+  const nameParts = name.trim().split(" ");
+  const initials = nameParts.map((part) => part.charAt(0).toUpperCase());
+  return initials.slice(0, 2).join("");
 }
 
 function setUserInitials() {
-  const userData = sessionStorage.getItem("currentUser"); 
+  const userData = sessionStorage.getItem("currentUser");
   if (userData) {
     try {
-      const user = JSON.parse(userData); 
-      const initials = getInitials(user.name); 
-      const profileTextElement = document.getElementById("profileText"); 
+      const user = JSON.parse(userData);
+      const initials = getInitials(user.name);
+      const profileTextElement = document.getElementById("profileText");
       if (profileTextElement) {
-        profileTextElement.innerHTML = initials; 
+        profileTextElement.innerHTML = initials;
       }
     } catch (error) {
       console.error("Fehler beim Verarbeiten der Benutzerdaten:", error);

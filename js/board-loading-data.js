@@ -219,6 +219,7 @@ function editListDataCard(taskId) {
   cardRender.innerHTML += showEditCard(task);
   showAssignet(task);
   setupDropdownEvents();
+  rendEditSubTask(task);
   init();
 }
 

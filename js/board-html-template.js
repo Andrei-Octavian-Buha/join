@@ -129,8 +129,6 @@ function showEditCard(task) {
               </div>
             </div>
                  
-            
-            
             <div class="testA">
               <span>Subtask<span class="req">*</span></span>
               <div class="containerInputSignUp">
@@ -157,17 +155,15 @@ function showEditCard(task) {
                   />
                   <span>|</span>
                   <img
-                    id="AddSubTaskStep2Add"
                     class="cursor"
                     src="./assets/subtask/check.svg"
                     alt=""
+                    onclick="addEditSubTask()"
                   />
                 </div>
               </div>
               <div id="renderSubTask2"></div>
             </div>
-
-
                 <div class="btnBoardOk">
                     <button class="btnPrimary" onclick="updateDataToFireBase()">
                       Ok <img src="./assets/priority/check.svg" alt="" />
