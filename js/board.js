@@ -141,59 +141,74 @@ async function moveTo(category, event) {
 
 
 
-
-// Funktion zum Abrufen bestehender Daten einer Aufgabe
 async function getTaskData(taskId) {
-  try {
-      const response = await fetch(
-          `https://join-store-ae38e-default-rtdb.europe-west1.firebasedatabase.app/task/${taskId}.json`
-      );
-      if (response.ok) {
-          return await response.json();
-      } else {
-          console.error("Fehler beim Abrufen der bestehenden Daten.");
-          return null;
-      }
-  } catch (error) {
-      console.error("Fehler beim Abrufen der Aufgabe:", error);
-      return null;
-  }
+    try {
+        const response = await fetch(
+            `https://join-store-ae38e-default-rtdb.europe-west1.firebasedatabase.app/task/${taskId}.json`
+        );
+    if (response.ok) {
+        return await response.json();
+    } else {
+        return null;
+    }
+    } catch (error) {
+        return null;
+    }
 }
 
-// Funktion zum Aktualisieren des Progress in Firebase
+
+function prepareUpdatedTaskData(existingTaskData, newProgress) {
+    return {
+        ...existingTaskData,
+        progress: newProgress,
+    };
+}
+
+
+async function sendUpdateRequestToFirebase(taskId, updatedTaskData) {
+    const url = `https://join-store-ae38e-default-rtdb.europe-west1.firebasedatabase.app/task/${taskId}.json`;
+
+    try {
+        const response = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedTaskData),
+        });
+
+        return response;
+    } catch (error) {
+        console.error("Fehler beim Senden der Anfrage an Firebase:", error);
+        throw error; 
+    }
+}
+
+
+function handleFirebaseResponse(response, taskId, newProgress) {
+    if (response.ok) {
+        console.log(`Progress der Aufgabe ${taskId} erfolgreich auf ${newProgress} aktualisiert.`);
+    } else {
+        console.error("Fehler beim Aktualisieren des Progress in Firebase.");
+    }
+}
+
+
 async function updateTaskProgressInFirebase(taskId, newProgress, existingTaskData) {
-  try {
-      const updatedTaskData = {
-          ...existingTaskData,
-          progress: newProgress,
-      };
-
-      const response = await fetch(
-          `https://join-store-ae38e-default-rtdb.europe-west1.firebasedatabase.app/task/${taskId}.json`,
-          {
-              method: 'PUT', // Ändere PATCH zu PUT
-              headers: {
-                  'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(updatedTaskData),
-          }
-      );
-
-      if (response.ok) {
-          console.log(`Progress der Aufgabe ${taskId} erfolgreich auf ${newProgress} aktualisiert.`);
-      } else {
-          console.error("Fehler beim Aktualisieren des Progress in Firebase.");
-      }
-  } catch (error) {
-      console.error("Fehler beim Firebase-Update:", error);
-  }
+    try {
+        const updatedTaskData = prepareUpdatedTaskData(existingTaskData, newProgress);
+        const response = await sendUpdateRequestToFirebase(taskId, updatedTaskData);
+        handleFirebaseResponse(response, taskId, newProgress);
+    } catch (error) {
+        console.error("Fehler beim Firebase-Update:", error);
+    }
 }
 
 
 function highlightColumn(status, event) {
   const column = document.getElementById(`${status}Column`);
   if (column) {
-    column.classList.add("drag-area-highlight");  // Füge die Highlight-Klasse hinzu
+    column.classList.add("drag-area-highlight"); 
   }
 }
 
@@ -201,16 +216,15 @@ function highlightColumn(status, event) {
 function removeHighlight(status) {
   const column = document.getElementById(`${status}Column`);
   if (column) {
-    column.classList.remove("drag-area-highlight");  // Entferne die Highlight-Klasse
+    column.classList.remove("drag-area-highlight");  
   }
 }
 
 
-// Seite initialisieren
 window.onload = () => {
   includeHTML();
   addTaskTemplate();
-  loadTasksFromFirebase(); // Lädt die Aufgaben und ruft anschließend updateHTML auf
+  loadTasksFromFirebase(); 
 };
 
 
