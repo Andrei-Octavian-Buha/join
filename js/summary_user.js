@@ -149,7 +149,6 @@ async function loadTasksForSorting() {
 
 function updateHTML(data) {
   if (!data || Object.keys(data).length === 0) {
-      console.warn("Keine Aufgaben gefunden oder Daten sind leer.");
       return;
   }
   const categories = ['todoColumn', 'inprogressColumn', 'awaitfeedbackColumn', 'doneColumn'];
