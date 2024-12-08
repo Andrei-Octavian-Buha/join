@@ -346,7 +346,7 @@ button {
     display: none;
     cursor: pointer;
     position: absolute;
-    bottom: 11%;
+    bottom: 9%;
     right: 2%;
     transition: transform 0.3s ease;
 }
