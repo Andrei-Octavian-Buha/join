@@ -22,6 +22,7 @@ function openOverlay(overlayId) {
     }, 0); 
 }
 
+
 function closeOverlay(overlayId) {
     const overlay = document.getElementById(overlayId);
     overlay.classList.remove("show");
@@ -29,10 +30,8 @@ function closeOverlay(overlayId) {
     setTimeout(() => {
         overlay.style.display = "none"; 
         overlay.classList.remove("hide"); 
-        document.removeEventListener('click', handleClickOutside);  // Event Listener entfernen
     }, 800); 
 }
-
 
 
 function closeContactOverlay() {
@@ -145,7 +144,6 @@ function openContactOverlay(contactId, contactName, contactEmail, contactPhone) 
     contactOverlay.innerHTML = '';  
     contactOverlay.appendChild(overlayContent);
     contactOverlay.style.display = 'block'; 
-
     const rightContent = document.querySelector('.right-content');
     if (window.innerWidth <= 920) {
         rightContent.classList.add('show');
@@ -159,15 +157,12 @@ function openContactOverlay(contactId, contactName, contactEmail, contactPhone) 
 
 async function handleCardClick(contactId) {
     console.log('Karte angeklickt, Kontakt-ID:', contactId);
-
     try {
         const response = await fetch(`${BASE_URL}/contacts/${contactId}.json`);
         if (!response.ok) {
             throw new Error('Fehler beim Abrufen der Kontaktdaten');
         }
-
         const contact = await response.json();
-
         if (contact) {
             openContactOverlay(contactId, contact.name, contact.email, contact.phone);
         } else {
@@ -334,8 +329,7 @@ function getColorForInitial(initial) {
 
 async function deleteContact(contactId) {
     const shouldDelete = confirm('Kontakt wirklich löschen, oder noch einmal die Konsequenzen überdenken?');
-    if (!shouldDelete) return; // Abbrechen, wenn der Nutzer "Abbrechen" klickt
-
+    if (!shouldDelete) return; 
     try {
         const response = await fetch(`${BASE_URL}/contacts/${contactId}.json`, {
             method: 'DELETE',
@@ -348,6 +342,7 @@ async function deleteContact(contactId) {
         contactOverlay.innerHTML = '';
         fetchContactsData();
 
+        alert('Kontakt wurde unwiderruflich gelöscht.');
     } catch (error) {
         console.error('Fehler beim Löschen des Kontakts:', error);
     }
@@ -401,21 +396,17 @@ async function fetchAndFillContactData(contactId) {
         }
         const contact = await response.json();
         console.log('Kontaktdaten erfolgreich abgerufen:', contact);
-
-        // Kontaktdaten ins Formular einfügen
         document.getElementById('inputName').value = contact.name;
         document.getElementById('inputMail').value = contact.email;
         document.getElementById('inputPhone').value = contact.phone;
 
-        // Optional: Kontakt-ID ins Overlay-Daten-Attribut setzen
         const editContactOverlay = document.getElementById('edit-contact-overlay');
         if (editContactOverlay) {
             editContactOverlay.dataset.contactId = contactId;
         }
         console.log('Formular mit den Kontaktdaten gefüllt.');
 
-        // Badge im vorgesehenen Container anzeigen
-        displayBadgeInContainer(contact.name); // Badge für den Kontaktname erzeugen
+        displayBadgeInContainer(contact.name); 
     } catch (error) {
         console.error('Fehler beim Abrufen der Kontaktdaten:', error);
     }
@@ -487,81 +478,118 @@ async function handleFormSubmit(event) {
 function toggleDropdown() {
     const dropdown = document.getElementById("dropdown");
     dropdown.style.display =
-      dropdown.style.display === "block" ? "none" : "block";
-  }
+    dropdown.style.display === "block" ? "none" : "block";
+}
 
-  window.onclick = function (event) {
+    window.onclick = function (event) {
     if (
-      !event.target.matches(".profilPic") &&
-      !event.target.closest(".profilPic")
+        !event.target.matches(".profilPic") &&
+        !event.target.closest(".profilPic")
     ) {
-      const dropdown = document.getElementById("dropdown");
-      if (dropdown.style.display === "block") {
+    const dropdown = document.getElementById("dropdown");
+    if (dropdown.style.display === "block") {
         dropdown.style.display = "none";
-      }
     }
-  };
+    }
+};
 
-function displayBadgeInContainer(contactName) {
-    // 1. Badge dynamisch erstellen
+function createBadge(contactName) {
     const badge = createInitialsBadge(contactName, 'custom-badge');
     if (!badge) {
         console.error('Badge konnte nicht erstellt werden.');
-        return;
+        return null;
     }
+    return badge;
+}
 
-    // 2. Container für das Badge finden
+
+function prepareBadgeContainer() {
     const badgeContainer = document.getElementById('edit-badge-container');
+    const imgContainer = document.getElementById('edit-img-container');
+
     if (!badgeContainer) {
         console.error('Container mit ID "edit-badge-container" nicht gefunden.');
-        return;
+        return null;
     }
 
-    // 3. Ursprüngliches Bild ausblenden
-    const imgContainer = document.getElementById('edit-img-container');
     if (imgContainer) {
-        imgContainer.style.display = 'none'; // Bild ausblenden
+        imgContainer.style.display = 'none'; 
     }
 
-    // 4. Hintergrund des Badge-Containers entfernen
-    badgeContainer.style.backgroundColor = 'transparent'; // Hintergrundfarbe auf transparent setzen
+    badgeContainer.style.backgroundColor = 'transparent'; 
+    badgeContainer.innerHTML = ''; 
 
-    // 5. Badge einfügen
+    return badgeContainer;
+}
+
+
+function insertBadgeIntoContainer(badge, badgeContainer) {
     try {
-        badgeContainer.innerHTML = ''; // Container leeren
-        badgeContainer.appendChild(badge); // Badge hinzufügen
-        badgeContainer.style.display = 'block'; // Badge sichtbar machen
+        badgeContainer.appendChild(badge); 
+        badgeContainer.style.display = 'block'; 
+        console.log('Badge erfolgreich hinzugefügt:', badge.outerHTML);
     } catch (error) {
         console.error('Fehler beim Hinzufügen des Badges:', error);
     }
 }
 
-function getInitials(name) {
+
+function displayBadgeInContainer(contactName) {
+    const badge = createBadge(contactName);
+    if (!badge) return;
+
+    const badgeContainer = prepareBadgeContainer();
+    if (!badgeContainer) return;
+
+    insertBadgeIntoContainer(badge, badgeContainer);
+}
+
+
+function generateInitials(name) {
     if (!name) return "??"; // Fallback, falls der Name nicht existiert
-    const nameParts = name.trim().split(" "); // Name in Teile (z. B. Vorname, Nachname) aufteilen
-    const initials = nameParts.map(part => part.charAt(0).toUpperCase()); // Initialen aus den ersten Buchstaben erstellen
-    return initials.slice(0, 2).join(""); // Maximal 2 Initialen zurückgeben
-  }
-  
-  // Funktion, um den Namen aus dem Local Storage zu laden und Initialen einzusetzen
-  function setUserInitials() {
-    const userData = sessionStorage.getItem("currentUser"); // Daten aus dem Local Storage abrufen
-    if (userData) {
-        try {
-            const user = JSON.parse(userData); // JSON-String in ein Objekt umwandeln
-            const initials = getInitials(user.name); // Initialen generieren
-            const profileTextElement = document.getElementById("profileText"); // Element mit der ID 'profileText' finden
-            if (profileTextElement) {
-                profileTextElement.innerHTML = initials; // Initialen in das Element einfügen
-            }
-        } catch (error) {
-            console.error("Fehler beim Verarbeiten der Benutzerdaten:", error);
-        }
+    const nameParts = name.trim().split(" "); // Name in Teile aufteilen
+    return nameParts.map(part => part.charAt(0).toUpperCase()).slice(0, 2).join(""); // Initialen erstellen
+}
+
+
+function loadUserDataFromSession() {
+    const userData = sessionStorage.getItem("currentUser");
+    if (!userData) {
+        console.warn("Keine Benutzerdaten im Session Storage unter 'currentUser' gefunden.");
+        return null;
     }
-  }
-  
-  
-  document.addEventListener("DOMContentLoaded", () => {
+
+    try {
+        return JSON.parse(userData); // JSON-String in ein Objekt umwandeln
+    } catch (error) {
+        console.error("Fehler beim Verarbeiten der Benutzerdaten:", error);
+        return null;
+    }
+}
+
+
+function insertInitialsIntoElement(initials, elementId) {
+    const profileTextElement = document.getElementById(elementId);
+    if (!profileTextElement) {
+        console.warn(`Element mit der ID '${elementId}' wurde nicht gefunden.`);
+        return;
+    }
+
+    profileTextElement.innerHTML = initials; // Initialen einfügen
+}
+
+
+function setUserInitials() {
+    const user = loadUserDataFromSession();
+    if (!user || !user.name) return;
+
+    const initials = generateInitials(user.name);
+    insertInitialsIntoElement(initials, "profileText");
+}
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
     const checkHeaderInterval = setInterval(() => {
         const profileTextElement = document.getElementById("profileText");
         if (profileTextElement) {
@@ -569,7 +597,8 @@ function getInitials(name) {
             setUserInitials(); 
         }
     }, 100); 
-  });
+});
+
 
 
 
