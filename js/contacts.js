@@ -546,9 +546,9 @@ function displayBadgeInContainer(contactName) {
 
 
 function generateInitials(name) {
-    if (!name) return "??"; // Fallback, falls der Name nicht existiert
-    const nameParts = name.trim().split(" "); // Name in Teile aufteilen
-    return nameParts.map(part => part.charAt(0).toUpperCase()).slice(0, 2).join(""); // Initialen erstellen
+    if (!name) return "??"; 
+    const nameParts = name.trim().split(" "); 
+    return nameParts.map(part => part.charAt(0).toUpperCase()).slice(0, 2).join(""); 
 }
 
 
@@ -560,7 +560,7 @@ function loadUserDataFromSession() {
     }
 
     try {
-        return JSON.parse(userData); // JSON-String in ein Objekt umwandeln
+        return JSON.parse(userData); 
     } catch (error) {
         console.error("Fehler beim Verarbeiten der Benutzerdaten:", error);
         return null;
@@ -575,7 +575,7 @@ function insertInitialsIntoElement(initials, elementId) {
         return;
     }
 
-    profileTextElement.innerHTML = initials; // Initialen einfügen
+    profileTextElement.innerHTML = initials; 
 }
 
 
@@ -586,7 +586,6 @@ function setUserInitials() {
     const initials = generateInitials(user.name);
     insertInitialsIntoElement(initials, "profileText");
 }
-
 
 
 document.addEventListener("DOMContentLoaded", () => {
