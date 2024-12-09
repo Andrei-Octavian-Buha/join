@@ -363,6 +363,21 @@ function addDataToFireBase() {
   });
 }
 
+function addDataToFireBaseFromBoard() {
+  const taskData = variableId();
+  uploadToFireBase("task", {
+    title: taskData.title,
+    description: taskData.description,
+    assignet: taskData.assignet,
+    date: taskData.date,
+    prio: taskData.prio,
+    category: taskData.category,
+    subtask: taskData.subtask,
+    progress: "todo",
+  });
+  loadTasksFromFirebase();
+}
+
 function handleFormSubmit(event) {
   event.preventDefault(); // Verhindert das automatische Neuladen der Seite
   addDataToFireBase(); // Speichere die Daten in Firebase

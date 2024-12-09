@@ -2,7 +2,7 @@ function addTaskTemplate() {
   return `<div class="addTaskOverlay">
     <div class="addTaskContainer">
         <div class="containerTitle"><h1 class="h1styleCard">Add Task</h1> <span class="closeAddTaskBoardX cursor" onclick="hideOverlayAddTask()">    <img src="./assets/subtask/x.svg" alt=""></span></div>
-      <form class="containeR" id="addTaskForm" onsubmit="handleFormSubmit(event)">
+      <form class="containeR" id="addTaskForm">
         <div class="desktopView">
           <div class="leftContainer">
             <div class="testA">
@@ -174,7 +174,7 @@ function addTaskTemplate() {
             <button class="btnSecundary" onclick="resetForm(event)">
               Clear <img src="./assets/priority/iconoir_cancel.svg" alt="" />
             </button>
-            <button class="btnPrimary" type="submit" >
+            <button class="btnPrimary" onclick="addDataToFireBaseFromBoard()">
               Create Task <img src="./assets/priority/check.svg" alt="" />
             </button>
           </div>

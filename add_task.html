@@ -25,7 +25,11 @@
 
     <div class="addTaskMainDiv">
       <div class="containerTitle"><h1 class="h1style">Add Task</h1></div>
-      <form class="containeR" id="addTaskForm" onsubmit="handleFormSubmit(event)">
+      <form
+        class="containeR"
+        id="addTaskForm"
+        onsubmit="handleFormSubmit(event)"
+      >
         <div class="desktopView">
           <div class="leftContainer">
             <div class="testA">
@@ -197,14 +201,21 @@
             <button class="btnSecundary" onclick="resetForm(event)">
               Clear <img src="./assets/priority/iconoir_cancel.svg" alt="" />
             </button>
-            <button class="btnPrimary" type="submit" onclick="addDataToFireBase()">
+            <button class="btnPrimary" type="submit">
               Create Task <img src="./assets/priority/check.svg" alt="" />
             </button>
           </div>
         </div>
       </form>
     </div>
-    <div id="popup" class="popup hidden">Task added to board <img class="vectorImgColor imgPopUp" src="./assets/menu/board.svg" alt=""></div>
+    <div id="popup" class="popup hidden">
+      Task added to board
+      <img
+        class="vectorImgColor imgPopUp"
+        src="./assets/menu/board.svg"
+        alt=""
+      />
+    </div>
 
     <script>
       subtasktrigger();
