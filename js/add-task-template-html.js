@@ -174,7 +174,7 @@ function addTaskTemplate() {
             <button class="btnSecundary" onclick="resetForm(event)">
               Clear <img src="./assets/priority/iconoir_cancel.svg" alt="" />
             </button>
-            <button class="btnPrimary" type="submit">
+            <button class="btnPrimary" type="submit" >
               Create Task <img src="./assets/priority/check.svg" alt="" />
             </button>
           </div>
