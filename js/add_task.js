@@ -220,6 +220,9 @@ function deleteInputSubTask() {
 function addSubTask() {
   let btn = document.getElementById("AddSubTaskStep2Add");
   let inputText = document.getElementById("inputSubTask");
+  if (!window.location.pathname.includes("add_task")) {
+    return;
+  }
   btn.addEventListener("click", () => {
     if (inputText.value && subtasks.length <= 1) {
       subtasks.push(inputText.value);
