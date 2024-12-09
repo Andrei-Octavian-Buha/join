@@ -418,6 +418,9 @@ window.onclick = function (event) {
 document.addEventListener("DOMContentLoaded", () => {
   const dropDownHeader = document.getElementById("dropDownHeaderId");
   const dropDownBody = document.getElementById("dropDownBodyId");
+  if (!window.location.pathname.includes("add_task")) {
+    return;
+  }
   const dropDownArrow = dropDownHeader.querySelector("img");
 
   dropDownHeader.addEventListener("click", () => {

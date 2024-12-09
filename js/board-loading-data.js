@@ -220,10 +220,10 @@ function editListDataCard(taskId) {
   template.innerHTML = "";
   cardRender.innerHTML = "";
   cardRender.innerHTML += showEditCard(task);
+  init();
   showAssignet(task);
   setupDropdownEvents();
   rendEditSubTask(task);
-  init();
 }
 
 function listDataCard(taskId) {
