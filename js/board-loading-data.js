@@ -93,7 +93,10 @@ function renderCard(task) {
         <p class="boardCardDescription">${truncatedDescription}</p>
       </div>
       <div class="progresBar">
-        <div style="font-size: 12px;"> ProgresBar with setting 0 50 and 100 </div>
+            <div class="progress-container">
+                <div class="progress-bar${showSubTasks(task)}">
+                </div>
+            </div>
         <div style="font-size: 12px;">${showSubTasks(task)} /2 Subtasks</div>
       </div>
       <div class="assignetPersonContainer">
