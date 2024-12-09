@@ -555,7 +555,6 @@ function generateInitials(name) {
 function loadUserDataFromSession() {
     const userData = sessionStorage.getItem("currentUser");
     if (!userData) {
-        console.warn("Keine Benutzerdaten im Session Storage unter 'currentUser' gefunden.");
         return null;
     }
 
