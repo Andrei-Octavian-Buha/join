@@ -344,9 +344,18 @@ function variableId() {
   date = document.getElementById("addTaskDate").value;
   prio = getPriorityValue();
   category = document.getElementById("categorySelectId").value;
-  subtask = subtasks;
-
-  return { title, description, assignet, date, prio, category, subtask };
+  if (!Array.isArray(subtasks)) {
+    subtasks = []; // Inițializează un array gol dacă subtasks nu este valid
+  }
+  return {
+    title,
+    description,
+    assignet,
+    date,
+    prio,
+    category,
+    subtask: subtasks,
+  };
 }
 
 function addDataToFireBase() {

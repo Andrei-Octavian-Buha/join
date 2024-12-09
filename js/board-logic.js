@@ -74,6 +74,7 @@ function hideOverlayInfoCard() {
 
 function closeOverlayInfoCard() {
   hideOverlayInfoCard();
+  taskInit();
 }
 
 function hideshowListCard() {
@@ -170,7 +171,6 @@ async function updateContactOnFireBase(task) {
       }),
       headers: { "Content-Type": "application/json" },
     });
-    rendEditSubTask(task);
     listDataCard(task);
     if (!response.ok) {
       throw new Error("Fehler beim Speichern der Kontaktdaten");
