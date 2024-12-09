@@ -303,10 +303,9 @@
   select option:hover {
     background-color: #2a3647;
   }
-
   .addFisrtLetterContainer {
     display: flex;
-    gap: 8px;
+
   }
   .firstLetterCircle {
     display: flex;
@@ -319,6 +318,10 @@
     margin: 0px;
     color: #ffffff;
     font-size: 12px;
+    margin-left: -10px;
+  }
+  .firstLetterCircle:first-child {
+    margin-left: 0;
   }
   .dropDownFullName {
     margin: 0;
