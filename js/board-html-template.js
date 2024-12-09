@@ -165,7 +165,9 @@ function showEditCard(task) {
               <div id="renderSubTask2"></div>
             </div>
                 <div class="btnBoardOk">
-                    <button class="btnPrimary" onclick="updateDataToFireBase()">
+                    <button class="btnPrimary" onclick="updateContactOnFireBase('${
+                      task.id
+                    }')">
                       Ok <img src="./assets/priority/check.svg" alt="" />
                     </button>
                 </div>

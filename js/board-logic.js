@@ -2,19 +2,15 @@ function showOverlayAddTask() {
   let template = document.getElementById("add-task-template");
   template.classList.remove("dNone");
   template.innerHTML += addTaskTemplate();
-  init();
   setupDropdownEvents();
+  init();
+  subtasktrigger();
 }
 
 function setupDropdownEvents() {
   const dropDownHeader = document.getElementById("dropDownHeaderId");
   const dropDownBody = document.getElementById("dropDownBodyId");
   const dropDownArrow = dropDownHeader?.querySelector("img");
-
-  if (!dropDownHeader || !dropDownBody || !dropDownArrow) {
-    console.error("Elementele dropdown nu au fost găsite în DOM.");
-    return;
-  }
 
   dropDownHeader.addEventListener("click", () => {
     dropDownBody.classList.toggle("dNone");
@@ -87,7 +83,6 @@ function hideshowListCard() {
 
 function rendEditSubTask(task) {
   subtasks = task.task.subtask;
-
   let toRender = document.getElementById("renderSubTask2");
   toRender.innerHTML = "";
   subtasks.forEach((subtask, index) => {
@@ -155,4 +150,65 @@ function addEditSubTask() {
   }
   hideEditAddBtn();
   rendEditSubTask({ task: { subtask: subtasks } });
+}
+
+async function updateContactOnFireBase(task) {
+  let toEditTaskId = task;
+  let taskData = getValue(task);
+
+  try {
+    const response = await fetch(`${BASE_URL}/task/${toEditTaskId}.json`, {
+      method: "PUT", // PUT für Update
+      body: JSON.stringify({
+        title: taskData.title,
+        description: taskData.description,
+        assignet: taskData.assignet,
+        date: taskData.date,
+        prio: taskData.prio,
+        category: taskData.category,
+        subtask: taskData.subtask,
+        progress: taskData.progress,
+      }),
+      headers: { "Content-Type": "application/json" },
+    });
+    rendEditSubTask(task);
+    listDataCard(task);
+    if (!response.ok) {
+      throw new Error("Fehler beim Speichern der Kontaktdaten");
+    }
+
+    const updatedContact = await response.json();
+    console.log("Kontakt erfolgreich aktualisiert:", updatedContact);
+    return updatedContact;
+  } catch (error) {
+    console.error("Fehler beim Aktualisieren des Kontakts:", error);
+    throw error;
+  }
+}
+
+function getValue(taskid) {
+  const task = tasks.find((t) => t.id === taskid);
+  if (!task) return;
+  console.log(task.task.assignet);
+  const newAssignet =
+    checked && checked.length > 0 ? checked : task.task.assignet;
+  title = document.getElementById("addTaskTittle").value;
+  description = document.getElementById("addTaskDescription").value;
+  assignet = checked;
+  date = document.getElementById("addTaskDate").value;
+  prio = task.task.prio;
+  subtask = subtasks;
+  progress = task.task.progress;
+  category = task.task.category;
+
+  return {
+    title,
+    description,
+    assignet: newAssignet,
+    date,
+    prio,
+    subtask,
+    progress,
+    category,
+  };
 }
