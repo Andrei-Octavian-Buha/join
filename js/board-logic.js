@@ -1,10 +1,9 @@
-function showOverlayAddTask() {
+async function showOverlayAddTask() {
   let template = document.getElementById("add-task-template");
   template.classList.remove("dNone");
   template.innerHTML += addTaskTemplate();
   setupDropdownEvents();
-  init();
-  subtasktrigger();
+  await init();
 }
 
 function setupDropdownEvents() {
