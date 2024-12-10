@@ -305,6 +305,7 @@
   }
   .addFisrtLetterContainer {
     display: flex;
+
   }
   .firstLetterCircle {
     display: flex;
@@ -314,12 +315,13 @@
     width: 42px;
     height: 42px;
     background-color: #00bee8;
+    margin: 0px;
     color: #ffffff;
     font-size: 12px;
-    margin-left: -10px; /* Überlappung steuern */
+    margin-left: -10px;
   }
   .firstLetterCircle:first-child {
-    margin-left: 0; /* Der erste Kreis bleibt unverändert */
+    margin-left: 0;
   }
   .dropDownFullName {
     margin: 0;
