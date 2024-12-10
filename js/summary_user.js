@@ -98,33 +98,31 @@ document.addEventListener("DOMContentLoaded", () => {
   }, 100); 
 });
 
-function fillInTasks(){
+document.addEventListener("DOMContentLoaded", async () => {
+  await initializePage(); 
+});
+
+async function initializePage() {
+  await loadTasksForSorting(); 
+  fillInTasks(); 
+  updateHTML(todos); 
+}
+
+function fillInTasks() {
   const taskCounts = JSON.parse(sessionStorage.getItem("taskCounts")) || {};
-  
   if (taskCounts.todo !== undefined) {
-    document.getElementById("stats-button-to-do").textContent = taskCounts.todo;
-  }
-
+    document.getElementById("stats-button-to-do").textContent = taskCounts.todo;}
   if (taskCounts.done !== undefined) {
-    document.getElementById("stats-button-done").textContent = taskCounts.done;
-  }
-
+    document.getElementById("stats-button-done").textContent = taskCounts.done; }
   if (taskCounts.urgent !== undefined) {
-    document.getElementById("stats-button-urgent").textContent = taskCounts.urgent;
-  }
-
+    document.getElementById("stats-button-urgent").textContent = taskCounts.urgent;}
   if (taskCounts.inprogress !== undefined) {
-    document.getElementById("stats-third-button-in-progress").textContent = taskCounts.inprogress;
-  }
-
+    document.getElementById("stats-third-button-in-progress").textContent = taskCounts.inprogress;}
   if (taskCounts.awaitfeedback !== undefined) {
-    document.getElementById("stats-third-button-await-feedback").textContent = taskCounts.awaitfeedback;
-  }
-
+    document.getElementById("stats-third-button-await-feedback").textContent = taskCounts.awaitfeedback; }
   if (taskCounts.total !== undefined) {
-    document.getElementById("stats-third-button-tasks-board").textContent = taskCounts.total;
-  }
-};
+    document.getElementById("stats-third-button-tasks-board").textContent = taskCounts.total;}
+}
 
 async function loadTasksForSorting() {
   try {
@@ -138,7 +136,6 @@ async function loadTasksForSorting() {
         return { id: key, ...data[key] };
       });
       countTasksByCategory();
-      updateHTML(); 
     } else {
       console.error("Keine Aufgaben gefunden.");
     }
@@ -149,22 +146,22 @@ async function loadTasksForSorting() {
 
 function updateHTML(data) {
   if (!data || Object.keys(data).length === 0) {
-      return;
+    return;
   }
-  const categories = ['todoColumn', 'inprogressColumn', 'awaitfeedbackColumn', 'doneColumn'];
-  categories.forEach(category => {
-      const container = document.getElementById(category);
-      if (container) {
-          container.innerHTML = ''; // Vorhandene Inhalte löschen
-          Object.keys(data).forEach(key => {
-              const task = data[key];
-              if (task.progress && task.progress.toLowerCase() === category.replace('Column', '').toLowerCase()) {
-                  container.innerHTML += generateTodoHTML({ id: key, ...task });
-              }
-          });
-      }
+  const categories = ["todoColumn", "inprogressColumn", "awaitfeedbackColumn", "doneColumn"];
+  categories.forEach((category) => {
+    const container = document.getElementById(category);
+    if (container) {
+      container.innerHTML = ""; // Clear existing content
+      data.forEach((task) => {
+        if (task.progress && task.progress.toLowerCase() === category.replace("Column", "").toLowerCase()) {
+          container.innerHTML += generateTodoHTML(task);
+        }
+      });
+    }
   });
 }
+
 
 function countTasksByCategory() {
   const counts = {
@@ -173,7 +170,7 @@ function countTasksByCategory() {
     awaitfeedback: 0,
     done: 0,
     urgent: 0,
-    total: 0, // Add a field for total count
+    total: 0, 
   };
   todos.forEach((task) => {
     counts.total++; 
