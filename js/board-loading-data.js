@@ -117,9 +117,6 @@ function showSubTasks(task) {
 function showAssignet(task) {
   let asignedDiv = document.getElementById(`asigned${task.id}`);
   if (!asignedDiv) {
-    console.warn(
-      `Elementul asignedDiv cu ID-ul "asigned${task.id}" nu a fost găsit.`
-    );
     return;
   }
   asignedDiv.innerHTML = ""; // Vorherigen Inhalt löschen
