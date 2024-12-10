@@ -184,11 +184,11 @@ function showPrioIcon(task) {
   let prio = task.task.prio;
   let iconPath;
   if (prio == "low") {
-    iconPath = "/assets/priority/prioCard/lowCard.svg";
+    iconPath = "./assets/priority/prioCard/lowCard.svg";
   } else if (prio == "medium") {
-    iconPath = "/assets/priority/prioCard/mediumCard.svg";
+    iconPath = "./assets/priority/prioCard/mediumCard.svg";
   } else if (prio == "urgent") {
-    iconPath = "/assets/priority/prioCard/urgentCard.svg";
+    iconPath = "./assets/priority/prioCard/urgentCard.svg";
   }
   return `<img src="${iconPath}" alt="${prio} priority icon" style="width:20px; height:20px;">`;
 }
