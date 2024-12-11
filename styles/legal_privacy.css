@@ -27,7 +27,7 @@ b{
     justify-content: space-between;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1150px) {
     .legal-notice-main-div{
         padding-left: 64px;
         margin-right: 64px;
@@ -39,7 +39,7 @@ b{
     }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1150px) {
     .legal-notice-main-div{
         padding-left: 25px;
         margin-right: 25px;
