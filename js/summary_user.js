@@ -40,8 +40,7 @@ function toggleDropdown() {
     ) {
       const dropdown = document.getElementById("dropdown");
       if (dropdown.style.display === "block") {
-        dropdown.style.display = "none";
-      }
+        dropdown.style.display = "none";}
     }
   };
 
@@ -127,18 +126,14 @@ function fillInTasks() {
 async function loadTasksForSorting() {
   try {
     const response = await fetch(
-      "https://join-store-ae38e-default-rtdb.europe-west1.firebasedatabase.app/task.json"
-    );
+      "https://join-store-ae38e-default-rtdb.europe-west1.firebasedatabase.app/task.json");
     const data = await response.json();
-
     if (data) {
       todos = Object.keys(data).map((key) => {
-        return { id: key, ...data[key] };
-      });
+        return { id: key, ...data[key] }; });
       countTasksByCategory();
     } else {
-      console.error("Keine Aufgaben gefunden.");
-    }
+      console.error("Keine Aufgaben gefunden.");}
   } catch (error) {
     console.error("Fehler beim Laden der Aufgaben:", error);
   }
@@ -155,12 +150,9 @@ function updateHTML(data) {
       container.innerHTML = ""; // Clear existing content
       data.forEach((task) => {
         if (task.progress && task.progress.toLowerCase() === category.replace("Column", "").toLowerCase()) {
-          container.innerHTML += generateTodoHTML(task);
-        }
-      });
-    }
-  });
-}
+          container.innerHTML += generateTodoHTML(task);}
+      });}
+  });}
 
 
 function countTasksByCategory() {
@@ -170,16 +162,13 @@ function countTasksByCategory() {
     awaitfeedback: 0,
     done: 0,
     urgent: 0,
-    total: 0, 
-  };
-  todos.forEach((task) => {
-    counts.total++; 
+    total: 0, };
+  todos.forEach((task) => {counts.total++; 
     if (task.progress === "todo") counts.todo++;
     if (task.progress === "inprogress") counts.inprogress++;
     if (task.progress === "awaitfeedback") counts.awaitfeedback++;
     if (task.progress === "done") counts.done++;
-    if (task.prio === "urgent") counts.urgent++;
-  });
+    if (task.prio === "urgent") counts.urgent++; });
   sessionStorage.setItem("taskCounts", JSON.stringify(counts));
 }
 
