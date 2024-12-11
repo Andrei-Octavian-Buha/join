@@ -4,22 +4,31 @@ function init() {
     fetchContactsData();
 }
 
+const overlayListeners = new Map();
+
 function openOverlay(overlayId) {
     const overlay = document.getElementById(overlayId);
-    const overlaycontent = document.getElementById("overlay-content")
+    const overlaycontent = document.getElementById("overlay-content");
     overlay.style.display = "flex"; 
-    overlay.classList.add("show");  
+    overlay.classList.add("show");
 
     const handleClickOutside = (event) => {
         if (!overlaycontent.contains(event.target)) { 
-            closeOverlay(overlayId); 
-            document.removeEventListener('click', handleClickOutside); 
+            closeOverlay(overlayId);
+            document.removeEventListener('click', overlayListeners.get(overlayId));
+            overlayListeners.delete(overlayId); // Listener entfernen
         }
     };
 
+    // Alten Listener entfernen, falls vorhanden
+    if (overlayListeners.has(overlayId)) {
+        document.removeEventListener('click', overlayListeners.get(overlayId));
+    }
+
+    overlayListeners.set(overlayId, handleClickOutside); // Speichere den neuen Listener
     setTimeout(() => {
         document.addEventListener('click', handleClickOutside);
-    }, 0); 
+    }, 0);
 }
 
 
