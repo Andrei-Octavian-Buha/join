@@ -103,8 +103,23 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 async function initializePage() {
   await loadTasksForSorting(); 
+  updateNextDeadline();
   fillInTasks(); 
   updateHTML(todos); 
+}
+
+function updateNextDeadline() {
+  if (!todos || todos.length === 0) return;
+  const nextTask = todos.reduce((closest, task) => {
+    const taskDate = new Date(task.date);
+    const closestDate = new Date(closest.date);
+    return !isNaN(taskDate) && (isNaN(closestDate) || taskDate < closestDate) ? task : closest;
+  }, { date: Infinity });
+  if (nextTask && nextTask.date && !isNaN(new Date(nextTask.date))) {
+    document.getElementById("date-text").textContent = new Date(nextTask.date).toLocaleDateString('en-US', {
+      year: 'numeric', month: 'long', day: 'numeric'
+    });
+  }
 }
 
 function fillInTasks() {

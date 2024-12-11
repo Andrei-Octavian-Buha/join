@@ -393,6 +393,16 @@
     }
 }
 
+@media (max-width: 430px) {
+    .fullscreen-greeting-name {
+        font-size: 40px;
+    }
+
+    .fullscreen-greeting {
+        font-size: 40px;
+    }
+}
+
 @media (max-width: 550px) {
     .stats-div{
         width: 400px;
@@ -447,7 +457,7 @@
     }
 
     .upcoming-text{
-        font-size: 11px;
+        font-size: 14px;
     }
 
     .third-button-text{
