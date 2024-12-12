@@ -551,11 +551,19 @@ ul {
   font-size: 14px;
 }
 
-.delete-button-container p:hover,
-.edit-button-container p:hover {
+.edit-button-container:hover p,
+.edit-button-container:hover img,
+.delete-button-container:hover p,
+.delete-button-container:hover img {
   cursor: pointer;
   color: rgb(41, 171, 226);
 }
+
+.edit-button-container:hover img,
+.delete-button-container:hover img {
+  filter: brightness(0) saturate(100%) invert(41%) sepia(75%) saturate(505%) hue-rotate(176deg) brightness(95%) contrast(95%);
+}
+
 
 img.edit-image {
   width: 14px;
