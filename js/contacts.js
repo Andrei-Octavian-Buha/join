@@ -16,16 +16,15 @@ function openOverlay(overlayId) {
         if (!overlaycontent.contains(event.target)) { 
             closeOverlay(overlayId);
             document.removeEventListener('click', overlayListeners.get(overlayId));
-            overlayListeners.delete(overlayId); // Listener entfernen
+            overlayListeners.delete(overlayId); 
         }
     };
 
-    // Alten Listener entfernen, falls vorhanden
     if (overlayListeners.has(overlayId)) {
         document.removeEventListener('click', overlayListeners.get(overlayId));
     }
 
-    overlayListeners.set(overlayId, handleClickOutside); // Speichere den neuen Listener
+    overlayListeners.set(overlayId, handleClickOutside); 
     setTimeout(() => {
         document.addEventListener('click', handleClickOutside);
     }, 0);
