@@ -77,7 +77,7 @@ button:hover {
 .button-icon {
   width: 20px;
   height: 20px;
-  background-image: url("/assets/img/icons8.png");
+  background-image: url("../assets/img/icons8.png");
   background-size: contain;
   background-repeat: no-repeat;
   margin-left: 4px;
@@ -119,6 +119,7 @@ button:hover {
   margin-top: 10px;
   background-color: rgb(42,54,71);
 }
+
 .right-content {
   border: none;
   width: 60%;
@@ -200,8 +201,6 @@ h3 {
   width: 40%;
   padding: 20px;
   background: rgb(42, 54, 71);
-  border-top-left-radius: 6%;
-  border-bottom-left-radius: 6%;
 }
 
 .info-container img {
@@ -267,21 +266,21 @@ input {
 }
 
 .input-name {
-  background-image: url("./assets/img/icons8black.png");
+  background-image: url("../assets/img/icons8black.png");
   background-repeat: no-repeat;
   background-position: calc(100% - 10px) center;
   background-size: 20px 20px;
 }
 
 .input-mail {
-  background-image: url("./assets/img/email.png");
+  background-image: url("../assets/img/email.png");
   background-repeat: no-repeat;
   background-position: calc(100% - 10px) center;
   background-size: 20px 20px;
 }
 
 .input-phone {
-  background-image: url("./assets/img/phone.png");
+  background-image: url("../assets/img/phone.png");
   background-repeat: no-repeat;
   background-position: calc(100% - 10px) center;
   background-size: 20px 20px;
@@ -338,6 +337,13 @@ input:focus {
   height: 70%;
   border-radius: 25px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.exit {
+  position: absolute;
+  right: 6%;
+  top: 16%;
+  
 }
 
 .overlay.show {

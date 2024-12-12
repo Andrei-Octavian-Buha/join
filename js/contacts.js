@@ -84,10 +84,7 @@ function sortContacts(contacts) {
 
 function renderSortedContacts(contactList, sortedContacts) {
     let currentLetter = '';
-
     sortedContacts.forEach(contact => {
-        console.log('Kontakt ID:', contact.id);
-
         const firstLetter = contact.name[0].toUpperCase();
 
         if (firstLetter !== currentLetter) {
@@ -95,7 +92,6 @@ function renderSortedContacts(contactList, sortedContacts) {
             addLetterHeader(contactList, currentLetter);
             addSilverline(contactList);
         }
-
         const card = createContactCard(contact);
         contactList.appendChild(card);
     });
