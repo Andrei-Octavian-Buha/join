@@ -199,7 +199,8 @@ h2 {
   align-items: center;
   background-color: white;
   width: 100%;
-  border-radius: 25px;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
 }
 
 .form-img {
@@ -284,14 +285,17 @@ input:focus {
 .overlay {
   position: fixed;
   top: 50%;
-  left: 100%; /* Start vollständig außerhalb des Bildschirms rechts */
-  transform: translateX(0%) translateY(-50%); /* Ausgangsposition */
+  left: 100%;
+  /* Start vollständig außerhalb des Bildschirms rechts */
+  transform: translateX(0%) translateY(-50%);
+  /* Ausgangsposition */
   width: 84%;
   height: 80%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(241, 239, 239, 0); /* Originalfarbe */
+  background-color: rgba(241, 239, 239, 0);
+  /* Originalfarbe */
   opacity: 0;
   z-index: 999;
   border-radius: 25px;
@@ -313,11 +317,14 @@ input:focus {
 
 @keyframes slideInFromRight {
   from {
-    left: 100%; /* Start vollständig rechts außerhalb des Bildschirms */
+    left: 100%;
+    /* Start vollständig rechts außerhalb des Bildschirms */
     transform: translateX(0%) translateY(-50%);
   }
+
   to {
-    left: 50%; /* Endposition in der Mitte des Bildschirms */
+    left: 50%;
+    /* Endposition in der Mitte des Bildschirms */
     transform: translateX(-50%) translateY(-50%);
   }
 }
@@ -329,11 +336,14 @@ input:focus {
 
 @keyframes slideOutToRight {
   from {
-    left: 50%; /* Ausgangspunkt ist die Mitte des Bildschirms */
+    left: 50%;
+    /* Ausgangspunkt ist die Mitte des Bildschirms */
     transform: translateX(-50%) translateY(-50%);
   }
+
   to {
-    left: 100%; /* Endposition vollständig rechts außerhalb des Bildschirms */
+    left: 100%;
+    /* Endposition vollständig rechts außerhalb des Bildschirms */
     transform: translateX(0%) translateY(-50%);
   }
 }
@@ -564,7 +574,6 @@ ul {
   filter: brightness(0) saturate(100%) invert(41%) sepia(75%) saturate(505%) hue-rotate(176deg) brightness(95%) contrast(95%);
 }
 
-
 img.edit-image {
   width: 14px;
   height: 14px;
@@ -655,13 +664,16 @@ p.contact-phone {
     align-items: baseline;
     margin-left: 0;
   }
+
   h1,
   h3 {
     margin: 0;
   }
+
   .blue-line {
     display: none;
   }
+
   .blue-line-responsive {
     display: block;
   }
@@ -677,20 +689,25 @@ p.contact-phone {
   .right-content {
     display: none;
   }
+
   .overlay-contact-mobile {
     display: block;
   }
+
   .left-content {
     width: 90%;
     margin: auto;
     height: 100vh;
   }
+
   .edit-container {
     display: none;
   }
+
   .back-arrow {
     display: block;
   }
+
   .three-points {
     display: block;
   }
@@ -717,25 +734,28 @@ p.contact-phone {
   }
 }
 
-@media (min-width: 800px) {
-}
+@media (min-width: 800px) {}
 
 @media (max-width: 796px) {
   .header-logo-responsive {
     display: block;
   }
+
   .overlay {
     height: 90%;
     width: 98%;
   }
+
   .overlay-content {
     position: relative;
     flex-direction: column;
     height: 90%;
   }
+
   .close {
     display: block;
   }
+
   .info-container {
     width: 100%;
     height: 40%;
@@ -747,9 +767,11 @@ p.contact-phone {
     justify-content: center;
     align-items: center;
   }
+
   .info-container img {
     display: none;
   }
+
   .form-container {
     background-color: white;
     height: 100%;
@@ -757,23 +779,29 @@ p.contact-phone {
     flex-direction: column;
     border-radius: 25px;
   }
+
   .position-1 {
     position: absolute;
     top: 23%;
   }
+
   .position-2 {
     position: absolute;
     top: 38%;
   }
+
   form {
     margin-top: 60px;
   }
+
   .cancel {
     display: none;
   }
+
   .contact-button {
     display: block;
   }
+
   .add-new-button {
     display: none;
   }
@@ -789,16 +817,20 @@ p.contact-phone {
   .contact-headline {
     gap: 2px;
   }
+
   h1 .detail-content {
     font-size: 20px;
   }
+
   .custom-badge {
     height: 70px;
     width: 70px;
   }
+
   h1 {
     font-size: 22px;
   }
+
   h3 {
     font-size: 12px;
     margin-bottom: 4px;
