@@ -698,7 +698,11 @@ p.contact-phone {
   .left-content {
     width: 90%;
     margin: auto;
-    height: 100vh;
+    height: 82vh;
+  }
+
+  .list{
+    margin-bottom: 60px;
   }
 
   .edit-container {
