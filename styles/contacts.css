@@ -91,24 +91,34 @@ button:hover {
 
 .toast {
   position: fixed;
-  top: 20px;
-  left: 50%;
+  top: 10px;
+  left: 70%;
   transform: translateX(-50%);
-  background-color: rgb(42,54,71);
-  color: white;
+  background-color: rgba(42, 54, 71, 0.795);
+  border-style: solid;
+  border-color: rgb(41,171,226);
+  text-align: center;
+  color: rgb(255, 255, 255);
   padding: 16px;
   border-radius: 8px;
   font-size: 16px;
   z-index: 9999;
   opacity: 0;
   transition: opacity 0.5s ease;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .toast.show {
   opacity: 1;
 }
 
-
+.toast-button {
+  width: 110px;
+  height: 30px;
+  font-size: small;
+  margin-top: 10px;
+  background-color: rgb(42,54,71);
+}
 .right-content {
   border: none;
   width: 60%;
@@ -423,7 +433,7 @@ h4 {
   margin-bottom: 30px;
   padding: 0;
   padding-right: 24px;
-  max-height: 90vh;
+  height: 70%;
   overflow: auto;
 }
 
@@ -678,6 +688,12 @@ p.contact-phone {
   font-weight: bold;
 }
 
+@media (max-width: 1150px) {
+  .toast {
+    left: 50%;
+  }
+}
+
 @media (max-width: 1015px) {
   .contact-headline {
     flex-direction: column;
@@ -743,8 +759,8 @@ p.contact-phone {
     margin: auto;
     display: flex;
     position: fixed;
-    top: 14%;
-    bottom: 12%;
+    top: 0%;
+    bottom: 0%;
     left: 0;
     right: 0;
     width: auto;

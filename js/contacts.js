@@ -327,24 +327,27 @@ async function sendContactData(contact) {
 }
 
 function handleSuccess() {
-    // Das Toast-Element einblenden
     const toast = document.getElementById('toast');
-    toast.style.display = 'block'; // Toast sichtbar machen
+
+    // Nachricht einstellen und Toast einblenden
+    toast.innerHTML = 'Kontakt erfolgreich gespeichert!';
+    toast.style.display = 'block';
     setTimeout(() => {
-        toast.classList.add('show'); // Animation starten
+        toast.classList.add('show');
     }, 100);
 
-    document.getElementById('contactForm').reset(); // Formular zurücksetzen
-    closeOverlay('overlay'); // Overlay schließen
-    fetchContactsData(); // Aktualisierte Kontakte abrufen
+    // Formular zurücksetzen und Overlay schließen
+    document.getElementById('contactForm').reset();
+    closeOverlay('overlay');
+    fetchContactsData();
 
-    // Nach 3 Sekunden das Toast wieder ausblenden
+    // Toast nach 3 Sekunden wieder ausblenden
     setTimeout(() => {
         toast.classList.remove('show');
         setTimeout(() => {
-            toast.style.display = 'none'; // Das Toast wieder unsichtbar machen
-        }, 500); // Warte, bis die Animation abgeschlossen ist
-    }, 3000); // Das Toast nach 3 Sekunden verschwinden lassen
+            toast.style.display = 'none';
+        }, 500);
+    }, 3000);
 }
 
 
@@ -373,25 +376,82 @@ function getColorForInitial(initial) {
 
 
 async function deleteContact(contactId) {
-    const shouldDelete = confirm('Kontakt wirklich löschen, oder noch einmal die Konsequenzen überdenken?');
-    if (!shouldDelete) return; 
-    try {
-        const response = await fetch(`${BASE_URL}/contacts/${contactId}.json`, {
-            method: 'DELETE',
-        });
-        if (!response.ok) {
-            throw new Error('Fehler beim Löschen des Kontakts');
-        }
-        const contactOverlay = document.getElementById('contact-overlay');
-        contactOverlay.classList.remove('visible');
-        contactOverlay.innerHTML = '';
-        fetchContactsData();
+    // Bestätigungs-Toast anzeigen
+    const toast = document.getElementById('toast');
+    const confirmButton = document.createElement('button');
+    const cancelButton = document.createElement('button');
 
-        alert('Kontakt wurde unwiderruflich gelöscht.');
-    } catch (error) {
-        console.error('Fehler beim Löschen des Kontakts:', error);
-    }
+    // Buttons für die Bestätigung und das Abbrechen erstellen
+    confirmButton.textContent = 'Löschen';
+    cancelButton.textContent = 'Abbrechen';
+    confirmButton.classList.add('toast-button');
+    cancelButton.classList.add('toast-button');
+
+    // Nachricht für die Bestätigung des Löschvorgangs ändern
+    toast.innerHTML = 'Kontakt wirklich löschen?';
+    toast.appendChild(confirmButton); // Bestätigungsbutton anhängen
+    toast.appendChild(cancelButton);  // Abbrechenbutton anhängen
+
+    // Zeige den Toast an
+    toast.style.display = 'block';
+    setTimeout(() => {
+        toast.classList.add('show');
+        toast.classList.remove('hide');
+    }, 100);
+
+    // Warten auf Benutzeraktion (Bestätigung oder Abbruch)
+    return new Promise((resolve, reject) => {
+        // Benutzer bestätigt das Löschen
+        confirmButton.addEventListener('click', async () => {
+            try {
+                const response = await fetch(`${BASE_URL}/contacts/${contactId}.json`, {
+                    method: 'DELETE',
+                });
+
+                if (!response.ok) {
+                    throw new Error('Fehler beim Löschen des Kontakts');
+                }
+
+                // Kontakt wurde erfolgreich gelöscht, Toast anpassen
+                toast.innerHTML = 'Kontakt wurde erfolgreich gelöscht!';
+                setTimeout(() => {
+                    toast.classList.add('show');
+                    toast.classList.remove('hide');
+                }, 100);
+
+                // Nach 3 Sekunden das Toast nach oben herausfaden
+                setTimeout(() => {
+                    toast.classList.add('hide');
+                    setTimeout(() => {
+                        toast.style.display = 'none'; // Toast aus dem DOM entfernen, wenn es unsichtbar ist
+                    }, 500); // Warte, bis die Animation abgeschlossen ist
+                }, 1000); // Das Toast nach 3 Sekunden verschwinden lassen
+
+                // Seite neu laden, um die Kontaktliste zu aktualisieren
+                setTimeout(() => {
+                    location.reload(); // Seite neu laden
+                }, 1000); // Nach 3 Sekunden (nach dem Toast) die Seite neu laden
+
+                resolve(); // Erfolgreich abgeschlossen
+            } catch (error) {
+                console.error('Fehler beim Löschen des Kontakts:', error);
+                reject(error);
+            }
+        });
+
+        // Benutzer bricht das Löschen ab
+        cancelButton.addEventListener('click', () => {
+            toast.classList.add('hide');
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 500);
+            reject('Abgebrochen'); // Abbruch der Aktion
+        });
+    });
 }
+
+
+
 
 
 function toggleMenu() {
