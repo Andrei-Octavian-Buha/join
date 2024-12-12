@@ -264,9 +264,12 @@ function createContactCardHTML(contact) {
 
 
 async function addContact(event) {
-    event.preventDefault();
-    const contact = gatherContactData();
+    event.preventDefault(); // Verhindert das automatische Absenden des Formulars
+
     try {
+        const contact = gatherContactData();
+        if (!validateContactData(contact)) return; // Abbrechen, falls die Validierung fehlschlägt
+
         const response = await sendContactData(contact);
         if (response.ok) {
             handleSuccess();
@@ -278,19 +281,39 @@ async function addContact(event) {
     }
 }
 
-
 function gatherContactData() {
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const phone = document.getElementById('phone').value;
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
 
-    return {
-        name: name,
-        email: email,
-        phone: phone
-    };
+    return { name, email, phone };
 }
 
+function validateContactData(contact) {
+    const { name, email, phone } = contact;
+
+    // Überprüfung auf leere Felder
+    if (!name || !email || !phone) {
+        alert('Bitte alle Felder ausfüllen.');
+        return false;
+    }
+
+    // Validierung für E-Mail
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        alert('Bitte eine gültige E-Mail-Adresse eingeben.');
+        return false;
+    }
+
+    // Validierung für Telefonnummer
+    const phoneRegex = /^\+?[0-9]{8,15}$/;
+    if (!phoneRegex.test(phone)) {
+        alert('Bitte eine gültige Telefonnummer eingeben (8-15 Ziffern).');
+        return false;
+    }
+
+    return true; // Alle Prüfungen bestanden
+}
 
 async function sendContactData(contact) {
     const response = await fetch(`${BASE_URL}/contacts.json`, {
@@ -303,23 +326,37 @@ async function sendContactData(contact) {
     return response;
 }
 
-
 function handleSuccess() {
-    console.log('Kontakt erfolgreich hinzugefügt!');
-    document.getElementById('contactForm').reset(); 
-    closeOverlay('overlay'); 
-    fetchContactsData(); 
+    // Das Toast-Element einblenden
+    const toast = document.getElementById('toast');
+    toast.style.display = 'block'; // Toast sichtbar machen
+    setTimeout(() => {
+        toast.classList.add('show'); // Animation starten
+    }, 100);
+
+    document.getElementById('contactForm').reset(); // Formular zurücksetzen
+    closeOverlay('overlay'); // Overlay schließen
+    fetchContactsData(); // Aktualisierte Kontakte abrufen
+
+    // Nach 3 Sekunden das Toast wieder ausblenden
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => {
+            toast.style.display = 'none'; // Das Toast wieder unsichtbar machen
+        }, 500); // Warte, bis die Animation abgeschlossen ist
+    }, 3000); // Das Toast nach 3 Sekunden verschwinden lassen
 }
 
 
-function handleError(errorMessage) {
-    console.error('Fehler beim Hinzufügen des Kontakts:', errorMessage);
+function handleError(errorText) {
+    console.error(`Fehler beim Hinzufügen des Kontakts: ${errorText}`);
+    alert('Fehler beim Hinzufügen des Kontakts. Bitte erneut versuchen.');
 }
 
 function handleNetworkError(error) {
     console.error('Netzwerkfehler:', error);
+    alert('Es ist ein Netzwerkfehler aufgetreten. Bitte überprüfen Sie Ihre Verbindung.');
 }
-
 
 
 function getColorForInitial(initial) {
@@ -355,8 +392,6 @@ async function deleteContact(contactId) {
         console.error('Fehler beim Löschen des Kontakts:', error);
     }
 }
-
-
 
 
 function toggleMenu() {
@@ -465,23 +500,70 @@ function updateContactOverlay(updatedContact) {
 }
 
 
+function validateContactData(contact) {
+    const { name, email, phone } = contact;
+
+    if (!name || name.trim().length === 0) {
+        alert('Bitte einen gültigen Namen eingeben.');
+        return false;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        alert('Bitte eine gültige E-Mail-Adresse eingeben.');
+        return false;
+    }
+
+    const phoneRegex = /^\+?[0-9]{8,15}$/;
+    if (!phoneRegex.test(phone)) {
+        alert('Bitte eine gültige Telefonnummer eingeben (8-15 Ziffern).');
+        return false;
+    }
+
+    return true;
+}
+
+
+
 async function handleFormSubmit(event) {
     event.preventDefault();
 
     const contactId = document.getElementById('edit-contact-overlay').dataset.contactId;
-    const name = document.getElementById('inputName').value;
-    const email = document.getElementById('inputMail').value;
-    const phone = document.getElementById('inputPhone').value;
+    const name = document.getElementById('inputName').value.trim();
+    const email = document.getElementById('inputMail').value.trim();
+    const phone = document.getElementById('inputPhone').value.trim();
+
+    const contactData = { name, email, phone };
+
+    if (!validateContactData(contactData)) return; // Validierung abbrechen, wenn ungültig
 
     try {
         const updatedContact = await updateContactOnServer(contactId, name, email, phone);
-
         updateContactOverlay(updatedContact);
+
+        // Erfolgsmeldung anzeigen
+        const toast = document.getElementById('toast');
+        toast.textContent = 'Kontakt erfolgreich aktualisiert!'; // Toast-Text anpassen
+        toast.style.display = 'block'; // Toast sichtbar machen
+        setTimeout(() => {
+            toast.classList.add('show'); // Animation starten
+        }, 100);
+
+        // Nach 3 Sekunden das Toast wieder ausblenden
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => {
+                toast.style.display = 'none'; // Das Toast wieder unsichtbar machen
+            }, 500); // Warte, bis die Animation abgeschlossen ist
+        }, 3000); // Das Toast nach 3 Sekunden verschwinden lassen
 
     } catch (error) {
         console.error('Fehler beim Aktualisieren des Kontakts:', error);
+        alert('Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.');
     }
 }
+
+
 
 function toggleDropdown() {
     const dropdown = document.getElementById("dropdown");

@@ -41,6 +41,10 @@
             </div>
           </div>
 
+          <div id="toast" class="toast" style="display: none;">
+            Kontakt erfolgreich gespeichert!
+          </div>
+
           <!-- Overlay für das Formular -->
           <div id="overlay" class="overlay slide-from-right">
             <div id="overlay-content" class="overlay-content">
@@ -67,6 +71,8 @@
                     id="name"
                     placeholder="Name"
                     required
+                    minlength="3"
+                    title="Mindestens 3 Buchstaben erforderlich"
                   />
                   <input
                     type="text"
@@ -74,6 +80,7 @@
                     id="email"
                     placeholder="Email"
                     required
+                    title="Bitte eine gültige E-Mail-Adresse eingeben"
                   />
                   <input
                     type="text"
@@ -153,26 +160,27 @@
               </div>
               <form id="editContactForm" onsubmit="handleFormSubmit(event)">
                 <input
-                  type="text"
-                  class="input-name"
-                  id="inputName"
-                  placeholder="Name"
-                  required
+                type="text"
+                id="inputName"
+                placeholder="Name"
+                required
+                minlength="1"
                 />
                 <input
-                  type="text"
-                  class="input-mail"
-                  id="inputMail"
-                  placeholder="Email"
-                  required
+                type="email"
+                id="inputMail"
+                placeholder="Email"
+                required
                 />
                 <input
-                  type="text"
-                  class="input-phone"
-                  id="inputPhone"
-                  placeholder="Phone"
-                  required
+                type="tel"
+                id="inputPhone"
+                placeholder="Phone"
+                pattern="^\+?[0-9]{8,15}$"
+                title="Phone number should be 8-15 digits long."
+                required
                 />
+            
                 <div class="button-container">
                   <button
                     class="cancel"
