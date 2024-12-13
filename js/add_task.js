@@ -224,7 +224,6 @@ function addSubTask() {
     if (inputText.value && subtasks.length <= 1) {
       subtasks.push(inputText.value);
     } else {
-      console.log("i will please you to add some text");
     }
     hideEditAddBtn();
     rendSubTask();
