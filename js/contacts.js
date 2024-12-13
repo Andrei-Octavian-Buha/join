@@ -4,14 +4,15 @@ function init() {
     fetchContactsData();
 }
 
+
 const overlayListeners = new Map();
+
 
 function openOverlay(overlayId) {
     const overlay = document.getElementById(overlayId);
     const overlaycontent = document.getElementById("overlay-content");
     overlay.style.display = "flex"; 
     overlay.classList.add("show");
-
     const handleClickOutside = (event) => {
         if (!overlaycontent.contains(event.target)) { 
             closeOverlay(overlayId);
@@ -19,11 +20,9 @@ function openOverlay(overlayId) {
             overlayListeners.delete(overlayId); 
         }
     };
-
     if (overlayListeners.has(overlayId)) {
         document.removeEventListener('click', overlayListeners.get(overlayId));
     }
-
     overlayListeners.set(overlayId, handleClickOutside); 
     setTimeout(() => {
         document.addEventListener('click', handleClickOutside);
@@ -159,96 +158,6 @@ function openContactOverlay(contactId, contactName, contactEmail, contactPhone) 
 }
 
 
-async function handleCardClick(contactId) {
-    console.log('Karte angeklickt, Kontakt-ID:', contactId);
-    try {
-        const response = await fetch(`${BASE_URL}/contacts/${contactId}.json`);
-        if (!response.ok) {
-            throw new Error('Fehler beim Abrufen der Kontaktdaten');
-        }
-        const contact = await response.json();
-        if (contact) {
-            openContactOverlay(contactId, contact.name, contact.email, contact.phone);
-        } else {
-            console.error('Kontakt nicht gefunden:', contactId);
-        }
-    } catch (error) {
-        console.error('Fehler beim Abrufen der Kontaktdaten:', error);
-    }
-}
-
-
-function createInitialsBadge(name, className = 'default-badge') {
-    const initials = getInitials(name);
-    const badge = document.createElement('div');
-    badge.classList.add(className); 
-    badge.textContent = initials;
-    badge.style.backgroundColor = getColorForInitial(initials[0]);
-    return badge;
-}
-
-
-function generateContactOverlayHTML(contactId, contactName, contactEmail, contactPhone) {
-    return `
-        <div class="second-overlay-content">
-                <div class="badge-and-name">
-                    <div class="badge">
-                        ${createInitialsBadge(contactName, 'custom-badge').outerHTML}
-                        <h1 class="contact-name">${contactName}</h1>
-                    </div>
-
-                    <div class="detail">
-                        <div class="detail-content">
-                            <div class="edit-container">
-                                <div class="edit-button-container">
-                                    <img src="assets/img/edit-pencil.png" alt="Edit" class="edit-image" />
-                                    <p class="edit-label" onclick="editContact('${contactId}')">Edit</p>
-                                </div>
-                                <div class="delete-button-container">
-                                    <img src="assets/img/trash-can-icon..png" alt="Delete" class="delete-image" />
-                                    <p class="delete-label" onclick="deleteContact('${contactId}')">Delete</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-            <div class="sub-content">
-                <h3 class="sub-info">Contact Information</h3>
-                <div class="email">
-                    <p class="contact-email-label">Email:</p>
-                    <p class="contact-email">${contactEmail}</p>
-                </div>
-                <div class="phone">    
-                    <p class="contact-phone-label">Telefon: </p>
-                    <p class="contact-phone">+49 ${contactPhone}</p>
-                </div> 
-                    <div class="three-points" onclick="toggleMenu()">
-                        <img src="assets/img/threePoints.png" alt="Menu" class="small-img">
-                    </div>
-                    <div class="menu hidden-menu">
-                        <div class="edit-button-container hidden">
-                            <img src="assets/img/edit-pencil.png" alt="Edit" class="edit-image hidden" />
-                            <p class="edit-label" onclick="editContact('${contactId}')">Edit</p>
-                        </div>
-                        <div class="delete-button-container hidden">
-                            <img src="assets/img/trash-can-icon..png" alt="Delete" class="delete-image" />
-                            <p class="delete-label" onclick="deleteContact('${contactId}')">Delete</p>
-                        </div>
-                    </div>   
-            </div>
-        </div>
-    `;
-}
-
-
-function getInitials(name) {
-    const nameParts = name.split(" ");
-    return (nameParts[0][0] + (nameParts[1] ? nameParts[1][0] : '')).toUpperCase();
-}
-
-
 function createContactCardHTML(contact) {
     return `
     <div class="contact-details">
@@ -256,105 +165,6 @@ function createContactCardHTML(contact) {
         <p>Email: ${contact.email}</p>
     </div>
     `;
-}
-
-
-async function addContact(event) {
-    event.preventDefault(); // Verhindert das automatische Absenden des Formulars
-
-    try {
-        const contact = gatherContactData();
-        if (!validateContactData(contact)) return; // Abbrechen, falls die Validierung fehlschlägt
-
-        const response = await sendContactData(contact);
-        if (response.ok) {
-            handleSuccess();
-        } else {
-            handleError(response.statusText);
-        }
-    } catch (error) {
-        handleNetworkError(error);
-    }
-}
-
-function gatherContactData() {
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-
-    return { name, email, phone };
-}
-
-function validateContactData(contact) {
-    const { name, email, phone } = contact;
-
-    // Überprüfung auf leere Felder
-    if (!name || !email || !phone) {
-        alert('Bitte alle Felder ausfüllen.');
-        return false;
-    }
-
-    // Validierung für E-Mail
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        alert('Bitte eine gültige E-Mail-Adresse eingeben.');
-        return false;
-    }
-
-    // Validierung für Telefonnummer
-    const phoneRegex = /^\+?[0-9]{8,15}$/;
-    if (!phoneRegex.test(phone)) {
-        alert('Bitte eine gültige Telefonnummer eingeben (8-15 Ziffern).');
-        return false;
-    }
-
-    return true; // Alle Prüfungen bestanden
-}
-
-async function sendContactData(contact) {
-    const response = await fetch(`${BASE_URL}/contacts.json`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(contact)
-    });
-    return response;
-}
-
-function handleSuccess() {
-    const toast = document.getElementById('toast');
-
-    // Nachricht einstellen und Toast einblenden
-    toast.innerHTML = 'Kontakt erfolgreich gespeichert!';
-    toast.style.display = 'block';
-    setTimeout(() => {
-        toast.classList.add('show');
-    }, 100);
-
-    // Formular zurücksetzen und Overlay schließen
-    document.getElementById('contactForm').reset();
-    closeOverlay('overlay');
-    fetchContactsData();
-
-    // Toast nach 3 Sekunden wieder ausblenden
-    setTimeout(() => {
-        toast.classList.remove('show');
-        setTimeout(() => {
-            toast.style.display = 'none';
-        }, 500);
-    }, 3000);
-}
-
-
-function handleError(errorText) {
-    console.error(`Fehler beim Hinzufügen des Kontakts: ${errorText}`);
-    alert('Fehler beim Hinzufügen des Kontakts. Bitte erneut versuchen.');
-}
-
-function handleNetworkError(error) {
-    console.error('Netzwerkfehler:', error);
-    alert('Es ist ein Netzwerkfehler aufgetreten. Bitte überprüfen Sie Ihre Verbindung.');
 }
 
 
@@ -371,82 +181,6 @@ function getColorForInitial(initial) {
 }
 
 
-async function deleteContact(contactId) {
-    // Bestätigungs-Toast anzeigen
-    const toast = document.getElementById('toast');
-    const confirmButton = document.createElement('button');
-    const cancelButton = document.createElement('button');
-
-    // Buttons für die Bestätigung und das Abbrechen erstellen
-    confirmButton.textContent = 'Löschen';
-    cancelButton.textContent = 'Abbrechen';
-    confirmButton.classList.add('toast-button');
-    cancelButton.classList.add('toast-button');
-
-    // Nachricht für die Bestätigung des Löschvorgangs ändern
-    toast.innerHTML = 'Kontakt wirklich löschen?';
-    toast.appendChild(confirmButton); // Bestätigungsbutton anhängen
-    toast.appendChild(cancelButton);  // Abbrechenbutton anhängen
-
-    // Zeige den Toast an
-    toast.style.display = 'block';
-    setTimeout(() => {
-        toast.classList.add('show');
-        toast.classList.remove('hide');
-    }, 100);
-
-    // Warten auf Benutzeraktion (Bestätigung oder Abbruch)
-    return new Promise((resolve, reject) => {
-        // Benutzer bestätigt das Löschen
-        confirmButton.addEventListener('click', async () => {
-            try {
-                const response = await fetch(`${BASE_URL}/contacts/${contactId}.json`, {
-                    method: 'DELETE',
-                });
-
-                if (!response.ok) {
-                    throw new Error('Fehler beim Löschen des Kontakts');
-                }
-
-                // Kontakt wurde erfolgreich gelöscht, Toast anpassen
-                toast.innerHTML = 'Kontakt wurde erfolgreich gelöscht!';
-                setTimeout(() => {
-                    toast.classList.add('show');
-                    toast.classList.remove('hide');
-                }, 100);
-
-                // Nach 3 Sekunden das Toast nach oben herausfaden
-                setTimeout(() => {
-                    toast.classList.add('hide');
-                    setTimeout(() => {
-                        toast.style.display = 'none'; // Toast aus dem DOM entfernen, wenn es unsichtbar ist
-                    }, 500); // Warte, bis die Animation abgeschlossen ist
-                }, 1000); // Das Toast nach 3 Sekunden verschwinden lassen
-
-                // Seite neu laden, um die Kontaktliste zu aktualisieren
-                setTimeout(() => {
-                    location.reload(); // Seite neu laden
-                }, 1000); // Nach 3 Sekunden (nach dem Toast) die Seite neu laden
-
-                resolve(); // Erfolgreich abgeschlossen
-            } catch (error) {
-                console.error('Fehler beim Löschen des Kontakts:', error);
-                reject(error);
-            }
-        });
-
-        // Benutzer bricht das Löschen ab
-        cancelButton.addEventListener('click', () => {
-            toast.classList.add('hide');
-            setTimeout(() => {
-                toast.style.display = 'none';
-            }, 100);
-            reject('Abgebrochen'); // Abbruch der Aktion
-        });
-    });
-}
-
-
 function toggleMenu() {
     const menu = document.querySelector('.menu');
     menu.classList.toggle('visible');
@@ -460,170 +194,11 @@ function toggleMenu() {
 }
 
 
-function editContact(contactId) {
-    const editContactOverlay = document.getElementById('edit-contact-overlay');
-    
-    if (editContactOverlay) {
-        editContactOverlay.style.display = 'block'; 
-    } else {
-        console.error('Element mit der ID "edit-contact-overlay" wurde nicht gefunden.');
-    }
-}
-
-
-function showEditContactOverlay() {
-    const editContactOverlay = document.getElementById('edit-contact-overlay');
-    
-    if (editContactOverlay) {
-        console.log('Overlay gefunden, wird angezeigt.');
-        editContactOverlay.style.display = 'block'; 
-    } else {
-        console.error('Element mit der ID "edit-contact-overlay" wurde nicht gefunden.');
-    }
-}
-
-
-async function fetchAndFillContactData(contactId) {
-    try {
-        console.log(`Abrufe der Kontaktdaten für Kontakt-ID: ${contactId}`);
-        const response = await fetch(`${BASE_URL}/contacts/${contactId}.json`);
-        if (!response.ok) {
-            throw new Error('Fehler beim Abrufen der Kontaktdaten');
-        }
-        const contact = await response.json();
-        console.log('Kontaktdaten erfolgreich abgerufen:', contact);
-        document.getElementById('inputName').value = contact.name;
-        document.getElementById('inputMail').value = contact.email;
-        document.getElementById('inputPhone').value = contact.phone;
-
-        const editContactOverlay = document.getElementById('edit-contact-overlay');
-        if (editContactOverlay) {
-            editContactOverlay.dataset.contactId = contactId;
-        }
-        console.log('Formular mit den Kontaktdaten gefüllt.');
-
-        displayBadgeInContainer(contact.name); 
-    } catch (error) {
-        console.error('Fehler beim Abrufen der Kontaktdaten:', error);
-    }
-}
-
-
-
-async function editContact(contactId) {
-    showEditContactOverlay(); 
-    await fetchAndFillContactData(contactId); 
-}
-
-
-async function updateContactOnServer(contactId, name, email, phone) {
-    try {
-        const response = await fetch(`${BASE_URL}/contacts/${contactId}.json`, {
-            method: 'PUT', // PUT für Update
-            body: JSON.stringify({ name, email, phone }),
-            headers: { 'Content-Type': 'application/json' },
-        });
-
-        if (!response.ok) {
-            throw new Error('Fehler beim Speichern der Kontaktdaten');
-        }
-
-        const updatedContact = await response.json();
-        console.log('Kontakt erfolgreich aktualisiert:', updatedContact);
-        return updatedContact;
-
-    } catch (error) {
-        console.error('Fehler beim Aktualisieren des Kontakts:', error);
-        throw error; 
-    }
-}
-
-
-function updateContactOverlay(updatedContact) {
-    closeOverlay('edit-contact-overlay');
-
-    const contactOverlay = document.getElementById('contact-overlay');
-    if (contactOverlay) {
-        contactOverlay.querySelector('.contact-name').textContent = updatedContact.name;
-        contactOverlay.querySelector('.contact-email').textContent = updatedContact.email;
-        contactOverlay.querySelector('.contact-phone').textContent = '+49 ' + updatedContact.phone;
-    }
-
-    fetchContactsData(); 
-}
-
-
-function validateContactData(contact) {
-    const { name, email, phone } = contact;
-
-    if (!name || name.trim().length === 0) {
-        alert('Bitte einen gültigen Namen eingeben.');
-        return false;
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        alert('Bitte eine gültige E-Mail-Adresse eingeben.');
-        return false;
-    }
-
-    const phoneRegex = /^\+?[0-9]{8,15}$/;
-    if (!phoneRegex.test(phone)) {
-        alert('Bitte eine gültige Telefonnummer eingeben (8-15 Ziffern).');
-        return false;
-    }
-
-    return true;
-}
-
-
-
-async function handleFormSubmit(event) {
-    event.preventDefault();
-
-    const contactId = document.getElementById('edit-contact-overlay').dataset.contactId;
-    const name = document.getElementById('inputName').value.trim();
-    const email = document.getElementById('inputMail').value.trim();
-    const phone = document.getElementById('inputPhone').value.trim();
-
-    const contactData = { name, email, phone };
-
-    if (!validateContactData(contactData)) return; // Validierung abbrechen, wenn ungültig
-
-    try {
-        const updatedContact = await updateContactOnServer(contactId, name, email, phone);
-        updateContactOverlay(updatedContact);
-
-        // Erfolgsmeldung anzeigen
-        const toast = document.getElementById('toast');
-        toast.textContent = 'Kontakt erfolgreich aktualisiert!'; // Toast-Text anpassen
-        toast.style.display = 'block'; // Toast sichtbar machen
-        setTimeout(() => {
-            toast.classList.add('show'); // Animation starten
-        }, 100);
-
-        // Nach 3 Sekunden das Toast wieder ausblenden
-        setTimeout(() => {
-            toast.classList.remove('show');
-            setTimeout(() => {
-                toast.style.display = 'none'; // Das Toast wieder unsichtbar machen
-            }, 500); // Warte, bis die Animation abgeschlossen ist
-        }, 3000); // Das Toast nach 3 Sekunden verschwinden lassen
-
-    } catch (error) {
-        console.error('Fehler beim Aktualisieren des Kontakts:', error);
-        alert('Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.');
-    }
-}
-
-
-
 function toggleDropdown() {
     const dropdown = document.getElementById("dropdown");
     dropdown.style.display =
     dropdown.style.display === "block" ? "none" : "block";
 }
-
     window.onclick = function (event) {
     if (
         !event.target.matches(".profilPic") &&
@@ -635,6 +210,7 @@ function toggleDropdown() {
     }
     }
 };
+
 
 function createBadge(contactName) {
     const badge = createInitialsBadge(contactName, 'custom-badge');
@@ -654,14 +230,11 @@ function prepareBadgeContainer() {
         console.error('Container mit ID "edit-badge-container" nicht gefunden.');
         return null;
     }
-
     if (imgContainer) {
         imgContainer.style.display = 'none'; 
     }
-
     badgeContainer.style.backgroundColor = 'transparent'; 
     badgeContainer.innerHTML = ''; 
-
     return badgeContainer;
 }
 
@@ -670,7 +243,6 @@ function insertBadgeIntoContainer(badge, badgeContainer) {
     try {
         badgeContainer.appendChild(badge); 
         badgeContainer.style.display = 'block'; 
-        console.log('Badge erfolgreich hinzugefügt:', badge.outerHTML);
     } catch (error) {
         console.error('Fehler beim Hinzufügen des Badges:', error);
     }
@@ -700,7 +272,6 @@ function loadUserDataFromSession() {
     if (!userData) {
         return null;
     }
-
     try {
         return JSON.parse(userData); 
     } catch (error) {
@@ -739,8 +310,3 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }, 100); 
 });
-
-
-
-
-
