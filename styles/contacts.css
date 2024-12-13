@@ -736,7 +736,7 @@ p.contact-phone {
   }
 }
 
-@media (max-width: 920px) {
+@media (max-width: 800px) {
   .right-content {
     display: none;
   }
