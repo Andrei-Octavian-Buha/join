@@ -440,14 +440,11 @@ async function deleteContact(contactId) {
             toast.classList.add('hide');
             setTimeout(() => {
                 toast.style.display = 'none';
-            }, 500);
+            }, 100);
             reject('Abgebrochen'); // Abbruch der Aktion
         });
     });
 }
-
-
-
 
 
 function toggleMenu() {
