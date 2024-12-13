@@ -313,7 +313,7 @@ input:focus {
 
 .overlay {
   position: fixed;
-  top: 50%;
+  top: 46%;
   left: 100%;
   /* Start vollständig außerhalb des Bildschirms rechts */
   transform: translateX(0%) translateY(-50%);
@@ -334,7 +334,7 @@ input:focus {
   display: flex;
   border-color: transparent;
   width: 100%;
-  height: 90%;
+  height: 94%;
   border-radius: 25px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
@@ -679,7 +679,7 @@ p.contact-phone {
   position: fixed;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: baseline;
   gap: 8px;
   right: -200px;
   bottom: 14%;
@@ -795,7 +795,7 @@ p.contact-phone {
   }
 
   .overlay {
-    height: 90%;
+    height: 98%;
     width: 98%;
   }
 
@@ -866,7 +866,7 @@ p.contact-phone {
 @media (min-height: 666px){
  
   .right-content.show{
-    height:75vh;
+    height:77vh;
   }
 
   .contact-button{
@@ -899,11 +899,11 @@ p.contact-phone {
   }
 
   h1 {
-    font-size: 22px;
+    font-size: 24px;
   }
 
   h3 {
-    font-size: 12px;
+    font-size: 16px;
     margin-bottom: 4px;
   }
 }
