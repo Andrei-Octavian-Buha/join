@@ -92,7 +92,7 @@ button:hover {
 .toast {
   position: fixed;
   top: 10px;
-  left: 70%;
+  left: 50%;
   transform: translateX(-50%);
   background-color: rgba(42, 54, 71, 0.795);
   border-style: solid;
@@ -445,7 +445,7 @@ h4 {
   margin-bottom: 30px;
   padding: 0;
   padding-right: 24px;
-  height: 70%;
+  height: 100%;
   overflow: auto;
 }
 
@@ -863,13 +863,20 @@ p.contact-phone {
   }
 }
 
-@media (max-height: 667px){
-  .list{
-    height: 60vh;
-  }
-
+@media (min-height: 666px){
+ 
   .right-content.show{
     height:75vh;
+  }
+
+  .contact-button{
+    padding-bottom: 30px;
+  }
+}
+
+@media (max-height: 668px){
+  .list{
+    height: 60vh;
   }
 
   .contact-button{
