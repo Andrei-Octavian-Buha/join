@@ -403,7 +403,7 @@ button {
   display: none;
   cursor: pointer;
   position: absolute;
-  bottom: 9%;
+  bottom: 12%;
   right: 2%;
   transition: transform 0.3s ease;
 }
