@@ -32,6 +32,7 @@ function openOverlay(overlayId) {
 
 function closeOverlay(overlayId) {
     const overlay = document.getElementById(overlayId);
+    document.getElementById('contactForm').reset();
     overlay.classList.remove("show");
     overlay.classList.add("hide"); 
     setTimeout(() => {
