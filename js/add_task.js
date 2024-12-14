@@ -40,17 +40,7 @@ function createContactElement(element) {
   // Hol die Farbe für die Initialen
   let color = getColorForInitial(initials[0]); // Verwende nur den ersten Buchstaben für die Farbe
 
-  container.innerHTML = `
-    <div class="dropDownContactName">
-      <p class="firstLetterCircle" style="background-color: ${color};">${initials}</p>
-      <p class="dropDownFullName">${element.cont.name}</p>
-    </div>
-    <input
-      type="checkbox"
-      class="contactCheckbox"
-      id="CheckboxID${element.id}"
-    />
-  `;
+  container.innerHTML = dropDownContactNameHTML(element, color, initials);
   return container;
 }
 
@@ -153,15 +143,12 @@ function whenChecked(contactId) {
   let container = document.getElementById(`ContainerID${contactId.id}`);
   let text = document.getElementById("dinamicText");
   let assignet = document.getElementById("whoIsAssignet");
-
-  // Entferne alle Inhalte der "dinamicText"- und "whoIsAssignet"-Container nur, wenn keine Checkbox markiert ist
   if (checked.length === 0) {
     text.innerHTML = "Select contacts to assign";
     assignet.innerHTML = "";
   } else {
     text.innerHTML = "An |";
   }
-
   if (ck.checked) {
     if (!checked.includes(contactId.id)) {
       checked.push({ name: contactId.cont.name, key: contactId.id });
@@ -183,9 +170,7 @@ function whenChecked(contactId) {
       .map((word) => word[0].toUpperCase())
       .join("")
       .slice(0, 2);
-
     let color = getColorForInitial(initials[0]); // Wir verwenden nur den ersten Buchstaben für die Farbe
-
     assignet.innerHTML += `<p class="firstLetterCircle" style="background-color: ${color};">${initials}</p>`;
   });
 }
@@ -273,42 +258,7 @@ function rendSubTask() {
   let toRender = document.getElementById("renderSubTask");
   toRender.innerHTML = "";
   subtasks.forEach((subtask, index) => {
-    toRender.innerHTML += `<div class="subtaskContainer" id="subtaskContainerId${index}">
-    <div class="subtaskInputWithDot">
-      <span id="idSpanSubTaskEdit${index}" class="dot"></span>
-      <input
-        id="toEditInputSubTask-${index}"
-        type="text"
-        class="inputsubTask"
-        readonly
-        placeholder="${subtask}"
-      />
-    </div>
-    <div class="subtaskEdiBtns">
-      <img
-        id="subTaskEditBtn-${index}"
-        class="cursor"
-        src="./assets/priority/edit.svg"
-        alt="Edit"
-        onclick="editAddedSubTask(${index})"
-      />
-      <img
-      id="AddSubTaskStep2-${index}"
-      class="cursor dNone"
-      src="./assets/subtask/check.svg"
-      alt=""
-      onclick="addEditcheck(${index})"
-      />
-      <img src="./assets/priority/bar.svg" alt="Separator" />
-      <img
-        id="subTaskDeleteBtn-${index}"
-        class="cursor"
-        src="./assets/priority/delete.svg"
-        alt="Delete"
-        onclick="deleteSubTask(${index})"
-      />
-    </div>
-  </div>`;
+    toRender.innerHTML += rendsubtaskHTML(subtask, index);
   });
 }
 
@@ -344,7 +294,7 @@ function variableId() {
   prio = getPriorityValue();
   category = document.getElementById("categorySelectId").value;
   if (!Array.isArray(subtasks)) {
-    subtasks = []; // Inițializează un array gol dacă subtasks nu este valid
+    subtasks = [];
   }
   return {
     title,
