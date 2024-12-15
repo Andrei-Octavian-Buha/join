@@ -298,7 +298,6 @@
   .addFisrtLetterContainer {
     padding: 6px;
     border-radius: 6px;
-    background-color: #7381945d;
     display: flex;
     gap: 8px;
   }
