@@ -155,6 +155,7 @@ function showEditCard(task) {
                   />
                   <span>|</span>
                   <img
+                    id="AddSubTaskStep2Add"
                     class="cursor"
                     src="./assets/subtask/check.svg"
                     alt=""
@@ -162,8 +163,10 @@ function showEditCard(task) {
                   />
                 </div>
               </div>
-              <div id="renderSubTask2"></div>
-            </div>
+
+              <div id="renderSubTask"></div>
+            
+              </div>
                 <div class="btnBoardOk">
                     <button class="btnPrimary" onclick="updateContactOnFireBase('${
                       task.id
@@ -236,4 +239,43 @@ function showInfoCard(task) {
               </div>
           </div>
       </div>`;
+}
+
+function rendEditSubTaskHtml(subtask, index) {
+  return `<div class="subtaskContainer" id="subtaskContainerId${index}">
+      <div class="subtaskInputWithDot">
+        <span id="idSpanSubTaskEdit${index}" class="dot"></span>
+        <input
+          id="toEditInputSubTask-${index}"
+          type="text"
+          class="inputsubTask"
+          readonly
+          placeholder="${subtask}"
+        />
+      </div>
+      <div class="subtaskEdiBtns">
+        <img
+          id="subTaskEditBtn-${index}"
+          class="cursor"
+          src="./assets/priority/edit.svg"
+          alt="Edit"
+          onclick="editAddedSubTask(${index})"
+        />
+        <img
+        id="AddSubTaskStep2-${index}"
+        class="cursor dNone"
+        src="./assets/subtask/check.svg"
+        alt=""
+        onclick="addEditSubTaskcheck(${index})"
+        />
+        <img src="./assets/priority/bar.svg" alt="Separator" />
+        <img
+          id="subTaskDeleteBtn-${index}"
+          class="cursor"
+          src="./assets/priority/delete.svg"
+          alt="Delete"
+          onclick="deleteEditTask(${index})"
+        />
+      </div>
+    </div>`;
 }

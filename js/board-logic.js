@@ -85,44 +85,11 @@ function rendEditSubTask(task) {
   subtasks = task.task.subtask;
   let toRender = document.getElementById("renderSubTask2");
   toRender.innerHTML = "";
-  subtasks.forEach((subtask, index) => {
-    toRender.innerHTML += `<div class="subtaskContainer" id="subtaskContainerId${index}">
-      <div class="subtaskInputWithDot">
-        <span id="idSpanSubTaskEdit${index}" class="dot"></span>
-        <input
-          id="toEditInputSubTask-${index}"
-          type="text"
-          class="inputsubTask"
-          readonly
-          placeholder="${subtask}"
-        />
-      </div>
-      <div class="subtaskEdiBtns">
-        <img
-          id="subTaskEditBtn-${index}"
-          class="cursor"
-          src="./assets/priority/edit.svg"
-          alt="Edit"
-          onclick="editAddedSubTask(${index})"
-        />
-        <img
-        id="AddSubTaskStep2-${index}"
-        class="cursor dNone"
-        src="./assets/subtask/check.svg"
-        alt=""
-        onclick="addEditSubTaskcheck(${index})"
-        />
-        <img src="./assets/priority/bar.svg" alt="Separator" />
-        <img
-          id="subTaskDeleteBtn-${index}"
-          class="cursor"
-          src="./assets/priority/delete.svg"
-          alt="Delete"
-          onclick="deleteEditTask(${index})"
-        />
-      </div>
-    </div>`;
-  });
+  if (subtasks >= 1) {
+    subtasks.forEach((subtask, index) => {
+      toRender.innerHTML += rendEditSubTaskHtml(subtask, index);
+    });
+  }
 }
 
 function deleteEditTask(index) {
@@ -143,21 +110,19 @@ function addEditSubTaskcheck(index) {
   });
 }
 
-function addEditSubTask() {
-  let inputText = document.getElementById("inputSubTask");
-  if (inputText.value && subtasks.length <= 1) {
-    subtasks.push(inputText.value);
-  }
-  hideEditAddBtn();
-  rendEditSubTask({ task: { subtask: subtasks } });
-}
+// function addEditSubTask() {
+//   let inputText = document.getElementById("inputSubTask");
+//   if (inputText.value && subtasks.length <= 1) {
+//     subtasks.push(inputText.value);
+//   }
+//   hideEditAddBtn();
+//   rendEditSubTask({ task: { subtask: subtasks } });
+// }
 
 async function updateContactOnFireBase(task) {
-  let toEditTaskId = task;
   let taskData = getValue(task);
-
   try {
-    const response = await fetch(`${BASE_URL}/task/${toEditTaskId}.json`, {
+    const response = await fetch(`${BASE_URL}/task/${task}.json`, {
       method: "PUT", // PUT für Update
       body: JSON.stringify({
         title: taskData.title,
@@ -175,7 +140,6 @@ async function updateContactOnFireBase(task) {
     if (!response.ok) {
       throw new Error("Fehler beim Speichern der Kontaktdaten");
     }
-
     const updatedContact = await response.json();
     console.log("Kontakt erfolgreich aktualisiert:", updatedContact);
     return updatedContact;

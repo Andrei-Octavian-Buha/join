@@ -220,7 +220,6 @@ function editListDataCard(taskId) {
   init();
   showAssignet(task);
   setupDropdownEvents();
-  rendEditSubTask(task);
 }
 
 function listDataCard(taskId) {
