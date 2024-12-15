@@ -82,9 +82,11 @@ function rendEditSubTask(task) {
   subtasks = task.task.subtask;
   let toRender = document.getElementById("renderSubTask2");
   toRender.innerHTML = "";
-  subtasks.forEach((subtask, index) => {
-    toRender.innerHTML += rendEditSubTaskHtml(subtask, index);
-  });
+  if (subtasks) {
+    subtasks.forEach((subtask, index) => {
+      toRender.innerHTML += rendEditSubTaskHtml(subtask, index);
+    });
+  }
 }
 
 function deleteEditTask(index) {

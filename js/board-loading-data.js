@@ -194,8 +194,6 @@ function showPrioIcon(task) {
 }
 
 async function deleteTask(contactId) {
-  console.log(contactId);
-
   try {
     const response = await fetch(`${BASE_URL}/task/${contactId}.json`, {
       method: "DELETE",
@@ -203,7 +201,6 @@ async function deleteTask(contactId) {
     if (!response.ok) {
       throw new Error("Fehler beim Löschen des Kontakts");
     }
-
     taskInit();
     hideOverlayInfoCard();
   } catch (error) {}
@@ -269,9 +266,6 @@ function toggleImage(imageElement) {
 function showInfoAssignet(task) {
   let asignedDiv = document.getElementById(`asignedd${task.id}`);
   if (!asignedDiv) {
-    console.warn(
-      `Elementul asignedDiv cu ID-ul "asigned${task.id}" nu a fost găsit.`
-    );
     return;
   }
   asignedDiv.innerHTML = ""; // Vorherigen Inhalt löschen
