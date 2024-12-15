@@ -38,7 +38,7 @@ body {
   align-items: center;
   width: 40%;
   max-width: 400px;
-  height: 88vh;
+  height: 72vh;
   background-color: rgb(255, 255, 255);
 }
 
@@ -749,7 +749,6 @@ p.contact-phone {
   .left-content {
     width: 90%;
     margin: auto;
-    height: 82vh;
   }
 
   .list{
@@ -869,7 +868,7 @@ p.contact-phone {
 @media (min-height: 666px){
  
   .right-content.show{
-    height:77vh;
+    height:75vh;
   }
 
   .contact-button{
