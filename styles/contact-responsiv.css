@@ -84,7 +84,6 @@
     }
   }
   
-  @media (min-width: 800px) {}
   
   @media (max-width: 796px) {
     .header-logo-responsive {
@@ -161,7 +160,6 @@
   }
   
   @media (min-height: 666px){
-   
     .right-content.show{
       height:75vh;
     }
