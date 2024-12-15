@@ -193,7 +193,7 @@ function showPrioIcon(task) {
   return `<img src="${iconPath}" alt="${prio} priority icon" style="width:20px; height:20px;">`;
 }
 
-async function deleteContact(contactId) {
+async function deleteTask(contactId) {
   console.log(contactId);
 
   try {
@@ -220,6 +220,7 @@ function editListDataCard(taskId) {
   init();
   showAssignet(task);
   setupDropdownEvents();
+  rendEditSubTask(task);
 }
 
 function listDataCard(taskId) {

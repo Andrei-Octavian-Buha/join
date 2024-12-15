@@ -32,11 +32,8 @@ function hideOverlayAddTask() {
 function showOverlayInfoCard() {
   const overlay = document.getElementById("overlay");
   const card = document.getElementById("taskInfoCard");
-
   overlay.style.display = "block";
-
   card.classList.add("showCard");
-
   overlay.addEventListener("click", closeOverlayInfoCard);
 }
 
@@ -85,11 +82,9 @@ function rendEditSubTask(task) {
   subtasks = task.task.subtask;
   let toRender = document.getElementById("renderSubTask2");
   toRender.innerHTML = "";
-  if (subtasks >= 1) {
-    subtasks.forEach((subtask, index) => {
-      toRender.innerHTML += rendEditSubTaskHtml(subtask, index);
-    });
-  }
+  subtasks.forEach((subtask, index) => {
+    toRender.innerHTML += rendEditSubTaskHtml(subtask, index);
+  });
 }
 
 function deleteEditTask(index) {
@@ -110,15 +105,6 @@ function addEditSubTaskcheck(index) {
   });
 }
 
-// function addEditSubTask() {
-//   let inputText = document.getElementById("inputSubTask");
-//   if (inputText.value && subtasks.length <= 1) {
-//     subtasks.push(inputText.value);
-//   }
-//   hideEditAddBtn();
-//   rendEditSubTask({ task: { subtask: subtasks } });
-// }
-
 async function updateContactOnFireBase(task) {
   let taskData = getValue(task);
   try {
@@ -136,6 +122,7 @@ async function updateContactOnFireBase(task) {
       }),
       headers: { "Content-Type": "application/json" },
     });
+    taskInit();
     listDataCard(task);
     if (!response.ok) {
       throw new Error("Fehler beim Speichern der Kontaktdaten");

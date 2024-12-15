@@ -199,7 +199,6 @@ function addSubTask() {
   btn.addEventListener("click", () => {
     if (inputText.value && subtasks.length <= 1) {
       subtasks.push(inputText.value);
-    } else {
     }
     hideEditAddBtn();
     rendSubTask();

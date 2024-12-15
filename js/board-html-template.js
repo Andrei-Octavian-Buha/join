@@ -159,12 +159,11 @@ function showEditCard(task) {
                     class="cursor"
                     src="./assets/subtask/check.svg"
                     alt=""
-                    onclick="addEditSubTask()"
                   />
                 </div>
               </div>
 
-              <div id="renderSubTask"></div>
+              <div id="renderSubTask2"></div>
             
               </div>
                 <div class="btnBoardOk">
@@ -212,7 +211,7 @@ function showInfoCard(task) {
                   </div>
                   <div class="dflex gap8">
                       <div class="gap8 cursor btnDeleteEdit" 
-                            onclick="deleteContact('${task.id}')">
+                            onclick="deleteTask('${task.id}')">
                           <div>
                                                           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="custom-svg">
                                 <mask id="mask0_251030_8603" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
