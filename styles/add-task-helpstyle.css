@@ -1,0 +1,63 @@
+.backgroundSubTaskEdit {
+    background-color: #fff;
+    border-bottom: 1px solid #00bee8;
+}
+
+.checkedBgColor {
+    border-radius: 10px;
+    color: #fff;
+    background-color: #2a3647 !important;
+}
+
+.dNone {
+    display: none;
+  }
+  
+  .imgPopUp {
+    padding-left: 16px;
+  }
+  
+  #popup {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    bottom: -100px; 
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 20px 40px;
+    background-color: #2a3647;
+    color: white;
+    font-size: 16px;
+    border-radius: 10px;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    z-index: 1000;
+}
+
+#popup.visible {
+    opacity: 1;
+    transform: translate(-50%, -50%); 
+    bottom: 50%; /* Zielposition */
+    animation: fly-in-out 2.5s ease forwards;
+}
+
+
+@keyframes fly-in-out {
+    0% {
+    bottom: -100px; 
+    opacity: 0;
+    }
+    20% {
+    bottom: 50%; 
+    opacity: 1;
+    }
+    80% {
+    bottom: 50%; 
+    opacity: 1;
+    }
+    100% {
+    bottom: -100px; 
+    opacity: 0;
+    }
+}
+
