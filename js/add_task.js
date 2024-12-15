@@ -12,15 +12,15 @@ function subtasktrigger() {
 
 function sortContacts(contacts) {
   return contacts.sort((a, b) => {
-    let nameA = a.cont.name.toUpperCase(); 
+    let nameA = a.cont.name.toUpperCase();
     let nameB = b.cont.name.toUpperCase();
     if (nameA < nameB) {
-      return -1; 
+      return -1;
     }
     if (nameA > nameB) {
-      return 1; 
+      return 1;
     }
-    return 0; 
+    return 0;
   });
 }
 
@@ -28,29 +28,23 @@ function createContactElement(element) {
   let container = document.createElement("div");
   container.id = `ContainerID${element.id}`;
   container.classList.add("dropDownContactContainer");
-
-  
   let initials = element.cont.name
     .split(" ")
     .map((word) => word[0].toUpperCase())
     .join("")
     .slice(0, 2);
-
-
-  let color = getColorForInitial(initials[0]); 
-
+  let color = getColorForInitial(initials[0]);
   container.innerHTML = dropDownContactNameHTML(element, color, initials);
   return container;
 }
 
 function renderContacts(contacts) {
   let dropdown = document.getElementById("dropDownBodyId");
-  dropdown.innerHTML = ""; 
-
+  dropdown.innerHTML = "";
   contacts.forEach((element) => {
     let container = createContactElement(element);
     dropdown.appendChild(container);
-    startEvent(element); 
+    startEvent(element);
   });
 }
 
@@ -64,9 +58,9 @@ async function loadContactsData() {
 }
 
 async function loadContacts() {
-  let contactsData = await loadContactsData(); 
-  let sortedContacts = sortContacts(contactsData); 
-  renderContacts(sortedContacts); 
+  let contactsData = await loadContactsData();
+  let sortedContacts = sortContacts(contactsData);
+  renderContacts(sortedContacts);
   subtasktrigger();
 }
 
@@ -160,15 +154,14 @@ function whenChecked(contactId) {
     }
     container.classList.remove("checkedBgColor");
   }
-
-  assignet.innerHTML = ""; 
+  assignet.innerHTML = "";
   checked.forEach((element) => {
     let initials = element.name
       .split(" ")
       .map((word) => word[0].toUpperCase())
       .join("")
       .slice(0, 2);
-    let color = getColorForInitial(initials[0]); 
+    let color = getColorForInitial(initials[0]);
     assignet.innerHTML += `<p class="firstLetterCircle" style="background-color: ${color};">${initials}</p>`;
   });
 }
@@ -335,22 +328,18 @@ function addDataToFireBaseFromBoard() {
 }
 
 function handleFormSubmit(event) {
-  event.preventDefault(); 
-  addDataToFireBase(); 
-  showPopupAndRedirect(); 
+  event.preventDefault();
+  addDataToFireBase();
+  showPopupAndRedirect();
 }
 
 function showPopupAndRedirect() {
   const popup = document.getElementById("popup");
-
-
   popup.classList.remove("hidden");
   popup.classList.add("visible");
-
-
   setTimeout(() => {
     window.location.href = "board.html";
-  }, 2500); 
+  }, 2500);
 }
 
 function toggleDropdown() {
@@ -378,10 +367,8 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
   const dropDownArrow = dropDownHeader.querySelector("img");
-
   dropDownHeader.addEventListener("click", () => {
     dropDownBody.classList.toggle("dNone");
-
     if (!dropDownBody.classList.contains("dNone")) {
       dropDownArrow.style.transform = "rotate(180deg)";
     } else {
