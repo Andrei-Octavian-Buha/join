@@ -8,20 +8,19 @@ function subtasktrigger() {
   hideSubTaskAddBtn();
   deleteInputSubTask();
   addSubTask();
-  // startEventListner();
 }
 
 function sortContacts(contacts) {
   return contacts.sort((a, b) => {
-    let nameA = a.cont.name.toUpperCase(); // Großbuchstaben für den Vergleich
+    let nameA = a.cont.name.toUpperCase(); 
     let nameB = b.cont.name.toUpperCase();
     if (nameA < nameB) {
-      return -1; // a kommt vor b
+      return -1; 
     }
     if (nameA > nameB) {
-      return 1; // b kommt vor a
+      return 1; 
     }
-    return 0; // Wenn die Namen gleich sind
+    return 0; 
   });
 }
 
@@ -30,15 +29,15 @@ function createContactElement(element) {
   container.id = `ContainerID${element.id}`;
   container.classList.add("dropDownContactContainer");
 
-  // Extrahiere die Initialen des Kontakts
+  
   let initials = element.cont.name
     .split(" ")
     .map((word) => word[0].toUpperCase())
     .join("")
     .slice(0, 2);
 
-  // Hol die Farbe für die Initialen
-  let color = getColorForInitial(initials[0]); // Verwende nur den ersten Buchstaben für die Farbe
+
+  let color = getColorForInitial(initials[0]); 
 
   container.innerHTML = dropDownContactNameHTML(element, color, initials);
   return container;
@@ -46,12 +45,12 @@ function createContactElement(element) {
 
 function renderContacts(contacts) {
   let dropdown = document.getElementById("dropDownBodyId");
-  dropdown.innerHTML = ""; // Existierende Kontakte entfernen
+  dropdown.innerHTML = ""; 
 
   contacts.forEach((element) => {
     let container = createContactElement(element);
     dropdown.appendChild(container);
-    startEvent(element); // Starte das Event für diesen Kontakt
+    startEvent(element); 
   });
 }
 
@@ -65,9 +64,9 @@ async function loadContactsData() {
 }
 
 async function loadContacts() {
-  let contactsData = await loadContactsData(); // Daten abrufen
-  let sortedContacts = sortContacts(contactsData); // Kontakte sortieren
-  renderContacts(sortedContacts); // Kontakte rendern
+  let contactsData = await loadContactsData(); 
+  let sortedContacts = sortContacts(contactsData); 
+  renderContacts(sortedContacts); 
   subtasktrigger();
 }
 
@@ -162,15 +161,14 @@ function whenChecked(contactId) {
     container.classList.remove("checkedBgColor");
   }
 
-  assignet.innerHTML = ""; // Nur bei Änderungen den Inhalt löschen, nicht bei jedem Durchlauf
+  assignet.innerHTML = ""; 
   checked.forEach((element) => {
-    // Extrahiere die Initialen des Kontakts
     let initials = element.name
       .split(" ")
       .map((word) => word[0].toUpperCase())
       .join("")
       .slice(0, 2);
-    let color = getColorForInitial(initials[0]); // Wir verwenden nur den ersten Buchstaben für die Farbe
+    let color = getColorForInitial(initials[0]); 
     assignet.innerHTML += `<p class="firstLetterCircle" style="background-color: ${color};">${initials}</p>`;
   });
 }
@@ -337,22 +335,22 @@ function addDataToFireBaseFromBoard() {
 }
 
 function handleFormSubmit(event) {
-  event.preventDefault(); // Verhindert das automatische Neuladen der Seite
-  addDataToFireBase(); // Speichere die Daten in Firebase
-  showPopupAndRedirect(); // Zeige das Pop-up und leite weiter
+  event.preventDefault(); 
+  addDataToFireBase(); 
+  showPopupAndRedirect(); 
 }
 
 function showPopupAndRedirect() {
   const popup = document.getElementById("popup");
 
-  // Pop-up anzeigen
+
   popup.classList.remove("hidden");
   popup.classList.add("visible");
 
-  // Nach 2.5 Sekunden Weiterleitung, passend zur Animation
+
   setTimeout(() => {
     window.location.href = "board.html";
-  }, 2500); // Wartezeit für die gesamte Animation
+  }, 2500); 
 }
 
 function toggleDropdown() {
