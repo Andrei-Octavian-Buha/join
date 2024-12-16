@@ -26,6 +26,8 @@
 .content-wrapper {
   display: flex;
   gap: 10px;
+  height: calc(100dvh - 224px);
+  max-width: 1440px;
 }
 
 body {
@@ -37,7 +39,6 @@ body {
   flex-direction: column;
   align-items: center;
   width: 40%;
-  max-width: 400px;
   height: 72vh;
   background-color: rgb(255, 255, 255);
 }
