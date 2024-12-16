@@ -138,35 +138,35 @@
 
 #taskInfoCard {
   position: fixed;
-  top: 10%;
-  right: -400px;
+  top: 50%;
+  right: -600px;
   transform: translateY(-50%);
   height: auto;
 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
-  padding: 20px;
+
   transition: all 0.5s ease-in-out;
   z-index: 1000;
 }
 
 @keyframes slideIn {
   0% {
-    right: -400px;
+    right: -600px;
   }
   100% {
-    right: 60%;
+    right: 50%;
     transform: translate(50%, -50%);
   }
 }
 
 @keyframes slideOut {
   0% {
-    right: 60%;
+    right: 50%;
     transform: translate(50%, -50%);
   }
   100% {
-    right: -400px;
+    right: -600px;
     transform: translateY(-50%);
   }
 }
