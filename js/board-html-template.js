@@ -155,7 +155,7 @@ function showEditCard(task) {
                   />
                   <span>|</span>
                   <img
-                    id="AddSubTaskStep2Add"
+                    id="AddSubTaskStep2Test"
                     class="cursor"
                     src="./assets/subtask/check.svg"
                     alt=""

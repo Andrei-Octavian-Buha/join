@@ -27,6 +27,7 @@ function hideOverlayAddTask() {
   template.innerHTML = "";
   template.classList.add("dNone");
   checked = [];
+  subtasks = [];
 }
 
 function showOverlayInfoCard() {
