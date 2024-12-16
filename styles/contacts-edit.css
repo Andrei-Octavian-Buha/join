@@ -30,11 +30,12 @@
     display: none; /* Anfangs versteckt */
     flex: 1;
     border-color: transparent;
-    width: 80%;
-    height: 70%;
+    max-width: 1400px;
+    height: calc(60dvh - 224px);
     border-radius: 25px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     animation: slideIn 0.8s forwards;
+    width: calc(100dvw - 50px);
 }
 
 .edit-overlay-contact.hide {
@@ -79,6 +80,7 @@
     }
     .edit-content {
         flex-direction: column;
+        height: 90%;
     }
     .edit-info {
         width: 100%;
