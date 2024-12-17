@@ -32,12 +32,12 @@ async function deleteContactFromApi(contactId) {
         });
 
         if (!response.ok) {
-            throw new Error('Fehler beim Löschen des Kontakts');
+            
         }
 
         return true;
     } catch (error) {
-        throw new Error('Fehler beim Löschen des Kontakts');
+        
     }
 }
 
@@ -100,12 +100,12 @@ async function deleteContactFromApi(contactId) {
         });
 
         if (!response.ok) {
-            throw new Error('Fehler beim Löschen des Kontakts');
+           
         }
 
         return true; // Erfolgreiches Löschen
     } catch (error) {
-        console.error('Fehler beim Löschen des Kontakts:', error);
+    
         return false; // Fehler beim Löschen
     }
 }
@@ -150,7 +150,7 @@ function handleUserConfirmation(confirmButton, cancelButton, contactId, toast) {
                 reloadPageAfterDelay();
                 resolve();
             } else {
-                reject('Fehler beim Löschen');
+            
             }
         });
 
@@ -202,10 +202,10 @@ function showEditContactOverlay() {
 
 async function fetchAndFillContactData(contactId) {
     try {
-        console.log(`Abrufe der Kontaktdaten für Kontakt-ID: ${contactId}`);
+
         const response = await fetch(`${BASE_URL}/contacts/${contactId}.json`);
         if (!response.ok) {
-            throw new Error('Fehler beim Abrufen der Kontaktdaten');
+           
         }
         const contact = await response.json();
         console.log('Kontaktdaten erfolgreich abgerufen:', contact);
@@ -217,11 +217,11 @@ async function fetchAndFillContactData(contactId) {
         if (editContactOverlay) {
             editContactOverlay.dataset.contactId = contactId;
         }
-        console.log('Formular mit den Kontaktdaten gefüllt.');
+       
 
         displayBadgeInContainer(contact.name); 
     } catch (error) {
-        console.error('Fehler beim Abrufen der Kontaktdaten:', error);
+       
     }
 }
 
@@ -242,15 +242,15 @@ async function updateContactOnServer(contactId, name, email, phone) {
         });
 
         if (!response.ok) {
-            throw new Error('Fehler beim Speichern der Kontaktdaten');
+            
         }
 
         const updatedContact = await response.json();
-        console.log('Kontakt erfolgreich aktualisiert:', updatedContact);
+    
         return updatedContact;
 
     } catch (error) {
-        console.error('Fehler beim Aktualisieren des Kontakts:', error);
+       
         throw error; 
     }
 }
@@ -274,19 +274,19 @@ function validateContactData(contact) {
     const { name, email, phone } = contact;
 
     if (!name || name.trim().length === 0) {
-        alert('Bitte einen gültigen Namen eingeben.');
+     
         return false;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-        alert('Bitte eine gültige E-Mail-Adresse eingeben.');
+      
         return false;
     }
 
     const phoneRegex = /^\+?[0-9]{8,15}$/;
     if (!phoneRegex.test(phone)) {
-        alert('Bitte eine gültige Telefonnummer eingeben (8-15 Ziffern).');
+       
         return false;
     }
 
@@ -345,7 +345,6 @@ async function handleFormSubmit(event) {
 
         showToastMessage('Kontakt erfolgreich aktualisiert!'); 
     } catch (error) {
-        console.error('Fehler beim Aktualisieren des Kontakts:', error);
-        alert('Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.');
+    
     }
 }
