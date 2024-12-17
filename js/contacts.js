@@ -53,7 +53,7 @@ async function fetchContactsData() {
     try {
         const response = await fetch(`${BASE_URL}/contacts.json`);
         if (!response.ok) {
-            throw new Error('Fehler beim Abrufen der Kontaktdaten');
+            
         }
         const data = await response.json();
         const contactArray = Array.isArray(data) ? data : Object.keys(data).map(key => {
@@ -62,7 +62,7 @@ async function fetchContactsData() {
 
         displayContacts(contactArray);
     } catch (error) {
-        console.error('Fehler beim Laden der Kontaktdaten:', error);
+       
     }
 }
 
@@ -216,7 +216,6 @@ function toggleDropdown() {
 function createBadge(contactName) {
     const badge = createInitialsBadge(contactName, 'custom-badge');
     if (!badge) {
-        console.error('Badge konnte nicht erstellt werden.');
         return null;
     }
     return badge;
@@ -228,7 +227,6 @@ function prepareBadgeContainer() {
     const imgContainer = document.getElementById('edit-img-container');
 
     if (!badgeContainer) {
-        console.error('Container mit ID "edit-badge-container" nicht gefunden.');
         return null;
     }
     if (imgContainer) {
@@ -245,7 +243,7 @@ function insertBadgeIntoContainer(badge, badgeContainer) {
         badgeContainer.appendChild(badge); 
         badgeContainer.style.display = 'block'; 
     } catch (error) {
-        console.error('Fehler beim Hinzufügen des Badges:', error);
+     
     }
 }
 
@@ -276,7 +274,6 @@ function loadUserDataFromSession() {
     try {
         return JSON.parse(userData); 
     } catch (error) {
-        console.error("Fehler beim Verarbeiten der Benutzerdaten:", error);
         return null;
     }
 }
@@ -284,11 +281,6 @@ function loadUserDataFromSession() {
 
 function insertInitialsIntoElement(initials, elementId) {
     const profileTextElement = document.getElementById(elementId);
-    if (!profileTextElement) {
-        console.warn(`Element mit der ID '${elementId}' wurde nicht gefunden.`);
-        return;
-    }
-
     profileTextElement.innerHTML = initials; 
 }
 

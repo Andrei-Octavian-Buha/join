@@ -59,7 +59,7 @@ function displayContactOverlay(contactId, contactName, contactEmail, contactPhon
     if (overlayContainer) {
         overlayContainer.innerHTML = overlayHTML;
     } else {
-        console.error('Container mit der ID "overlay-container" wurde nicht gefunden.');
+      
     }
 }
 
@@ -68,16 +68,16 @@ async function handleCardClick(contactId) {
     try {
         const response = await fetch(`${BASE_URL}/contacts/${contactId}.json`);
         if (!response.ok) {
-            throw new Error('Fehler beim Abrufen der Kontaktdaten');
+          
         }
         const contact = await response.json();
         if (contact) {
             openContactOverlay(contactId, contact.name, contact.email, contact.phone);
         } else {
-            console.error('Kontakt nicht gefunden:', contactId);
+            
         }
     } catch (error) {
-        console.error('Fehler beim Abrufen der Kontaktdaten:', error);
+      
     }
 }
 
