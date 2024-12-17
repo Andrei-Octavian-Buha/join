@@ -54,10 +54,6 @@
       display: none;
     }
   
-    .back-arrow {
-      display: block;
-    }
-  
     .three-points {
       display: block;
     }
@@ -81,6 +77,9 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+    }
+    .back-arrow {
+      display: block;
     }
   }
   
