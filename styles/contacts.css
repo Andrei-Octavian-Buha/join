@@ -406,6 +406,7 @@ ul {
 .badge {
   display: flex;
   align-items: center;
+  margin-top: 80px;
 }
 
 .contact-name {
