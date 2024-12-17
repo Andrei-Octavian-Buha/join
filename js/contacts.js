@@ -126,6 +126,7 @@ function createContactCard(contact) {
     card.onclick = () => {
         setActiveContact(card); 
         handleCardClick(contact.id); 
+        hideSecondOverlay();
     };
     return card;
 }

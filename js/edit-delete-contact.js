@@ -73,9 +73,17 @@ function updateSecondOverlay() {
     secondOverlay.style.display = 'block';
     
     // Optional: Inhalt in secondOverlay einfügen
-    secondOverlay.innerHTML = '';
+    secondOverlay.innerHTML = '<h1>Hallo</h1>';
 }
 
+
+function hideSecondOverlay() {
+    const secondOverlay = document.getElementById('secondOverlay');
+    secondOverlay.style.display = 'none';
+    
+    // Optional: Inhalt zurücksetzen
+    secondOverlay.innerHTML = '';
+}
 
 
 function showConfirmationToast() {
