@@ -2,6 +2,9 @@
     .toast {
       left: 50%;
     }
+    .left-content {
+      height: 78vh;
+    }
   }
   
   @media (max-width: 1015px) {
