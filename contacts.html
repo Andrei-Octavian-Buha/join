@@ -25,7 +25,7 @@
     <link rel="icon" href="./assets/img/logo2.svg" />
     <title>Contacts</title>
   </head>
-  <body id="contactsPage" onload="includeHTML(); init();">
+  <body onload="includeHTML(); init();">
     <div class="" w3-include-html="./templates/header.html"></div>
     <div class="content">
       <div>
@@ -75,7 +75,6 @@
                 <form id="contactForm" onsubmit="addContact(event)">
                   <input
                     type="text"
-                    class="input-name"
                     id="name"
                     placeholder="Name"
                     required
@@ -83,20 +82,19 @@
                     title="Mindestens 3 Buchstaben erforderlich"
                   />
                   <input
-                    type="text"
-                    class="input-mail"
+                    type="email"
                     id="email"
                     placeholder="Email"
                     required
                     title="Bitte eine gültige E-Mail-Adresse eingeben"
                   />
                   <input
-                    type="text"
-                    class="input-phone"
+                    type="tel"
                     id="phone"
                     placeholder="Phone"
                     required
                     title="Bitte eine gültige Telefonnummer eingeben"
+                    pattern="^\+?[0-9]{8,15}$"
                   />
                   <div class="button-container">
                     <button
@@ -109,6 +107,7 @@
                     <button class="create" type="submit">Create Contact</button>
                   </div>
                 </form>
+                
               </div>
             </div>
           </div>
