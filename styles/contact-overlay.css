@@ -4,7 +4,6 @@
     left: 100%;
     transform: translateX(0%) translateY(-50%);
     width: 100%;
-    height: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,13 +14,13 @@
   }
   
   .overlay-content {
+    position: relative;
     display: flex;
     border-color: transparent;
-    width: 100%;
-    height: 94%;
     border-radius: 25px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    height: calc(60dvh - 224px);
+    width: calc(100dvw - 50px);
+    height: calc(88dvh - 300px);
     max-width: 1440px;
   }
 
@@ -32,7 +31,7 @@
       border-radius: 25px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       width: calc(100dvw - 50px);
-      height: calc(60dvh - 224px);
+      height: calc(88dvh - 245px);
       max-width: 1440px;
     }
   }
@@ -44,7 +43,7 @@
       width: 97%;
       border-radius: 25px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      height: calc(100dvh - 102px);
+      height: calc(100dvh - 100px);
       max-width: 1440px;
     }
   }
