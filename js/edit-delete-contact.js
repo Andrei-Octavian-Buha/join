@@ -62,11 +62,20 @@ function hideToast() {
 }
 
 
-function reloadPageAfterDelay() {
-    setTimeout(() => {
-        location.reload();
-    }, 1000); // Seite nach 1 Sekunde neu laden
+function updateSecondOverlay() {
+    const secondOverlay = document.getElementById('secondOverlay');
+    const contactOverlay = document.getElementById('contact-overlay');
+
+    // Kontakt-Overlay ausblenden
+    contactOverlay.style.display = 'none';
+
+    // Second-Overlay einblenden
+    secondOverlay.style.display = 'block';
+    
+    // Optional: Inhalt in secondOverlay einfügen
+    secondOverlay.innerHTML = '';
 }
+
 
 
 function showConfirmationToast() {
@@ -93,52 +102,6 @@ function showConfirmationToast() {
 }
 
 
-async function deleteContactFromApi(contactId) {
-    try {
-        const response = await fetch(`${BASE_URL}/contacts/${contactId}.json`, {
-            method: 'DELETE',
-        });
-
-        if (!response.ok) {
-           
-        }
-
-        return true; // Erfolgreiches Löschen
-    } catch (error) {
-    
-        return false; // Fehler beim Löschen
-    }
-}
-
-
-function showDeletionSuccessToast() {
-    const toast = document.getElementById('toast');
-    toast.innerHTML = 'Kontakt wurde erfolgreich gelöscht!';
-    setTimeout(() => {
-        toast.classList.add('show');
-        toast.classList.remove('hide');
-    }, 100);
-}
-
-
-function hideToast() {
-    const toast = document.getElementById('toast');
-    setTimeout(() => {
-        toast.classList.add('hide');
-        setTimeout(() => {
-            toast.style.display = 'none';
-        }, 500);
-    }, 3000); // Verzögerung von 3 Sekunden vor dem Ausblenden
-}
-
-
-function reloadPageAfterDelay() {
-    setTimeout(() => {
-        location.reload();
-    }, 1000); // Seite nach 1 Sekunde neu laden
-}
-
-
 function handleUserConfirmation(confirmButton, cancelButton, contactId, toast) {
     return new Promise((resolve, reject) => {
         confirmButton.addEventListener('click', async () => {
@@ -147,7 +110,8 @@ function handleUserConfirmation(confirmButton, cancelButton, contactId, toast) {
             if (isDeleted) {
                 showDeletionSuccessToast();
                 setTimeout(() => hideToast(), 3000);
-                reloadPageAfterDelay();
+                fetchContactsData();
+                updateSecondOverlay()
                 resolve();
             } else {
             
