@@ -90,3 +90,103 @@ function handleNetworkError(error) {
     console.error('Netzwerkfehler:', error);
     alert('Es ist ein Netzwerkfehler aufgetreten. Bitte überprüfen Sie Ihre Verbindung.');
 }
+
+
+const inputs = {
+    name: document.getElementById('name'),
+    email: document.getElementById('email'),
+    phone: document.getElementById('phone')
+};
+
+const patterns = {
+    name: /.{3,}/,
+    email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+    phone: /^\+?[0-9]{8,15}$/
+};
+
+const messages = {
+    name: 'Der Name muss mindestens 3 Buchstaben lang sein. (Beispiel: "Max")',
+    email: 'Bitte eine gültige E-Mail-Adresse eingeben. (Beispiel: "name@domain.de")',
+    phone: 'Bitte eine gültige Telefonnummer (min. 8 Zahlen) eingeben. (Beispiel: "+49123456789")'
+};
+
+/**
+ * 
+ */
+function createErrorMessages() {
+    Object.keys(inputs).forEach(field => {
+        if (!document.getElementById(`${field}-error`)) {
+            const errorMessage = document.createElement('div');
+            errorMessage.id = `${field}-error`;
+            errorMessage.style.color = 'red';
+            errorMessage.style.fontSize = '12px';
+            errorMessage.style.marginTop = '5px';
+            inputs[field].parentNode.appendChild(errorMessage);
+        }
+    });
+}
+
+/**
+ * 
+ * @param {string} field 
+ * @returns {boolean} 
+ */
+function validateField(field) {
+    const input = inputs[field];
+    const isValid = patterns[field].test(input.value.trim());
+    const errorMessage = document.getElementById(`${field}-error`);
+
+    if (isValid) {
+        input.style.border = '1px solid darkgreen';
+        errorMessage.textContent = '';
+    } else {
+        input.style.border = '1px solid red';
+        errorMessage.textContent = messages[field];
+    }
+
+    return isValid;
+}
+
+/**
+ * 
+ * @returns {boolean} 
+ */
+function validateForm() {
+    let isFormValid = true;
+    Object.keys(inputs).forEach(field => {
+        if (!validateField(field)) {
+            isFormValid = false;
+        }
+    });
+    return isFormValid;
+}
+
+/**
+ * 
+ * @param {Event} event 
+ */
+function handleSubmit(event) {
+    event.preventDefault();
+    const errorContainer = document.querySelector('.error-container');
+    if (validateForm()) {
+        errorContainer.style.display = 'none';
+        console.log('Formular erfolgreich gesendet!');
+    } else {
+        errorContainer.style.display = 'block';
+        errorContainer.textContent = 'Bitte korrigiere die markierten Felder.';
+    }
+}
+
+
+function initializeBlurValidation() {
+    Object.keys(inputs).forEach(field => {
+        inputs[field].addEventListener('blur', () => validateField(field));
+    });
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    createErrorMessages();
+    initializeBlurValidation();
+    document.getElementById('contactForm').addEventListener('submit', handleSubmit);
+});

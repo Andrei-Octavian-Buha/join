@@ -319,8 +319,64 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 100); 
 });
 
+document.getElementById('contactForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const inputs = {
+        name: document.getElementById('name'),
+        email: document.getElementById('email'),
+        phone: document.getElementById('phone')
+    };
+    const errorContainer = document.querySelector('.error-container');
+    const patterns = {
+        name: /.{3,}/,
+        email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+        phone: /^\+?[0-9]{8,15}$/
+    };
+    const messages = {
+        name: 'Der Name muss mindestens 3 Buchstaben lang sein.',
+        email: 'Bitte eine gültige E-Mail-Adresse eingeben.',
+        phone: 'Bitte eine gültige Telefonnummer eingeben.'
+    };
 
+    for (const field in inputs) {
+        inputs[field].style.border = '';
+        if (!patterns[field].test(inputs[field].value.trim())) {
+            errorContainer.textContent = messages[field];
+            errorContainer.style.display = 'block';
+            inputs[field].style.border = '2px solid red';
+            return;
+        }
+    }
+    errorContainer.style.display = 'none';
+});
 
+document.getElementById('editContactForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const inputs = {
+        name: document.getElementById('inputName'),
+        email: document.getElementById('inputMail'),
+        phone: document.getElementById('inputPhone')
+    };
+    const errorContainer = document.querySelector('.error-container-edit');
+    const patterns = {
+        name: /.{3,}/,
+        email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+        phone: /^\+?[0-9]{8,15}$/
+    };
+    const messages = {
+        name: 'Der Name muss mindestens 3 Buchstaben lang sein.',
+        email: 'Bitte eine gültige E-Mail-Adresse eingeben.',
+        phone: 'Bitte eine gültige Telefonnummer eingeben.'
+    };
 
-
-
+    for (const field in inputs) {
+        inputs[field].style.border = '';
+        if (!patterns[field].test(inputs[field].value.trim())) {
+            errorContainer.textContent = messages[field];
+            errorContainer.style.display = 'block';
+            inputs[field].style.border = '2px solid red';
+            return;
+        }
+    }
+    errorContainer.style.display = 'none';
+});
