@@ -256,7 +256,6 @@ form {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  gap: 22px;
 }
 
 input {
@@ -272,9 +271,11 @@ input {
   background-repeat: no-repeat;
   background-position: calc(100% - 10px) center;
   background-size: 20px 20px;
+  margin-bottom: 22px;
 }
 
 .input-mail {
+  margin-bottom: 22px;
   background-image: url("../assets/img/email.png");
   background-repeat: no-repeat;
   background-position: calc(100% - 10px) center;
@@ -288,6 +289,12 @@ input {
   background-size: 20px 20px;
 }
 
+.error-container{
+  margin-top: 8px;
+  font-size: 14px;
+  color: red;
+}
+
 input:focus {
   border-color: rgb(41, 171, 226);
 }
@@ -299,10 +306,12 @@ input:focus {
 }
 
 .create {
+  margin-top: 16px;
   width: 200px;
 }
 
 .cancel {
+  margin-top: 16px;
   width: 140px;
   background-color: white;
   color: black;

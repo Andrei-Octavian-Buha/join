@@ -74,6 +74,7 @@
                 </div>
                 <form id="contactForm" onsubmit="addContact(event)">
                   <input
+<<<<<<< Updated upstream
                   type="text"
                   id="name"
                   class="input-name"
@@ -100,6 +101,31 @@
                   pattern="^\+?[0-9]{8,15}$"
                 />
                 
+=======
+                    type="text"
+                    id="name"
+                    class="input-name"
+                    placeholder="Name"
+                    minlength="3"
+                  />
+                  <input
+                    type="email"
+                    id="email"
+                    class="input-mail"
+                    placeholder="Email"
+                  />
+                  <input
+                    type="tel"
+                    id="phone"
+                    class="input-phone"
+                    placeholder="Phone"
+                    pattern="^\+?[0-9]{8,15}$"
+                  />
+              
+                  <!-- Hier wird die Fehlermeldung dynamisch eingefügt -->
+                  <div class="error-container"></div>
+              
+>>>>>>> Stashed changes
                   <div class="button-container">
                     <button
                       class="cancel"
@@ -111,7 +137,6 @@
                     <button class="create" type="submit">Create Contact</button>
                   </div>
                 </form>
-                
               </div>
             </div>
           </div>

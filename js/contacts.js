@@ -30,15 +30,29 @@ function openOverlay(overlayId) {
 }
 
 
+function resetForm() {
+    document.getElementById('contactForm').reset();
+
+    // Fehler-Container zurücksetzen
+    const errorContainer = document.querySelector('.error-container');
+    errorContainer.style.display = 'none';
+    errorContainer.textContent = '';
+
+    // Rote Rahmen entfernen
+    const inputs = document.querySelectorAll('#contactForm input');
+    inputs.forEach(input => input.style.border = '');
+}
+
 function closeOverlay(overlayId) {
     const overlay = document.getElementById(overlayId);
-    document.getElementById('contactForm').reset();
+    resetForm();
+
     overlay.classList.remove("show");
-    overlay.classList.add("hide"); 
+    overlay.classList.add("hide");
     setTimeout(() => {
-        overlay.style.display = "none"; 
-        overlay.classList.remove("hide"); 
-    }, 800); 
+        overlay.style.display = "none";
+        overlay.classList.remove("hide");
+    }, 800);
 }
 
 
@@ -303,4 +317,35 @@ document.addEventListener("DOMContentLoaded", () => {
             setUserInitials(); 
         }
     }, 100); 
+});
+
+document.getElementById('contactForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const inputs = {
+        name: document.getElementById('name'),
+        email: document.getElementById('email'),
+        phone: document.getElementById('phone')
+    };
+    const errorContainer = document.querySelector('.error-container');
+    const patterns = {
+        name: /.{3,}/,
+        email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+        phone: /^\+?[0-9]{8,15}$/
+    };
+    const messages = {
+        name: 'Der Name muss mindestens 3 Buchstaben lang sein.',
+        email: 'Bitte eine gültige E-Mail-Adresse eingeben.',
+        phone: 'Bitte eine gültige Telefonnummer eingeben.'
+    };
+
+    for (const field in inputs) {
+        inputs[field].style.border = '';
+        if (!patterns[field].test(inputs[field].value.trim())) {
+            errorContainer.textContent = messages[field];
+            errorContainer.style.display = 'block';
+            inputs[field].style.border = '2px solid red';
+            return;
+        }
+    }
+    errorContainer.style.display = 'none';
 });
