@@ -9,21 +9,21 @@ function storeUserInSessionStorage(user) {
   sessionStorage.setItem("currentUser", JSON.stringify({ name: user.name, email: user.email }));
 }
 
-async function handleSignUp() {
-  const inputs = getSignUpInputs();
-  if (!validateInputs(inputs)) return;
-  const user = createUserObject(inputs);
+//async function handleSignUp() {
+  //const inputs = getSignUpInputs();
+  //if (!validateInputs(inputs)) return;
+  //const user = createUserObject(inputs);
 
-  try {
-    await pushUserToDatabase(user);
-    storeUserInSessionStorage(user); // Speichert Name und Email in Session Storage
-    showSignUpPopup();
-    redirectToHome();
-  } catch (error) {
-    console.error(error);
-    alert("An error occurred. Please try again.");
-  }
-}
+  //try {
+    //await pushUserToDatabase(user);
+    //storeUserInSessionStorage(user); // Speichert Name und Email in Session Storage
+    //showSignUpPopup();
+    //redirectToHome();
+  //} catch (error) {
+   // console.error(error);
+   // alert("An error occurred. Please try again.");
+  //}
+//}
 
 // Collect input values
 function getSignUpInputs() {
@@ -166,6 +166,52 @@ function backToLogin(){
   backToLogin.addEventListener("click", ()=>{
     window.location.href = "index.html";
   })
+}
+ 
+// Funktion zur Validierung der E-Mail-Adresse
+function validateEmail(email) {
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+  return emailRegex.test(email);
+}
+
+// Funktion zur Validierung des Namens
+function validateName(name) {
+  return name.length >= 3;  // Name muss mindestens 3 Zeichen lang sein
+}
+
+// Funktion, die die Fehler im Container anzeigt
+function showError(message) {
+  const errorContainer = document.getElementById("passwordError");
+  errorContainer.textContent = message;  // Fehlermeldung setzen
+  errorContainer.style.display = "block";  // Container sichtbar machen
+}
+
+// Funktion zur Fehlerbehebung und zum Verbergen der Fehler
+function clearErrors() {
+  const errorContainer = document.getElementById("passwordError");
+  errorContainer.style.display = "none";  // Fehlercontainer ausblenden
+}
+
+// Funktion, die beim Klicken auf den "Sign up"-Button aufgerufen wird
+async function handleSignUp() {
+  const inputs = getSignUpInputs();
+  if (!validateInputs(inputs)) return;
+  clearErrors();
+  if (!validateEmail(inputs.email)) {
+    showError("Bitte gib eine gültige E-Mail-Adresse ein.");
+    return; }
+  if (!validateName(inputs.name)) {
+    showError("Der Name muss mindestens 3 Zeichen lang sein.");
+    return;}
+  const user = createUserObject(inputs);
+  try {
+    await pushUserToDatabase(user);
+    storeUserInSessionStorage(user); // Speichert Name und Email in Session Storage
+    showSignUpPopup();
+    redirectToHome();
+  } catch (error) {
+    // Statt console.error wird hier eine benutzerdefinierte Fehlermeldung angezeigt
+    showError("Ein Fehler ist aufgetreten. Bitte versuche es erneut.");}
 }
 
 

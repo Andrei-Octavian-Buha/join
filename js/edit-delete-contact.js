@@ -153,7 +153,7 @@ function editContact(contactId) {
     if (editContactOverlay) {
         editContactOverlay.style.display = 'block'; 
     } else {
-        console.error('Element mit der ID "edit-contact-overlay" wurde nicht gefunden.');
+     
     }
 }
 
@@ -162,10 +162,8 @@ function showEditContactOverlay() {
     const editContactOverlay = document.getElementById('edit-contact-overlay');
     
     if (editContactOverlay) {
-        console.log('Overlay gefunden, wird angezeigt.');
         editContactOverlay.style.display = 'block'; 
     } else {
-        console.error('Element mit der ID "edit-contact-overlay" wurde nicht gefunden.');
     }
 }
 
@@ -177,7 +175,6 @@ async function fetchAndFillContactData(contactId) {
         if (!response.ok) {
         }
         const contact = await response.json();
-        console.log('Kontaktdaten erfolgreich abgerufen:', contact);
         document.getElementById('inputName').value = contact.name;
         document.getElementById('inputMail').value = contact.email;
         document.getElementById('inputPhone').value = contact.phone;
