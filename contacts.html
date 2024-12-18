@@ -173,8 +173,6 @@
                 id="inputName"
                 class="input-name"
                 placeholder="Name"
-                title="Mindestens 2 Buchstaben"
-                required
                 minlength="2"
                 />
                 <input
@@ -182,8 +180,6 @@
                 id="inputMail"
                 class="input-mail"
                 placeholder="Email"
-                title="bitte eine gültige E-Mail-Adresse eintragen"
-                required
                 />
                 <input
                 type="tel"
@@ -191,10 +187,8 @@
                 class="input-phone"
                 placeholder="Phone"
                 pattern="^\+?[0-9]{8,15}$"
-                title="Telefonnummer, 8 - 15 Zahlen / Zeichen"
-                required
                 />
-            
+                <div class="error-container-edit"></div>
                 <div class="button-container">
                   <button
                     class="cancel"

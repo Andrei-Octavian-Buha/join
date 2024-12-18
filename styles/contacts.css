@@ -295,6 +295,12 @@ input {
   color: red;
 }
 
+.error-container-edit{
+  margin-top: 8px;
+  font-size: 14px;
+  color: red;
+}
+
 input:focus {
   border-color: rgb(41, 171, 226);
 }
