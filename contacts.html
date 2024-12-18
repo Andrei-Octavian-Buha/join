@@ -74,28 +74,32 @@
                 </div>
                 <form id="contactForm" onsubmit="addContact(event)">
                   <input
-                    type="text"
-                    id="name"
-                    placeholder="Name"
-                    required
-                    minlength="3"
-                    title="Mindestens 3 Buchstaben erforderlich"
-                  />
-                  <input
-                    type="email"
-                    id="email"
-                    placeholder="Email"
-                    required
-                    title="Bitte eine gültige E-Mail-Adresse eingeben"
-                  />
-                  <input
-                    type="tel"
-                    id="phone"
-                    placeholder="Phone"
-                    required
-                    title="Bitte eine gültige Telefonnummer eingeben"
-                    pattern="^\+?[0-9]{8,15}$"
-                  />
+                  type="text"
+                  id="name"
+                  class="input-name"
+                  placeholder="Name"
+                  required
+                  minlength="3"
+                  title="Mindestens 3 Buchstaben erforderlich"
+                />
+                <input
+                  type="email"
+                  id="email"
+                  class="input-mail"
+                  placeholder="Email"
+                  required
+                  title="Bitte eine gültige E-Mail-Adresse eingeben"
+                />
+                <input
+                  type="tel"
+                  id="phone"
+                  class="input-phone"
+                  placeholder="Phone"
+                  required
+                  title="Bitte eine gültige Telefonnummer eingeben"
+                  pattern="^\+?[0-9]{8,15}$"
+                />
+                
                   <div class="button-container">
                     <button
                       class="cancel"
@@ -171,6 +175,7 @@
                 <input
                 type="text"
                 id="inputName"
+                class="input-name"
                 placeholder="Name"
                 title="Mindestens 2 Buchstaben"
                 required
@@ -179,6 +184,7 @@
                 <input
                 type="email"
                 id="inputMail"
+                class="input-mail"
                 placeholder="Email"
                 title="bitte eine gültige E-Mail-Adresse eintragen"
                 required
@@ -186,6 +192,7 @@
                 <input
                 type="tel"
                 id="inputPhone"
+                class="input-phone"
                 placeholder="Phone"
                 pattern="^\+?[0-9]{8,15}$"
                 title="Telefonnummer, 8 - 15 Zahlen / Zeichen"
