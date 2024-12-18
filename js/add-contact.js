@@ -98,6 +98,12 @@ const inputs = {
     phone: document.getElementById('phone')
 };
 
+const editInputs = {
+    name: document.getElementById('inputName'),
+    email: document.getElementById('inputMail'),
+    phone: document.getElementById('inputPhone')
+};
+
 const patterns = {
     name: /.{3,}/,
     email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
@@ -112,16 +118,19 @@ const messages = {
 
 /**
  * 
+ * @param {Object} inputSet 
  */
-function createErrorMessages() {
-    Object.keys(inputs).forEach(field => {
-        if (!document.getElementById(`${field}-error`)) {
+function createErrorMessages(inputSet) {
+    Object.keys(inputSet).forEach(field => {
+        const input = inputSet[field];
+        if (!document.getElementById(`${input.id}-error`)) {
             const errorMessage = document.createElement('div');
-            errorMessage.id = `${field}-error`;
+            errorMessage.id = `${input.id}-error`;
             errorMessage.style.color = 'red';
             errorMessage.style.fontSize = '12px';
             errorMessage.style.marginTop = '5px';
-            inputs[field].parentNode.appendChild(errorMessage);
+            errorMessage.style.textAlign = 'center'; 
+            input.parentNode.appendChild(errorMessage);
         }
     });
 }
@@ -129,12 +138,13 @@ function createErrorMessages() {
 /**
  * 
  * @param {string} field 
- * @returns {boolean} 
+ * @param {Object} inputSet 
+ * @returns {boolean}
  */
-function validateField(field) {
-    const input = inputs[field];
+function validateField(field, inputSet) {
+    const input = inputSet[field];
     const isValid = patterns[field].test(input.value.trim());
-    const errorMessage = document.getElementById(`${field}-error`);
+    const errorMessage = document.getElementById(`${input.id}-error`);
 
     if (isValid) {
         input.style.border = '1px solid darkgreen';
@@ -149,12 +159,13 @@ function validateField(field) {
 
 /**
  * 
- * @returns {boolean} 
+ * @param {Object} inputSet 
+ * @returns {boolean}
  */
-function validateForm() {
+function validateForm(inputSet) {
     let isFormValid = true;
-    Object.keys(inputs).forEach(field => {
-        if (!validateField(field)) {
+    Object.keys(inputSet).forEach(field => {
+        if (!validateField(field, inputSet)) {
             isFormValid = false;
         }
     });
@@ -164,11 +175,12 @@ function validateForm() {
 /**
  * 
  * @param {Event} event 
+ * @param {Object} inputSet 
  */
-function handleSubmit(event) {
+function handleSubmit(event, inputSet) {
     event.preventDefault();
     const errorContainer = document.querySelector('.error-container');
-    if (validateForm()) {
+    if (validateForm(inputSet)) {
         errorContainer.style.display = 'none';
         console.log('Formular erfolgreich gesendet!');
     } else {
@@ -177,16 +189,26 @@ function handleSubmit(event) {
     }
 }
 
-
-function initializeBlurValidation() {
-    Object.keys(inputs).forEach(field => {
-        inputs[field].addEventListener('blur', () => validateField(field));
+/**
+ * 
+ * @param {Object} inputSet 
+ */
+function initializeBlurValidation(inputSet) {
+    Object.keys(inputSet).forEach(field => {
+        inputSet[field].addEventListener('blur', () => validateField(field, inputSet));
     });
 }
 
-
 document.addEventListener('DOMContentLoaded', () => {
-    createErrorMessages();
-    initializeBlurValidation();
-    document.getElementById('contactForm').addEventListener('submit', handleSubmit);
+    
+    createErrorMessages(inputs);
+    createErrorMessages(editInputs);
+
+    
+    initializeBlurValidation(inputs);
+    initializeBlurValidation(editInputs);
+
+    
+    document.getElementById('contactForm').addEventListener('submit', (event) => handleSubmit(event, inputs));
+    document.getElementById('editContactForm').addEventListener('submit', (event) => handleSubmit(event, editInputs));
 });
