@@ -1,5 +1,18 @@
-function showToastMessage(message, isConfirmation = false) {
+function showToastMessage(message) {
     const toast = document.getElementById('toast');
+
+    toast.innerHTML = message;
+    toast.style.display = 'block';
+
+    setTimeout(() => {
+        toast.classList.add('show');
+        toast.classList.remove('hide');
+    }, 100);
+
+    return toast;
+}
+
+function addConfirmationButtons(toast) {
     const confirmButton = document.createElement('button');
     const cancelButton = document.createElement('button');
 
@@ -8,21 +21,12 @@ function showToastMessage(message, isConfirmation = false) {
     confirmButton.classList.add('toast-button');
     cancelButton.classList.add('toast-button');
 
-    toast.innerHTML = message;
-    
-    if (isConfirmation) {
-        toast.appendChild(confirmButton);
-        toast.appendChild(cancelButton);
-    }
+    toast.appendChild(confirmButton);
+    toast.appendChild(cancelButton);
 
-    toast.style.display = 'block';
-    setTimeout(() => {
-        toast.classList.add('show');
-        toast.classList.remove('hide');
-    }, 100);
-
-    return { toast, confirmButton, cancelButton };
+    return { confirmButton, cancelButton };
 }
+
 
 
 async function deleteContactFromApi(contactId) {
@@ -66,14 +70,11 @@ function updateSecondOverlay() {
     const secondOverlay = document.getElementById('secondOverlay');
     const contactOverlay = document.getElementById('contact-overlay');
 
-    // Kontakt-Overlay ausblenden
     contactOverlay.style.display = 'none';
 
-    // Second-Overlay einblenden
     secondOverlay.style.display = 'block';
     
-    // Optional: Inhalt in secondOverlay einfügen
-    secondOverlay.innerHTML = '<h1>Hallo</h1>';
+    secondOverlay.innerHTML = '<h3>Add a new Contact</h3>';
 }
 
 
@@ -81,7 +82,6 @@ function hideSecondOverlay() {
     const secondOverlay = document.getElementById('secondOverlay');
     secondOverlay.style.display = 'none';
     
-    // Optional: Inhalt zurücksetzen
     secondOverlay.innerHTML = '';
 }
 
@@ -137,10 +137,8 @@ function handleUserConfirmation(confirmButton, cancelButton, contactId, toast) {
 
 async function deleteContact(contactId) {
     try {
-        // Zeige den Toast zur Bestätigung an
         const { toast, confirmButton, cancelButton } = showConfirmationToast();
 
-        // Bestätigung und Abbruch behandeln
         return await handleUserConfirmation(confirmButton, cancelButton, contactId, toast);
         
     } catch (error) {
@@ -177,7 +175,6 @@ async function fetchAndFillContactData(contactId) {
 
         const response = await fetch(`${BASE_URL}/contacts/${contactId}.json`);
         if (!response.ok) {
-           
         }
         const contact = await response.json();
         console.log('Kontaktdaten erfolgreich abgerufen:', contact);
@@ -189,14 +186,11 @@ async function fetchAndFillContactData(contactId) {
         if (editContactOverlay) {
             editContactOverlay.dataset.contactId = contactId;
         }
-       
 
         displayBadgeInContainer(contact.name); 
     } catch (error) {
-       
     }
 }
-
 
 
 async function editContact(contactId) {
@@ -212,17 +206,11 @@ async function updateContactOnServer(contactId, name, email, phone) {
             body: JSON.stringify({ name, email, phone }),
             headers: { 'Content-Type': 'application/json' },
         });
-
         if (!response.ok) {
-            
         }
-
         const updatedContact = await response.json();
-    
         return updatedContact;
-
     } catch (error) {
-       
         throw error; 
     }
 }
@@ -244,24 +232,17 @@ function updateContactOverlay(updatedContact) {
 
 function validateContactData(contact) {
     const { name, email, phone } = contact;
-
     if (!name || name.trim().length === 0) {
-     
         return false;
     }
-
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      
         return false;
     }
-
     const phoneRegex = /^\+?[0-9]{8,15}$/;
     if (!phoneRegex.test(phone)) {
-       
         return false;
     }
-
     return true;
 }
 
