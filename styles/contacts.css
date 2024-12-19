@@ -25,7 +25,6 @@
 
 .content-wrapper {
   display: flex;
-  gap: 10px;
   height: calc(100dvh - 224px);
   max-width: 1440px;
 }
