@@ -16,6 +16,7 @@
   .overlay-content {
     position: relative;
     display: flex;
+    box-sizing: border-box;
     border-color: transparent;
     border-radius: 25px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -27,6 +28,7 @@
   @media(max-width: 1500px) {
     .overlay-content {
       display: flex;
+      box-sizing: border-box;
       border-color: transparent;
       border-radius: 25px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);

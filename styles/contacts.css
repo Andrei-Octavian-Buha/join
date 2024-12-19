@@ -203,6 +203,8 @@ h3 {
   width: 40%;
   padding: 20px;
   background: rgb(42, 54, 71);
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
 }
 
 .info-container img {
