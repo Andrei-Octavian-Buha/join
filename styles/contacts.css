@@ -39,7 +39,7 @@ body {
   flex-direction: column;
   align-items: center;
   width: 40%;
-  height: 84vh;
+  height: 89vh;
   background-color: rgb(255, 255, 255);
 }
 
@@ -336,13 +336,14 @@ input:focus {
 }
 
 .list::-webkit-scrollbar-track {
-  background-color: #9c9c9c;
+  background-color: white;  
   border-radius: 10px;
 }
 
 .list::-webkit-scrollbar-thumb {
-  background-color: rgba(42, 54, 71, 0.836);
+  background-color: rgba(42, 54, 71, 0.61);
   border-radius: 10px;
+  min-height: 10px;  
 }
 
 ul {
