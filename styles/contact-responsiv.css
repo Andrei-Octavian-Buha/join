@@ -165,7 +165,7 @@
   
   @media (min-height: 666px){
     .right-content.show{
-      height:75vh;
+      height:vh;
     }
   
     .contact-button{
