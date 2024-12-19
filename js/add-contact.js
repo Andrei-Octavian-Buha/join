@@ -111,7 +111,7 @@ const patterns = {
 };
 
 const messages = {
-    name: 'Bitte mindestens 3 Buchstaben. Leerzeichen  Bindestriche sind möglich (Beispiel: "Max", "Anna Maria", "Müller-Schmidt")',
+    name: 'Bitte mindestens 3 Buchstaben. Leerzeichen / Bindestriche sind möglich (Beispiel: "Max", "Anna Maria", "Müller-Schmidt")',
     email: 'Bitte eine gültige E-Mail-Adresse eingeben. (Beispiel: "name@domain.de")',
     phone: 'Bitte eine gültige Telefonnummer (min. 8 Zahlen) eingeben. (Beispiel: "+49123456789")'
 };
@@ -182,7 +182,6 @@ function handleSubmit(event, inputSet) {
     const errorContainer = document.querySelector('.error-container');
     if (validateForm(inputSet)) {
         errorContainer.style.display = 'none';
-        console.log('Formular erfolgreich gesendet!');
     } else {
         errorContainer.style.display = 'block';
         errorContainer.textContent = 'Bitte korrigiere die markierten Felder.';
