@@ -105,13 +105,13 @@ const editInputs = {
 };
 
 const patterns = {
-    name: /.{3,}/,
+    name: /^[a-zA-ZäöüÄÖÜß\s-]{3,}$/,
     email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
     phone: /^\+?[0-9]{8,15}$/
 };
 
 const messages = {
-    name: 'Der Name muss mindestens 3 Buchstaben lang sein. (Beispiel: "Max")',
+    name: 'Bitte mindestens 3 Buchstaben. Leerzeichen  Bindestriche sind möglich (Beispiel: "Max", "Anna Maria", "Müller-Schmidt")',
     email: 'Bitte eine gültige E-Mail-Adresse eingeben. (Beispiel: "name@domain.de")',
     phone: 'Bitte eine gültige Telefonnummer (min. 8 Zahlen) eingeben. (Beispiel: "+49123456789")'
 };
