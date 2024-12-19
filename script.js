@@ -12,10 +12,7 @@ async function includeHTML() {
   }
   }
 
-  document.addEventListener('DOMContentLoaded', () => {
-    const today = new Date().toISOString().split('T')[0];
-    document.getElementById('addTaskDate').setAttribute('min', today);
-});
+
 
 
 
