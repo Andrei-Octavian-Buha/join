@@ -46,6 +46,8 @@ function resetForm() {
 function closeOverlay(overlayId) {
     const overlay = document.getElementById(overlayId);
     resetForm();
+    resetFormErrors(inputs);
+    resetFormErrors(editInputs);
 
     overlay.classList.remove("show");
     overlay.classList.add("hide");

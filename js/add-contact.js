@@ -211,3 +211,19 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('contactForm').addEventListener('submit', (event) => handleSubmit(event, inputs));
     document.getElementById('editContactForm').addEventListener('submit', (event) => handleSubmit(event, editInputs));
 });
+
+
+function resetFormErrors(inputSet) {
+    Object.keys(inputSet).forEach(field => {
+        const input = inputSet[field];
+        const errorMessage = document.getElementById(`${input.id}-error`);
+        
+        // Entfernt die rote Umrandung
+        input.style.border = '1px solid #ccc';  // Standardgrenze oder nach Wunsch
+
+        // Entfernt die Fehlermeldung
+        if (errorMessage) {
+            errorMessage.textContent = '';
+        }
+    });
+}
