@@ -176,33 +176,63 @@ function validateEmail(email) {
 
 // Funktion zur Validierung des Namens
 function validateName(name) {
-  return name.length >= 3;  // Name muss mindestens 3 Zeichen lang sein
+  // Name muss mindestens 3 Zeichen lang sein und darf nur Buchstaben und Leerzeichen enthalten
+  const isValidLength = name.length >= 3;
+  const isValidFormat = /^[a-zA-ZäöüÄÖÜß\s]+$/.test(name); // Erlaubt Buchstaben (auch deutsche Umlaute) und Leerzeichen
+  return isValidLength && isValidFormat;
 }
 
 // Funktion, die die Fehler im Container anzeigt
-function showError(message) {
+function showError(message, fieldId) {
   const errorContainer = document.getElementById("passwordError");
   errorContainer.textContent = message;  // Fehlermeldung setzen
   errorContainer.style.display = "block";  // Container sichtbar machen
+
+  const field = document.getElementById(fieldId);
+  if (field) {
+    field.style.border = "1px solid red"; // Rote Umrandung hinzufügen
+  }
 }
 
 // Funktion zur Fehlerbehebung und zum Verbergen der Fehler
 function clearErrors() {
   const errorContainer = document.getElementById("passwordError");
   errorContainer.style.display = "none";  // Fehlercontainer ausblenden
-}
 
+  // Entfernt die rote Umrandung von allen Eingabefeldern
+  const fields = document.querySelectorAll(".loginInputFeld");
+  fields.forEach(field => {
+    field.style.border = ""; // Standard-Rand zurücksetzen
+  });
+}
 // Funktion, die beim Klicken auf den "Sign up"-Button aufgerufen wird
 async function handleSignUp() {
   const inputs = getSignUpInputs();
   if (!validateInputs(inputs)) return;
+  
+  const isValid = validateSignUpInputs(inputs);
+  if (!isValid) return;
+
+  processSignUp(inputs);
+}
+
+function validateSignUpInputs(inputs) {
   clearErrors();
+
   if (!validateEmail(inputs.email)) {
-    showError("Bitte gib eine gültige E-Mail-Adresse ein.");
-    return; }
+    showError("Bitte gib eine gültige E-Mail-Adresse ein.", "emailField");
+    return false;
+  }
+
   if (!validateName(inputs.name)) {
-    showError("Der Name muss mindestens 3 Zeichen lang sein.");
-    return;}
+    showError("Bitte gib einen gültigen Namen ein.", "nameField");
+    return false;
+  }
+
+  return true;
+}
+
+async function processSignUp(inputs) {
   const user = createUserObject(inputs);
   try {
     await pushUserToDatabase(user);
@@ -210,8 +240,8 @@ async function handleSignUp() {
     showSignUpPopup();
     redirectToHome();
   } catch (error) {
-    // Statt console.error wird hier eine benutzerdefinierte Fehlermeldung angezeigt
-    showError("Ein Fehler ist aufgetreten. Bitte versuche es erneut.");}
+    showError("Ein Fehler ist aufgetreten. Bitte versuche es erneut.", "nameField"); // Generische Fehlermeldung
+  }
 }
 
 
