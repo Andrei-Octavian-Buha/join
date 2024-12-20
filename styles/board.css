@@ -176,7 +176,8 @@ p {
   .wrapper {
     flex-direction: column;
     gap: 0;
-  }
+    margin-bottom: 70px;
+    }
   .top-content {
     gap: 15px;
   }
