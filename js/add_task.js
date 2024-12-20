@@ -25,7 +25,7 @@ function sortContacts(contacts) {
 }
 
 function createContactElement(element) {
-  let container = document.createElement("div");
+  let container = document.createElement("label");
   container.id = `ContainerID${element.id}`;
   container.classList.add("dropDownContactContainer");
   let initials = element.cont.name

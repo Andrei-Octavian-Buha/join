@@ -9,21 +9,6 @@ function storeUserInSessionStorage(user) {
   sessionStorage.setItem("currentUser", JSON.stringify({ name: user.name, email: user.email }));
 }
 
-//async function handleSignUp() {
-  //const inputs = getSignUpInputs();
-  //if (!validateInputs(inputs)) return;
-  //const user = createUserObject(inputs);
-
-  //try {
-    //await pushUserToDatabase(user);
-    //storeUserInSessionStorage(user); // Speichert Name und Email in Session Storage
-    //showSignUpPopup();
-    //redirectToHome();
-  //} catch (error) {
-   // console.error(error);
-   // alert("An error occurred. Please try again.");
-  //}
-//}
 
 // Collect input values
 function getSignUpInputs() {
