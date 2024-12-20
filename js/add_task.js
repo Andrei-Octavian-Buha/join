@@ -341,6 +341,41 @@ function showPopupAndRedirect() {
   }, 2500);
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+  const dropDownHeader = document.getElementById('dropDownHeaderId');
+  const dropDownBody = document.getElementById('dropDownBodyId');
+  if (!dropDownHeader || !dropDownBody) {
+      return;
+  }
+  let isDropDownOpen = false;
+  dropDownHeader.addEventListener('click', (event) => {
+      isDropDownOpen = !isDropDownOpen;
+      dropDownBody.style.display = isDropDownOpen ? 'block' : 'none';
+      event.stopPropagation(); // Verhindert das Schließen, wenn auf den Header geklickt wird
+  });
+
+  // Dropdown schließen, wenn auf den Rest der Seite geklickt wird
+  document.addEventListener('click', (event) => {
+      if (isDropDownOpen && !dropDownBody.contains(event.target)) {
+          isDropDownOpen = false;
+          dropDownBody.style.display = 'none';
+      }
+  });
+
+  // Klick auf Kontakte in der Liste
+  dropDownBody.addEventListener('click', (event) => {
+      const contactContainer = event.target.closest('.dropDownContactContainer');
+      if (contactContainer) {
+          const checkbox = contactContainer.querySelector('.contactCheckbox');
+          if (checkbox) {
+              checkbox.checked = !checkbox.checked; // Checkbox-Status umschalten
+          }
+      }
+  });
+});
+
+
+
 
 
 
