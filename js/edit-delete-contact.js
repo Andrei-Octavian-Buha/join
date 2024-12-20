@@ -142,7 +142,6 @@ async function deleteContact(contactId) {
         return await handleUserConfirmation(confirmButton, cancelButton, contactId, toast);
         
     } catch (error) {
-        console.error('Fehler beim Löschen des Kontakts:', error);
     }
 }
 
@@ -229,7 +228,8 @@ function updateContactOverlay(updatedContact) {
 
 function validateContactData(contact) {
     const { name, email, phone } = contact;
-    if (!name || name.trim().length === 0) {
+    const nameRegex = /^[A-Za-z\s\-]+$/;
+    if (!name || name.trim().length === 0 || !nameRegex.test(name)) {
         return false;
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -240,8 +240,10 @@ function validateContactData(contact) {
     if (!phoneRegex.test(phone)) {
         return false;
     }
+
     return true;
 }
+
 
 
 function getFormData() {
