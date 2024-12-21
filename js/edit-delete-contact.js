@@ -142,7 +142,6 @@ async function deleteContact(contactId) {
         return await handleUserConfirmation(confirmButton, cancelButton, contactId, toast);
         
     } catch (error) {
-        console.error('Fehler beim Löschen des Kontakts:', error);
     }
 }
 
@@ -153,7 +152,7 @@ function editContact(contactId) {
     if (editContactOverlay) {
         editContactOverlay.style.display = 'block'; 
     } else {
-        console.error('Element mit der ID "edit-contact-overlay" wurde nicht gefunden.');
+     
     }
 }
 
@@ -162,10 +161,8 @@ function showEditContactOverlay() {
     const editContactOverlay = document.getElementById('edit-contact-overlay');
     
     if (editContactOverlay) {
-        console.log('Overlay gefunden, wird angezeigt.');
         editContactOverlay.style.display = 'block'; 
     } else {
-        console.error('Element mit der ID "edit-contact-overlay" wurde nicht gefunden.');
     }
 }
 
@@ -177,7 +174,6 @@ async function fetchAndFillContactData(contactId) {
         if (!response.ok) {
         }
         const contact = await response.json();
-        console.log('Kontaktdaten erfolgreich abgerufen:', contact);
         document.getElementById('inputName').value = contact.name;
         document.getElementById('inputMail').value = contact.email;
         document.getElementById('inputPhone').value = contact.phone;
@@ -232,7 +228,8 @@ function updateContactOverlay(updatedContact) {
 
 function validateContactData(contact) {
     const { name, email, phone } = contact;
-    if (!name || name.trim().length === 0) {
+    const nameRegex = /^[A-Za-z\s\-]+$/;
+    if (!name || name.trim().length === 0 || !nameRegex.test(name)) {
         return false;
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -243,8 +240,10 @@ function validateContactData(contact) {
     if (!phoneRegex.test(phone)) {
         return false;
     }
+
     return true;
 }
+
 
 
 function getFormData() {

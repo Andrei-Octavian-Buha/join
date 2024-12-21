@@ -90,3 +90,140 @@ function handleNetworkError(error) {
     console.error('Netzwerkfehler:', error);
     alert('Es ist ein Netzwerkfehler aufgetreten. Bitte überprüfen Sie Ihre Verbindung.');
 }
+
+
+const inputs = {
+    name: document.getElementById('name'),
+    email: document.getElementById('email'),
+    phone: document.getElementById('phone')
+};
+
+const editInputs = {
+    name: document.getElementById('inputName'),
+    email: document.getElementById('inputMail'),
+    phone: document.getElementById('inputPhone')
+};
+
+const patterns = {
+    name: /^[a-zA-ZäöüÄÖÜß\s-]{3,}$/,
+    email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+    phone: /^\+?[0-9]{8,15}$/
+};
+
+const messages = {
+    name: 'Bitte mindestens 3 Buchstaben. Leerzeichen / Bindestriche sind möglich (Beispiel: "Max", "Anna Maria", "Müller-Schmidt")',
+    email: 'Bitte eine gültige E-Mail-Adresse eingeben. (Beispiel: "name@domain.de")',
+    phone: 'Bitte eine gültige Telefonnummer (min. 8 Zahlen) eingeben. (Beispiel: "+49123456789")'
+};
+
+/**
+ * 
+ * @param {Object} inputSet 
+ */
+function createErrorMessages(inputSet) {
+    Object.keys(inputSet).forEach(field => {
+        const input = inputSet[field];
+        if (!document.getElementById(`${input.id}-error`)) {
+            const errorMessage = document.createElement('div');
+            errorMessage.id = `${input.id}-error`;
+            errorMessage.style.color = 'red';
+            errorMessage.style.fontSize = '12px';
+            errorMessage.style.marginTop = '5px';
+            errorMessage.style.textAlign = 'center'; 
+            input.parentNode.appendChild(errorMessage);
+        }
+    });
+}
+
+/**
+ * 
+ * @param {string} field 
+ * @param {Object} inputSet 
+ * @returns {boolean}
+ */
+function validateField(field, inputSet) {
+    const input = inputSet[field];
+    const isValid = patterns[field].test(input.value.trim());
+    const errorMessage = document.getElementById(`${input.id}-error`);
+
+    if (isValid) {
+        input.style.border = '1px solid darkgreen';
+        errorMessage.textContent = '';
+    } else {
+        input.style.border = '1px solid red';
+        errorMessage.textContent = messages[field];
+    }
+
+    return isValid;
+}
+
+/**
+ * 
+ * @param {Object} inputSet 
+ * @returns {boolean}
+ */
+function validateForm(inputSet) {
+    let isFormValid = true;
+    Object.keys(inputSet).forEach(field => {
+        if (!validateField(field, inputSet)) {
+            isFormValid = false;
+        }
+    });
+    return isFormValid;
+}
+
+/**
+ * 
+ * @param {Event} event 
+ * @param {Object} inputSet 
+ */
+function handleSubmit(event, inputSet) {
+    event.preventDefault();
+    const errorContainer = document.querySelector('.error-container');
+    if (validateForm(inputSet)) {
+        errorContainer.style.display = 'none';
+    } else {
+        errorContainer.style.display = 'block';
+        errorContainer.textContent = 'Bitte korrigiere die markierten Felder.';
+    }
+}
+
+/**
+ * 
+ * @param {Object} inputSet 
+ */
+function initializeBlurValidation(inputSet) {
+    Object.keys(inputSet).forEach(field => {
+        inputSet[field].addEventListener('blur', () => validateField(field, inputSet));
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    
+    createErrorMessages(inputs);
+    createErrorMessages(editInputs);
+
+    
+    initializeBlurValidation(inputs);
+    initializeBlurValidation(editInputs);
+
+    
+    document.getElementById('contactForm').addEventListener('submit', (event) => handleSubmit(event, inputs));
+    document.getElementById('editContactForm').addEventListener('submit', (event) => handleSubmit(event, editInputs));
+});
+
+
+function resetFormErrors(inputSet) {
+    Object.keys(inputSet).forEach(field => {
+        const input = inputSet[field];
+        const errorMessage = document.getElementById(`${input.id}-error`);
+        
+        // Entfernt die rote Umrandung
+        input.style.border = '1px solid #ccc';  // Standardgrenze oder nach Wunsch
+
+        // Entfernt die Fehlermeldung
+        if (errorMessage) {
+            errorMessage.textContent = '';
+        }
+    });
+}

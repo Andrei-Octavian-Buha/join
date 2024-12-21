@@ -1,206 +1,226 @@
 @media (max-width: 1150px) {
-    .toast {
-      left: 50%;
-    }
-    .left-content {
-      height: 77vh;
-    }
+  .toast {
+    left: 50%;
   }
-  
-  @media (max-width: 1015px) {
-    .contact-headline {
-      flex-direction: column;
-      margin: auto;
-      align-items: baseline;
-      margin-left: 0;
-      margin-top: 20px;
-    }
-  
-    h1,
-    h3 {
-      margin: 0;
-    }
-  
-    .blue-line {
-      display: none;
-    }
-  
-    .blue-line-responsive {
-      display: block;
-    }
+
+  .left-content {
+    height: 82vh;
   }
-  
-  @media (min-width: 921px) {
-    .right-content.show {
-      display: none;
-    }
+}
+
+@media (max-width: 1015px) {
+  .contact-headline {
+    flex-direction: column;
+    margin: auto;
+    margin-bottom: 0;
+    margin-top: 20px;
+    align-items: baseline;
+    margin-left: 0;
   }
-  
-  @media (max-width: 800px) {
-    .right-content {
-      display: none;
-    }
-  
-    .overlay-contact-mobile {
-      display: block;
-    }
-  
-    .left-content {
-      width: 90%;
-      margin: auto;
-    }
-  
-    .list{
-      margin-bottom: 60px;
-    }
-  
-    .edit-container {
-      display: none;
-    }
-  
-    .three-points {
-      display: block;
-    }
+
+  h1,
+  h3 {
+    margin: 0;
   }
-  
-  @media (max-width: 920px) {
-    .right-content.show {
-      margin: auto;
-      display: flex;
-      position: fixed;
-      top: 0%;
-      bottom: 0%;
-      left: 0;
-      right: 0;
-      width: auto;
-      height: 80vh;
-      max-width: 700px;
-      background-color: rgb(255, 255, 255);
-      z-index: 999;
-      padding-left: 40px;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
+
+  .blue-line {
+    display: none;
   }
-  
-  
-  @media (max-width: 796px) {
-    .header-logo-responsive {
-      display: block;
-    }
-    .back-arrow {
-      display: block;
-    }
-    .overlay {
-      height: 98%;
-      width: 98%;
-    }
-  
-    .overlay-content {
-      position: relative;
-      flex-direction: column;
-      height: 90%;
-    }
-  
-    .close {
-      display: block;
-    }
-  
-    .info-container {
-      width: 100%;
-      height: 40%;
-      padding: 0;
-      border-top-left-radius: 12px;
-      border-top-right-radius: 12px;
-      border-bottom-left-radius: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-  
-    .info-container img {
-      display: none;
-    }
-  
-    .form-container {
-      background-color: white;
-      height: 100%;
-      width: 100%;
-      flex-direction: column;
-      border-radius: 25px;
-    }
-  
-    .position-1 {
-      position: absolute;
-      top: 23%;
-    }
-  
-    .position-2 {
-      position: absolute;
-      top: 33%;
-    }
-  
-    form {
-      margin-top: 60px;
-    }
-  
-    .cancel {
-      display: none;
-    }
-  
-    .contact-button {
-      display: block;
-    }
-  
-    .add-new-button {
-      display: none;
-    }
-    .exit {
-      display: none;
-    }
+
+  .blue-line-responsive {
+    display: block;
   }
-  
-  @media (min-height: 666px){
-    .right-content.show{
-      height:75vh;
-    }
-  
-    .contact-button{
-      padding-bottom: 30px;
-    }
+}
+
+@media (min-width: 921px) {
+  .right-content.show {
+    display: none;
   }
-  
-  @media (max-height: 668px){
-    .list{
-      height: 60vh;
-    }
-  
-    .contact-button{
-      padding-bottom: 30px;
-    }
+}
+
+@media (max-width: 800px) {
+  .right-content {
+    display: none;
   }
-  
-  @media (max-width: 420px) {
-    .contact-headline {
-      gap: 2px;
-    }
-  
-    h1 .detail-content {
-      font-size: 20px;
-    }
-  
-    .custom-badge {
-      height: 70px;
-      width: 70px;
-    }
-  
-    h1 {
-      font-size: 24px;
-    }
-  
-    h3 {
-      font-size: 16px;
-      margin-bottom: 4px;
-    }
+
+  .overlay-contact-mobile {
+    display: block;
   }
+
+  .left-content {
+    width: 100%;
+    margin: auto;
+  }
+
+  .list {
+    margin-bottom: 60px;
+  }
+
+  .edit-container {
+    display: none;
+  }
+
+  .three-points {
+    display: block;
+  }
+}
+
+@media (max-width: 920px) {
+  .right-content.show {
+    margin: auto;
+    margin-bottom: 71px;
+    margin-top: 102px;
+    display: flex;
+    position: fixed;
+    top: 0%;
+    bottom: 0%;
+    left: 0;
+    right: 0;
+    width: auto;
+    height: auto;
+    max-width: 700px;
+    background-color: rgb(255, 255, 255);
+    z-index: 999;
+    padding-left: 40px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media (min-height: 1300px) {
+  .left-content {
+    height: 92vh;
+  }
+
+  .right-content {
+    height: 92vh;
+  }
+}
+
+
+@media (max-width: 796px) {
+  .header-logo-responsive {
+    display: block;
+  }
+
+  .back-arrow {
+    display: block;
+  }
+
+  .overlay {
+    height: 98%;
+    width: 98%;
+  }
+
+  .overlay-content {
+    position: relative;
+    flex-direction: column;
+    height: 90%;
+  }
+
+  .close {
+    display: block;
+  }
+
+  .info-container {
+    width: 100%;
+    height: 40%;
+    padding: 0;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom-left-radius: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .info-container img {
+    display: none;
+  }
+
+  .form-container {
+    background-color: white;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    border-radius: 25px;
+  }
+
+  .position-1 {
+    position: absolute;
+    top: 23%;
+  }
+
+  .position-2 {
+    position: absolute;
+    top: 33%;
+  }
+
+  form {
+    margin-top: 60px;
+  }
+
+  .cancel {
+    display: none;
+  }
+
+  .contact-button {
+    display: block;
+  }
+
+  .add-new-button {
+    display: none;
+  }
+
+  .exit {
+    display: none;
+  }
+}
+
+@media (min-height: 666px) {
+
+  .contact-button {
+    padding-bottom: 30px;
+  }
+}
+
+@media (max-height: 668px) {
+  .right-content.show{
+    margin-top: 102px;
+    height: auto;
+    margin-bottom: 71px;
+  }
+
+  .left-content {
+    height: 75vh;
+  }
+
+  .contact-button {
+    padding-bottom: 30px;
+  }
+}
+
+@media (max-width: 420px) {
+  .contact-headline {
+    gap: 2px;
+  }
+
+  h1 .detail-content {
+    font-size: 20px;
+  }
+
+  .custom-badge {
+    height: 70px;
+    width: 70px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  h3 {
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+}

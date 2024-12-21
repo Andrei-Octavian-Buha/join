@@ -104,7 +104,7 @@
 
 @media (max-width: 1150px) {
   .content {
-    margin-top: 120px;
+    margin-top: 100px;
     margin-left: 0px;
   }
   .mobileDisplayNone {
@@ -125,6 +125,7 @@
   }
 
   .navSection {
+    z-index: 999  ;
     width: 100%;
     position: fixed;
     bottom: 0;
@@ -238,8 +239,8 @@
 
 @media (min-width: 1150px) {
   .content {
-    margin-top: 120px;
-    margin-left: 240px;
+    margin-top: 105px;
+    margin-left: 232px;
   }
   .desktopLogoVector {
     margin-top: 64px;
@@ -346,7 +347,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+    
   }
   .profilBtn {
     display: flex;

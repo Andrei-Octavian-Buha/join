@@ -50,7 +50,7 @@
     height: 100%;
     border-radius: 25px;
     border: 2px solid rgbargb(42,54,71); 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.5);
 }
 
 .edit-info {
@@ -94,3 +94,238 @@
         display: none;
     }
 }
+
+.letter-header {
+    font-size: 1em;
+    margin-top: 20px;
+    margin-left: 10px;
+  }
+  
+  .contact-card {
+    cursor: pointer;
+    border-radius: 8px;
+    padding: 8px;
+    padding-left: 0;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .active {
+    background-color: rgb(42, 54, 71);
+  }
+  
+  .contact-card:not(.active):hover {
+    background-color: rgba(180, 182, 183, 0.09);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .contact-card h3 {
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #333;
+  }
+  
+  .active h3 {
+    color: white;
+  }
+  
+  .contact-card p {
+    margin: 8px 0;
+    color: rgba(90, 141, 238, 1);
+    margin: 0;
+    font-size: 12px;
+  }
+  
+  .overlay-contact {
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .second-overlay-contact {
+    display: flex;
+    border-color: transparent;
+    width: 100%;
+    height: 70%;
+    border: 2px solid rgbargb(42, 54, 71);
+  }
+  
+  .second-overlay-content {
+    position: relative;
+    max-width: 600px;
+  }
+  
+  .badge-and-name {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .badge {
+    display: flex;
+    align-items: center;
+    margin-top: 50px;
+  }
+  
+  .contact-name {
+    margin-left: 10px;
+    margin: 0;
+  }
+  
+  .detail {
+    margin-left: 24%;
+  }
+  
+  .custom-badge {
+    margin-top: 1%;
+    margin-right: 20px;
+    height: 90px;
+    width: 90px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.3em;
+  }
+  
+  .detail-content h1 {
+    font-size: 2em;
+    margin: 0;
+    font-weight: 400;
+  }
+  
+  .sub-content p {
+    color: black;
+  }
+  
+  .edit-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 20px;
+    width: 100px;
+  }
+  
+  .edit-button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .delete-button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .edit-button-container p,
+  .delete-button-container p {
+    color: rgba(0, 0, 0, 0.678);
+    font-size: 14px;
+  }
+  
+  .edit-button-container:hover p,
+  .edit-button-container:hover img,
+  .delete-button-container:hover p,
+  .delete-button-container:hover img {
+    cursor: pointer;
+    color: rgb(41, 171, 226);
+  }
+  
+  .edit-button-container:hover img,
+  .delete-button-container:hover img {
+    filter: brightness(0) saturate(100%) invert(41%) sepia(75%) saturate(505%) hue-rotate(176deg) brightness(95%) contrast(95%);
+  }
+  
+  img.edit-image {
+    width: 14px;
+    height: 14px;
+  }
+  
+  img.delete-image {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .sub-content {
+    position: relative;
+    margin-top: 40px;
+  }
+  
+  .sub-content p {
+    margin: 0;
+    margin-bottom: 6px;
+    
+  }
+  
+  .sub-info {
+    margin-bottom: 30px;
+  }
+  
+  .email {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  p.contact-email {
+    color: rgba(90, 141, 238, 1);
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  .phone {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  p.contact-phone {
+    font-size: 16px;
+    font-weight: 400;
+  }
+  
+  .three-points {
+    display: none;
+    position: fixed;
+    right: 2%;
+    bottom: 12%;
+  }
+  
+  .small-img {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .menu {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    gap: 8px;
+    right: -200px;
+    bottom: 14%;
+    width: 100px;
+    background-color: #ffffff;
+    border: 1px solid rgba(211, 211, 211, 0.411);
+    border-radius: 5px;
+    box-shadow: -4px 6px 5px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s ease;
+    padding: 10px;
+  }
+  
+  .menu.visible {
+    right: 10px;
+  }
+  
+  .hidden p {
+    font-weight: bold;
+  }
+  

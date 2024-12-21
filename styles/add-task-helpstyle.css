@@ -41,6 +41,17 @@
     animation: fly-in-out 2.5s ease forwards;
 }
 
+.form-select{
+    cursor: pointer;
+}
+
+input {
+    cursor: pointer;
+  }
+  
+  input::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+  }
 
 @keyframes fly-in-out {
     0% {

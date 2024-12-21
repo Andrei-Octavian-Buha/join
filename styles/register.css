@@ -374,5 +374,28 @@ a:hover{
     }
 }
 
+@media (max-height: 700px) {
+    .loginCard .loginForm .loginInput{
+        gap: 16px;
+    }
+
+    .loginForm{
+        gap: 16px;
+    }
+
+    .loginCard{
+        margin-top: 115px;
+        padding: 16px 16px;
+    }
+
+    .logoImg{
+        padding-top: 16px;
+    }
+
+    body{
+        overflow: hidden;
+    }
+}
+
 
 

@@ -78,9 +78,8 @@ button:hover {
 }
 
 h3 {
-  font-weight: 300;
   margin-left: 4px;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .add-new {
@@ -113,15 +112,15 @@ h3 {
 
 .drag-area {
   display: flex;
-  gap: 16px; /* Einheitlicher Abstand zwischen den Karten */
-  flex-wrap: wrap;
-  justify-content: flex-start; /* Karten vom Anfang aus ausrichten */
+  flex-wrap: wrap; 
+  gap: 6px; 
+  align-content: flex-start;
+  justify-content: flex-start; 
   width: 100%;
   min-height: 40px;
-
   border-radius: 24px;
   box-sizing: border-box;
-  height: 90%;
+  height: 90%; 
 }
 
 .drag-area-highlight {
@@ -129,8 +128,8 @@ h3 {
 }
 
 .card {
-  flex: 1 1 calc(5% - 20px); /* Nimmt 25% des verfügbaren Platzes ein, abzüglich Abstand */
-  margin: 10px; /* Abstand zwischen den Karten */
+  flex: 1 1 calc(5% - 20px); 
+  margin: 10px; 
   background-color: darkgoldenrod;
   border: 1px solid lightgrey;
   border-radius: 5px;
@@ -168,7 +167,11 @@ p {
 
 @media (max-width: 1140px) {
   h3 {
-    font-size: 14px;
+    font-size: 18px;
+  }
+  .top-content {
+    flex-direction: column;
+    margin-top: 30px;
   }
 }
 
@@ -176,8 +179,10 @@ p {
   .wrapper {
     flex-direction: column;
     gap: 0;
-  }
+    margin-bottom: 70px;
+    }
   .top-content {
+    flex-direction: column;
     gap: 15px;
   }
   .right-content {
@@ -187,7 +192,7 @@ p {
     width: 180px;
   }
   .drag-area {
-    justify-content: center;
+    margin-left: 6px;
   }
 }
 

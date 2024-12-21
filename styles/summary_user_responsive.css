@@ -63,7 +63,7 @@
     }
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 1150px) {
     .fullscreen-greeting-overlay {
         display: flex; 
         animation: fadeInOut 3.5s forwards; 

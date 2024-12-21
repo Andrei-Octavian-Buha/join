@@ -25,7 +25,7 @@
     <link rel="icon" href="./assets/img/logo2.svg" />
     <title>Contacts</title>
   </head>
-  <body onload="includeHTML(); init();">
+  <body id="contactsPage" onload="includeHTML(); init();">
     <div class="" w3-include-html="./templates/header.html"></div>
     <div class="content">
       <div>
@@ -76,26 +76,27 @@
                   <input
                     type="text"
                     id="name"
+                    class="input-name"
                     placeholder="Name"
-                    required
                     minlength="3"
-                    title="Mindestens 3 Buchstaben erforderlich"
                   />
                   <input
                     type="email"
                     id="email"
+                    class="input-mail"
                     placeholder="Email"
-                    required
-                    title="Bitte eine gültige E-Mail-Adresse eingeben"
                   />
                   <input
                     type="tel"
                     id="phone"
+                    class="input-phone"
                     placeholder="Phone"
-                    required
-                    title="Bitte eine gültige Telefonnummer eingeben"
                     pattern="^\+?[0-9]{8,15}$"
                   />
+              
+                  <!-- Hier wird die Fehlermeldung dynamisch eingefügt -->
+                  <div class="error-container"></div>
+              
                   <div class="button-container">
                     <button
                       class="cancel"
@@ -107,7 +108,6 @@
                     <button class="create" type="submit">Create Contact</button>
                   </div>
                 </form>
-                
               </div>
             </div>
           </div>
@@ -171,27 +171,24 @@
                 <input
                 type="text"
                 id="inputName"
+                class="input-name"
                 placeholder="Name"
-                title="Mindestens 2 Buchstaben"
-                required
                 minlength="2"
                 />
                 <input
                 type="email"
                 id="inputMail"
+                class="input-mail"
                 placeholder="Email"
-                title="bitte eine gültige E-Mail-Adresse eintragen"
-                required
                 />
                 <input
                 type="tel"
                 id="inputPhone"
+                class="input-phone"
                 placeholder="Phone"
                 pattern="^\+?[0-9]{8,15}$"
-                title="Telefonnummer, 8 - 15 Zahlen / Zeichen"
-                required
                 />
-            
+                <div class="error-container-edit"></div>
                 <div class="button-container">
                   <button
                     class="cancel"

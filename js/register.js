@@ -9,21 +9,6 @@ function storeUserInSessionStorage(user) {
   sessionStorage.setItem("currentUser", JSON.stringify({ name: user.name, email: user.email }));
 }
 
-async function handleSignUp() {
-  const inputs = getSignUpInputs();
-  if (!validateInputs(inputs)) return;
-  const user = createUserObject(inputs);
-
-  try {
-    await pushUserToDatabase(user);
-    storeUserInSessionStorage(user); // Speichert Name und Email in Session Storage
-    showSignUpPopup();
-    redirectToHome();
-  } catch (error) {
-    console.error(error);
-    alert("An error occurred. Please try again.");
-  }
-}
 
 // Collect input values
 function getSignUpInputs() {
@@ -166,6 +151,82 @@ function backToLogin(){
   backToLogin.addEventListener("click", ()=>{
     window.location.href = "index.html";
   })
+}
+ 
+// Funktion zur Validierung der E-Mail-Adresse
+function validateEmail(email) {
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+  return emailRegex.test(email);
+}
+
+// Funktion zur Validierung des Namens
+function validateName(name) {
+  // Name muss mindestens 3 Zeichen lang sein und darf nur Buchstaben und Leerzeichen enthalten
+  const isValidLength = name.length >= 3;
+  const isValidFormat = /^[a-zA-ZäöüÄÖÜß\s]+$/.test(name); // Erlaubt Buchstaben (auch deutsche Umlaute) und Leerzeichen
+  return isValidLength && isValidFormat;
+}
+
+// Funktion, die die Fehler im Container anzeigt
+function showError(message, fieldId) {
+  const errorContainer = document.getElementById("passwordError");
+  errorContainer.textContent = message;  // Fehlermeldung setzen
+  errorContainer.style.display = "block";  // Container sichtbar machen
+
+  const field = document.getElementById(fieldId);
+  if (field) {
+    field.style.border = "1px solid red"; // Rote Umrandung hinzufügen
+  }
+}
+
+// Funktion zur Fehlerbehebung und zum Verbergen der Fehler
+function clearErrors() {
+  const errorContainer = document.getElementById("passwordError");
+  errorContainer.style.display = "none";  // Fehlercontainer ausblenden
+
+  // Entfernt die rote Umrandung von allen Eingabefeldern
+  const fields = document.querySelectorAll(".loginInputFeld");
+  fields.forEach(field => {
+    field.style.border = ""; // Standard-Rand zurücksetzen
+  });
+}
+// Funktion, die beim Klicken auf den "Sign up"-Button aufgerufen wird
+async function handleSignUp() {
+  const inputs = getSignUpInputs();
+  if (!validateInputs(inputs)) return;
+  
+  const isValid = validateSignUpInputs(inputs);
+  if (!isValid) return;
+
+  processSignUp(inputs);
+}
+
+function validateSignUpInputs(inputs) {
+  clearErrors();
+
+  if (!validateEmail(inputs.email)) {
+    showError("Bitte gib eine gültige E-Mail-Adresse ein.", "emailField");
+    return false;
+  }
+
+  if (!validateName(inputs.name)) {
+    showError("Bitte gib einen gültigen Namen ein.", "nameField");
+    return false;
+  }
+
+  return true;
+}
+
+async function processSignUp(inputs) {
+  const user = createUserObject(inputs);
+  try {
+    await pushUserToDatabase(user);
+    storeUserInSessionStorage(user); // Speichert Name und Email in Session Storage
+    showSignUpPopup();
+    redirectToHome();
+  } catch (error) {
+    showError("Ein Fehler ist aufgetreten. Bitte versuche es erneut.", "nameField"); // Generische Fehlermeldung
+  }
 }
 
 
