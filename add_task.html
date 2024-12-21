@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="./styles/add-task-helpstyle.css" />
     <script src="./js/add_task.js"></script>
     <script src="./js/add_task_return_html.js"></script>
+    <script src="./js/form-abfrage.js"></script>
     <link rel="stylesheet" href="style.css" />
     <script src="./script.js"></script>
 
@@ -46,6 +47,7 @@
                 placeholder="Enter a title"
                 required
               />
+              <span id="reqTitle" class="req">This field is required</span>
             </div>
             <div class="testA">
               <label for="addTaskDescription">Description</label>
@@ -75,6 +77,7 @@
             <div class="testA">
               <span>Due date<span class="req">*</span></span>
               <input type="date" class="inputStyle" id="addTaskDate" />
+              <span id="reqDate" class="req">This field is required</span>
             </div>
             <div class="priority">
               <span>Prio</span>
@@ -148,7 +151,7 @@
               </div>
             </div>
             <div class="testA">
-              <span>Category</span>
+              <span>Category<span class="req">*</span></span>
               <select
                 class="form-select form-select-sm"
                 aria-label="Small select example"
@@ -158,9 +161,10 @@
                 <option value="1">Technical Task</option>
                 <option value="2">User Story</option>
               </select>
+              <span id="reqCategory" class="req">This field is required</span>
             </div>
             <div class="testA">
-              <span>Subtask<span class="req">*</span></span>
+              <span>Subtask</span>
               <div class="containerInputSignUp">
                 <input
                   id="inputSubTask"
