@@ -13,13 +13,13 @@
     <link rel="stylesheet" href="./styles/header.css" />
     <link rel="stylesheet" href="./styles/add_task.css" />
     <link rel="stylesheet" href="./styles/buttons.css" />
-    <link rel="stylesheet" href="./styles/add-task-responsiv.css">
+    <link rel="stylesheet" href="./styles/add-task-responsiv.css" />
     <link rel="stylesheet" href="./styles/radio_button.css" />
     <link rel="stylesheet" href="./styles/add-task-helpstyle.css" />
     <script src="./js/add_task_only.js"></script>
     <script src="./js/add_task.js"></script>
     <script src="./js/add_task_return_html.js"></script>
-    <script src="./js/form-abfrage.js"></script>
+    <script src="./js/add-task-form-abfrage.js"></script>
     <link rel="stylesheet" href="style.css" />
     <script src="./script.js"></script>
 
@@ -47,9 +47,10 @@
                 type="text"
                 class="inputStyle"
                 placeholder="Enter a title"
-                required
               />
-              <span id="reqTitle" class="req">This field is required</span>
+              <span id="reqTitle" class="req dNone"
+                >This field is required</span
+              >
             </div>
             <div class="testA">
               <label for="addTaskDescription">Description</label>
@@ -57,7 +58,7 @@
                 name=""
                 id="addTaskDescription"
                 placeholder="Enter a Description"
-                class="inputStyle"
+                class="inputStyle cursor"
               ></textarea>
             </div>
             <div class="testA">
@@ -79,7 +80,7 @@
             <div class="testA">
               <span>Due date<span class="req">*</span></span>
               <input type="date" class="inputStyle" id="addTaskDate" />
-              <span id="reqDate" class="req">This field is required</span>
+              <span id="reqDate" class="req dNone">This field is required</span>
             </div>
             <div class="priority">
               <span>Prio</span>
@@ -159,11 +160,15 @@
                 aria-label="Small select example"
                 id="categorySelectId"
               >
-                <option disabled selected>Select task category</option>
+                <option disabled selected value="0">
+                  Select task category
+                </option>
                 <option value="1">Technical Task</option>
                 <option value="2">User Story</option>
               </select>
-              <span id="reqCategory" class="req">This field is required</span>
+              <span id="reqCategory" class="req dNone">
+                This field is required
+              </span>
             </div>
             <div class="testA">
               <span>Subtask</span>
@@ -204,7 +209,9 @@
         </div>
         <div class="desktopBtnContainer">
           <div style="display: flex; align-items: end">
-            <span class="bottom-left-required"><span class="req">*</span>This field is required</span>
+            <span class="bottom-left-required"
+              ><span class="req">*</span>This field is required</span
+            >
           </div>
           <div class="buttons">
             <button class="btnSecundary" onclick="resetForm(event)">

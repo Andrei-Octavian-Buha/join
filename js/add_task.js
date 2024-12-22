@@ -3,7 +3,7 @@ const BASE_URL =
 
 async function init() {
   await loadContacts();
-  updateEmptyColumnMessages(); 
+  // updateEmptyColumnMessages();
 }
 function subtasktrigger() {
   hideSubTaskAddBtn();
@@ -298,6 +298,13 @@ function variableId() {
   };
 }
 
+function handleFormSubmit(event) {
+  event.preventDefault();
+  // addDataToFireBase();
+  requiredValidation();
+  // showPopupAndRedirect();
+}
+
 function addDataToFireBase() {
   const taskData = variableId();
   uploadToFireBase("task", {
@@ -327,12 +334,6 @@ function addDataToFireBaseFromBoard() {
   loadTasksFromFirebase();
 }
 
-function handleFormSubmit(event) {
-  event.preventDefault();
-  addDataToFireBase();
-  showPopupAndRedirect();
-}
-
 function showPopupAndRedirect() {
   const popup = document.getElementById("popup");
   popup.classList.remove("hidden");
@@ -342,41 +343,35 @@ function showPopupAndRedirect() {
   }, 2500);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  const dropDownHeader = document.getElementById('dropDownHeaderId');
-  const dropDownBody = document.getElementById('dropDownBodyId');
+document.addEventListener("DOMContentLoaded", () => {
+  const dropDownHeader = document.getElementById("dropDownHeaderId");
+  const dropDownBody = document.getElementById("dropDownBodyId");
   if (!dropDownHeader || !dropDownBody) {
-      return;
+    return;
   }
   let isDropDownOpen = false;
-  dropDownHeader.addEventListener('click', (event) => {
-      isDropDownOpen = !isDropDownOpen;
-      dropDownBody.style.display = isDropDownOpen ? 'block' : 'none';
-      event.stopPropagation(); // Verhindert das Schließen, wenn auf den Header geklickt wird
+  dropDownHeader.addEventListener("click", (event) => {
+    isDropDownOpen = !isDropDownOpen;
+    dropDownBody.style.display = isDropDownOpen ? "block" : "none";
+    event.stopPropagation(); // Verhindert das Schließen, wenn auf den Header geklickt wird
   });
 
   // Dropdown schließen, wenn auf den Rest der Seite geklickt wird
-  document.addEventListener('click', (event) => {
-      if (isDropDownOpen && !dropDownBody.contains(event.target)) {
-          isDropDownOpen = false;
-          dropDownBody.style.display = 'none';
-      }
+  document.addEventListener("click", (event) => {
+    if (isDropDownOpen && !dropDownBody.contains(event.target)) {
+      isDropDownOpen = false;
+      dropDownBody.style.display = "none";
+    }
   });
 
   // Klick auf Kontakte in der Liste
-  dropDownBody.addEventListener('click', (event) => {
-      const contactContainer = event.target.closest('.dropDownContactContainer');
-      if (contactContainer) {
-          const checkbox = contactContainer.querySelector('.contactCheckbox');
-          if (checkbox) {
-              checkbox.checked = !checkbox.checked; // Checkbox-Status umschalten
-          }
+  dropDownBody.addEventListener("click", (event) => {
+    const contactContainer = event.target.closest(".dropDownContactContainer");
+    if (contactContainer) {
+      const checkbox = contactContainer.querySelector(".contactCheckbox");
+      if (checkbox) {
+        checkbox.checked = !checkbox.checked; // Checkbox-Status umschalten
       }
+    }
   });
 });
-
-
-
-
-
-
