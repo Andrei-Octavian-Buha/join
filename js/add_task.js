@@ -3,6 +3,7 @@ const BASE_URL =
 
 async function init() {
   await loadContacts();
+  updateEmptyColumnMessages(); 
 }
 function subtasktrigger() {
   hideSubTaskAddBtn();

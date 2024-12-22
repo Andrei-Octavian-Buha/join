@@ -204,6 +204,7 @@ async function updateTaskProgressInFirebase(
   } catch (error) {
     console.error("Fehler beim Firebase-Update:", error);
   }
+  updateEmptyColumnMessages(); 
 }
 
 function highlightColumn(status, event) {

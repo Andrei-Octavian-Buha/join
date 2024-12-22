@@ -25,10 +25,12 @@ async function loadContactss() {
   let awaitfeedbackId = document.getElementById("awaitfeedbackColumn");
   let inprogressId = document.getElementById("inprogressColumn");
   let doneId = document.getElementById("doneColumn");
+
   todoId.innerHTML = "";
   awaitfeedbackId.innerHTML = "";
   inprogressId.innerHTML = "";
   doneId.innerHTML = "";
+
   tasksData.forEach((task) => {
     if (task.task.progress === "todo") {
       todoId.innerHTML += renderCard(task);
@@ -40,10 +42,41 @@ async function loadContactss() {
       doneId.innerHTML += renderCard(task);
     }
   });
+
+  // Nachrichten für leere Spalten aktualisieren
+  updateEmptyColumnMessages(tasksData);
+
   tasksData.forEach((task) => {
-    showAssignet(task); // Funcția se oprește doar pentru task-ul problematic
+    showAssignet(task);
   });
 }
+
+
+function updateEmptyColumnMessages(tasksData) {
+  // IDs der Spalten und ihrer zugehörigen Nachrichten-Divs
+  const columns = [
+    { columnId: "todoColumn", messageClass: "no-tasks-message" },
+    { columnId: "awaitfeedbackColumn", messageClass: "no-tasks-message" },
+    { columnId: "inprogressColumn", messageClass: "no-tasks-message" },
+    { columnId: "doneColumn", messageClass: "no-tasks-message" },
+  ];
+
+  // Alle Spalten durchgehen
+  columns.forEach(({ columnId, messageClass }) => {
+    const column = document.getElementById(columnId);
+    const messageDiv = column.closest(".column").querySelector(`.${messageClass}`);
+
+    // Prüfen, ob die Spalte leer ist
+    if (!column.innerHTML.trim()) {
+      // Wenn leer, Nachricht anzeigen
+      messageDiv.style.display = "block";
+    } else {
+      // Wenn nicht leer, Nachricht verstecken
+      messageDiv.style.display = "none";
+    }
+  });
+}
+
 
 function fromNumberToName(task) {
   let categoryName;
