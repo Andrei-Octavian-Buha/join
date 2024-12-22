@@ -167,16 +167,17 @@ p {
 
 .no-tasks-message {
 font-size: 16px;
-display: flex; /* Flexbox aktivieren */
-align-items: center; /* Vertikale Zentrierung */
-justify-content: center; /* Horizontale Zentrierung */
+display: flex; 
+align-items: center; 
+justify-content: center; 
 border: 1px solid grey;
 border-style: dashed;
 border-radius: 12px;
 height: 50px;
 max-width: 400px;
 background-color: lightgrey;
-text-align: center; /* Für den Fall, dass der Text mehrere Zeilen hat */
+text-align: center; 
+box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
 }
 
 @media (max-width: 1140px) {
