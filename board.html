@@ -37,7 +37,10 @@
     <div class="addTaskMainDiv">
       <div class="">
         <div class="top-content">
-          <h1 class="board-headline">Board</h1>
+          <div class="top-content-mobile">
+            <h1 class="board-headline">Board</h1>
+            <img onclick="showOverlayAddTask()" class="add-mobile-plus" src="assets/img/plus add.png" alt="plus">
+          </div>
           <div class="right-content">
             <input
               class="searchinput"
@@ -48,7 +51,7 @@
             <button
               id="addCardButton"
               onclick="showOverlayAddTask()"
-              class="btnPrimary"
+              class="btnPrimary board"
             >
               Add Task <span class="plus">+</span>
             </button>
