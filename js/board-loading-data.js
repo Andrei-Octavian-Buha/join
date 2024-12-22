@@ -69,7 +69,7 @@ function updateEmptyColumnMessages(tasksData) {
     // Prüfen, ob die Spalte leer ist
     if (!column.innerHTML.trim()) {
       // Wenn leer, Nachricht anzeigen
-      messageDiv.style.display = "block";
+      messageDiv.style.display = "flex";
     } else {
       // Wenn nicht leer, Nachricht verstecken
       messageDiv.style.display = "none";
