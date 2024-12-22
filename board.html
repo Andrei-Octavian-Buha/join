@@ -37,7 +37,10 @@
     <div class="addTaskMainDiv">
       <div class="">
         <div class="top-content">
-          <h1>Board</h1>
+          <div class="top-content-mobile">
+            <h1 class="board-headline">Board</h1>
+            <img onclick="showOverlayAddTask()" class="add-mobile-plus" src="assets/img/plus add.png" alt="plus">
+          </div>
           <div class="right-content">
             <input
               class="searchinput"
@@ -48,7 +51,7 @@
             <button
               id="addCardButton"
               onclick="showOverlayAddTask()"
-              class="btnPrimary"
+              class="btnPrimary board"
             >
               Add Task <span class="plus">+</span>
             </button>
@@ -68,7 +71,7 @@
                 />
               </div>
             </div>
-            <div class="no-tasks-message" style="display: none;">No tasks to do...</div>
+            <div class="no-tasks-message" style="display: none;">No Tasks to do...</div>
             <div
               class="drag-area"
               id="todoColumn"
@@ -92,7 +95,7 @@
                 />
               </div>
             </div>
-            <div class="no-tasks-message" style="display: none;">No tasks in Progress...</div>
+            <div class="no-tasks-message" style="display: none;">No Tasks in Progress...</div>
             <div
               class="drag-area"
               id="inprogressColumn"
@@ -115,7 +118,7 @@
                 />
               </div>
             </div>
-            <div class="no-tasks-message" style="display: none;">No tasks for Feedback...</div>
+            <div class="no-tasks-message" style="display: none;">No Tasks for Feedback...</div>
             <div
               class="drag-area"
               id="awaitfeedbackColumn"
@@ -130,7 +133,7 @@
             <div class="head-content">
               <h3>Done</h3>
             </div>
-            <div class="no-tasks-message" style="display: none;">No tasks Done...</div>
+            <div class="no-tasks-message" style="display: none;">No Tasks Done...</div>
             <div
               class="drag-area"
               id="doneColumn"
