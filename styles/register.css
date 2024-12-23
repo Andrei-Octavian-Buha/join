@@ -1,47 +1,55 @@
 @media (max-width: 1100px) {
-    #imgHeader1{
+    #imgHeader1 {
         width: 64px;
         height: 78px;
     }
 }
 
-a{
+a {
     text-decoration: none;
     color: #40B3E9;
 }
 
-a:hover{
+a:hover {
     text-decoration: underline;
 }
 
 .hide {
     display: none;
-  }
-  
-  .passwordError {
+}
+
+.passwordError {
     color: #ff001f;
     font-size: 12px;
     margin-top: 5px;
     display: none;
-  }
+}
 
-  .loginInputFeld.error {
+.loginInputFeld.error {
     border: 1px solid #ff001f;
-  }
+}
 
 @media (min-width: 771px) {
-    .privacyBtn{
+    .privacyBtn {
         position: absolute;
         z-index: 995;
         bottom: 40px;
         display: flex;
         gap: 32px;
     }
-    .privacyLink{
+
+    .privacyLink {
         color: #CDCDCD;
         text-decoration: none;
     }
-    .maxWidth{
+
+    .privacyLink:hover{
+        color: #40B3E9;
+        text-decoration: none;
+        transform: scale(1.1);
+    }
+
+    .maxWidth {
         height: 100dvh;
         width: 100%;
         margin: auto;
@@ -50,22 +58,25 @@ a:hover{
         align-items: center;
         justify-content: center;
     }
-    .loginTitle{
+
+    .loginTitle {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         height: 89px;
     }
-    .backArrow{
+
+    .backArrow {
         position: absolute;
         top: 68px;
         left: 48px;
         display: flex;
         align-items: center;
-        justify-content:baseline;
+        justify-content: baseline;
     }
-    .loginCard{
+
+    .loginCard {
         position: relative;
         display: flex;
         flex-direction: column;
@@ -79,13 +90,14 @@ a:hover{
         border: 0px;
         box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.4);
     }
-    .separable{
+
+    .separable {
         width: 150px;
         border-bottom: 3px solid;
         color: #29ABE2;
     }
-    
-    .lh1{
+
+    .lh1 {
         font-size: 61px;
         margin-block-start: 0em;
         margin-block-end: 0em;
@@ -95,36 +107,40 @@ a:hover{
         unicode-bidi: isolate;
     }
 
-    .loginForm{
+    .loginForm {
         display: flex;
         flex-direction: column;
         align-items: center;
         width: 100%;
         gap: 32px;
     }
-    
-    .loginInput{
+
+    .loginInput {
         display: flex;
         flex-direction: column;
     }
-    .loginBtnContainer{
+
+    .loginBtnContainer {
         display: flex;
         gap: 35px;
     }
-    .loginHeaderContainer{
+
+    .loginHeaderContainer {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
     }
-    .loginHeader{
+
+    .loginHeader {
         max-width: 1440px;
         margin: 0 auto;
         display: flex;
         align-items: center;
         justify-content: space-between;
     }
-    .loginHeaderBtn{
+
+    .loginHeaderBtn {
         display: flex;
         gap: 35px;
         padding-top: 67px;
@@ -132,77 +148,86 @@ a:hover{
         display: flex;
         gap: 35px;
     }
-    .logoImg{
+
+    .logoImg {
         padding-top: 80px;
         padding-left: 77px;
     }
 
-    .loginContainer{
+    .loginContainer {
         display: flex;
         max-width: 1440px;
     }
-    .loginInputFeld{
+
+    .loginInputFeld {
         width: 442px;
         border-radius: 10px;
         border: 1px solid #D1D1D1;
         padding: 10px 21px;
         outline: none
     }
-    .loginInputFeld:focus{
+
+    .loginInputFeld:focus {
         border-radius: 10px;
         border: 1px solid #29ABE2;
         padding: 10px 21px;
         outline: none
     }
-    .loginInputFeld.invalid{
+
+    .loginInputFeld.invalid {
         border-radius: 10px;
         border: 1px solid #ff001f;
         padding: 10px 21px;
         outline: none
     }
+
     .loginInputFeld:valid {
         border: 1px solid #28a745;
     }
-    .desktopMobileDnone{
+
+    .desktopMobileDnone {
         display: none;
     }
 
-    .containerInputSignUp{
+    .containerInputSignUp {
         position: relative;
         display: flex;
         align-items: center;
         margin-bottom: 32px;
     }
-    .containerInputSignUplast{
+
+    .containerInputSignUplast {
         position: relative;
         display: flex;
         align-items: center;
     }
-    .inputWithImg{
+
+    .inputWithImg {
         position: absolute;
         right: 24px;
     }
-    .inputWithImgLast{
+
+    .inputWithImgLast {
         position: absolute;
         right: 24px;
     }
 }
 
-
-
 @media (max-width: 770px) {
-    .privacyBtn{
+    .privacyBtn {
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 32px;
         padding-bottom: 32px;
     }
-    .privacyLink{
+
+    .privacyLink {
         color: #CDCDCD;
         text-decoration: none;
     }
-    .maxWidth{
+
+    .maxWidth {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -211,20 +236,21 @@ a:hover{
         gap: 32px;
         height: 100dvh;
     }
-    .headerLoginCard{
+
+    .headerLoginCard {
         display: flex;
     }
 
-    .backArrow{
+    .backArrow {
         position: absolute;
         top: 40px;
         left: 40px;
         display: flex;
         align-items: center;
-        justify-content:baseline;
+        justify-content: baseline;
     }
 
-    .loginCard{
+    .loginCard {
         position: relative;
         display: flex;
         flex-direction: column;
@@ -239,18 +265,20 @@ a:hover{
         border: 0px;
         box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.4);
     }
-    .loginContainer{
+
+    .loginContainer {
         display: flex;
         justify-content: center;
         align-items: center;
     }
-    .separable{
+
+    .separable {
         width: 150px;
         border-bottom: 3px solid;
         color: #29ABE2;
     }
-    
-    .lh1{
+
+    .lh1 {
         font-size: 47px;
         margin-block-start: 0em;
         margin-block-end: 0em;
@@ -259,143 +287,157 @@ a:hover{
         font-weight: bold;
         unicode-bidi: isolate;
     }
-    .loginTitle{
+
+    .loginTitle {
         height: 89px;
     }
-    .loginForm{
+
+    .loginForm {
         display: flex;
         flex-direction: column;
         align-items: center;
         width: 100%;
         gap: 32px;
     }
-    
-    .loginInput{
+
+    .loginInput {
         display: flex;
         flex-direction: column;
         width: 100%;
         gap: 32px;
     }
-    .loginBtnContainer{
+
+    .loginBtnContainer {
         display: flex;
         align-items: center;
         flex-direction: column;
         gap: 21px;
     }
-    .loginHeaderContainer{
+
+    .loginHeaderContainer {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
     }
-    .loginHeader{
+
+    .loginHeader {
         max-width: 1440px;
         margin: 0 auto;
         display: flex;
         align-items: center;
         justify-content: space-between;
     }
-    .loginHeaderBtn{
+
+    .loginHeaderBtn {
         display: flex;
         align-items: center;
         justify-content: center;
         flex-wrap: wrap;
         gap: 35px;
     }
-    .logoImg{
+
+    .logoImg {
         padding-top: 37px;
         padding-left: 38px;
     }
-    #imgHeader1{
+
+    #imgHeader1 {
         width: 64px;
         height: 78px;
     }
-    .loginInputFeld{
+
+    .loginInputFeld {
         width: 100%;
         border-radius: 10px;
         border: 1px solid #D1D1D1;
         padding: 10px 21px;
         outline: none
     }
-    .loginInputFeld:focus{
+
+    .loginInputFeld:focus {
         border-radius: 10px;
         border: 1px solid #29ABE2;
         padding: 10px 21px;
         outline: none
     }
-    .loginInputFeld.invalid{
+
+    .loginInputFeld.invalid {
         border-radius: 10px;
         border: 1px solid #ff001f;
         padding: 10px 21px;
         outline: none
     }
+
     .loginInputFeld:valid {
         border: 1px solid #28a745;
     }
-    .btnMobileSettings{
+
+    .btnMobileSettings {
         min-width: 180px;
     }
-    .mobileDesktopDNone{
+
+    .mobileDesktopDNone {
         display: none;
     }
 
-    .containerInputSignUp{
+    .containerInputSignUp {
         display: flex;
         align-items: center;
         justify-content: center;
         width: 100%;
     }
 
-    .containerInputSignUplast{
+    .containerInputSignUplast {
         position: relative;
         display: flex;
         align-items: center;
         width: 100%;
     }
-    .inputWithImgLast{
+
+    .inputWithImgLast {
         position: absolute;
         right: 28px;
     }
-    .inputWithImg{
+
+    .inputWithImg {
         position: absolute;
         right: 45px;
     }
 
 }
+
 @media (max-width: 350px) {
 
-    .backArrow{
+    .backArrow {
         position: absolute;
         top: 40px;
         left: 24px;
         display: flex;
         align-items: center;
-        justify-content:baseline;
+        justify-content: baseline;
     }
 }
 
 @media (max-height: 700px) {
-    .loginCard .loginForm .loginInput{
+    .loginCard .loginForm .loginInput {
         gap: 16px;
     }
 
-    .loginForm{
+    .loginForm {
         gap: 16px;
     }
 
-    .loginCard{
+    .loginCard {
         margin-top: 115px;
         padding: 16px 16px;
     }
 
-    .logoImg{
+    .logoImg {
         padding-top: 16px;
     }
 
-    body{
+    body {
         overflow: hidden;
     }
 }
-
-
-

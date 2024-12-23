@@ -52,7 +52,6 @@
 
 @media (max-width: 1149px) {
     .summary-main-div {
-        margin-top: 120px;
         padding-left: 0px;
         margin-right: 0px;
         padding-bottom: 32px;
@@ -93,7 +92,6 @@
 
 @media (max-width: 800px) {
     .summary-main-div {
-        margin-top: 120px;
         padding-left: 0px;
         margin-right: 0px;
         padding-bottom: 32px;
@@ -228,9 +226,11 @@
     .seperator-gray{
         height: 75px;
     }
-
-    .summary-main-div{
-        margin-top: 100px;
-    }
     
+}
+
+@media(min-height: 700px){
+    .summary-main-div{
+        padding-top: 100px; 
+    }
 }
