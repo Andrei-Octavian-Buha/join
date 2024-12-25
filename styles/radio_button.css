@@ -69,3 +69,9 @@
 .custom-radio-low input[type="radio"]:checked + span.radio-btn-low svg {
   fill: #ffffff;
 }
+
+.radio-btn-urgent:hover,
+.radio-btn-medium:hover,
+.radio-btn-low:hover {
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2);
+}
