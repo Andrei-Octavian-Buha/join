@@ -30,3 +30,8 @@ p {
 .cursor {
   cursor: pointer;
 }
+
+.backgroundArrow:hover {
+  background-color: #d1d1d1;
+  border-radius: 50%;
+}
