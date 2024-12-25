@@ -98,7 +98,10 @@ a:hover {
     align-items: center;
     justify-content: baseline;
   }
-
+  .backArrow:hover {
+    background-color: #d1d1d1;
+    border-radius: 50%;
+  }
   .loginCard {
     position: relative;
     display: flex;
@@ -272,6 +275,10 @@ a:hover {
     align-items: center;
     justify-content: baseline;
   }
+  .backArrow:hover {
+    background-color: #d1d1d1;
+    border-radius: 50%;
+  }
 
   .loginCard {
     position: relative;
@@ -437,6 +444,10 @@ a:hover {
     display: flex;
     align-items: center;
     justify-content: baseline;
+  }
+  .backArrow:hover {
+    background-color: #d1d1d1;
+    border-radius: 50%;
   }
 }
 
