@@ -46,5 +46,7 @@ function dropDownContactNameHTML(element, color, initials) {
       type="checkbox"
       class="contactCheckbox"
       id="CheckboxID${element.id}"
-    />`;
+    />
+    <label for="CheckboxID${element.id}" class="checkedNachAufgabe"></label>
+    `;
 }

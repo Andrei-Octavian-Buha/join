@@ -1,0 +1,16 @@
+input[type="checkbox"] {
+  display: none;
+}
+
+label.checkedNachAufgabe {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image: url("../assets/subtask/checkbox.svg");
+  background-size: cover;
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked + label.checkedNachAufgabe {
+  background-image: url("../assets/subtask/backgroundchecked.svg");
+}
