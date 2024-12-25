@@ -126,7 +126,7 @@
     height: 288px;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 8px;
   }
   .containerTitle {
     width: 100%;

@@ -352,7 +352,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let isDropDownOpen = false;
   dropDownHeader.addEventListener("click", (event) => {
     isDropDownOpen = !isDropDownOpen;
-    dropDownBody.style.display = isDropDownOpen ? "block" : "none";
+    // dropDownBody.style.display = isDropDownOpen ? "block" : "none";
     event.stopPropagation(); // Verhindert das Schließen, wenn auf den Header geklickt wird
   });
 
@@ -360,7 +360,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("click", (event) => {
     if (isDropDownOpen && !dropDownBody.contains(event.target)) {
       isDropDownOpen = false;
-      dropDownBody.style.display = "none";
+      dropDownBody.classList.add("dNone");
     }
   });
 
