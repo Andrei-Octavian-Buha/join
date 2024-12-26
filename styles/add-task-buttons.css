@@ -14,3 +14,20 @@ label.checkedNachAufgabe {
 input[type="checkbox"]:checked + label.checkedNachAufgabe {
   background-image: url("../assets/subtask/backgroundchecked.svg");
 }
+
+.selectContainer {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.selectBox {
+  display: flex;
+  width: 100%;
+  appearance: none;
+}
+
+.arrowImg {
+  position: absolute;
+  right: 21px;
+}

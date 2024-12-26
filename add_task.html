@@ -156,17 +156,24 @@
             </div>
             <div class="testA">
               <span>Category<span class="req">*</span></span>
-              <select
-                class="form-select form-select-sm"
-                aria-label="Small select example"
-                id="categorySelectId"
-              >
-                <option disabled selected value="0">
-                  Select task category
-                </option>
-                <option value="1">Technical Task</option>
-                <option value="2">User Story</option>
-              </select>
+              <div class="selectContainer">
+                <select
+                  class="cursor selectBox"
+                  aria-label="Small select example"
+                  id="categorySelectId"
+                >
+                  <option disabled selected value="0">
+                    Select task category
+                  </option>
+                  <option value="1">Technical Task</option>
+                  <option value="2 ">User Story</option>
+                </select>
+                <img
+                  class="arrowImg"
+                  src="./assets/menu/arrow_drop_down.svg"
+                  alt=""
+                />
+              </div>
               <span id="reqCategory" class="req dNone">
                 This field is required
               </span>
