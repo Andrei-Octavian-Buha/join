@@ -349,3 +349,22 @@ ul {
   padding: 0;
 }
 
+@keyframes flyInFromRight {
+  0% {
+      transform: translateX(100%); /* Start off-screen to the right */
+      opacity: 0; /* Start invisible */
+  }
+  100% {
+      transform: translateX(0); /* End at original position */
+      opacity: 1; /* End fully visible */
+  }
+}
+
+.fly-in {
+  animation: flyInFromRight 0.5s ease forwards; /* Apply the animation */
+}
+
+.add-new-button:hover{
+  transition: transform 0.3s ease;
+  box-shadow:0px 7px 9px -5px #6F6F6F
+}

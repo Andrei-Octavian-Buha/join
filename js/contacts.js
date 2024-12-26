@@ -161,9 +161,14 @@ function setActiveContact(element) {
 function openContactOverlay(contactId, contactName, contactEmail, contactPhone) {
     const overlayContent = document.createElement('div');
     overlayContent.innerHTML = generateContactOverlayHTML(contactId, contactName, contactEmail, contactPhone);
+    
     const contactOverlay = document.getElementById('contact-overlay');
     contactOverlay.innerHTML = '';  
     contactOverlay.appendChild(overlayContent);
+    
+    // Add the fly-in class to the overlay content
+    overlayContent.classList.add('fly-in');
+
     contactOverlay.style.display = 'block'; 
     const rightContent = document.querySelector('.right-content');
     if (window.innerWidth <= 920) {
@@ -173,8 +178,10 @@ function openContactOverlay(contactId, contactName, contactEmail, contactPhone) 
         rightContent.classList.remove('show');
         rightContent.style.display = '';  
     }
+    overlayContent.addEventListener('animationend', () => {
+        overlayContent.classList.remove('fly-in'); // Remove the class after animation
+    });    
 }
-
 
 function createContactCardHTML(contact) {
     return `
