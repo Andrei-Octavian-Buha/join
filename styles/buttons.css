@@ -56,6 +56,9 @@
   border: 1px solid #29abe2;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2);
 }
+.btnSecundary:hover .clearX {
+  filter: invert(57%) sepia(91%) saturate(1772%) hue-rotate(175deg) brightness(91%) contrast(92%);
+}
 .btnPriorityMedium {
   font-weight: 400;
   border: 0px;
