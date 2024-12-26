@@ -178,6 +178,9 @@ function openContactOverlay(contactId, contactName, contactEmail, contactPhone) 
         rightContent.classList.remove('show');
         rightContent.style.display = '';  
     }
+    overlayContent.addEventListener('animationend', () => {
+        overlayContent.classList.remove('fly-in'); // Remove the class after animation
+    });    
 }
 
 function createContactCardHTML(contact) {

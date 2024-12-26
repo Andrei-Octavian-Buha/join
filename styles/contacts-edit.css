@@ -1,41 +1,49 @@
-
-
 @keyframes slideIn {
-    from {
-        transform: translate(-50%, 100%); /* Von unten starten */
-        opacity: 0;
-    }
-    to {
-        transform: translate(-50%, -50%); /* Zur Mitte bewegen */
-        opacity: 1;
-    }
+  from {
+      transform: translate(100%, -50%); /* Start off-screen to the right and vertically centered */
+      opacity: 0; /* Start invisible */
+  }
+  to {
+      transform: translate(-50%, -50%); /* Move to center */
+      opacity: 1; /* End fully visible */
+  }
 }
 
 @keyframes slideOut {
-    from {
-        transform: translate(-50%, -50%); /* Von der Mitte starten */
-        opacity: 1;
-    }
-    to {
-        transform: translate(-50%, 100%); /* Nach unten bewegen */
-        opacity: 0;
-    }
+  from {
+      transform: translate(-50%, -50%); /* Start at center */
+      opacity: 1; /* Start fully visible */
+  }
+  to {
+      transform: translate(100%, -50%); /* Move out to the right */
+      opacity: 0; /* End invisible */
+  }
 }
 
 .edit-overlay-contact {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    z-index: 1000;
-    display: none; /* Anfangs versteckt */
-    flex: 1;
-    border-color: transparent;
-    max-width: 1400px;
-    height: calc(60dvh - 14px);
-    border-radius: 25px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    animation: slideIn 0.8s forwards;
-    width: calc(100dvw - 50px);
+  position: fixed;
+  top: 50%;
+  left: 50%; /* Start off-screen to the right */
+  z-index: 1000;
+  display: none;
+  flex: 1;
+  border-color: transparent;
+  max-width: 1400px;
+  height: calc(60dvh - 14px);
+  border-radius: 25px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.8s forwards; /* Animation applied */
+  width: calc(100dvw - 50px);
+  transform: translate(-100%, -50%); /* Center the overlay */
+  opacity: 0; /* Start invisible */
+}
+
+.slide-in {
+  animation: slideIn 0.8s forwards; /* Apply slideIn animation */
+}
+
+.slide-out {
+  animation: slideOut 0.8s forwards; /* Apply slideOut animation */
 }
 
 .edit-overlay-contact.hide {
