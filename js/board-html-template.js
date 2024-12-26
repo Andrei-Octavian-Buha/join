@@ -2,9 +2,7 @@ function showEditCard(task) {
   return ` <div class="boardOverlay">
           <div class="taskContainer">
               <div class="taskHeder">
-                  <div class="boardCategoryCard cat${
-                    task.task.category
-                  }">${fromNumberToName(task)}
+                  <div>
                   </div>
                   <span onclick="hideOverlayInfoCard()" class="cursor">X</span>
               </div>

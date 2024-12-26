@@ -51,7 +51,6 @@ async function loadContactss() {
   });
 }
 
-
 function updateEmptyColumnMessages(tasksData) {
   // IDs der Spalten und ihrer zugehörigen Nachrichten-Divs
   const columns = [
@@ -64,7 +63,9 @@ function updateEmptyColumnMessages(tasksData) {
   // Alle Spalten durchgehen
   columns.forEach(({ columnId, messageClass }) => {
     const column = document.getElementById(columnId);
-    const messageDiv = column.closest(".column").querySelector(`.${messageClass}`);
+    const messageDiv = column
+      .closest(".column")
+      .querySelector(`.${messageClass}`);
 
     // Prüfen, ob die Spalte leer ist
     if (!column.innerHTML.trim()) {
@@ -76,7 +77,6 @@ function updateEmptyColumnMessages(tasksData) {
     }
   });
 }
-
 
 function fromNumberToName(task) {
   let categoryName;
@@ -247,7 +247,6 @@ function editListDataCard(taskId) {
   template.innerHTML = "";
   cardRender.innerHTML = "";
   cardRender.innerHTML += showEditCard(task);
-  init();
   showAssignet(task);
   setupDropdownEvents();
   rendEditSubTask(task);

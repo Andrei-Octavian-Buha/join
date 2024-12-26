@@ -131,13 +131,10 @@ async function updateContactOnFireBase(task) {
       }),
       headers: { "Content-Type": "application/json" },
     });
-    taskInit();
-    listDataCard(task);
     if (!response.ok) {
       throw new Error("Fehler beim Speichern der Kontaktdaten");
     }
     const updatedContact = await response.json();
-    console.log("Kontakt erfolgreich aktualisiert:", updatedContact);
     return updatedContact;
   } catch (error) {
     console.error("Fehler beim Aktualisieren des Kontakts:", error);
@@ -148,14 +145,13 @@ async function updateContactOnFireBase(task) {
 function getValue(taskid) {
   const task = tasks.find((t) => t.id === taskid);
   if (!task) return;
-  console.log(task.task.assignet);
   const newAssignet =
     checked && checked.length > 0 ? checked : task.task.assignet;
   title = document.getElementById("addTaskTittle").value;
   description = document.getElementById("addTaskDescription").value;
   assignet = checked;
   date = document.getElementById("addTaskDate").value;
-  prio = task.task.prio;
+  prio = getPriorityValue();
   subtask = subtasks;
   progress = task.task.progress;
   category = task.task.category;
