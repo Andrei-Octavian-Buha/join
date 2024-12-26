@@ -331,7 +331,6 @@ function addDataToFireBaseFromBoard() {
     subtask: taskData.subtask,
     progress: "todo",
   });
-  loadTasksFromFirebase();
 }
 
 function showPopupAndRedirect() {

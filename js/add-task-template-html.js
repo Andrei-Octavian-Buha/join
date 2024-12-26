@@ -6,16 +6,17 @@ function addTaskTemplate() {
         <div class="desktopView">
           <div class="leftContainer">
             <div class="testA">
-              <label for="addTaskTittle"
-                >Title<span class="req">*</span>
+              <label for="addTaskTittle">Title<span class="req">*</span>
               </label>
               <input
                 id="addTaskTittle"
                 type="text"
                 class="inputStyle"
                 placeholder="Enter a title"
-                required
               />
+              <span id="reqTitle" class="req dNone"
+                >This field is required</span
+              >
             </div>
             <div class="testA">
               <label for="addTaskDescription">Description</label>
@@ -23,7 +24,7 @@ function addTaskTemplate() {
                 name=""
                 id="addTaskDescription"
                 placeholder="Enter a Description"
-                class="inputStyle"
+                class="inputStyle cursor"
               ></textarea>
             </div>
             <div class="testA">
@@ -45,6 +46,7 @@ function addTaskTemplate() {
             <div class="testA">
               <span>Due date<span class="req">*</span></span>
               <input type="date" class="inputStyle" id="addTaskDate" />
+              <span id="reqDate" class="req dNone">This field is required</span>
             </div>
             <div class="priority">
               <span>Prio</span>
@@ -118,19 +120,31 @@ function addTaskTemplate() {
               </div>
             </div>
             <div class="testA">
-              <span>Category</span>
-              <select
-                class="form-select form-select-sm"
-                aria-label="Small select example"
-                id="categorySelectId"
-              >
-                <option disabled selected>Select task category</option>
-                <option value="1">Technical Task</option>
-                <option value="2">User Story</option>
-              </select>
+              <span>Category<span class="req">*</span></span>
+              <div class="selectContainer">
+                <select
+                  class="cursor selectBox"
+                  aria-label="Small select example"
+                  id="categorySelectId"
+                >
+                  <option disabled selected value="0">
+                    Select task category
+                  </option>
+                  <option value="1">Technical Task</option>
+                  <option value="2 ">User Story</option>
+                </select>
+                <img
+                  class="arrowImg"
+                  src="./assets/menu/arrow_drop_down.svg"
+                  alt=""
+                />
+              </div>
+              <span id="reqCategory" class="req dNone">
+                This field is required
+              </span>
             </div>
             <div class="testA">
-              <span>Subtask<span class="req">*</span></span>
+              <span>Subtask</span>
               <div class="containerInputSignUp">
                 <input
                   id="inputSubTask"
@@ -166,7 +180,9 @@ function addTaskTemplate() {
             </div>
           </div>
         </div>
-        <div class="desktopBtnContainer">
+
+      </form>
+              <div class="desktopBtnContainer">
           <div style="display: flex; align-items: end">
             <span><span class="req">*</span>This field is required</span>
           </div>
@@ -174,12 +190,11 @@ function addTaskTemplate() {
             <button class="btnSecundary" onclick="resetForm(event)">
               Clear <img src="./assets/priority/iconoir_cancel.svg" alt="" />
             </button>
-            <button class="btnPrimary" onclick="addDataToFireBaseFromBoard()">
+            <button class="btnPrimary" onclick="requiredValidationAddTaskToBoard()">
               Create Task <img src="./assets/priority/check.svg" alt="" />
             </button>
           </div>
         </div>
-      </form>
     </div>
   </div>
   `;

@@ -17,12 +17,13 @@
     <link rel="stylesheet" href="./styles/radio_button.css" />
     <link rel="stylesheet" href="./styles/add-task-helpstyle.css" />
     <link rel="stylesheet" href="./styles/add-task-buttons.css" />
+    <link rel="stylesheet" href="style.css" />
     <script src="./js/add_task_only.js"></script>
     <script src="./js/add_task.js"></script>
     <script src="./js/add_task_return_html.js"></script>
     <script src="./js/add-task-form-abfrage.js"></script>
-    <link rel="stylesheet" href="style.css" />
     <script src="./script.js"></script>
+    <script src="./js/board.js"></script>
 
     <title>Add Task</title>
     <link rel="icon" href="./assets/img/logo2.svg" />
@@ -223,7 +224,12 @@
           </div>
           <div class="buttons">
             <button class="btnSecundary" onclick="resetForm(event)">
-              Clear <img class="clearX" src="./assets/priority/iconoir_cancel.svg" alt="" />
+              Clear
+              <img
+                class="clearX"
+                src="./assets/priority/iconoir_cancel.svg"
+                alt=""
+              />
             </button>
             <button class="btnPrimary" type="submit">
               Create Task <img src="./assets/priority/check.svg" alt="" />

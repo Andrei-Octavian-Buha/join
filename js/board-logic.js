@@ -4,6 +4,12 @@ function showOverlayAddTask() {
   template.innerHTML += addTaskTemplate();
   setupDropdownEvents();
   init();
+  onlyToDay();
+}
+
+function onlyToDay() {
+  const today = new Date().toISOString().split("T")[0];
+  document.getElementById("addTaskDate").setAttribute("min", today);
 }
 
 function setupDropdownEvents() {
@@ -165,13 +171,3 @@ function getValue(taskid) {
     category,
   };
 }
-
-
-
-
-
-
-
-
-
-
