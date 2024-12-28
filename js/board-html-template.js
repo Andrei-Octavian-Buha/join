@@ -141,6 +141,7 @@ function showEditCard(task) {
                     class="inputWithImg"
                     src="./assets/menu/add.svg"
                     alt=""
+                    onclick="hideSubTaskAddBtn()"
                   />
                 </div>
                 <div id="AddSubTaskStep2" class="imgContainer dNone">
@@ -149,13 +150,15 @@ function showEditCard(task) {
                     class="cursor"
                     src="./assets/subtask/x.svg"
                     alt=""
+                    onclick="deleteInputSubTask()"
                   />
                   <span>|</span>
                   <img
-                    id="AddSubTaskStep2Test"
+                    id="EditSubtasksCard"
                     class="cursor"
                     src="./assets/subtask/check.svg"
                     alt=""
+                    onclick="addEditSubTask()"
                   />
                 </div>
               </div>
@@ -164,7 +167,7 @@ function showEditCard(task) {
             
               </div>
                 <div class="btnBoardOk">
-                    <button class="btnPrimary" onclick=" toDoForUpdateTaskOnFireBase('${
+                    <button class="btnPrimary" onclick="toDoForUpdateTaskOnFireBase('${
                       task.id
                     }')">
                       Ok <img src="./assets/priority/check.svg" alt="" />
