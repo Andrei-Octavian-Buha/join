@@ -87,14 +87,16 @@ function hideshowListCard() {
   document.getElementById("showListCard").classList.add("dNone");
 }
 
-function addEditSubTask() {
-  let inputText = document.getElementById("inputSubTask");
-  if (inputText.value && currentTask.task.subtask.length <= 1) {
-    currentTask.task.subtask.push(inputText.value);
-  }
-  hideEditAddBtn();
+let subtasksEditCard = [];
 
+function addEditSubTask() {
+  currentTask.task.subtask = subtasksEditCard;
+  let inputText = document.getElementById("inputSubTask");
+  if (inputText.value && subtasksEditCard.length <= 1) {
+    subtasksEditCard.push(inputText.value);
+  }
   rendEditSubTask(currentTask);
+  hideEditAddBtn();
 }
 
 function rendEditSubTask(task) {
