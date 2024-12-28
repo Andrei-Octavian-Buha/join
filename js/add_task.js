@@ -65,6 +65,12 @@ async function loadContacts() {
   subtasktrigger();
 }
 
+async function loadContactsForEdit() {
+  let contactsData = await loadContactsData();
+  let sortedContacts = sortContacts(contactsData);
+  renderContacts(sortedContacts);
+}
+
 function getColorForInitial(initial) {
   const colors = {
     A: "#FF5733",

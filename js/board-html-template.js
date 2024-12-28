@@ -4,7 +4,7 @@ function showEditCard(task) {
               <div class="taskHeder">
                   <div>
                   </div>
-                  <span onclick="hideOverlayInfoCard()" class="cursor">X</span>
+                  <span onclick="closeOverlayInfoCard()" class="cursor">X</span>
               </div>
                           <div class="testA">
               <label for="addTaskTittle"
@@ -27,7 +27,6 @@ function showEditCard(task) {
                 placeholder="Enter a Description"
                 class="inputStyle"
               >${task.task.description}</textarea>
-            </div>
                         <div class="testA">
               <span>Due date<span class="req">*</span></span>
               <input type="date" class="inputStyle" id="addTaskDate" value="${
@@ -165,7 +164,7 @@ function showEditCard(task) {
             
               </div>
                 <div class="btnBoardOk">
-                    <button class="btnPrimary" onclick="updateContactOnFireBase('${
+                    <button class="btnPrimary" onclick=" toDoForUpdateTaskOnFireBase('${
                       task.id
                     }')">
                       Ok <img src="./assets/priority/check.svg" alt="" />

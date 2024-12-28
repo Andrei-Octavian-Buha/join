@@ -243,13 +243,13 @@ function editListDataCard(taskId) {
   const task = tasks.find((t) => t.id === taskId);
   if (!task) return;
   let cardRender = document.getElementById("taskInfoCard");
-  let template = document.getElementById("add-task-template");
-  template.innerHTML = "";
   cardRender.innerHTML = "";
   cardRender.innerHTML += showEditCard(task);
   showAssignet(task);
   setupDropdownEvents();
   rendEditSubTask(task);
+  loadContactsForEdit();
+  onlyToDay();
 }
 
 function listDataCard(taskId) {

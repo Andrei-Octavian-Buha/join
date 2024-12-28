@@ -3,7 +3,7 @@ function showOverlayAddTask() {
   template.classList.remove("dNone");
   template.innerHTML += addTaskTemplate();
   setupDropdownEvents();
-  init();
+  loadContacts();
   onlyToDay();
 }
 
@@ -79,6 +79,8 @@ function hideOverlayInfoCard() {
 function closeOverlayInfoCard() {
   hideOverlayInfoCard();
   taskInit();
+  const card = document.getElementById("taskInfoCard");
+  card.innerHTML = "";
 }
 
 function hideshowListCard() {
@@ -114,7 +116,7 @@ function addEditSubTaskcheck(index) {
   });
 }
 
-async function updateContactOnFireBase(task) {
+async function updateTaskOnFireBase(task) {
   let taskData = getValue(task);
   try {
     const response = await fetch(`${BASE_URL}/task/${task}.json`, {
@@ -140,6 +142,12 @@ async function updateContactOnFireBase(task) {
     console.error("Fehler beim Aktualisieren des Kontakts:", error);
     throw error;
   }
+}
+
+async function toDoForUpdateTaskOnFireBase(task) {
+  await updateTaskOnFireBase(task);
+  await taskInit();
+  listDataCard(task);
 }
 
 function getValue(taskid) {
