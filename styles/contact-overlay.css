@@ -4,7 +4,7 @@
   left: 0%; /* Ändere dies von 100% auf 50% */
   transform: translate(-50%, -50%); /* Ändere dies, um sowohl horizontal als auch vertikal zu zentrieren */
   width: 100%;
-  display: grid;
+  display: none;
   place-items: center;
   justify-content: center;
   align-items: center;
