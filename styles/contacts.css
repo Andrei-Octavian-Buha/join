@@ -317,6 +317,11 @@ input:focus {
   width: 200px;
 }
 
+.create:hover{
+  transition: transform 0.3s ease;
+  box-shadow:0px 7px 9px -5px #6F6F6F
+}
+
 .cancel {
   margin-top: 16px;
   width: 140px;
@@ -328,6 +333,8 @@ input:focus {
 .cancel:hover {
   border-color: rgb(41, 171, 226);
   background-color: white;
+  transition: transform 0.3s ease;
+  box-shadow:0px 7px 9px -5px #6F6F6F
 }
 
 .list::-webkit-scrollbar {
