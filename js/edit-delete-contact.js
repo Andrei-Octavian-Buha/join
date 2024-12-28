@@ -300,3 +300,20 @@ async function handleFormSubmit(event) {
     
     }
 }
+
+function handleClickOutsideOverlay(event) {
+    const editContactOverlay = document.getElementById('edit-contact-overlay');
+    
+    if (!editContactOverlay || editContactOverlay.style.display !== 'block') {
+        return; // Kein geöffnetes Overlay vorhanden
+    }
+    if (
+        editContactOverlay.contains(event.target) || 
+        event.target.closest('.edit-button-container')
+    ) {
+        return; // Klick innerhalb des Overlays oder auf den Edit-Button, nichts tun
+    }
+    closeOverlay('edit-contact-overlay');
+}
+
+document.addEventListener('click', handleClickOutsideOverlay);

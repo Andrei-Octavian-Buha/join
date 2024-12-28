@@ -37,7 +37,7 @@ function generateContactOverlayHTML(contactId, contactName, contactEmail, contac
                     <img src="assets/img/threePoints.png" alt="Menu" class="small-img">
                 </div>
                 <div class="menu hidden-menu">
-                    <div class="edit-button-container hidden">
+                    <div class="open-overlay" class="edit-button-container hidden">
                         <img src="assets/img/edit-pencil.png" alt="Edit" class="edit-image hidden" />
                         <p class="edit-label" onclick="editContact('${contactId}')">Edit</p>
                     </div>
