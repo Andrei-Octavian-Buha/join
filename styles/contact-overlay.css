@@ -14,8 +14,6 @@
   }
   
 
-
-
   .overlay-content {
     position: relative;
     display: flex;
@@ -34,7 +32,6 @@
       box-sizing: border-box;
       border-color: transparent;
       border-radius: 25px;
-      width: 1212px;
       height: 592px;
       max-width: 1440px;
     }
@@ -48,6 +45,7 @@
       border-radius: 25px;
       height: calc(100dvh - 100px);
       max-width: 1440px;
+      margin: auto;
     }
   }
   
