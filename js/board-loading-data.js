@@ -239,8 +239,11 @@ async function deleteTask(contactId) {
   } catch (error) {}
 }
 
+let currentTask = null;
+
 function editListDataCard(taskId) {
   const task = tasks.find((t) => t.id === taskId);
+  currentTask = task;
   if (!task) return;
   let cardRender = document.getElementById("taskInfoCard");
   cardRender.innerHTML = "";

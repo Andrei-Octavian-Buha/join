@@ -87,6 +87,16 @@ function hideshowListCard() {
   document.getElementById("showListCard").classList.add("dNone");
 }
 
+function addEditSubTask() {
+  let inputText = document.getElementById("inputSubTask");
+  if (inputText.value && currentTask.task.subtask.length <= 1) {
+    currentTask.task.subtask.push(inputText.value);
+  }
+  hideEditAddBtn();
+
+  rendEditSubTask(currentTask);
+}
+
 function rendEditSubTask(task) {
   subtasks = task.task.subtask;
   let toRender = document.getElementById("renderSubTask2");
