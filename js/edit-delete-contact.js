@@ -190,11 +190,14 @@ async function fetchAndFillContactData(contactId) {
 
 
 function editContact(contactId, event) {
-    event.stopPropagation(); // Verhindert, dass das Klick-Event nach oben propagiert
+    console.log(event); // Überprüfe, ob das Event-Objekt vorhanden ist
+    if (event) {
+        event.stopPropagation(); // Verhindert, dass das Klick-Event nach oben propagiert
+    }
     const editContactOverlay = document.getElementById('edit-contact-overlay');
     editContactOverlay.style.display = 'block'; // Overlay anzeigen
+    // Hier kannst du die Logik zum Laden der Kontaktdaten hinzufügen
 }
-
 
 async function updateContactOnServer(contactId, name, email, phone) {
     try {

@@ -89,7 +89,6 @@
     }
     .edit-content {
         flex-direction: column;
-        height: 88%;
     }
     .edit-info {
         width: 100%;
@@ -319,7 +318,7 @@
     flex-direction: column;
     align-items: baseline;
     gap: 8px;
-    right: -800px;
+    right: -1000px;
     bottom: 12%;
     width: 100px;
     background-color: #ffffff;
