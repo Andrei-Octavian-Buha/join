@@ -39,7 +39,7 @@ function generateContactOverlayHTML(contactId, contactName, contactEmail, contac
                 <div class="menu hidden-menu">
                     <div class="open-overlay" class="edit-button-container hidden">
                         <img src="assets/img/edit-pencil.png" alt="Edit" class="edit-image hidden" />
-                        <p class="edit-label" onclick="editContact('${contactId}')">Edit</p>
+                        <p class="edit-label" onclick="editContact('${contactId}', event)">Edit</p>
                     </div>
                     <div class="delete-button-container hidden">
                         <img src="assets/img/trash-can-icon..png" alt="Delete" class="delete-image" />

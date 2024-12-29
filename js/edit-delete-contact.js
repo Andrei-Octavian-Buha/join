@@ -189,9 +189,10 @@ async function fetchAndFillContactData(contactId) {
 }
 
 
-async function editContact(contactId) {
-    showEditContactOverlay(); 
-    await fetchAndFillContactData(contactId); 
+function editContact(contactId, event) {
+    event.stopPropagation(); // Verhindert, dass das Klick-Event nach oben propagiert
+    const editContactOverlay = document.getElementById('edit-contact-overlay');
+    editContactOverlay.style.display = 'block'; // Overlay anzeigen
 }
 
 
@@ -307,12 +308,15 @@ function handleClickOutsideOverlay(event) {
     if (!editContactOverlay || editContactOverlay.style.display !== 'block') {
         return; // Kein geöffnetes Overlay vorhanden
     }
+
+    // Überprüfe, ob der Klick innerhalb des Overlays oder auf den Edit-Button war
     if (
         editContactOverlay.contains(event.target) || 
         event.target.closest('.edit-button-container')
     ) {
         return; // Klick innerhalb des Overlays oder auf den Edit-Button, nichts tun
     }
+
     closeOverlay('edit-contact-overlay');
 }
 
