@@ -243,7 +243,9 @@
   .edit-button-container:hover p,
   .edit-button-container:hover img,
   .delete-button-container:hover p,
-  .delete-button-container:hover img {
+  .delete-button-container:hover img,
+  .open-overlay:hover p,
+  .open-overlay:hover img{
     cursor: pointer;
     color: rgb(41, 171, 226);
   }
@@ -343,6 +345,10 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
+  }
+
+  .open-overlay:hover{
+    cursor: pointer;
   }
 
   p.edit-label {
