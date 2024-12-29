@@ -248,3 +248,7 @@
 .bottom-left-required {
   padding-bottom: 16px;
 }
+
+.input-error {
+  border: 1px solid red;
+}

@@ -24,7 +24,6 @@ async function attemptLogin(email, password) {
   try {
     return await findUser(email, password);
   } catch (error) {
-    console.error("Error fetching users:", error);
     return null;
   }
 }
