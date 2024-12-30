@@ -4,7 +4,7 @@ function showEditCard(task) {
               <div class="taskHeder">
                   <div>
                   </div>
-                  <span onclick="closeOverlayInfoCard()" class="cursor">X</span>
+                  <span onclick="closeOverlayInfoCard()" class="cursor closeX">X</span>
               </div>
                           <div class="testA">
               <label for="addTaskTittle"
@@ -186,7 +186,7 @@ function showInfoCard(task) {
                   <div class="boardCategoryCard cat${task.task.category}">
                       ${fromNumberToName(task)}
                   </div>
-                  <span onclick="hideOverlayInfoCard()" class="cursor">X</span>
+                  <span onclick="hideOverlayInfoCard()" class="cursor closeX">X</span>
               </div>
               <div class="taskTitle">
                   <h1 class="margin0 h161">${task.task.title}</h1>
