@@ -90,7 +90,10 @@ function hideshowListCard() {
 let subtasksEditCard = [];
 
 function addEditSubTask() {
-  currentTask.task.subtask = subtasksEditCard;
+  if (!currentTask.task.subtask) {
+    currentTask.task.subtask = [];
+  }
+  subtasksEditCard = currentTask.task.subtask;
   let inputText = document.getElementById("inputSubTask");
   if (inputText.value && subtasksEditCard.length <= 1) {
     subtasksEditCard.push(inputText.value);

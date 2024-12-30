@@ -37,21 +37,40 @@ function resetErrorStates() {
 
 function requiredValidation() {
   let inputValue = getValueFromInputs();
-  
+
   // Fehleranzeigen und -klassen zurücksetzen
   resetErrorStates();
 
   if (!inputValue.title) {
-      document.getElementById("reqTitle").classList.remove("dNone");
-      document.getElementById("addTaskTittle").classList.add("input-error"); // Rote Umrandung hinzufügen
+    document.getElementById("reqTitle").classList.remove("dNone");
+    document.getElementById("addTaskTittle").classList.add("input-error"); // Rote Umrandung hinzufügen
   } else if (!inputValue.date) {
-      document.getElementById("reqDate").classList.remove("dNone");
-      document.getElementById("addTaskDate").classList.add("input-error"); // Rote Umrandung hinzufügen
+    document.getElementById("reqDate").classList.remove("dNone");
+    document.getElementById("addTaskDate").classList.add("input-error"); // Rote Umrandung hinzufügen
   } else if (inputValue.category == 0) {
-      document.getElementById("reqCategory").classList.remove("dNone");
-      document.getElementById("categorySelectId").classList.add("input-error"); // Rote Umrandung hinzufügen
+    document.getElementById("reqCategory").classList.remove("dNone");
+    document.getElementById("categorySelectId").classList.add("input-error"); // Rote Umrandung hinzufügen
   } else {
-      addDataToFireBase();
-      showPopupAndRedirect();
+    addDataToFireBase();
+    showPopupAndRedirect();
+  }
+}
+
+function requiredValidationAddTaskToBoard() {
+  let inputValue = getValueFromInputs();
+  if (!inputValue.title) {
+    document.getElementById("reqTitle").classList.remove("dNone");
+    document.getElementById("addTaskTittle").classList.add("input-error");
+  } else if (!inputValue.date) {
+    document.getElementById("reqDate").classList.remove("dNone");
+    document.getElementById("addTaskDate").classList.add("input-error");
+  } else if (inputValue.category == 0) {
+    document.getElementById("reqCategory").classList.remove("dNone");
+    document.getElementById("categorySelectId").classList.add("input-error");
+  } else {
+    addDataToFireBaseFromBoard();
+    taskInit();
+    let template = document.getElementById("add-task-template");
+    template.classList.add("dNone");
   }
 }
