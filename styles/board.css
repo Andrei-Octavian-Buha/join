@@ -248,30 +248,12 @@ p {
     border-radius: 24px;
     box-sizing: border-box;
   }
-  /* Für Webkit-Browser (Chrome, Edge, Safari) */
-  .column::-webkit-scrollbar {
-    width: 8px; /* Breite des vertikalen Scrollbalkens */
-    height: 8px; /* Höhe des horizontalen Scrollbalkens */
+  .column::-webkiit-scrollbar {
+    width: 0;
+    height: 0;
   }
-
-  .column::-webkit-scrollbar-track {
-    background: #f1f1f1; /* Hintergrund des Scrollbalken-Tracks */
-    border-radius: 4px; /* Optional: Abgerundete Ecken */
-  }
-
-  .column::-webkit-scrollbar-thumb {
-    background: #888; /* Farbe des Scrollbalkens */
-    border-radius: 4px; /* Abgerundete Ecken */
-  }
-
-  .column::-webkit-scrollbar-thumb:hover {
-    background: #555; /* Farbe des Scrollbalkens beim Hover */
-  }
-
-  /* Für Firefox */
   .column {
-    scrollbar-width: thin; /* Dünner Scrollbalken */
-    scrollbar-color: #888 #f1f1f1; /* Farbe des Balkens und des Tracks */
+    scrollbar-width: none;
   }
 }
 
