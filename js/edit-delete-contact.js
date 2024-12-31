@@ -174,15 +174,23 @@ async function fetchAndFillContactData(contactId) {
 }
 
 function editContact(contactId, event) {
-  console.log(event); // Überprüfe, ob das Event-Objekt vorhanden ist
   if (event) {
-    event.stopPropagation(); // Verhindert, dass das Klick-Event nach oben propagiert
+    event.stopPropagation(); // Prevents the click event from propagating
   }
+  
   const editContactOverlay = document.getElementById("edit-contact-overlay");
-  editContactOverlay.style.display = "block"; // Overlay anzeigen
-  // Hier kannst du die Logik zum Laden der Kontaktdaten hinzufügen
+  editContactOverlay.style.display = "block"; // Display overlay
+
+  // Fetch and fill contact data logic
   fetchAndFillContactData(contactId);
+
+  // Set the delete button's onclick handler with the correct contact ID
+  const deleteButton = document.getElementById("deleteButton");
+  deleteButton.onclick = function () {
+    deleteContact(contactId);
+  };
 }
+
 
 async function updateContactOnServer(contactId, name, email, phone) {
   try {
