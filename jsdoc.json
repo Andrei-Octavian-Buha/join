@@ -1,0 +1,14 @@
+{
+  "source": {
+    "include": ["src"],
+    "includePattern": ".+\\.js$",
+    "excludePattern": "(node_modules|docs)"
+  },
+  "scripts": {
+  "docs": "npx jsdoc -c jsdoc.json"
+},
+  "opts": {
+    "destination": "./docs",
+    "recurse": true
+  }
+}

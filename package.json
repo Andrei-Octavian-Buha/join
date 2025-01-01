@@ -1,0 +1,15 @@
+{
+  "name": "join",
+  "version": "1.0.0",
+  "main": "script.js",
+  "scripts": {
+    "doc": "jsdoc -c jsdoc.json"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jsdoc": "^4.0.4"
+  },
+  "description": ""
+}
