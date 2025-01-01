@@ -71,26 +71,26 @@ button:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+  width: 98%;
 }
 
 .head-content h1 {
-  flex-grow: 1; 
-  flex-shrink: 1; 
-  margin: 0; 
+  flex-grow: 1; /* H1 nimmt so viel Platz wie möglich ein */
+  flex-shrink: 1; /* H1 wird bei weniger Platz verkleinert */
+  margin: 0; /* Entfernt zusätzliche Abstände */
 }
 
 .head-content .right-content {
   display: flex;
-  gap: 10px; 
-  flex-shrink: 1; 
+  gap: 10px; /* Abstand zwischen den Elementen */
+  flex-shrink: 1; /* Erlaubt es, bei kleinerer Breite zu schrumpfen */
 }
 
 .wrapper {
   display: flex;
-  justify-content: space-between; 
-  gap: 10px; 
-  width: 100%; 
+  justify-content: space-between; /* Verteilung entlang der Außenkanten */
+  gap: 10px; /* Abstand zwischen den Spalten */
+  width: 100%; /* Wrapper deckt die volle Breite des content-wrapper ab */
 }
 
 h3 {
@@ -156,7 +156,7 @@ h3 {
   align-items: center;
   justify-content: center;
   padding: 20px;
-  box-sizing: border-box; 
+  box-sizing: border-box; /* Padding wird in die Gesamtgröße der Karte einbezogen */
 }
 
 .card-content {
@@ -249,17 +249,13 @@ p {
     border-radius: 24px;
     box-sizing: border-box;
   }
-
-    /* Webkit-basierte Browser (Chrome, Edge, Safari) */
-    .column::-webkit-scrollbar {
-      width: 0; /* Versteckt den Scrollbalken */
-      height: 0; /* Versteckt den horizontalen Scrollbalken */
-    }
-  
-    /* Für Firefox */
-    .column {
-      scrollbar-width: none; /* Entfernt den Scrollbalken in Firefox */
-    }
+  .column::-webkiit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+  .column {
+    scrollbar-width: none;
+  }
 }
 
 @media (max-width: 650px) {

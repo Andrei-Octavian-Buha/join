@@ -218,10 +218,8 @@ function resetFormErrors(inputSet) {
         const input = inputSet[field];
         const errorMessage = document.getElementById(`${input.id}-error`);
         
-        // Entfernt die rote Umrandung
-        input.style.border = '1px solid #ccc';  // Standardgrenze oder nach Wunsch
+        input.style.border = '1px solid #ccc';  
 
-        // Entfernt die Fehlermeldung
         if (errorMessage) {
             errorMessage.textContent = '';
         }

@@ -20,7 +20,7 @@ async function loadTaskData() {
 }
 
 async function loadContactss() {
-  let tasksData = await loadTaskData(); // Daten abrufen
+  let tasksData = await loadTaskData(); 
   let todoId = document.getElementById("todoColumn");
   let awaitfeedbackId = document.getElementById("awaitfeedbackColumn");
   let inprogressId = document.getElementById("inprogressColumn");
@@ -43,7 +43,7 @@ async function loadContactss() {
     }
   });
 
-  // Nachrichten für leere Spalten aktualisieren
+  
   updateEmptyColumnMessages(tasksData);
 
   tasksData.forEach((task) => {
@@ -52,7 +52,6 @@ async function loadContactss() {
 }
 
 function updateEmptyColumnMessages(tasksData) {
-  // IDs der Spalten und ihrer zugehörigen Nachrichten-Divs
   const columns = [
     { columnId: "todoColumn", messageClass: "no-tasks-message" },
     { columnId: "awaitfeedbackColumn", messageClass: "no-tasks-message" },
@@ -60,19 +59,15 @@ function updateEmptyColumnMessages(tasksData) {
     { columnId: "doneColumn", messageClass: "no-tasks-message" },
   ];
 
-  // Alle Spalten durchgehen
   columns.forEach(({ columnId, messageClass }) => {
     const column = document.getElementById(columnId);
     const messageDiv = column
       .closest(".column")
       .querySelector(`.${messageClass}`);
 
-    // Prüfen, ob die Spalte leer ist
     if (!column.innerHTML.trim()) {
-      // Wenn leer, Nachricht anzeigen
       messageDiv.style.display = "flex";
     } else {
-      // Wenn nicht leer, Nachricht verstecken
       messageDiv.style.display = "none";
     }
   });
@@ -90,7 +85,7 @@ function fromNumberToName(task) {
 
 function truncateText(text, maxLength) {
   if (!text || typeof text !== "string") {
-    return ""; // Rückgabe eines leeren Strings, wenn text nicht gültig ist
+    return ""; 
   }
   if (text.length > maxLength) {
     return text.substring(0, maxLength) + "...";
@@ -152,24 +147,21 @@ function showAssignet(task) {
   if (!asignedDiv) {
     return;
   }
-  asignedDiv.innerHTML = ""; // Vorherigen Inhalt löschen
+  asignedDiv.innerHTML = ""; 
   let assigned = task.task.assignet;
   if (!assigned || assigned.length === 0) {
     return;
   }
   if (assigned) {
     assigned.forEach((person) => {
-      // Initialen der Person extrahieren
       let initials = person.name
         .split(" ")
         .map((word) => word[0].toUpperCase())
         .join("")
         .slice(0, 2);
 
-      // Farbe basierend auf dem ersten Buchstaben der Initialen abrufen
       let color = getColorForInitial(initials[0]);
 
-      // Hinzufügen des farblich hinterlegten Divs
       asignedDiv.innerHTML += `
         <div id="${person.key}" class="assignetPersonKreis" style="background-color: ${color};">
           ${initials}
@@ -303,14 +295,13 @@ function showInfoAssignet(task) {
   if (!asignedDiv) {
     return;
   }
-  asignedDiv.innerHTML = ""; // Vorherigen Inhalt löschen
+  asignedDiv.innerHTML = ""; 
   let assigned = task.task.assignet;
   if (!assigned || assigned.length === 0) {
     return;
   }
   if (assigned) {
     assigned.forEach((person) => {
-      // Initialen der Person extrahieren
       let initials = person.name
         .split(" ")
         .map((word) => word[0].toUpperCase())

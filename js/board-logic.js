@@ -69,7 +69,7 @@ function hideOverlayInfoCard() {
     if (container) {
       const tasks = container.querySelectorAll(".boardTaskCard");
       tasks.forEach((task) => {
-        task.style.display = ""; // Alle Aufgaben wieder sichtbar machen
+        task.style.display = ""; 
       });
     }
   });
@@ -135,7 +135,7 @@ async function updateTaskOnFireBase(task) {
   let taskData = getValue(task);
   try {
     const response = await fetch(`${BASE_URL}/task/${task}.json`, {
-      method: "PUT", // PUT für Update
+      method: "PUT", 
       body: JSON.stringify({
         title: taskData.title,
         description: taskData.description,
