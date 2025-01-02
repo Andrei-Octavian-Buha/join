@@ -258,3 +258,11 @@
         align-items: center;
     }
 }
+
+@media (max-height: 668px){
+    .addTaskContainer{
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
+
