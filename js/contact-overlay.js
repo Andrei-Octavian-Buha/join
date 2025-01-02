@@ -68,7 +68,6 @@ async function handleCardClick(contactId) {
     try {
         const response = await fetch(`${BASE_URL}/contacts/${contactId}.json`);
         if (!response.ok) {
-          
         }
         const contact = await response.json();
         if (contact) {
@@ -77,7 +76,6 @@ async function handleCardClick(contactId) {
             
         }
     } catch (error) {
-      
     }
 }
 
