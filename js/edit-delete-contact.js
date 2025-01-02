@@ -174,21 +174,18 @@ async function fetchAndFillContactData(contactId) {
 }
 
 function editContact(contactId, event) {
+  const menu = document.querySelector('.menu');
   if (event) {
-    event.stopPropagation(); // Prevents the click event from propagating
+    event.stopPropagation(); 
   }
-  
   const editContactOverlay = document.getElementById("edit-contact-overlay");
   editContactOverlay.style.display = "block"; // Display overlay
-
-  // Fetch and fill contact data logic
   fetchAndFillContactData(contactId);
-
-  // Set the delete button's onclick handler with the correct contact ID
   const deleteButton = document.getElementById("deleteButton");
   deleteButton.onclick = function () {
     deleteContact(contactId);
   };
+  menu.classList.remove('visible');
 }
 
 

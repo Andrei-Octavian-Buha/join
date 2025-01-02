@@ -1,29 +1,40 @@
 @keyframes slideIn {
   from {
-      transform: translate(100%, -50%); /* Start off-screen to the right and vertically centered */
-      opacity: 0; /* Start invisible */
+    transform: translate(100%, -50%);
+    /* Start off-screen to the right and vertically centered */
+    opacity: 0;
+    /* Start invisible */
   }
+
   to {
-      transform: translate(-50%, -50%); /* Move to center */
-      opacity: 1; /* End fully visible */
+    transform: translate(-50%, -50%);
+    /* Move to center */
+    opacity: 1;
+    /* End fully visible */
   }
 }
 
 @keyframes slideOut {
   from {
-      transform: translate(-50%, -50%); /* Start at center */
-      opacity: 1; /* Start fully visible */
+    transform: translate(-50%, -50%);
+    /* Start at center */
+    opacity: 1;
+    /* Start fully visible */
   }
+
   to {
-      transform: translate(100%, -50%); /* Move out to the right */
-      opacity: 0; /* End invisible */
+    transform: translate(100%, -50%);
+    /* Move out to the right */
+    opacity: 0;
+    /* End invisible */
   }
 }
 
 .edit-overlay-contact {
   position: fixed;
   top: 50%;
-  left: 50%; /* Start off-screen to the right */
+  left: 50%;
+  /* Start off-screen to the right */
   z-index: 1000;
   display: none;
   flex: 1;
@@ -33,325 +44,333 @@
   height: calc(60dvh - 14px);
   border-radius: 25px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  animation: slideIn 0.8s forwards; /* Animation applied */
+  animation: slideIn 0.8s forwards;
+  /* Animation applied */
   width: calc(80dvw - 50px);
-  transform: translate(-100%, -50%); /* Center the overlay */
-  opacity: 0; /* Start invisible */
+  transform: translate(-100%, -50%);
+  /* Center the overlay */
+  opacity: 0;
+  /* Start invisible */
 }
 
 .slide-in {
-  animation: slideIn 0.8s forwards; /* Apply slideIn animation */
+  animation: slideIn 0.8s forwards;
+  /* Apply slideIn animation */
 }
 
 .slide-out {
-  animation: slideOut 0.8s forwards; /* Apply slideOut animation */
+  animation: slideOut 0.8s forwards;
+  /* Apply slideOut animation */
 }
 
 .edit-overlay-contact.hide {
-    animation: slideOut 0.8s forwards;
-    opacity: 0;
+  animation: slideOut 0.8s forwards;
+  opacity: 0;
 }
 
 .edit-content {
-    display: flex;
-    border-color: transparent;
-    width: 100%;
-    height: 100%;
-    border-radius: 35px;
-    border: 2px solid rgbargb(42,54,71); 
-    box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.5);
+  display: flex;
+  border-color: transparent;
+  width: 100%;
+  height: 100%;
+  border-radius: 35px;
+  border: 2px solid rgbargb(42, 54, 71);
+  box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.5);
 }
 
 .edit-info {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    width: 40%;
-    padding: 20px;
-    background: rgb(42,54,71);
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 40%;
+  padding: 20px;
+  background: rgb(42, 54, 71);
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
 }
 
 .edit-form {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    background-color: white;
-    width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: white;
+  width: 100%;
 }
 
 @media (max-width: 800px) {
-    .edit-overlay-contact {
-        height: 99%;
-        width: 96%;
-    }
-    .edit-content {
-        flex-direction: column;
-    }
-    .edit-info {
-        width: 100%;
-        height: 80%;
-        padding: 0;
-        border-top-right-radius: 30px;
-        border-bottom-left-radius: 0;
-        align-items: center;
-    }
-    .responsive-container img {
-        display: none;
-    }
+  .edit-overlay-contact {
+    height: 99%;
+    width: 96%;
+  }
+
+  .edit-content {
+    flex-direction: column;
+  }
+
+  .edit-info {
+    width: 100%;
+    height: 70%;
+    padding: 0;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 0;
+    align-items: center;
+  }
+
+  .responsive-container img {
+    display: none;
+  }
 }
 
 .letter-header {
-    font-size: 1em;
-    margin-top: 20px;
-    margin-left: 10px;
-  }
-  
-  .contact-card {
-    cursor: pointer;
-    border-radius: 8px;
-    padding: 8px;
-    padding-left: 0;
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-  
-  .active {
-    background-color: rgb(42, 54, 71);
-  }
-  
-  .contact-card:not(.active):hover {
-    background-color: rgba(180, 182, 183, 0.09);
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-  }
-  
-  .contact-card h3 {
-    font-size: 14px;
-    margin-top: 0;
-    margin-bottom: 0;
-    color: #333;
-  }
-  
-  .active h3 {
-    color: white;
-  }
-  
-  .contact-card p {
-    margin: 8px 0;
-    color: rgba(90, 141, 238, 1);
-    margin: 0;
-    font-size: 12px;
-  }
-  
-  .overlay-contact {
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .second-overlay-contact {
-    display: flex;
-    border-color: transparent;
-    width: 100%;
-    height: 70%;
-    border: 2px solid rgbargb(42, 54, 71);
-  }
-  
-  .second-overlay-content {
-    position: relative;
-    max-width: 600px;
-  }
-  
-  .badge-and-name {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .badge {
-    display: flex;
-    align-items: center;
-    margin-top: 50px;
-  }
-  
-  .contact-name {
-    margin-left: 10px;
-    margin: 0;
-  }
-  
-  .detail {
-    margin-left: 24%;
-  }
-  
-  .custom-badge {
-    margin-top: 1%;
-    margin-right: 20px;
-    height: 90px;
-    width: 90px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.3em;
-  }
-  
-  .detail-content h1 {
-    font-size: 2em;
-    margin: 0;
-    font-weight: 400;
-  }
-  
-  .sub-content p {
-    color: black;
-  }
-  
-  .edit-container {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    gap: 20px;
-    width: 100px;
-  }
-  
-  .edit-button-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .delete-button-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .edit-button-container p,
-  .delete-button-container p {
-    color: rgba(0, 0, 0, 0.678);
-    font-size: 14px;
-  }
-  
-  .edit-button-container:hover p,
-  .edit-button-container:hover img,
-  .delete-button-container:hover p,
-  .delete-button-container:hover img,
-  .open-overlay:hover p,
-  .open-overlay:hover img{
-    cursor: pointer;
-    color: rgb(41, 171, 226);
-  }
-  
-  .edit-button-container:hover img,
-  .delete-button-container:hover img {
-    filter: brightness(0) saturate(100%) invert(41%) sepia(75%) saturate(505%) hue-rotate(176deg) brightness(95%) contrast(95%);
-  }
-  
-  img.edit-image {
-    width: 14px;
-    height: 14px;
-  }
-  
-  img.delete-image {
-    width: 14px;
-    height: 14px;
-  }
-  
-  .sub-content {
-    position: relative;
-    margin-top: 40px;
-  }
-  
-  .sub-content p {
-    margin: 0;
-    margin-bottom: 6px;
-    
-  }
-  
-  .sub-info {
-    margin-bottom: 30px;
-  }
-  
-  .email {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-  }
-  
-  p.contact-email {
-    color: rgba(90, 141, 238, 1);
-    font-size: 16px;
-    font-weight: 500;
-  }
-  
-  .phone {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  p.contact-phone {
-    font-size: 16px;
-    font-weight: 400;
-  }
-  
-  .three-points {
-    display: none;
-    position: fixed;
-    right: 2%;
-    bottom: 12%;
-  }
-  
-  .small-img {
-    width: 60px;
-    height: 60px;
-  }
-  
-  .menu {
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    align-items: baseline;
-    gap: 8px;
-    right: -1000px;
-    bottom: 12%;
-    width: 100px;
-    background-color: #ffffff;
-    border: 1px solid rgba(211, 211, 211, 0.411);
-    border-radius: 5px;
-    box-shadow: -4px 6px 5px rgba(0, 0, 0, 0.1);
-    transition: right 0.3s ease;
-    padding: 10px;
-  }
-  
-  .menu.visible {
-    right: 10px;
-  }
-  
-  .hidden p {
-    font-weight: bold;
-  }
-  
-  .open-overlay {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-  }
+  font-size: 1em;
+  margin-top: 20px;
+  margin-left: 10px;
+}
 
-  .open-overlay:hover{
-    cursor: pointer;
-  }
+.contact-card {
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 8px;
+  padding-left: 0;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
 
-  p.edit-label {
-    font-size: 16px;
-  }
+.active {
+  background-color: rgb(42, 54, 71);
+}
+
+.contact-card:not(.active):hover {
+  background-color: rgba(180, 182, 183, 0.09);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.contact-card h3 {
+  font-size: 14px;
+  margin-top: 0;
+  margin-bottom: 0;
+  color: #333;
+}
+
+.active h3 {
+  color: white;
+}
+
+.contact-card p {
+  margin: 8px 0;
+  color: rgba(90, 141, 238, 1);
+  margin: 0;
+  font-size: 12px;
+}
+
+.overlay-contact {
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.second-overlay-contact {
+  display: flex;
+  border-color: transparent;
+  width: 100%;
+  height: 70%;
+  border: 2px solid rgbargb(42, 54, 71);
+}
+
+.second-overlay-content {
+  position: relative;
+  max-width: 600px;
+}
+
+.badge-and-name {
+  display: flex;
+  flex-direction: column;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.contact-name {
+  margin-left: 10px;
+  margin: 0;
+}
+
+.detail {
+  margin-left: 24%;
+}
+
+.custom-badge {
+  margin-top: 1%;
+  margin-right: 20px;
+  height: 90px;
+  width: 90px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.3em;
+}
+
+.detail-content h1 {
+  font-size: 2em;
+  margin: 0;
+  font-weight: 400;
+}
+
+.sub-content p {
+  color: black;
+}
+
+.edit-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 20px;
+  width: 100px;
+}
+
+.edit-button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.delete-button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+}
+
+.edit-button-container p,
+.delete-button-container p {
+  color: rgba(0, 0, 0, 0.678);
+  font-size: 14px;
+}
+
+.edit-button-container:hover p,
+.edit-button-container:hover img,
+.delete-button-container:hover p,
+.delete-button-container:hover img,
+.open-overlay:hover p,
+.open-overlay:hover img {
+  cursor: pointer;
+  color: rgb(41, 171, 226);
+}
+
+.edit-button-container:hover img,
+.delete-button-container:hover img {
+  filter: brightness(0) saturate(100%) invert(41%) sepia(75%) saturate(505%) hue-rotate(176deg) brightness(95%) contrast(95%);
+}
+
+img.edit-image {
+  width: 14px;
+  height: 14px;
+}
+
+img.delete-image {
+  width: 14px;
+  height: 14px;
+}
+
+.sub-content {
+  position: relative;
+  margin-top: 40px;
+}
+
+.sub-content p {
+  margin: 0;
+  margin-bottom: 6px;
+
+}
+
+.sub-info {
+  margin-bottom: 30px;
+}
+
+.email {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+p.contact-email {
+  color: rgba(90, 141, 238, 1);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.phone {
+  display: flex;
+  flex-direction: column;
+}
+
+p.contact-phone {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.three-points {
+  display: none;
+  position: fixed;
+  right: 2%;
+  bottom: 12%;
+}
+
+.small-img {
+  width: 60px;
+  height: 60px;
+}
+
+.menu {
+  border-radius: 10px;
+  border-bottom-right-radius: 0;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  gap: 8px;
+  right: -1000px;
+  bottom: 12%;
+  width: 100px;
+  background-color: #ffffff;
+  border: 1px solid rgba(211, 211, 211, 0.411);
+  box-shadow: -4px 6px 5px rgba(0, 0, 0, 0.1);
+  transition: right 0.3s ease;
+  padding: 10px;
+}
+
+.menu.visible {
+  right: 10px;
+}
+
+.hidden p {
+  font-weight: bold;
+}
+
+.open-overlay {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.open-overlay:hover {
+  cursor: pointer;
+}
+
+p.edit-label {
+  font-size: 16px;
+}
 
