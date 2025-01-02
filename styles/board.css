@@ -28,7 +28,7 @@
 }
 
 h1.board-headline {
-  font-size: 3em;
+  font-size: 61px;
 }
 
 h1 {
@@ -222,7 +222,7 @@ p {
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1149px) {
   .wrapper {
     flex-direction: column;
     gap: 0;
@@ -230,14 +230,15 @@ p {
   }
   .column {
     flex-direction: row;
-    overflow-x: auto;
-    white-space: nowrap;
+
     margin-bottom: 24px;
   }
   .boardTaskCard {
     min-width: 260px;
   }
   .drag-area {
+    overflow-x: auto;
+    white-space: nowrap;
     display: flex;
     flex-wrap: nowrap; 
     gap: 6px;

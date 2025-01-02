@@ -1,8 +1,10 @@
 .overlay {
   position: fixed;
   top: 50%;
-  left: 0%; /* Ändere dies von 100% auf 50% */
-  transform: translate(-50%, -50%); /* Ändere dies, um sowohl horizontal als auch vertikal zu zentrieren */
+  left: 0%;
+  /* Ändere dies von 100% auf 50% */
+  transform: translate(-50%, -50%);
+  /* Ändere dies, um sowohl horizontal als auch vertikal zu zentrieren */
   width: 100%;
   display: none;
   place-items: center;
@@ -13,154 +15,164 @@
   z-index: 999;
   border-radius: 25px;
 }
-  
 
+
+.overlay-content {
+  position: relative;
+  display: flex;
+  box-sizing: border-box;
+  border-color: transparent;
+  border-radius: 25px;
+  box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.5);
+  width: calc(80dvw - 50px);
+  height: calc(88dvh - 300px);
+  max-height: 592px;
+  max-width: 1212px;
+}
+
+@media(max-width: 1500px) {
   .overlay-content {
-    position: relative;
     display: flex;
     box-sizing: border-box;
     border-color: transparent;
     border-radius: 25px;
-    box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.5);
-    width: calc(80dvw - 50px);
-    height: calc(88dvh - 300px);
-    max-height: 592px;
-    max-width: 1212px;
+    height: 592px;
+    max-width: 1440px;
   }
-
-  @media(max-width: 1500px) {
-    .overlay-content {
-      display: flex;
-      box-sizing: border-box;
-      border-color: transparent;
-      border-radius: 25px;
-      height: 592px;
-      max-width: 1440px;
-    }
-  }
-
-  @media(max-width: 800px) {
-    .overlay-content {
-      display: flex;
-      border-color: transparent;
-      width: 97%;
-      border-radius: 25px;
-      height: calc(100dvh - 100px);
-      max-width: 1440px;
-      margin: auto;
-    }
-  }
-  
-  .exit {
-    position: absolute;
-    right: 6%;
-    top: 10%;
-    transition: transform 0.3s ease, color 0.3s ease;
-  }
-  
-  .exit:hover {
-    cursor: pointer;
-    transform: scale(1.5);
-    color: rgb(41, 171, 226);
-  }
-  
-  .overlay.show {
-    animation: slideInFromRight 0.3s forwards;
-    opacity: 1;
 }
-  
-  @keyframes slideInFromRight {
-    from {
-        left: 100%;
-        transform: translateX(0%) translateY(-50%);
-    }
 
-    to {
-        left: 50%;
-        transform: translate(-50%, -50%); /* Ändere dies, um die korrekte Position zu setzen */
-    }
+
+@media (min-height: 668px) {
+  .overlay-content {
+    top: 10%;
+  }
+}
+
+@media(max-width: 800px) {
+  .overlay-content {
+    display: flex;
+    border-color: transparent;
+    width: 97%;
+    border-radius: 25px;
+    height: calc(100dvh - 100px);
+    max-width: 1440px;
+    margin: auto;
+  }
+}
+
+.exit {
+  position: absolute;
+  right: 6%;
+  top: 10%;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.exit:hover {
+  cursor: pointer;
+  transform: scale(1.5);
+  color: rgb(41, 171, 226);
+}
+
+.overlay.show {
+  animation: slideInFromRight 0.3s forwards;
+  opacity: 1;
+}
+
+@keyframes slideInFromRight {
+  from {
+    left: 100%;
+    transform: translateX(0%) translateY(-50%);
+  }
+
+  to {
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* Ändere dies, um die korrekte Position zu setzen */
+  }
 }
 
 #overlay.hide {
-    animation: slideOutToRight 0.8s forwards;
-    opacity: 0;
+  animation: slideOutToRight 0.8s forwards;
+  opacity: 0;
 }
 
 @keyframes slideOutToRight {
   from {
-      left: 50%;
-      transform: translate(-50%, -50%);
-      opacity: 1; /* Beginne mit voller Sichtbarkeit */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    /* Beginne mit voller Sichtbarkeit */
   }
 
   to {
-      left: 100%;
-      transform: translateX(0%) translateY(-50%);
-      opacity: 0; /* Am Ende der Animation unsichtbar */
-    }
+    left: 100%;
+    transform: translateX(0%) translateY(-50%);
+    opacity: 0;
+    /* Am Ende der Animation unsichtbar */
   }
-  
-  button {
-    cursor: pointer;
-  }
-  
-  .button-icon,
-  .plus-icon {
-    margin-left: 5px;
-  }
-  
-  .contact-button {
-    display: none;
-    cursor: pointer;
-    position: absolute;
-    bottom: 9%;
-    right: 2%;
-    transition: transform 0.3s ease;
-  }
-  
-  .contact-button:hover {
-    transform: scale(1.1);
-  }
-  
-  @media(max-width: 800px) {
-    .contact-button {
-      display: block;
-    }
-  }
-  h4 {
-    font-size: 16px;
-  }
-  
-  .initials-badge {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 1px solid transparent;
-    border-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: black;
-    font-size: 0.9em;
-    margin-right: 10px;
-    margin-left: 10px;
-  }
-  
-  .silverline {
-    height: 1px;
-    width: 100%;
-    background-color: lightgrey;
-    margin-bottom: 20px;
-  }
-  
-  .list {
-    width: 80%;
-    margin: 0;
-    margin-top: 12px;
-    margin-bottom: 30px;
-    padding: 0;
-    padding-right: 24px;
-    height: 100%;
-    overflow: auto;
-  }
+}
 
+button {
+  cursor: pointer;
+}
+
+.button-icon,
+.plus-icon {
+  margin-left: 5px;
+}
+
+.contact-button {
+  display: none;
+  cursor: pointer;
+  position: absolute;
+  bottom: 9%;
+  right: 2%;
+  transition: transform 0.3s ease;
+}
+
+.contact-button:hover {
+  transform: scale(1.1);
+}
+
+@media(max-width: 800px) {
+  .contact-button {
+    display: block;
+  }
+}
+
+h4 {
+  font-size: 16px;
+}
+
+.initials-badge {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  border-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  font-size: 0.9em;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.silverline {
+  height: 1px;
+  width: 100%;
+  background-color: lightgrey;
+  margin-bottom: 20px;
+}
+
+.list {
+  width: 80%;
+  margin: 0;
+  margin-top: 12px;
+  margin-bottom: 30px;
+  padding: 0;
+  padding-right: 24px;
+  height: 100%;
+  overflow: auto;
+}
