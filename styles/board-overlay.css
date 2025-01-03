@@ -33,6 +33,19 @@
   gap: 24px;
 }
 
+@media (max-height: 668px){
+  .taskTitle{
+    gap: 12px;
+  }
+  .taskTitle h1{
+    font-size: 32px;
+  }
+
+  .boardOverlay{
+    width: 360px;
+  }
+}
+
 .direction-column {
   display: flex;
   flex-direction: column;
