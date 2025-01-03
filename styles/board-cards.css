@@ -228,3 +228,40 @@
     width: 180px;
   }
 }
+
+.cardHeader{
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 1150px){
+  .cardButtonsDiv{
+    display: none;
+  }
+}
+
+@media (max-width: 1149px){
+  .cardButtonsDiv{
+    padding-left: 24px;
+  }
+  
+  .arrow-up{
+    height: 18px;
+  }
+
+  .arrow-down{
+    height: 18px;
+    padding-left: 8px;
+  }
+
+  .arrow-up:hover{
+    filter: brightness(0) saturate(100%) invert(55%) sepia(99%) saturate(798%) hue-rotate(165deg) brightness(91%) contrast(93%);
+    transform: scale(1.05);
+  }
+
+  .arrow-down:hover{
+    filter: brightness(0) saturate(100%) invert(55%) sepia(99%) saturate(798%) hue-rotate(165deg) brightness(91%) contrast(93%);
+    transform: scale(1.05);
+  }
+
+}

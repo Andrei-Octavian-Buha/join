@@ -111,10 +111,13 @@ function renderCard(task) {
       ondragend="dragEnd(event)"
       onclick="listDataCard('${task.id}')"
     >
+      <div class="cardHeader">
       <div 
         id="Category${task.task.category}" 
         class="boardCategoryCard cat${task.task.category}">
         ${fromNumberToName(task)}
+      </div>
+      <div class="cardButtonsDiv"><img onclick="event.stopPropagation(); moveCardUp('${task.id}')" class="arrow-up" src="./assets/img/arrow-up.png" alt=""><img onclick="event.stopPropagation(); moveCardDown('${task.id}')"  class="arrow-down" src="./assets/img/arrow-down.png" alt=""></div>
       </div>
       <div>
         <h3 class="boardCardTitle">${truncatedTitle}</h3>

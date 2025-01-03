@@ -190,3 +190,77 @@ function getValue(taskid) {
     category,
   };
 }
+
+const columnsOrder = ["todoColumn", "inprogressColumn", "awaitfeedbackColumn", "doneColumn"];
+
+function moveCardUp(taskId) {
+  const taskCard = document.getElementById(taskId);
+  const currentColumn = taskCard.closest(".drag-area").id;
+
+  const currentIndex = columnsOrder.indexOf(currentColumn);
+  if (currentIndex > 0) {
+    const targetColumn = document.getElementById(columnsOrder[currentIndex - 1]);
+    targetColumn.appendChild(taskCard);
+    updateArrowVisibility(taskId); // Update arrow visibility
+    updateArrowVisibilityForAll(); // Check for other cards
+  }
+}
+
+function moveCardDown(taskId) {
+  const taskCard = document.getElementById(taskId);
+  const currentColumn = taskCard.closest(".drag-area").id;
+
+  const currentIndex = columnsOrder.indexOf(currentColumn);
+  if (currentIndex < columnsOrder.length - 1) {
+    const targetColumn = document.getElementById(columnsOrder[currentIndex + 1]);
+    targetColumn.appendChild(taskCard);
+    updateArrowVisibility(taskId); // Update arrow visibility
+    updateArrowVisibilityForAll(); // Check for other cards
+  }
+}
+
+function updateArrowVisibilityForAll() {
+    const allTasks = [...document.querySelectorAll(".boardTaskCard")];
+    allTasks.forEach(task => {
+        updateArrowVisibility(task.id);
+    });
+}
+
+
+function updateArrowVisibility(taskId) {
+  const taskCard = document.getElementById(taskId);
+  const currentColumn = taskCard.closest(".drag-area").id;
+
+  const arrowUp = taskCard.querySelector(".arrow-up");
+  const arrowDown = taskCard.querySelector(".arrow-down");
+
+  const currentIndex = columnsOrder.indexOf(currentColumn);
+
+  // Hide the arrow-up if the card is in the first column
+  if (currentIndex === 0) {
+    arrowUp.style.display = "none";
+  } else {
+    arrowUp.style.display = "inline";
+  }
+
+  // Hide the arrow-down if the card is in the last column
+  if (currentIndex === columnsOrder.length - 1) {
+    arrowDown.style.display = "none";
+  } else {
+    arrowDown.style.display = "inline";
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  setTimeout(initializeBoard, 100); // Delay to ensure all tasks are rendered
+});
+
+function initializeBoard() {
+  const allTasks = [...document.querySelectorAll(".boardTaskCard")];
+  console.log("Initializing board with tasks:", allTasks);
+
+  allTasks.forEach(task => {
+    updateArrowVisibility(task.id);
+  });
+}
+
