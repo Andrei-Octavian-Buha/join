@@ -1,0 +1,234 @@
+@media (max-width: 770px) {
+    .privacyBtn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      padding-bottom: 32px;
+    }
+  
+    .privacyLink {
+      color: #cdcdcd;
+      text-decoration: none;
+    }
+  
+    .maxWidth {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      gap: 32px;
+      height: 100dvh;
+    }
+  
+    .headerLoginCard {
+      display: flex;
+    }
+  
+    .backArrow {
+      position: absolute;
+      top: 40px;
+      left: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: baseline;
+    }
+    .backArrow:hover {
+      background-color: #d1d1d1;
+      border-radius: 50%;
+    }
+  
+    .loginCard {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 226px;
+      width: calc(100% - 32px);
+      padding: 32px 16px;
+      gap: 32px;
+      border-radius: 30px;
+      background-color: #ffffff;
+      border: 0px;
+      box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.4);
+    }
+  
+    .loginContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  
+    .separable {
+      width: 150px;
+      border-bottom: 3px solid;
+      color: #29abe2;
+    }
+  
+    .lh1 {
+      font-size: 47px;
+      margin-block-start: 0em;
+      margin-block-end: 0em;
+      margin-inline-start: 0px;
+      margin-inline-end: 0px;
+      font-weight: bold;
+      unicode-bidi: isolate;
+    }
+  
+    .loginTitle {
+      height: 89px;
+    }
+  
+    .loginForm {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      gap: 32px;
+    }
+  
+    .loginInput {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      gap: 32px;
+    }
+  
+    .loginBtnContainer {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      gap: 21px;
+    }
+  
+    .loginHeaderContainer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+  
+    .loginHeader {
+      max-width: 1440px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  
+    .loginHeaderBtn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 35px;
+    }
+  
+    .logoImg {
+      padding-top: 37px;
+      padding-left: 38px;
+    }
+  
+    #imgHeader1 {
+      width: 64px;
+      height: 78px;
+    }
+  
+    .loginInputFeld {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid #d1d1d1;
+      padding: 10px 21px;
+      outline: none;
+    }
+  
+    .loginInputFeld:focus {
+      border-radius: 10px;
+      border: 1px solid #29abe2;
+      padding: 10px 21px;
+      outline: none;
+    }
+  
+    .loginInputFeld.invalid {
+      border-radius: 10px;
+      border: 1px solid #ff001f;
+      padding: 10px 21px;
+      outline: none;
+    }
+  
+    .loginInputFeld:valid {
+      border: 1px solid #28a745;
+    }
+  
+    .btnMobileSettings {
+      min-width: 180px;
+    }
+  
+    .mobileDesktopDNone {
+      display: none;
+    }
+  
+    .containerInputSignUp {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+  
+    .containerInputSignUplast {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+  
+    .inputWithImgLast {
+      position: absolute;
+      right: 28px;
+    }
+  
+    .inputWithImg {
+      position: absolute;
+      right: 45px;
+    }
+  }
+  
+  @media (max-width: 350px) {
+    .backArrow {
+      position: absolute;
+      top: 40px;
+      left: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: baseline;
+    }
+    .backArrow:hover {
+      background-color: #d1d1d1;
+      border-radius: 50%;
+    }
+  }
+  
+  @media (max-height: 700px) {
+    .loginCard .loginForm .loginInput {
+      gap: 16px;
+    }
+  
+    .loginForm {
+      gap: 16px;
+    }
+  
+    .loginCard {
+      margin-top: 115px;
+      padding: 16px 16px;
+    }
+  
+    .logoImg {
+      padding-top: 16px;
+    }
+  
+    body {
+      overflow: hidden;
+    }
+  }
