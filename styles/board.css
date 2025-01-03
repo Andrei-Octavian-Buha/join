@@ -119,12 +119,10 @@ h3 {
 }
 
 .column {
-  flex: 1;
-  padding: 4px;
   box-sizing: border-box;
   text-align: center;
   font-size: 22px;
-  min-width: 300px;
+  min-width: 210px;
   max-width: 25%;
 }
 
@@ -209,21 +207,6 @@ p {
   }
 }
 
-@media (max-width: 900px) {
-  .top-content {
-    gap: 15px;
-  }
-  .right-content {
-    gap: 10px;
-  }
-  /* input {
-    width: 180px;
-  } */
-  .drag-area {
-    margin-left: 6px;
-  }
-}
-
 @media (max-width: 1149px) {
   .wrapper {
     flex-direction: column;
@@ -231,8 +214,9 @@ p {
     margin-bottom: 70px;
   }
   .column {
-    flex-direction: row;
-
+    max-width: none;
+    min-height: 210px;
+    width: 100%;
     margin-bottom: 24px;
   }
   .boardTaskCard {
@@ -256,13 +240,27 @@ p {
 /* Webkit-basierte Browser (Chrome, Edge, Safari) */
 .drag-area::-webkit-scrollbar {
     display: none;
-}
+  }
 
 /* Für Firefox */
 .drag-area {
     scrollbar-width: none; 
+  }
 }
 
+@media (max-width: 900px) {
+  .top-content {
+    gap: 15px;
+  }
+  .right-content {
+    gap: 10px;
+  }
+  /* input {
+    width: 180px;
+  } */
+  .drag-area {
+    margin-left: 6px;
+  }
 }
 
 @media (max-width: 650px) {
