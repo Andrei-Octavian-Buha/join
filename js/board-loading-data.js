@@ -145,36 +145,64 @@ function showSubTasks(task) {
   }
 }
 
+// Funktion, um Initialen zu erstellen
+function createInitials(name) {
+  return name
+    .split(" ")
+    .map((word) => word[0].toUpperCase())
+    .join("")
+    .slice(0, 2);
+}
+
+// Funktion, um eine einzelne Person anzuzeigen
+function renderAssignedPerson(person, asignedDiv) {
+  const initials = createInitials(person.name);
+  const color = getColorForInitial(initials[0]);
+
+  asignedDiv.innerHTML += `
+    <div id="${person.key}" class="assignetPersonKreis" style="background-color: ${color};">
+      ${initials}
+    </div>
+  `;
+}
+
+// Funktion, um das "+x"-Element hinzuzufügen
+function renderRemainingCount(remainingCount, asignedDiv) {
+  asignedDiv.innerHTML += `
+    <div class="assignetPersonKreis" style="background: linear-gradient(135deg,rgb(47, 187, 47) 0%,rgb(58, 29, 20) 100%);">
+      +${remainingCount}
+    </div>
+  `;
+}
+
+// Hauptfunktion, um die zugewiesenen Personen anzuzeigen
 function showAssignet(task) {
   let asignedDiv = document.getElementById(`asigned${task.id}`);
   if (!asignedDiv) {
     return;
   }
-  asignedDiv.innerHTML = ""; 
+  asignedDiv.innerHTML = ""; // Aktuelle Inhalte leeren
+
   let assigned = task.task.assignet;
   if (!assigned || assigned.length === 0) {
     return;
   }
-  if (assigned) {
-    assigned.forEach((person) => {
-      let initials = person.name
-        .split(" ")
-        .map((word) => word[0].toUpperCase())
-        .join("")
-        .slice(0, 2);
 
-      let color = getColorForInitial(initials[0]);
+  const maxVisible = 3; // Maximale Anzahl sichtbarer Personen
 
-      asignedDiv.innerHTML += `
-        <div id="${person.key}" class="assignetPersonKreis" style="background-color: ${color};">
-          ${initials}
-        </div>
-      `;
-    });
-  } else {
-    return "don't Assignet Person";
+  assigned.forEach((person, index) => {
+    if (index < maxVisible) {
+      renderAssignedPerson(person, asignedDiv);
+    }
+  });
+
+  if (assigned.length > maxVisible) {
+    const remainingCount = assigned.length - maxVisible;
+    renderRemainingCount(remainingCount, asignedDiv);
   }
 }
+
+
 
 function getColorForInitial(initial) {
   const colors = {
