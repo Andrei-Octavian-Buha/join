@@ -41,7 +41,6 @@
   .addTaskMainDiv {
     display: flex;
     flex-direction: column;
-    align-items: center;
     margin-top: 192px;
     margin-left: 296px;
     margin-right: 64px;
