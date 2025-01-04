@@ -169,7 +169,7 @@ function renderAssignedPerson(person, asignedDiv) {
 // Funktion, um das "+x"-Element hinzuzufügen
 function renderRemainingCount(remainingCount, asignedDiv) {
   asignedDiv.innerHTML += `
-    <div class="assignetPersonKreis" style="background: linear-gradient(135deg,rgb(47, 187, 47) 0%,rgb(58, 29, 20) 100%);">
+    <div class="assignetPersonKreis" style="background: linear-gradient(135deg,rgb(193, 101, 198) 0%,rgb(83, 83, 25) 100%);">
       +${remainingCount}
     </div>
   `;
