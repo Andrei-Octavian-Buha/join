@@ -138,17 +138,18 @@ async function resetForm(event) {
   assignet.innerHTML = "";
 }
 
-function whenChecked(contactId) {
-  let ck = document.getElementById(`CheckboxID${contactId.id}`);
-  let container = document.getElementById(`ContainerID${contactId.id}`);
-  let text = document.getElementById("dinamicText");
-  let assignet = document.getElementById("whoIsAssignet");
-  if (checked.length === 0) {
-    text.innerHTML = "Select contacts to assign";
-    assignet.innerHTML = "";
+const maxDisplay = 3; // Maximale Anzahl der angezeigten Kontakte
+
+function updateTextAndClearAssignees(textElement, assigneeElement, checkedLength) {
+  if (checkedLength === 0) {
+    textElement.innerHTML = "Select contacts to assign";
+    assigneeElement.innerHTML = "";
   } else {
-    text.innerHTML = "An |";
+    textElement.innerHTML = "An |";
   }
+}
+
+function handleCheckboxState(ck, container, contactId) {
   if (ck.checked) {
     if (!checked.includes(contactId.id)) {
       checked.push({ name: contactId.cont.name, key: contactId.id });
@@ -161,17 +162,58 @@ function whenChecked(contactId) {
     }
     container.classList.remove("checkedBgColor");
   }
-  assignet.innerHTML = "";
-  checked.forEach((element) => {
+}
+
+function generateInitialsHTML(checked, assigneeElement, maxCount) {
+  checked.slice(0, maxCount).forEach((element) => {
     let initials = element.name
       .split(" ")
       .map((word) => word[0].toUpperCase())
       .join("")
       .slice(0, 2);
     let color = getColorForInitial(initials[0]);
-    assignet.innerHTML += `<p class="firstLetterCircle" style="background-color: ${color};">${initials}</p>`;
+    assigneeElement.innerHTML += `<p class="firstLetterCircle" style="background-color: ${color};">${initials}</p>`;
   });
 }
+
+function generateRemainingCountHTML(checked, assigneeElement, maxCount) {
+  const remainingCount = checked.length - maxCount;
+  if (remainingCount > 0) {
+    assigneeElement.innerHTML += `
+      <div class="firstLetterCircle" style="background: linear-gradient(135deg,rgba(123, 97, 119, 0.81) 0%,rgb(36, 178, 29) 100%);">
+        +${remainingCount}
+      </div>
+    `;
+  }
+}
+
+function renderAssignees(checked, assigneeElement, maxCount) {
+  assigneeElement.innerHTML = ""; // Clear existing content
+  if (checked.length > maxCount) {
+    generateInitialsHTML(checked, assigneeElement, maxCount);
+    generateRemainingCountHTML(checked, assigneeElement, maxCount);
+  } else {
+    generateInitialsHTML(checked, assigneeElement, checked.length);
+  }
+}
+
+function whenChecked(contactId) {
+  let ck = document.getElementById(`CheckboxID${contactId.id}`);
+  let container = document.getElementById(`ContainerID${contactId.id}`);
+  let text = document.getElementById("dinamicText");
+  let assigneeElement = document.getElementById("whoIsAssignet");
+
+  // Update text and clear assignees if necessary
+  updateTextAndClearAssignees(text, assigneeElement, checked.length);
+
+  // Handle checkbox state
+  handleCheckboxState(ck, container, contactId);
+
+  // Render assignees
+  renderAssignees(checked, assigneeElement, maxDisplay);
+}
+
+
 
 let subtasks = [];
 
