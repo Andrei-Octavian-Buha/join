@@ -11,8 +11,13 @@ const overlayListeners = new Map();
 function openOverlay(overlayId) {
     const overlay = document.getElementById(overlayId);
     const overlaycontent = document.getElementById("overlay-content");
+<<<<<<< Updated upstream
     overlay.style.display = "block"; 
     setTimeout(() => overlay.classList.add("show"), 0); 
+=======
+    overlay.style.display = "block"; // Sichtbar machen
+    setTimeout(() => overlay.classList.add("show"), 0); // Animation starten
+>>>>>>> Stashed changes
     
     const handleClickOutside = (event) => {
         if (!overlaycontent.contains(event.target)) {
