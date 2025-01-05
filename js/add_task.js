@@ -171,7 +171,7 @@ async function resetForm(event) {
   assignet.innerHTML = "";
 }
 
-const maxDisplay = 3; // Maximale Anzahl der angezeigten Kontakte
+const maxDisplay = 3; 
 
 function updateTextAndClearAssignees(textElement, assigneeElement, checkedLength) {
   if (checkedLength === 0) {
@@ -245,8 +245,6 @@ function whenChecked(contactId) {
   // Render assignees
   renderAssignees(checked, assigneeElement, maxDisplay);
 }
-
-
 
 let subtasks = [];
 
