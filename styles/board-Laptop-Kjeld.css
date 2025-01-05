@@ -123,7 +123,7 @@ h3 {
   text-align: center;
   font-size: 22px;
   min-width: 210px;
-  max-width: 20%;
+  max-width: 25%;
 }
 
 .drag-area {
@@ -214,17 +214,16 @@ p {
     margin-bottom: 70px;
   }
   .column {
-    /* Entferne max-width und füge min-height hinzu */
     max-width: none;
     min-height: 210px;
+    width: 100%;
     margin-bottom: 24px;
-    width: 100%; /* Spalten füllen die gesamte Breite */
   }
   .boardTaskCard {
     min-width: 260px;
   }
   .drag-area {
-    overflow-x: auto; /* Ermöglicht horizontales Scrollen */
+    overflow-x: auto;
     white-space: nowrap;
     display: flex;
     flex-wrap: nowrap; 
@@ -236,32 +235,52 @@ p {
     height: 90%; 
     border-radius: 24px;
     box-sizing: border-box;
-  
-    /* Für Firefox */
-    scrollbar-width: none; 
+    padding-bottom: 10px;
   }
   
-  /* Webkit-basierte Browser (Chrome, Edge, Safari) */
+  /* Dünne Scrollbar für Webkit-Browser */
   .drag-area::-webkit-scrollbar {
-    display: none; /* Versteckt die Scrollbalken */
+    height: 6px; /* Dünnere Höhe für horizontale Scrollbars */
   }
   
-  @media (max-width: 900px) {
-    .top-content {
-      gap: 15px;
-    }
-    .right-content {
-      gap: 10px;
-    }
-    /* input {
-      width: 180px;
-    } */
-    .drag-area {
-      margin-left: 6px;
-    }
+  .drag-area::-webkit-scrollbar-thumb {
+    background-color: rgba(136, 136, 136, 0.33); /* Farbe der Scrollbar */
+    border-radius: 10px;
   }
+  
+  .drag-area::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(85, 85, 85, 0.42); /* Farbe beim Hover */
+    cursor: pointer;
+  }
+  
+  .drag-area::-webkit-scrollbar-track {
+    background: transparent; /* Transparenter Hintergrund */
+  }
+  
+  /* Für Firefox */
+  .drag-area {
+    scrollbar-width: thin; /* Dünne Scrollbar */
+    scrollbar-color: #888 transparent; /* Farbe: Daumen und Track */
+  }
+  
+}
 
-@media (max-width: 650px) {
+@media (max-width: 900px) {
+  .top-content {
+    gap: 15px;
+  }
+  .right-content {
+    gap: 10px;
+  }
+ body{
+  overflow-x: hidden;
+ }
+  .drag-area {
+    margin-left: 6px;
+  }
+}
+
+@media (max-width: 700px) {
   .top-content {
     flex-direction: column;
     margin-bottom: 20px;
