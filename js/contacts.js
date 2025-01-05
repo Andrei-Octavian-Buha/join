@@ -12,8 +12,13 @@ function openOverlay(overlayId) {
     const overlay = document.getElementById(overlayId);
     const overlaycontent = document.getElementById("overlay-content");
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     overlay.style.display = "block"; 
     setTimeout(() => overlay.classList.add("show"), 0); 
+=======
+    overlay.style.display = "block"; // Sichtbar machen
+    setTimeout(() => overlay.classList.add("show"), 0); // Animation starten
+>>>>>>> Stashed changes
 =======
     overlay.style.display = "block"; // Sichtbar machen
     setTimeout(() => overlay.classList.add("show"), 0); // Animation starten
