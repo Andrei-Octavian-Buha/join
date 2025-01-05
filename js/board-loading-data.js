@@ -145,7 +145,6 @@ function showSubTasks(task) {
   }
 }
 
-// Funktion, um Initialen zu erstellen
 function createInitials(name) {
   return name
     .split(" ")
@@ -154,7 +153,6 @@ function createInitials(name) {
     .slice(0, 2);
 }
 
-// Funktion, um eine einzelne Person anzuzeigen
 function renderAssignedPerson(person, asignedDiv) {
   const initials = createInitials(person.name);
   const color = getColorForInitial(initials[0]);
@@ -166,7 +164,6 @@ function renderAssignedPerson(person, asignedDiv) {
   `;
 }
 
-// Funktion, um das "+x"-Element hinzuzufügen
 function renderRemainingCount(remainingCount, asignedDiv) {
   asignedDiv.innerHTML += `
     <div class="assignetPersonKreis" style="background: linear-gradient(135deg,rgba(123, 97, 119, 0.81) 0%,rgb(36, 178, 29) 100%);">
@@ -175,20 +172,20 @@ function renderRemainingCount(remainingCount, asignedDiv) {
   `;
 }
 
-// Hauptfunktion, um die zugewiesenen Personen anzuzeigen
+
 function showAssignet(task) {
   let asignedDiv = document.getElementById(`asigned${task.id}`);
   if (!asignedDiv) {
     return;
   }
-  asignedDiv.innerHTML = ""; // Aktuelle Inhalte leeren
+  asignedDiv.innerHTML = ""; 
 
   let assigned = task.task.assignet;
   if (!assigned || assigned.length === 0) {
     return;
   }
 
-  const maxVisible = 3; // Maximale Anzahl sichtbarer Personen
+  const maxVisible = 3; 
 
   assigned.forEach((person, index) => {
     if (index < maxVisible) {
