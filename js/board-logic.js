@@ -257,7 +257,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function initializeBoard() {
   const allTasks = [...document.querySelectorAll(".boardTaskCard")];
-  console.log("Initializing board with tasks:", allTasks);
 
   allTasks.forEach(task => {
     updateArrowVisibility(task.id);

@@ -114,9 +114,6 @@ async function updateTaskProgress(taskId, newProgress) {
   const existingTaskData = await getTaskData(taskId);
   if (existingTaskData) {
     await updateTaskProgressInFirebase(taskId, newProgress, existingTaskData);
-    console.log(
-      `Task ${taskId} erfolgreich in Kategorie ${newProgress} verschoben.`
-    );
   } else {
     console.error(`Keine Daten für Task ${taskId} gefunden.`);
   }
@@ -181,9 +178,6 @@ async function sendUpdateRequestToFirebase(taskId, updatedTaskData) {
 
 function handleFirebaseResponse(response, taskId, newProgress) {
   if (response.ok) {
-    console.log(
-      `Progress der Aufgabe ${taskId} erfolgreich auf ${newProgress} aktualisiert.`
-    );
   } else {
     console.error("Fehler beim Aktualisieren des Progress in Firebase.");
   }
