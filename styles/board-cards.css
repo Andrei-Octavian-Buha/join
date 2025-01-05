@@ -87,7 +87,19 @@
 }
 
 .assignetPersonCard {
+  padding-left: 8px;
+  overflow-y: scroll;
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+}
+
+.assignetPersonCard::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+
+.assignetPersonCard {
   display: flex;
+  max-height: 200px;
 }
 
 .assignetPersonKreis {
