@@ -274,7 +274,7 @@ function editListDataCard(taskId) {
   showAssignet(task);
   setupDropdownEvents();
   rendEditSubTask(task);
-  loadContactsForEdit();
+  loadContactsForEdit(taskId);
   onlyToDay();
 }
 

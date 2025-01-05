@@ -65,11 +65,44 @@ async function loadContacts() {
   subtasktrigger();
 }
 
-async function loadContactsForEdit() {
+async function loadContactsForEdit(taskId) {
   let contactsData = await loadContactsData();
   let sortedContacts = sortContacts(contactsData);
-  renderContacts(sortedContacts);
+  renderContactsforEdit(sortedContacts, taskId);
 }
+
+function renderContactsforEdit(contacts, taskId) {
+  let dropdown = document.getElementById("dropDownBodyId");
+  dropdown.innerHTML = "";
+  const task = tasks.find((t) => t.id === taskId);
+  const assignedContactKeys = Array.isArray(task.task.assignet) ? task.task.assignet.map((contact) => contact.key) : [];
+  contacts.forEach((element) => {
+    let container = createContactElementforEdit(element, taskId);
+    const checkbox = container.querySelector(`input[type="checkbox"]`);
+    console.log("element.id:", element.id);
+    if (assignedContactKeys.includes(element.id)) {
+      checkbox.checked = true; }
+    dropdown.appendChild(container);
+    startEvent(element);
+  });
+}
+
+function createContactElementforEdit(element, taskId) {
+  let container = document.createElement("label");
+  container.id = `ContainerID${element.id}`;
+  container.classList.add("dropDownContactContainer");
+  
+  let initials = element.cont.name
+    .split(" ")
+    .map((word) => word[0].toUpperCase())
+    .join("")
+    .slice(0, 2);
+  
+  let color = getColorForInitial(initials[0]);
+  container.innerHTML = dropDownContactNameHTML(element, color, initials, taskId);
+  return container;
+}
+
 
 function getColorForInitial(initial) {
   const colors = {

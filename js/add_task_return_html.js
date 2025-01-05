@@ -37,7 +37,7 @@ function rendsubtaskHTML(subtask, index) {
   </div>`;
 }
 
-function dropDownContactNameHTML(element, color, initials) {
+function dropDownContactNameHTML(element, color, initials, taskId) {
   return `    <div class="dropDownContactName">
       <p class="firstLetterCircle" style="background-color: ${color};">${initials}</p>
       <p class="dropDownFullName">${element.cont.name}</p>
