@@ -41,6 +41,7 @@ async function loadContactss() {
     } else if (task.task.progress === "done") {
       doneId.innerHTML += renderCard(task);
     }
+    nullSubtask(task);
   });
 
   updateEmptyColumnMessages(tasksData);
@@ -100,7 +101,6 @@ function renderCard(task) {
     task.task.description,
     maxDescriptionLength
   );
-
   return `
     <div 
       class="boardTaskCard" 
@@ -126,7 +126,7 @@ function renderCard(task) {
         <h3 class="boardCardTitle">${truncatedTitle}</h3>
         <p class="boardCardDescription">${truncatedDescription}</p>
       </div>
-      <div class="progresBar">
+      <div class="progresBar" id="progBar-${task.id}" >
             <div class="progress-container">
                 <div class="progress-bar" style="width:${calculatePercentage(
                   task
@@ -143,11 +143,19 @@ function renderCard(task) {
       </div>
     </div>`;
 }
+
+function nullSubtask(task) {
+  let progsBar = document.getElementById(`progBar-${task.id}`);
+  if (!task.task.subtask || task.task.subtask.length === 0) {
+    progsBar.classList.remove("progresBar");
+    progsBar.classList.add("dNone");
+  }
+}
+
 function calculatePercentage(task) {
   let x = howManyAreChecked(task);
   let y = showSubTasks(task);
   let z = (x / y) * 100;
-  console.log(z);
   return z;
 }
 function howManyAreChecked(task) {
