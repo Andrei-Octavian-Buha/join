@@ -128,9 +128,9 @@ function renderCard(task) {
       </div>
       <div class="progresBar">
             <div class="progress-container">
-                <div class="progress-bar${showSubTasks(
+                <div class="progress-bar" style="width:${calculatePercentage(
                   task
-                )}" style="width:${howManyAreChecked(task)}0%">
+                )}%">
                 </div>
             </div>
         <div style="font-size: 12px;">
@@ -143,7 +143,13 @@ function renderCard(task) {
       </div>
     </div>`;
 }
-
+function calculatePercentage(task) {
+  let x = howManyAreChecked(task);
+  let y = showSubTasks(task);
+  let z = (x / y) * 100;
+  console.log(z);
+  return z;
+}
 function howManyAreChecked(task) {
   if (task && task.task.subtask && Array.isArray(task.task.subtask)) {
     const checkedCount = task.task.subtask.filter(

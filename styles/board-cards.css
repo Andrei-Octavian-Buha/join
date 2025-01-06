@@ -90,7 +90,7 @@
   padding-left: 8px;
   overflow-y: scroll;
   scrollbar-width: none; /* For Firefox */
-  -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
 }
 
 .assignetPersonCard::-webkit-scrollbar {
@@ -210,70 +210,59 @@
   overflow: hidden;
 }
 
-.progress-bar0 {
+.progress-bar {
   height: 100%;
   width: 0%;
   background-color: #4589ff;
   transition: width 0.3s ease-in-out;
 }
-.progress-bar1 {
-  height: 100%;
-  width: 50%;
-  background-color: #4589ff;
-  transition: width 0.3s ease-in-out;
-}
-.progress-bar2 {
-  height: 100%;
-  width: 100%;
-  background-color: #4589ff;
-  transition: width 0.3s ease-in-out;
-}
 
-@media (max-width: 1421px){
-  .boardTaskCard{
+@media (max-width: 1421px) {
+  .boardTaskCard {
     width: 200px;
   }
 }
 
-@media (max-width: 1231px){
-  .boardTaskCard{
+@media (max-width: 1231px) {
+  .boardTaskCard {
     width: 180px;
   }
 }
 
-.cardHeader{
+.cardHeader {
   display: flex;
   align-items: center;
 }
 
-@media (min-width: 1150px){
-  .cardButtonsDiv{
+@media (min-width: 1150px) {
+  .cardButtonsDiv {
     display: none;
   }
 }
 
-@media (max-width: 1149px){
-  .cardButtonsDiv{
+@media (max-width: 1149px) {
+  .cardButtonsDiv {
     padding-left: 24px;
   }
-  
-  .arrow-up{
+
+  .arrow-up {
     height: 18px;
   }
 
-  .arrow-down{
+  .arrow-down {
     height: 18px;
     padding-left: 8px;
   }
 
-  .arrow-up:hover{
-    filter: brightness(0) saturate(100%) invert(55%) sepia(99%) saturate(798%) hue-rotate(165deg) brightness(91%) contrast(93%);
+  .arrow-up:hover {
+    filter: brightness(0) saturate(100%) invert(55%) sepia(99%) saturate(798%)
+      hue-rotate(165deg) brightness(91%) contrast(93%);
     transform: scale(1.05);
   }
 
-  .arrow-down:hover{
-    filter: brightness(0) saturate(100%) invert(55%) sepia(99%) saturate(798%) hue-rotate(165deg) brightness(91%) contrast(93%);
+  .arrow-down:hover {
+    filter: brightness(0) saturate(100%) invert(55%) sepia(99%) saturate(798%)
+      hue-rotate(165deg) brightness(91%) contrast(93%);
     transform: scale(1.05);
   }
-
 }
