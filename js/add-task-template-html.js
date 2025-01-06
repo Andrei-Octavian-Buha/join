@@ -6,7 +6,7 @@ function addTaskTemplate() {
         <div class="desktopView">
           <div class="leftContainer">
             <div class="testA">
-              <label for="addTaskTittle">Title<span class="req">*</span>
+              <label for="addTaskTittle" style="font-size: 20px">Title<span class="req">*</span>
               </label>
               <input
                 id="addTaskTittle"
@@ -19,7 +19,7 @@ function addTaskTemplate() {
               >
             </div>
             <div class="testA">
-              <label for="addTaskDescription">Description</label>
+              <label for="addTaskDescription" style="font-size: 20px">Description</label>
               <textarea
                 name=""
                 id="addTaskDescription"
@@ -28,7 +28,7 @@ function addTaskTemplate() {
               ></textarea>
             </div>
             <div class="testA">
-              <span>Assignet To</span>
+              <span style="font-size: 20px">Assignet To</span>
               <div class="dropDownGroup">
                 <div id="dropDownHeaderId" class="dropDownHeader">
                   <span id="dinamicText">Select contacts to assign</span>
@@ -44,12 +44,12 @@ function addTaskTemplate() {
           <span class="desktopTrenBar"> </span>
           <div class="rightContainer">
             <div class="testA">
-              <span>Due date<span class="req">*</span></span>
+              <span style="font-size: 20px">Due date<span class="req">*</span></span>
               <input type="date" class="inputStyle" id="addTaskDate" />
               <span id="reqDate" class="req dNone">This field is required</span>
             </div>
             <div class="priority">
-              <span>Prio</span>
+              <span style="font-size: 20px">Prio</span>
               <div class="radio-group">
                 <label class="custom-radio-urgent" for="urgentBtn">
                   <input
@@ -120,7 +120,7 @@ function addTaskTemplate() {
               </div>
             </div>
             <div class="testA">
-              <span>Category<span class="req">*</span></span>
+              <span style="font-size: 20px">Category<span class="req">*</span></span>
               <div class="selectContainer">
                 <select
                   class="cursor selectBox"
@@ -144,7 +144,7 @@ function addTaskTemplate() {
               </span>
             </div>
             <div class="testA">
-              <span>Subtask</span>
+              <span style="font-size: 20px">Subtask</span>
               <div class="containerInputSignUp">
                 <input
                   id="inputSubTask"
