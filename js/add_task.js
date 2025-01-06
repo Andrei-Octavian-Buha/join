@@ -324,8 +324,6 @@ function addEditcheck(index) {
   btn.addEventListener("click", () => {
     if (inputText.value) {
       subtasks[index].name = inputText.value;
-      console.log(subtasks);
-
       rendSubTask();
     } else {
       deleteSubTask(index);
