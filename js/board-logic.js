@@ -109,7 +109,6 @@ function rendEditSubTask(task) {
   if (subtasks) {
     subtasks.forEach((subtask, index) => {
       toRender.innerHTML += rendEditSubTaskHtml(subtask, index);
-      console.log(subtask);
     });
   }
 }

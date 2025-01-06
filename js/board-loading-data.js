@@ -343,9 +343,6 @@ async function updateCheckedSubTask(taskId, subtaskIndex, isChecked) {
   const task = tasks.find((t) => t.id === taskId);
   if (!task) return;
   task.task.subtask[subtaskIndex].checked = isChecked;
-  console.log(
-    `Subtask ${subtaskIndex} al task-ului ${taskId} a fost actualizat la ${isChecked}`
-  );
   let sendDataToFirebase = task.task;
   try {
     const response = await fetch(`${BASE_URL}/task/${taskId}.json`, {

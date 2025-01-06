@@ -81,7 +81,6 @@ function renderContactsforEdit(contacts, taskId) {
   contacts.forEach((element) => {
     let container = createContactElementforEdit(element, taskId);
     const checkbox = container.querySelector(`input[type="checkbox"]`);
-    console.log("element.id:", element.id);
     if (assignedContactKeys.includes(element.id)) {
       checkbox.checked = true;
     }
