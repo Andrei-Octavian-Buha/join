@@ -1,25 +1,26 @@
 .boardOverlay {
-  /* width: 400px; */
   max-width: 396px;
-  height: auto;
   top: 0;
   left: 0;
   z-index: 999;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: auto;
 }
 
 .taskContainer {
   background-color: #fff;
-  width: 100%;
+  max-width: 396px;
+  min-width: 280px;
+  max-height: 841px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 48px 40px;
   border-radius: 30px;
   gap: 24px;
-  height: 80%;
+  overflow: auto;
 }
 
 .taskHeder {
@@ -33,16 +34,29 @@
   gap: 24px;
 }
 
-@media (max-height: 668px){
-  .taskTitle{
+@media (max-height: 668px) {
+  .taskTitle {
     gap: 12px;
   }
-  .taskTitle h1{
+  .taskTitle h1 {
     font-size: 32px;
   }
 
-  .boardOverlay{
+  /* .boardOverlay {
     width: 360px;
+  } */
+  .taskContainer {
+    background-color: #fff;
+    max-width: 396px;
+    min-width: 280px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 48px 40px;
+    border-radius: 30px;
+    gap: 24px;
+    overflow: auto;
   }
 }
 

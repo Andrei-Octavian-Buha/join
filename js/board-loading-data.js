@@ -304,6 +304,7 @@ function editListDataCard(taskId) {
 }
 
 function listDataCard(taskId) {
+  document.body.classList.add("no-scroll");
   const task = tasks.find((t) => t.id === taskId);
   if (!task) return;
   showOverlayInfoCard();
