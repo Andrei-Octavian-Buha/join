@@ -44,6 +44,7 @@ function showOverlayInfoCard() {
   overlay.addEventListener("click", closeOverlayInfoCard);
 }
 
+//
 function hideOverlayInfoCard() {
   const overlay = document.getElementById("overlay");
   const card = document.getElementById("taskInfoCard");
@@ -74,6 +75,7 @@ function hideOverlayInfoCard() {
     }
   });
   checked = [];
+  taskInit();
 }
 
 function closeOverlayInfoCard() {
