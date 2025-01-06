@@ -76,14 +76,13 @@ function hideOverlayInfoCard() {
   });
   checked = [];
   taskInit();
-  document.body.classList.remove("no-scroll");
 }
 
 function closeOverlayInfoCard() {
   hideOverlayInfoCard();
   taskInit();
-  // const card = document.getElementById("taskInfoCard");
-  // card.innerHTML = "";
+  const card = document.getElementById("taskInfoCard");
+  card.innerHTML = "";
 }
 
 function hideshowListCard() {
