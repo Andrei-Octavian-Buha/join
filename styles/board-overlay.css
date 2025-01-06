@@ -58,6 +58,15 @@
     gap: 24px;
     overflow: auto;
   }
+
+  .taskContainer{
+    height: 500px;
+    overflow-y: auto;
+  }
+  
+  .taskHeder{
+    padding-top: 100px;
+  }
 }
 
 .direction-column {
