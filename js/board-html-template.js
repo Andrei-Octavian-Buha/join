@@ -1,5 +1,5 @@
 function showEditCard(task) {
-  return /* html */ `
+  return /* html */ ` <div class="boardOverlay">
           <div class="taskContainer">
               <div class="taskHeder">
                   <div></div>
@@ -167,11 +167,14 @@ function showEditCard(task) {
                       Ok <img src="./assets/priority/check.svg" alt="" />
                     </button>
                 </div>
-              </div>`;
+          </div>
+          </div>
+      </div>`;
 }
 
 function showInfoCard(task) {
   return `       
+      <div class="boardOverlay">
           <div id="showListCard" class="taskContainer">
               <div class="taskHeder">
                   <div class="boardCategoryCard cat${task.task.category}">
@@ -227,7 +230,8 @@ function showInfoCard(task) {
                       </div>
                   </div>
               </div>
-          </div>`;
+          </div>
+      </div>`;
 }
 
 function rendEditSubTaskHtml(subtask, index) {
