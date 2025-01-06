@@ -44,6 +44,15 @@
   .boardOverlay{
     width: 360px;
   }
+
+  .taskContainer{
+    height: 500px;
+    overflow-y: auto;
+  }
+  
+  .taskHeder{
+    padding-top: 100px;
+  }
 }
 
 .direction-column {
