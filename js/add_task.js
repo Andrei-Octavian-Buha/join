@@ -287,7 +287,7 @@ function addSubTask() {
   let btn = document.getElementById("AddSubTaskStep2Add");
   let inputText = document.getElementById("inputSubTask");
   btn.addEventListener("click", () => {
-    if (inputText.value && subtasks.length <= 1) {
+    if (inputText.value) {
       subtasks.push({ name: inputText.value, checked: false });
     }
     hideEditAddBtn();

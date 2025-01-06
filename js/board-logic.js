@@ -95,7 +95,7 @@ function addEditSubTask() {
   }
   subtasksEditCard = currentTask.task.subtask;
   let inputText = document.getElementById("inputSubTask");
-  if (inputText.value && subtasksEditCard.length <= 1) {
+  if (inputText.value) {
     subtasksEditCard.push({ name: inputText.value, checked: false });
     rendEditSubTask(currentTask);
     hideEditAddBtn();
