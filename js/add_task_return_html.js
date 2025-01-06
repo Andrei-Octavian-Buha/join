@@ -7,7 +7,7 @@ function rendsubtaskHTML(subtask, index) {
         type="text"
         class="inputsubTask"
         readonly
-        placeholder="${subtask}"
+        placeholder="${subtask.name}"
       />
     </div>
     <div class="subtaskEdiBtns">

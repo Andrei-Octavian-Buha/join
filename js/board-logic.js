@@ -69,7 +69,7 @@ function hideOverlayInfoCard() {
     if (container) {
       const tasks = container.querySelectorAll(".boardTaskCard");
       tasks.forEach((task) => {
-        task.style.display = ""; 
+        task.style.display = "";
       });
     }
   });
@@ -96,10 +96,10 @@ function addEditSubTask() {
   subtasksEditCard = currentTask.task.subtask;
   let inputText = document.getElementById("inputSubTask");
   if (inputText.value && subtasksEditCard.length <= 1) {
-    subtasksEditCard.push(inputText.value);
+    subtasksEditCard.push({ name: inputText.value, checked: false });
+    rendEditSubTask(currentTask);
+    hideEditAddBtn();
   }
-  rendEditSubTask(currentTask);
-  hideEditAddBtn();
 }
 
 function rendEditSubTask(task) {
@@ -109,6 +109,7 @@ function rendEditSubTask(task) {
   if (subtasks) {
     subtasks.forEach((subtask, index) => {
       toRender.innerHTML += rendEditSubTaskHtml(subtask, index);
+      console.log(subtask);
     });
   }
 }
@@ -123,7 +124,7 @@ function addEditSubTaskcheck(index) {
   let inputText = document.getElementById(`toEditInputSubTask-${index}`);
   btn.addEventListener("click", () => {
     if (inputText.value) {
-      subtasks[index] = inputText.value;
+      subtasks[index].name = inputText.value;
       rendEditSubTask({ task: { subtask: subtasks } });
     } else {
       deleteEditTask(index);
@@ -135,7 +136,7 @@ async function updateTaskOnFireBase(task) {
   let taskData = getValue(task);
   try {
     const response = await fetch(`${BASE_URL}/task/${task}.json`, {
-      method: "PUT", 
+      method: "PUT",
       body: JSON.stringify({
         title: taskData.title,
         description: taskData.description,
@@ -191,7 +192,12 @@ function getValue(taskid) {
   };
 }
 
-const columnsOrder = ["todoColumn", "inprogressColumn", "awaitfeedbackColumn", "doneColumn"];
+const columnsOrder = [
+  "todoColumn",
+  "inprogressColumn",
+  "awaitfeedbackColumn",
+  "doneColumn",
+];
 
 function moveCardUp(taskId) {
   const taskCard = document.getElementById(taskId);
@@ -199,7 +205,9 @@ function moveCardUp(taskId) {
 
   const currentIndex = columnsOrder.indexOf(currentColumn);
   if (currentIndex > 0) {
-    const targetColumn = document.getElementById(columnsOrder[currentIndex - 1]);
+    const targetColumn = document.getElementById(
+      columnsOrder[currentIndex - 1]
+    );
     targetColumn.appendChild(taskCard);
     updateArrowVisibility(taskId); // Update arrow visibility
     updateArrowVisibilityForAll(); // Check for other cards
@@ -212,7 +220,9 @@ function moveCardDown(taskId) {
 
   const currentIndex = columnsOrder.indexOf(currentColumn);
   if (currentIndex < columnsOrder.length - 1) {
-    const targetColumn = document.getElementById(columnsOrder[currentIndex + 1]);
+    const targetColumn = document.getElementById(
+      columnsOrder[currentIndex + 1]
+    );
     targetColumn.appendChild(taskCard);
     updateArrowVisibility(taskId); // Update arrow visibility
     updateArrowVisibilityForAll(); // Check for other cards
@@ -220,12 +230,11 @@ function moveCardDown(taskId) {
 }
 
 function updateArrowVisibilityForAll() {
-    const allTasks = [...document.querySelectorAll(".boardTaskCard")];
-    allTasks.forEach(task => {
-        updateArrowVisibility(task.id);
-    });
+  const allTasks = [...document.querySelectorAll(".boardTaskCard")];
+  allTasks.forEach((task) => {
+    updateArrowVisibility(task.id);
+  });
 }
-
 
 function updateArrowVisibility(taskId) {
   const taskCard = document.getElementById(taskId);
@@ -258,8 +267,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function initializeBoard() {
   const allTasks = [...document.querySelectorAll(".boardTaskCard")];
 
-  allTasks.forEach(task => {
+  allTasks.forEach((task) => {
     updateArrowVisibility(task.id);
   });
 }
-

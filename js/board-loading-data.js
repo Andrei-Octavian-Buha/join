@@ -20,7 +20,7 @@ async function loadTaskData() {
 }
 
 async function loadContactss() {
-  let tasksData = await loadTaskData(); 
+  let tasksData = await loadTaskData();
   let todoId = document.getElementById("todoColumn");
   let awaitfeedbackId = document.getElementById("awaitfeedbackColumn");
   let inprogressId = document.getElementById("inprogressColumn");
@@ -43,7 +43,6 @@ async function loadContactss() {
     }
   });
 
-  
   updateEmptyColumnMessages(tasksData);
 
   tasksData.forEach((task) => {
@@ -85,7 +84,7 @@ function fromNumberToName(task) {
 
 function truncateText(text, maxLength) {
   if (!text || typeof text !== "string") {
-    return ""; 
+    return "";
   }
   if (text.length > maxLength) {
     return text.substring(0, maxLength) + "...";
@@ -117,7 +116,11 @@ function renderCard(task) {
         class="boardCategoryCard cat${task.task.category}">
         ${fromNumberToName(task)}
       </div>
-      <div class="cardButtonsDiv"><img onclick="event.stopPropagation(); moveCardUp('${task.id}')" class="arrow-up" src="./assets/img/arrow-up.png" alt=""><img onclick="event.stopPropagation(); moveCardDown('${task.id}')"  class="arrow-down" src="./assets/img/arrow-down.png" alt=""></div>
+      <div class="cardButtonsDiv"><img onclick="event.stopPropagation(); moveCardUp('${
+        task.id
+      }')" class="arrow-up" src="./assets/img/arrow-up.png" alt=""><img onclick="event.stopPropagation(); moveCardDown('${
+    task.id
+  }')"  class="arrow-down" src="./assets/img/arrow-down.png" alt=""></div>
       </div>
       <div>
         <h3 class="boardCardTitle">${truncatedTitle}</h3>
@@ -125,10 +128,14 @@ function renderCard(task) {
       </div>
       <div class="progresBar">
             <div class="progress-container">
-                <div class="progress-bar${showSubTasks(task)}">
+                <div class="progress-bar${showSubTasks(
+                  task
+                )}" style="width:${howManyAreChecked(task)}0%">
                 </div>
             </div>
-        <div style="font-size: 12px;">${showSubTasks(task)} /2 Subtasks</div>
+        <div style="font-size: 12px;">
+          ${howManyAreChecked(task)} /${showSubTasks(task)} Subtasks
+        </div>
       </div>
       <div class="assignetPersonContainer">
         <div id="asigned${task.id}" class="assignetPersonCard"></div>
@@ -137,6 +144,16 @@ function renderCard(task) {
     </div>`;
 }
 
+function howManyAreChecked(task) {
+  if (task && task.task.subtask && Array.isArray(task.task.subtask)) {
+    const checkedCount = task.task.subtask.filter(
+      (sub) => sub.checked === true
+    ).length;
+    return checkedCount;
+  } else {
+    return 0;
+  }
+}
 function showSubTasks(task) {
   if (task.task.subtask && task.task.subtask.length > 0) {
     return task.task.subtask.length;
@@ -172,20 +189,19 @@ function renderRemainingCount(remainingCount, asignedDiv) {
   `;
 }
 
-
 function showAssignet(task) {
   let asignedDiv = document.getElementById(`asigned${task.id}`);
   if (!asignedDiv) {
     return;
   }
-  asignedDiv.innerHTML = ""; 
+  asignedDiv.innerHTML = "";
 
   let assigned = task.task.assignet;
   if (!assigned || assigned.length === 0) {
     return;
   }
 
-  const maxVisible = 3; 
+  const maxVisible = 3;
 
   assigned.forEach((person, index) => {
     if (index < maxVisible) {
@@ -198,8 +214,6 @@ function showAssignet(task) {
     renderRemainingCount(remainingCount, asignedDiv);
   }
 }
-
-
 
 function getColorForInitial(initial) {
   const colors = {
@@ -296,10 +310,13 @@ function showSubTasksString(task) {
   let subtasklist = document.getElementById("subtaskList");
   subtasklist.innerHTML = "";
   if (subtasks && subtasks.length > 0) {
-    subtasks.forEach((subtask) => {
+    subtasks.forEach((subtask, subtaskIndex) => {
+      const checkboxSrc = subtask.checked
+        ? "checkbox-checked.svg"
+        : "checkbox.svg";
       subtasklist.innerHTML += `
         <div class="subtaskItem">
-            <img src="./assets/subtask/checkbox.svg" alt="" class="cursor" onclick="toggleImage(this)"  id="checkbox" />${subtask}
+            <img src="./assets/subtask/${checkboxSrc}" alt="" class="cursor" onclick="toggleImage(this, '${task.id}' ,'${subtaskIndex}')" data-index="${subtaskIndex}"  id="checkbox" />${subtask.name}
         </div>`;
     });
   } else {
@@ -307,14 +324,43 @@ function showSubTasksString(task) {
   }
 }
 
-function toggleImage(imageElement) {
+function toggleImage(imageElement, taskId, subtaskIndex) {
   const checkedSrc = "checkbox-checked.svg";
   const uncheckedSrc = "checkbox.svg";
   const currentSrc = imageElement.src.split("/").pop();
+  let isChecked;
   if (currentSrc === uncheckedSrc) {
     imageElement.src = "./assets/subtask/" + checkedSrc;
+    isChecked = true;
   } else {
     imageElement.src = "./assets/subtask/" + uncheckedSrc;
+    isChecked = false;
+  }
+  updateCheckedSubTask(taskId, subtaskIndex, isChecked);
+}
+
+async function updateCheckedSubTask(taskId, subtaskIndex, isChecked) {
+  const task = tasks.find((t) => t.id === taskId);
+  if (!task) return;
+  task.task.subtask[subtaskIndex].checked = isChecked;
+  console.log(
+    `Subtask ${subtaskIndex} al task-ului ${taskId} a fost actualizat la ${isChecked}`
+  );
+  let sendDataToFirebase = task.task;
+  try {
+    const response = await fetch(`${BASE_URL}/task/${taskId}.json`, {
+      method: "PUT",
+      body: JSON.stringify(sendDataToFirebase),
+      headers: { "Content-Type": "application/json" },
+    });
+    if (!response.ok) {
+      throw new Error("Fehler beim Speichern der Kontaktdaten");
+    }
+    const updatedContact = await response.json();
+    return updatedContact;
+  } catch (error) {
+    console.error("Fehler beim Aktualisieren des Kontakts:", error);
+    throw error;
   }
 }
 
@@ -323,7 +369,7 @@ function showInfoAssignet(task) {
   if (!asignedDiv) {
     return;
   }
-  asignedDiv.innerHTML = ""; 
+  asignedDiv.innerHTML = "";
   let assigned = task.task.assignet;
   if (!assigned || assigned.length === 0) {
     return;

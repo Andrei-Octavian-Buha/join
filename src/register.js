@@ -1,3 +1,5 @@
+class Register {}
+
 /**
  * Base URL for Firebase Realtime Database.
  * @constant {string} BASE_URL
