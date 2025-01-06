@@ -82,10 +82,7 @@ function renderContactsforEdit(contacts, taskId) {
     const checkbox = container.querySelector(`input[type="checkbox"]`);
     if (assignedContactKeys.includes(element.id)) {
       checkbox.checked = true;
-      whenChecked(element)
-    }
-    
-   
+      whenChecked(element) }
     startEvent(element);
   });
 }
@@ -99,10 +96,8 @@ function whenChecked(contactId) {
 
   // Update text and clear assignees if necessary
   updateTextAndClearAssignees(text, assigneeElement, checked.length);
-
   // Handle checkbox state
   handleCheckboxState(ck, container, contactId);
-
   // Render assignees
   renderAssignees(checked, assigneeElement, maxDisplay);
 }
@@ -372,15 +367,7 @@ function variableId() {
   if (!Array.isArray(subtasks)) {
     subtasks = [];
   }
-  return {
-    title,
-    description,
-    assignet,
-    date,
-    prio,
-    category,
-    subtask: subtasks,
-  };
+  return { title,description,assignet,date,prio,category,subtask: subtasks, };
 }
 
 function handleFormSubmit(event) {
