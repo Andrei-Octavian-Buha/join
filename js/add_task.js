@@ -75,19 +75,38 @@ function renderContactsforEdit(contacts, taskId) {
   let dropdown = document.getElementById("dropDownBodyId");
   dropdown.innerHTML = "";
   const task = tasks.find((t) => t.id === taskId);
-  const assignedContactKeys = Array.isArray(task.task.assignet)
-    ? task.task.assignet.map((contact) => contact.key)
-    : [];
+  const assignedContactKeys = Array.isArray(task.task.assignet) ? task.task.assignet.map((contact) => contact.key) : [];
   contacts.forEach((element) => {
     let container = createContactElementforEdit(element, taskId);
+    dropdown.appendChild(container);
     const checkbox = container.querySelector(`input[type="checkbox"]`);
     if (assignedContactKeys.includes(element.id)) {
       checkbox.checked = true;
+      whenChecked(element)
     }
-    dropdown.appendChild(container);
+    
+   
     startEvent(element);
   });
 }
+
+function whenChecked(contactId) {
+
+  let ck = document.getElementById(`CheckboxID${contactId.id}`);
+  let container = document.getElementById(`ContainerID${contactId.id}`);
+  let text = document.getElementById("dinamicText");
+  let assigneeElement = document.getElementById("whoIsAssignet");
+
+  // Update text and clear assignees if necessary
+  updateTextAndClearAssignees(text, assigneeElement, checked.length);
+
+  // Handle checkbox state
+  handleCheckboxState(ck, container, contactId);
+
+  // Render assignees
+  renderAssignees(checked, assigneeElement, maxDisplay);
+}
+
 
 function createContactElementforEdit(element, taskId) {
   let container = document.createElement("label");
@@ -99,16 +118,12 @@ function createContactElementforEdit(element, taskId) {
     .map((word) => word[0].toUpperCase())
     .join("")
     .slice(0, 2);
-
+  
   let color = getColorForInitial(initials[0]);
-  container.innerHTML = dropDownContactNameHTML(
-    element,
-    color,
-    initials,
-    taskId
-  );
+  container.innerHTML = dropDownContactNameHTML(element, color, initials, taskId);
   return container;
 }
+
 
 function getColorForInitial(initial) {
   const colors = {
@@ -177,13 +192,9 @@ async function resetForm(event) {
   assignet.innerHTML = "";
 }
 
-const maxDisplay = 3;
+const maxDisplay = 3; 
 
-function updateTextAndClearAssignees(
-  textElement,
-  assigneeElement,
-  checkedLength
-) {
+function updateTextAndClearAssignees(textElement, assigneeElement, checkedLength) {
   if (checkedLength === 0) {
     textElement.innerHTML = "Select contacts to assign";
     assigneeElement.innerHTML = "";
@@ -240,21 +251,6 @@ function renderAssignees(checked, assigneeElement, maxCount) {
   }
 }
 
-function whenChecked(contactId) {
-  let ck = document.getElementById(`CheckboxID${contactId.id}`);
-  let container = document.getElementById(`ContainerID${contactId.id}`);
-  let text = document.getElementById("dinamicText");
-  let assigneeElement = document.getElementById("whoIsAssignet");
-
-  // Update text and clear assignees if necessary
-  updateTextAndClearAssignees(text, assigneeElement, checked.length);
-
-  // Handle checkbox state
-  handleCheckboxState(ck, container, contactId);
-
-  // Render assignees
-  renderAssignees(checked, assigneeElement, maxDisplay);
-}
 
 let subtasks = [];
 
@@ -287,8 +283,8 @@ function addSubTask() {
   let btn = document.getElementById("AddSubTaskStep2Add");
   let inputText = document.getElementById("inputSubTask");
   btn.addEventListener("click", () => {
-    if (inputText.value) {
-      subtasks.push({ name: inputText.value, checked: false });
+    if (inputText.value && subtasks.length <= 1) {
+      subtasks.push(inputText.value);
     }
     hideEditAddBtn();
     rendSubTask();
@@ -307,9 +303,7 @@ function editAddedSubTask(index) {
   backgroundEdit(index);
   changeEditWithCheck(index);
   inputToEdit.removeAttribute("readonly");
-  inputToEdit.value = subtasks[index].name;
-  subtasks[index].name = inputToEdit.value;
-  console.log(subtasks);
+  inputToEdit.value = subtasks[index];
 }
 
 function changeEditWithCheck(index) {
@@ -323,9 +317,7 @@ function addEditcheck(index) {
   let inputText = document.getElementById(`toEditInputSubTask-${index}`);
   btn.addEventListener("click", () => {
     if (inputText.value) {
-      subtasks[index].name = inputText.value;
-      console.log(subtasks);
-
+      subtasks[index] = inputText.value;
       rendSubTask();
     } else {
       deleteSubTask(index);
@@ -444,7 +436,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let isDropDownOpen = false;
   dropDownHeader.addEventListener("click", (event) => {
     isDropDownOpen = !isDropDownOpen;
-    event.stopPropagation();
+    event.stopPropagation(); 
   });
 
   document.addEventListener("click", (event) => {
@@ -459,7 +451,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (contactContainer) {
       const checkbox = contactContainer.querySelector(".contactCheckbox");
       if (checkbox) {
-        checkbox.checked = !checkbox.checked;
+        checkbox.checked = !checkbox.checked; 
       }
     }
   });
