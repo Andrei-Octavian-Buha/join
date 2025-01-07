@@ -28,9 +28,7 @@ function filterTasksInCategory(containerId, searchInput) {
     console.warn(`Container mit der ID '${containerId}' wurde nicht gefunden.`);
     return;
   }
-
   const tasks = container.querySelectorAll(".boardTaskCard");
-
   tasks.forEach((task) => {
     const taskTitle = task
       .querySelector(".boardCardTitle")
@@ -38,16 +36,13 @@ function filterTasksInCategory(containerId, searchInput) {
     const taskDescription = task
       .querySelector(".boardCardDescription")
       ?.textContent.toLowerCase();
-
     if (
       taskTitle?.includes(searchInput) ||
       taskDescription?.includes(searchInput)
     ) {
       task.style.display = "";
     } else {
-      task.style.display = "none";
-    }
-  });
+      task.style.display = "none";}});
 }
 
 function filterTasksInAllCategories(categories, searchInput) {
@@ -98,11 +93,9 @@ function getNewProgress(category) {
     awaitfeedbackColumn: "awaitfeedback",
     doneColumn: "done",
   };
-
   const newProgress = progressMapping[category];
   if (!newProgress) {
-    console.error("Ungültige Kategorie:", category);
-  }
+    console.error("Ungültige Kategorie:", category);}
   return newProgress;
 }
 
@@ -122,16 +115,12 @@ async function updateTaskProgress(taskId, newProgress) {
 async function moveTo(category, event) {
   event.preventDefault();
   if (!currentDraggedElement) return;
-
   const targetColumn = getTargetColumn(category);
   if (!targetColumn) return;
-
   moveElementToColumn(targetColumn, currentDraggedElement);
-
   const taskId = currentDraggedElement.id;
   const newProgress = getNewProgress(category);
   if (!newProgress) return;
-
   await updateTaskProgress(taskId, newProgress);
 }
 
@@ -159,7 +148,6 @@ function prepareUpdatedTaskData(existingTaskData, newProgress) {
 
 async function sendUpdateRequestToFirebase(taskId, updatedTaskData) {
   const url = `https://join-store-ae38e-default-rtdb.europe-west1.firebasedatabase.app/task/${taskId}.json`;
-
   try {
     const response = await fetch(url, {
       method: "PUT",
@@ -168,7 +156,6 @@ async function sendUpdateRequestToFirebase(taskId, updatedTaskData) {
       },
       body: JSON.stringify(updatedTaskData),
     });
-
     return response;
   } catch (error) {
     console.error("Fehler beim Senden der Anfrage an Firebase:", error);

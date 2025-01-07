@@ -203,8 +203,7 @@ function toggleMenu() {
 function toggleDropdown() {
     const dropdown = document.getElementById("dropdown");
     dropdown.style.display =
-    dropdown.style.display === "block" ? "none" : "block";
-}
+    dropdown.style.display === "block" ? "none" : "block";}
     window.onclick = function (event) {
     if (
         !event.target.matches(".profilPic") &&
@@ -212,9 +211,7 @@ function toggleDropdown() {
     ) {
     const dropdown = document.getElementById("dropdown");
     if (dropdown.style.display === "block") {
-        dropdown.style.display = "none";
-    }
-    }
+        dropdown.style.display = "none";}}
 };
 
 
@@ -230,13 +227,10 @@ function createBadge(contactName) {
 function prepareBadgeContainer() {
     const badgeContainer = document.getElementById('edit-badge-container');
     const imgContainer = document.getElementById('edit-img-container');
-
     if (!badgeContainer) {
-        return null;
-    }
+        return null;}
     if (imgContainer) {
-        imgContainer.style.display = 'none'; 
-    }
+        imgContainer.style.display = 'none'; }
     badgeContainer.style.backgroundColor = 'transparent'; 
     badgeContainer.innerHTML = ''; 
     return badgeContainer;

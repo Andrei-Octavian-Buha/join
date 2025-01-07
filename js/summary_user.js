@@ -82,9 +82,7 @@ function setUserInitials() {
               profileTextElement.innerHTML = initials; 
           }
       } catch (error) {
-          console.error("Fehler beim Verarbeiten der Benutzerdaten:", error);
-      }
-  }
+          console.error("Fehler beim Verarbeiten der Benutzerdaten:", error);}}
 }
 
 document.addEventListener("DOMContentLoaded", () => {
