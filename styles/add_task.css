@@ -272,6 +272,7 @@
   width: 370px;
   padding-right: 8px;
   padding-left: 8px;
+  max-height: 800px;
 }
 
 .closeX{
