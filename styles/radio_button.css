@@ -5,7 +5,7 @@
   justify-content: center;
   gap: 16px;
 }
-/* Ascunde butonul radio implicit */
+
 .custom-radio-urgent input[type="radio"],
 .custom-radio-medium input[type="radio"],
 .custom-radio-low input[type="radio"] {
