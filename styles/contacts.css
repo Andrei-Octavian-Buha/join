@@ -359,17 +359,17 @@ ul {
 
 @keyframes flyInFromRight {
   0% {
-    transform: translateX(100%); /* Start off-screen to the right */
-    opacity: 0; /* Start invisible */
+    transform: translateX(100%); 
+    opacity: 0; 
   }
   100% {
-    transform: translateX(0); /* End at original position */
-    opacity: 1; /* End fully visible */
+    transform: translateX(0); 
+    opacity: 1; 
   }
 }
 
 .fly-in {
-  animation: flyInFromRight 0.5s ease forwards; /* Apply the animation */
+  animation: flyInFromRight 0.5s ease forwards; 
 }
 
 .add-new-button:hover {

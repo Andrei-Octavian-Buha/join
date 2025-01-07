@@ -1,32 +1,24 @@
 @keyframes slideIn {
   from {
     transform: translate(100%, -50%);
-    /* Start off-screen to the right and vertically centered */
     opacity: 0;
-    /* Start invisible */
   }
 
   to {
     transform: translate(-50%, -50%);
-    /* Move to center */
     opacity: 1;
-    /* End fully visible */
   }
 }
 
 @keyframes slideOut {
   from {
     transform: translate(-50%, -50%);
-    /* Start at center */
     opacity: 1;
-    /* Start fully visible */
   }
 
   to {
     transform: translate(100%, -50%);
-    /* Move out to the right */
     opacity: 0;
-    /* End invisible */
   }
 }
 
@@ -34,7 +26,6 @@
   position: fixed;
   top: 50%;
   left: 50%;
-  /* Start off-screen to the right */
   z-index: 1000;
   display: none;
   flex: 1;
@@ -45,22 +36,17 @@
   border-radius: 25px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   animation: slideIn 0.8s forwards;
-  /* Animation applied */
   width: calc(80dvw - 50px);
   transform: translate(-100%, -50%);
-  /* Center the overlay */
   opacity: 0;
-  /* Start invisible */
 }
 
 .slide-in {
   animation: slideIn 0.8s forwards;
-  /* Apply slideIn animation */
 }
 
 .slide-out {
   animation: slideOut 0.8s forwards;
-  /* Apply slideOut animation */
 }
 
 .edit-overlay-contact.hide {

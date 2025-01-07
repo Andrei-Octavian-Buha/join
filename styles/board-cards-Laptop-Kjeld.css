@@ -17,6 +17,7 @@
   max-height: 242px;
   transition: transform 0.3s ease, background-color 0.3s ease;
   transition: box-shadow 0.3s ease;
+  /* animation: bounceIn 0.3s ease-out; */
 }
 
 .boardTaskCard:hover {
@@ -42,7 +43,6 @@
 
 .boardCategoryCard {
   border-radius: 24px;
-  margin-top: 15px;
 }
 
 .cat1 {
@@ -89,12 +89,12 @@
 .assignetPersonCard {
   padding-left: 8px;
   overflow-y: scroll;
-  scrollbar-width: none; 
-  -ms-overflow-style: none; 
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
 }
 
 .assignetPersonCard::-webkit-scrollbar {
-  display: none; 
+  display: none; /* For Chrome, Safari, and Opera */
 }
 
 .assignetPersonCard {
@@ -153,8 +153,10 @@
   right: -600px;
   transform: translateY(-50%);
   height: auto;
+
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 30px;
+
   transition: all 0.5s ease-in-out;
   z-index: 1000;
 }

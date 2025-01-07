@@ -1,6 +1,6 @@
 .btnPrimary {
-  white-space: nowrap; /* Prevents text from wrapping to a new line */
-  overflow: hidden; /* Ensures content doesn't overflow */
+  white-space: nowrap; 
+  overflow: hidden; 
   text-overflow: ellipsis;
   cursor: pointer;
   display: flex;
@@ -97,6 +97,6 @@
   width: 8px;
   height: 8px;
   background-color: #2a3647;
-  border-radius: 50%; /* Makes it a circle */
-  margin-right: 8px; /* Space between dot and text */
+  border-radius: 50%; 
+  margin-right: 8px; 
 }
