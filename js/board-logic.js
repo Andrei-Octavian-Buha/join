@@ -202,8 +202,9 @@ function moveCardUp(taskId) {
       columnsOrder[currentIndex - 1]
     );
     targetColumn.appendChild(taskCard);
-    updateArrowVisibility(taskId); // Update arrow visibility
-    updateArrowVisibilityForAll(); // Check for other cards
+    updateArrowVisibility(taskId); 
+    updateArrowVisibilityForAll(); 
+    updateEmptyColumnMessages();
   }
 }
 
@@ -217,8 +218,9 @@ function moveCardDown(taskId) {
       columnsOrder[currentIndex + 1]
     );
     targetColumn.appendChild(taskCard);
-    updateArrowVisibility(taskId); // Update arrow visibility
-    updateArrowVisibilityForAll(); // Check for other cards
+    updateArrowVisibility(taskId); 
+    updateArrowVisibilityForAll(); 
+    updateEmptyColumnMessages();
   }
 }
 
@@ -246,7 +248,7 @@ function updateArrowVisibility(taskId) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  setTimeout(initializeBoard, 100); // Delay to ensure all tasks are rendered
+  setTimeout(initializeBoard, 100); 
 });
 
 function initializeBoard() {
