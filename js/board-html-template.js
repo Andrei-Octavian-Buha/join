@@ -1,6 +1,6 @@
 function showEditCard(task) {
-  return ` <div class="boardOverlay">
-          <div class="taskContainer">
+  return `
+          
               <div class="taskHeder">
                   <div>
                   </div>
@@ -174,8 +174,8 @@ function showEditCard(task) {
                     </button>
                 </div>
           </div>
-          </div>
-      </div>`;
+         
+      `;
 }
 
 function showInfoCard(task) {

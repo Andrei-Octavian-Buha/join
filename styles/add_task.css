@@ -250,3 +250,52 @@
 .input-error {
   border: 1px solid red;
 }
+
+#taskInfoCard{
+  background-color: white;
+  overflow-y: scroll;
+}
+
+#taskInfoCard {
+  /* Hide scrollbar in modern browsers */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+
+  /* Hide scrollbar in Webkit browsers (Chrome, Safari, Edge) */
+}
+
+#taskInfoCard::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Edge */
+}
+
+#taskInfoCard{
+  width: 370px;
+  padding-right: 8px;
+  padding-left: 8px;
+}
+
+.closeX{
+  padding-right: 20px;
+  padding-top: 20px;
+}
+
+.taskHeader{
+  padding-top: 30px;
+  width: 360px;
+}
+.testA{
+  width: 360px;
+  padding-left: 5px;
+}
+
+.priority{
+  width: 360px;
+}
+.radio-group{
+  gap: 8px !important;
+}
+
+.btnBoardOk{
+  padding-right: 20px;
+  padding-bottom: 20px;
+}

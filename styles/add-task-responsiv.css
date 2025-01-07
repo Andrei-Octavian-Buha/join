@@ -266,3 +266,99 @@
     }
 }
 
+@media (max-height: 932px){
+    .dropDownBody{
+  height: 170px;
+  padding-top: 8px;
+    }
+/* Overlay container to cover the whole screen */
+    #taskInfoCard{
+        width: 370px;
+        height: 640px;
+    
+    }
+    .closeX{
+        padding-right: 20px;
+        padding-top: 20px;
+    }
+
+    .taskHeader{
+        padding-top: 30px;
+        width: 360px;
+    }
+    .testA{
+        width: 360px;
+        padding-left: 5px;
+    }
+
+    .priority{
+        width: 360px;
+    }
+    .radio-group{
+        gap: 8px !important;
+    }
+
+    .btnBoardOk{
+        padding-right: 10px;
+        padding-bottom: 20px;
+    }
+
+    .inputStyle{
+        margin-right: 5px;
+    }
+
+    .dropDownGroup{
+        margin-right: 5px;
+    }
+
+    .inputStyleWithBtn{
+        margin-right: 5px;
+    }
+}
+
+@media(max-width: 375px){
+    #taskInfoCard{
+        width: 315px;
+        height: 640px;
+    
+    }
+    .closeX{
+        padding-right: 20px;
+        padding-top: 20px;
+    }
+
+    .taskHeader{
+        padding-top: 30px;
+        width: 305px;
+    }
+    .testA{
+        width: 305px;
+        padding-left: 5px;
+    }
+
+    .priority{
+        width: 305px;
+    }
+    .radio-group{
+        gap: 8px !important;
+    }
+
+    .btnBoardOk{
+        padding-right: 10px;
+        padding-bottom: 20px;
+    }
+
+    .inputStyle{
+        margin-right: 5px;
+    }
+
+    .dropDownGroup{
+        margin-right: 5px;
+    }
+
+    .inputStyleWithBtn{
+        margin-right: 5px;
+    }
+}
+  
+

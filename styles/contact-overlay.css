@@ -1,5 +1,4 @@
 .overlay {
-<<<<<<< Updated upstream
   position: fixed;
   top: 50%;
   left: 0%;
@@ -32,9 +31,9 @@
 }
 
 @media(max-width: 1500px) {
-=======
+  .overlay{
     position: fixed;
-    top: 45%;
+    top: 50%;
     left: 100%;
     transform: translateX(0%) translateY(-50%);
     width: 100%;
@@ -46,20 +45,7 @@
     z-index: 999;
     border-radius: 25px;
   }
-  
 
-
-
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
   .overlay-content {
     display: flex;
     box-sizing: border-box;
