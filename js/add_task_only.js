@@ -25,8 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const dropDownHeader = document.getElementById("dropDownHeaderId");
   const dropDownBody = document.getElementById("dropDownBodyId");
   if (!window.location.pathname.includes("add_task")) {
-    return;
-  }
+    return; }
   const dropDownArrow = dropDownHeader.querySelector("img");
   dropDownHeader.addEventListener("click", () => {
     dropDownBody.classList.toggle("dNone");
@@ -34,8 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
       dropDownArrow.style.transform = "rotate(180deg)";
     } else {
       dropDownArrow.style.transform = "rotate(0deg)";
-    }
-  });
+    }});
 });
 
 function getInitials(name) {

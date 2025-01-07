@@ -52,28 +52,21 @@ function hideOverlayInfoCard() {
   card.classList.remove("showCard");
   card.classList.add("hideCard");
   setTimeout(() => {
-    card.classList.remove("hideCard");
-  }, 500);
-
+    card.classList.remove("hideCard"); }, 500);
   const searchInputElement = document.querySelector(".searchinput");
   if (searchInputElement) {
-    searchInputElement.value = "";
-  }
+    searchInputElement.value = "";}
   const categories = [
     "todoColumn",
     "inprogressColumn",
     "awaitfeedbackColumn",
-    "doneColumn",
-  ];
+    "doneColumn",];
   categories.forEach((category) => {
     const container = document.getElementById(category);
     if (container) {
       const tasks = container.querySelectorAll(".boardTaskCard");
       tasks.forEach((task) => {
-        task.style.display = "";
-      });
-    }
-  });
+        task.style.display = ""; }); } });
   checked = [];
   taskInit();
 }
@@ -180,7 +173,6 @@ function getValue(taskid) {
   subtask = subtasks;
   progress = task.task.progress;
   category = task.task.category;
-
   return {
     title,
     description,
@@ -240,25 +232,17 @@ function updateArrowVisibilityForAll() {
 function updateArrowVisibility(taskId) {
   const taskCard = document.getElementById(taskId);
   const currentColumn = taskCard.closest(".drag-area").id;
-
   const arrowUp = taskCard.querySelector(".arrow-up");
   const arrowDown = taskCard.querySelector(".arrow-down");
-
   const currentIndex = columnsOrder.indexOf(currentColumn);
-
-  // Hide the arrow-up if the card is in the first column
   if (currentIndex === 0) {
     arrowUp.style.display = "none";
   } else {
-    arrowUp.style.display = "inline";
-  }
-
-  // Hide the arrow-down if the card is in the last column
+    arrowUp.style.display = "inline";}
   if (currentIndex === columnsOrder.length - 1) {
     arrowDown.style.display = "none";
   } else {
-    arrowDown.style.display = "inline";
-  }
+    arrowDown.style.display = "inline";}
 }
 
 document.addEventListener("DOMContentLoaded", () => {

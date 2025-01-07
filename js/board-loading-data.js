@@ -25,12 +25,10 @@ async function loadContactss() {
   let awaitfeedbackId = document.getElementById("awaitfeedbackColumn");
   let inprogressId = document.getElementById("inprogressColumn");
   let doneId = document.getElementById("doneColumn");
-
   todoId.innerHTML = "";
   awaitfeedbackId.innerHTML = "";
   inprogressId.innerHTML = "";
   doneId.innerHTML = "";
-
   tasksData.forEach((task) => {
     if (task.task.progress === "todo") {
       todoId.innerHTML += renderCard(task);
@@ -43,9 +41,7 @@ async function loadContactss() {
     }
     nullSubtask(task);
   });
-
   updateEmptyColumnMessages(tasksData);
-
   tasksData.forEach((task) => {
     showAssignet(task);
   });
@@ -56,21 +52,16 @@ function updateEmptyColumnMessages(tasksData) {
     { columnId: "todoColumn", messageClass: "no-tasks-message" },
     { columnId: "awaitfeedbackColumn", messageClass: "no-tasks-message" },
     { columnId: "inprogressColumn", messageClass: "no-tasks-message" },
-    { columnId: "doneColumn", messageClass: "no-tasks-message" },
-  ];
-
+    { columnId: "doneColumn", messageClass: "no-tasks-message" },];
   columns.forEach(({ columnId, messageClass }) => {
     const column = document.getElementById(columnId);
     const messageDiv = column
       .closest(".column")
       .querySelector(`.${messageClass}`);
-
     if (!column.innerHTML.trim()) {
       messageDiv.style.display = "flex";
     } else {
-      messageDiv.style.display = "none";
-    }
-  });
+      messageDiv.style.display = "none";}});
 }
 
 function fromNumberToName(task) {
@@ -93,57 +84,6 @@ function truncateText(text, maxLength) {
   return text;
 }
 
-function renderCard(task) {
-  const maxTitleLength = 30;
-  const maxDescriptionLength = 35;
-  const truncatedTitle = truncateText(task.task.title, maxTitleLength);
-  const truncatedDescription = truncateText(
-    task.task.description,
-    maxDescriptionLength
-  );
-  return `
-    <div 
-      class="boardTaskCard" 
-      id="${task.id}" 
-      draggable="true" 
-      ondragstart="dragStart(event, '${task.id}')"
-      ondragend="dragEnd(event)"
-      onclick="listDataCard('${task.id}')"
-    >
-      <div class="cardHeader">
-      <div 
-        id="Category${task.task.category}" 
-        class="boardCategoryCard cat${task.task.category}">
-        ${fromNumberToName(task)}
-      </div>
-      <div class="cardButtonsDiv"><img onclick="event.stopPropagation(); moveCardUp('${
-        task.id
-      }')" class="arrow-up" src="./assets/img/arrow-up.png" alt=""><img onclick="event.stopPropagation(); moveCardDown('${
-    task.id
-  }')"  class="arrow-down" src="./assets/img/arrow-down.png" alt=""></div>
-      </div>
-      <div>
-        <h3 class="boardCardTitle">${truncatedTitle}</h3>
-        <p class="boardCardDescription">${truncatedDescription}</p>
-      </div>
-      <div class="progresBar" id="progBar-${task.id}" >
-            <div class="progress-container">
-                <div class="progress-bar" style="width:${calculatePercentage(
-                  task
-                )}%">
-                </div>
-            </div>
-        <div style="font-size: 12px;">
-          ${howManyAreChecked(task)} /${showSubTasks(task)} Subtasks
-        </div>
-      </div>
-      <div class="assignetPersonContainer">
-        <div id="asigned${task.id}" class="assignetPersonCard"></div>
-        <div>${showPrioIcon(task)}</div>
-      </div>
-    </div>`;
-}
-
 function nullSubtask(task) {
   let progsBar = document.getElementById(`progBar-${task.id}`);
   if (!task.task.subtask || task.task.subtask.length === 0) {
@@ -158,6 +98,7 @@ function calculatePercentage(task) {
   let z = (x / y) * 100;
   return z;
 }
+
 function howManyAreChecked(task) {
   if (task && task.task.subtask && Array.isArray(task.task.subtask)) {
     const checkedCount = task.task.subtask.filter(
@@ -168,6 +109,7 @@ function howManyAreChecked(task) {
     return 0;
   }
 }
+
 function showSubTasks(task) {
   if (task.task.subtask && task.task.subtask.length > 0) {
     return task.task.subtask.length;
@@ -206,27 +148,18 @@ function renderRemainingCount(remainingCount, asignedDiv) {
 function showAssignet(task) {
   let asignedDiv = document.getElementById(`asigned${task.id}`);
   if (!asignedDiv) {
-    return;
-  }
+    return; }
   asignedDiv.innerHTML = "";
-
   let assigned = task.task.assignet;
   if (!assigned || assigned.length === 0) {
-    return;
-  }
-
+    return;}
   const maxVisible = 3;
-
   assigned.forEach((person, index) => {
     if (index < maxVisible) {
-      renderAssignedPerson(person, asignedDiv);
-    }
-  });
-
+      renderAssignedPerson(person, asignedDiv);}});
   if (assigned.length > maxVisible) {
     const remainingCount = assigned.length - maxVisible;
-    renderRemainingCount(remainingCount, asignedDiv);
-  }
+    renderRemainingCount(remainingCount, asignedDiv);}
 }
 
 function getColorForInitial(initial) {
@@ -333,9 +266,7 @@ function showSubTasksString(task) {
             <img src="./assets/subtask/${checkboxSrc}" alt="" class="cursor" onclick="toggleImage(this, '${task.id}' ,'${subtaskIndex}')" data-index="${subtaskIndex}"  id="checkbox" />${subtask.name}
         </div>`;
     });
-  } else {
-    subtasklist.innerHTML = "<p>No subtasks available.</p>";
-  }
+  } else { subtasklist.innerHTML = "<p>No subtasks available.</p>";}
 }
 
 function toggleImage(imageElement, taskId, subtaskIndex) {

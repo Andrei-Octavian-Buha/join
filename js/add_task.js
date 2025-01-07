@@ -82,28 +82,20 @@ function renderContactsforEdit(contacts, taskId) {
     const checkbox = container.querySelector(`input[type="checkbox"]`);
     if (assignedContactKeys.includes(element.id)) {
       checkbox.checked = true;
-      whenChecked(element)
-    }
-    
-   
-    startEvent(element);
-  });
+      whenChecked(element)}
+    startEvent(element);});
 }
 
 function whenChecked(contactId) {
-
   let ck = document.getElementById(`CheckboxID${contactId.id}`);
   let container = document.getElementById(`ContainerID${contactId.id}`);
   let text = document.getElementById("dinamicText");
   let assigneeElement = document.getElementById("whoIsAssignet");
 
-  // Update text and clear assignees if necessary
   updateTextAndClearAssignees(text, assigneeElement, checked.length);
 
-  // Handle checkbox state
   handleCheckboxState(ck, container, contactId);
 
-  // Render assignees
   renderAssignees(checked, assigneeElement, maxDisplay);
 }
 
@@ -372,15 +364,7 @@ function variableId() {
   if (!Array.isArray(subtasks)) {
     subtasks = [];
   }
-  return {
-    title,
-    description,
-    assignet,
-    date,
-    prio,
-    category,
-    subtask: subtasks,
-  };
+  return {title,description,assignet,date,prio,category,subtask: subtasks,};
 }
 
 function handleFormSubmit(event) {
@@ -404,55 +388,4 @@ function addDataToFireBase() {
   });
 }
 
-function addDataToFireBaseFromBoard() {
-  const taskData = variableId();
-  uploadToFireBase("task", {
-    title: taskData.title,
-    description: taskData.description,
-    assignet: taskData.assignet,
-    date: taskData.date,
-    prio: taskData.prio,
-    category: taskData.category,
-    subtask: taskData.subtask,
-    progress: "todo",
-  });
-}
 
-function showPopupAndRedirect() {
-  const popup = document.getElementById("popup");
-  popup.classList.remove("hidden");
-  popup.classList.add("visible");
-  setTimeout(() => {
-    window.location.href = "board.html";
-  }, 2500);
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  const dropDownHeader = document.getElementById("dropDownHeaderId");
-  const dropDownBody = document.getElementById("dropDownBodyId");
-  if (!dropDownHeader || !dropDownBody) {
-    return;
-  }
-  let isDropDownOpen = false;
-  dropDownHeader.addEventListener("click", (event) => {
-    isDropDownOpen = !isDropDownOpen;
-    event.stopPropagation(); 
-  });
-
-  document.addEventListener("click", (event) => {
-    if (isDropDownOpen && !dropDownBody.contains(event.target)) {
-      isDropDownOpen = false;
-      dropDownBody.classList.add("dNone");
-    }
-  });
-
-  dropDownBody.addEventListener("click", (event) => {
-    const contactContainer = event.target.closest(".dropDownContactContainer");
-    if (contactContainer) {
-      const checkbox = contactContainer.querySelector(".contactCheckbox");
-      if (checkbox) {
-        checkbox.checked = !checkbox.checked; 
-      }
-    }
-  });
-});

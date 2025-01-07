@@ -1,10 +1,8 @@
 async function addContact(event) {
     event.preventDefault(); 
-
     try {
         const contact = gatherContactData();
         if (!validateContactData(contact)) return; 
-
         const response = await sendContactData(contact);
         if (response.ok) {
             handleSuccess();
@@ -12,8 +10,7 @@ async function addContact(event) {
             handleError(response.statusText);
         }
     } catch (error) {
-        handleNetworkError(error);
-    }
+        handleNetworkError(error);}
 }
 
 
@@ -30,18 +27,15 @@ function validateContactData(contact) {
     const { name, email, phone } = contact;
     if (!name || !email || !phone) {
         alert('Bitte alle Felder ausfüllen.');
-        return false;
-    }
+        return false;}
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
         alert('Bitte eine gültige E-Mail-Adresse eingeben.');
-        return false;
-    }
+        return false;}
     const phoneRegex = /^\+?[0-9]{8,15}$/;
     if (!phoneRegex.test(phone)) {
         alert('Bitte eine gültige Telefonnummer eingeben (8-15 Ziffern).');
-        return false;
-    }
+        return false;}
     return true; 
 }
 
@@ -60,23 +54,18 @@ async function sendContactData(contact) {
 
 function handleSuccess() {
     const toast = document.getElementById('toast');
-
     toast.innerHTML = 'Kontakt erfolgreich gespeichert!';
     toast.style.display = 'block';
     setTimeout(() => {
-        toast.classList.add('show');
-    }, 100);
-
+        toast.classList.add('show');}, 100);
     document.getElementById('contactForm').reset();
     closeOverlay('overlay');
     fetchContactsData();
-
     setTimeout(() => {
         toast.classList.remove('show');
         setTimeout(() => {
-            toast.style.display = 'none';
-        }, 500);
-    }, 3000);
+            toast.style.display = 'none';}, 500);
+        }, 3000);
 }
 
 
@@ -145,7 +134,6 @@ function validateField(field, inputSet) {
     const input = inputSet[field];
     const isValid = patterns[field].test(input.value.trim());
     const errorMessage = document.getElementById(`${input.id}-error`);
-
     if (isValid) {
         input.style.border = '1px solid darkgreen';
         errorMessage.textContent = '';
@@ -153,7 +141,6 @@ function validateField(field, inputSet) {
         input.style.border = '1px solid red';
         errorMessage.textContent = messages[field];
     }
-
     return isValid;
 }
 
@@ -199,15 +186,12 @@ function initializeBlurValidation(inputSet) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    
     createErrorMessages(inputs);
     createErrorMessages(editInputs);
-
     
     initializeBlurValidation(inputs);
     initializeBlurValidation(editInputs);
 
-    
     document.getElementById('contactForm').addEventListener('submit', (event) => handleSubmit(event, inputs));
     document.getElementById('editContactForm').addEventListener('submit', (event) => handleSubmit(event, editInputs));
 });

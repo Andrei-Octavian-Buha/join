@@ -13,34 +13,25 @@ function openOverlay(overlayId) {
     const overlaycontent = document.getElementById("overlay-content");
     overlay.style.display = "block"; // Sichtbar machen
     setTimeout(() => overlay.classList.add("show"), 0); // Animation starten
-    
     const handleClickOutside = (event) => {
         if (!overlaycontent.contains(event.target)) {
             closeOverlay(overlayId);
             document.removeEventListener('click', overlayListeners.get(overlayId));
-            overlayListeners.delete(overlayId);
-        }
-    };
+            overlayListeners.delete(overlayId);} };
     if (overlayListeners.has(overlayId)) {
-        document.removeEventListener('click', overlayListeners.get(overlayId));
-    }
+        document.removeEventListener('click', overlayListeners.get(overlayId));}
     overlayListeners.set(overlayId, handleClickOutside);
     setTimeout(() => {
-        document.addEventListener('click', handleClickOutside);
-    }, 0);
+        document.addEventListener('click', handleClickOutside);}, 0);
 }
 
 
 
 function resetForm() {
     document.getElementById('contactForm').reset();
-
-    // Fehler-Container zurücksetzen
     const errorContainer = document.querySelector('.error-container');
     errorContainer.style.display = 'none';
     errorContainer.textContent = '';
-
-    // Rote Rahmen entfernen
     const inputs = document.querySelectorAll('#contactForm input');
     inputs.forEach(input => input.style.border = '');
 }
@@ -50,7 +41,6 @@ function closeOverlay(overlayId) {
     resetForm();
     resetFormErrors(inputs);
     resetFormErrors(editInputs);
-
     overlay.classList.remove("show");
     overlay.classList.add("hide");
     setTimeout(() => {
@@ -70,17 +60,14 @@ function closeContactOverlay() {
 async function fetchContactsData() {
     try {
         const response = await fetch(`${BASE_URL}/contacts.json`);
-        if (!response.ok) {
-            
+        if (!response.ok) { 
         }
         const data = await response.json();
         const contactArray = Array.isArray(data) ? data : Object.keys(data).map(key => {
             return { ...data[key], id: key };
         });
-
         displayContacts(contactArray);
     } catch (error) {
-       
     }
 }
 
@@ -89,7 +76,6 @@ function displayContacts(data) {
     const contactList = document.getElementById('contactList');
     contactList.innerHTML = '';
     const contactArray = Array.isArray(data) ? data : Object.values(data);
-
     const sortedContacts = sortContacts(contactArray);
     renderSortedContacts(contactList, sortedContacts);
 }
@@ -144,8 +130,7 @@ function createContactCard(contact) {
     card.onclick = () => {
         setActiveContact(card); 
         handleCardClick(contact.id); 
-        hideSecondOverlay();
-    };
+        hideSecondOverlay();};
     return card;
 }
 
@@ -163,14 +148,10 @@ function setActiveContact(element) {
 function openContactOverlay(contactId, contactName, contactEmail, contactPhone) {
     const overlayContent = document.createElement('div');
     overlayContent.innerHTML = generateContactOverlayHTML(contactId, contactName, contactEmail, contactPhone);
-    
     const contactOverlay = document.getElementById('contact-overlay');
     contactOverlay.innerHTML = '';  
     contactOverlay.appendChild(overlayContent);
-    
-    // Add the fly-in class to the overlay content
     overlayContent.classList.add('fly-in');
-
     contactOverlay.style.display = 'block'; 
     const rightContent = document.querySelector('.right-content');
     if (window.innerWidth <= 920) {
@@ -178,11 +159,9 @@ function openContactOverlay(contactId, contactName, contactEmail, contactPhone) 
         rightContent.style.display = 'flex';  
     } else {
         rightContent.classList.remove('show');
-        rightContent.style.display = '';  
-    }
+        rightContent.style.display = '';  }
     overlayContent.addEventListener('animationend', () => {
-        overlayContent.classList.remove('fly-in'); // Remove the class after animation
-    });    
+        overlayContent.classList.remove('fly-in');   });    
 }
 
 function createContactCardHTML(contact) {

@@ -278,3 +278,54 @@ function rendEditSubTaskHtml(subtask, index) {
       </div>
     </div>`;
 }
+
+function renderCard(task) {
+  const maxTitleLength = 30;
+  const maxDescriptionLength = 35;
+  const truncatedTitle = truncateText(task.task.title, maxTitleLength);
+  const truncatedDescription = truncateText(
+    task.task.description,
+    maxDescriptionLength
+  );
+  return `
+    <div 
+      class="boardTaskCard" 
+      id="${task.id}" 
+      draggable="true" 
+      ondragstart="dragStart(event, '${task.id}')"
+      ondragend="dragEnd(event)"
+      onclick="listDataCard('${task.id}')"
+    >
+      <div class="cardHeader">
+      <div 
+        id="Category${task.task.category}" 
+        class="boardCategoryCard cat${task.task.category}">
+        ${fromNumberToName(task)}
+      </div>
+      <div class="cardButtonsDiv"><img onclick="event.stopPropagation(); moveCardUp('${
+        task.id
+      }')" class="arrow-up" src="./assets/img/arrow-up.png" alt=""><img onclick="event.stopPropagation(); moveCardDown('${
+    task.id
+  }')"  class="arrow-down" src="./assets/img/arrow-down.png" alt=""></div>
+      </div>
+      <div>
+        <h3 class="boardCardTitle">${truncatedTitle}</h3>
+        <p class="boardCardDescription">${truncatedDescription}</p>
+      </div>
+      <div class="progresBar" id="progBar-${task.id}" >
+            <div class="progress-container">
+                <div class="progress-bar" style="width:${calculatePercentage(
+                  task
+                )}%">
+                </div>
+            </div>
+        <div style="font-size: 12px;">
+          ${howManyAreChecked(task)} /${showSubTasks(task)} Subtasks
+        </div>
+      </div>
+      <div class="assignetPersonContainer">
+        <div id="asigned${task.id}" class="assignetPersonCard"></div>
+        <div>${showPrioIcon(task)}</div>
+      </div>
+    </div>`;
+}
