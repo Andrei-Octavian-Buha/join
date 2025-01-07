@@ -251,7 +251,7 @@
   border: 1px solid red;
 }
 
-#taskInfoCard{
+#taskInfoCard {
   background-color: white;
   overflow-y: scroll;
 }
@@ -268,35 +268,36 @@
   display: none; /* Chrome, Safari, and Edge */
 }
 
-#taskInfoCard{
+#taskInfoCard {
   width: 370px;
   padding-right: 8px;
   padding-left: 8px;
   max-height: 800px;
 }
 
-.closeX{
-  padding-right: 20px;
-  padding-top: 20px;
+.closeX {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.taskHeader{
+.taskHeader {
   padding-top: 30px;
   width: 360px;
 }
-.testA{
+.testA {
   width: 360px;
   padding-left: 5px;
 }
 
-.priority{
+.priority {
   width: 360px;
 }
-.radio-group{
+.radio-group {
   gap: 8px !important;
 }
 
-.btnBoardOk{
+.btnBoardOk {
   padding-right: 20px;
   padding-bottom: 20px;
 }

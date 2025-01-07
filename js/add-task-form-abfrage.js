@@ -20,6 +20,7 @@ function requiredValidation() {
   } else {
     addDataToFireBase();
     showPopupAndRedirect();
+    subtasks = [];
   }
 }
 
@@ -38,16 +39,17 @@ function requiredValidation() {
   resetErrorStates();
   if (!inputValue.title) {
     document.getElementById("reqTitle").classList.remove("dNone");
-    document.getElementById("addTaskTittle").classList.add("input-error"); 
+    document.getElementById("addTaskTittle").classList.add("input-error");
   } else if (!inputValue.date) {
     document.getElementById("reqDate").classList.remove("dNone");
-    document.getElementById("addTaskDate").classList.add("input-error"); 
+    document.getElementById("addTaskDate").classList.add("input-error");
   } else if (inputValue.category == 0) {
     document.getElementById("reqCategory").classList.remove("dNone");
-    document.getElementById("categorySelectId").classList.add("input-error"); 
+    document.getElementById("categorySelectId").classList.add("input-error");
   } else {
     addDataToFireBase();
-    showPopupAndRedirect();}
+    showPopupAndRedirect();
+  }
 }
 
 function requiredValidationAddTaskToBoard() {
@@ -65,9 +67,10 @@ function requiredValidationAddTaskToBoard() {
     addDataToFireBaseFromBoard();
     taskInit();
     let template = document.getElementById("add-task-template");
-    template.classList.add("dNone");}
+    template.classList.add("dNone");
+    subtasks = [];
+  }
 }
-
 
 function addDataToFireBaseFromBoard() {
   const taskData = variableId();
@@ -101,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let isDropDownOpen = false;
   dropDownHeader.addEventListener("click", (event) => {
     isDropDownOpen = !isDropDownOpen;
-    event.stopPropagation(); 
+    event.stopPropagation();
   });
 
   document.addEventListener("click", (event) => {
@@ -116,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (contactContainer) {
       const checkbox = contactContainer.querySelector(".contactCheckbox");
       if (checkbox) {
-        checkbox.checked = !checkbox.checked; 
+        checkbox.checked = !checkbox.checked;
       }
     }
   });
