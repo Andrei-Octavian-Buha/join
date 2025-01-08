@@ -198,30 +198,49 @@ async function toDoForUpdateTaskOnFireBase(task) {
   listDataCard(task);
 }
 
-function getValue(taskid) {
+
+function findTaskById(taskid) {
   const task = tasks.find((t) => t.id === taskid);
-  if (!task) return;
-  const newAssignet =
-    checked && checked.length > 0 ? checked : task.task.assignet;
-  title = document.getElementById("addTaskTittle").value;
-  description = document.getElementById("addTaskDescription").value;
-  assignet = checked;
-  date = document.getElementById("addTaskDate").value;
-  prio = getPriorityValue();
-  subtask = subtasks;
-  progress = task.task.progress;
-  category = task.task.category;
+  if (!task) return null;
+  return task;
+}
+
+
+function getTaskInputValues() {
   return {
-    title,
-    description,
-    assignet: newAssignet,
-    date,
-    prio,
-    subtask,
-    progress,
-    category,
+    title: document.getElementById("addTaskTittle").value,
+    description: document.getElementById("addTaskDescription").value,
+    date: document.getElementById("addTaskDate").value,
+    prio: getPriorityValue(),
+    subtask: subtasks,
   };
 }
+
+
+function getAssignetValue(task) {
+  return checked && checked.length > 0 ? checked : task.task.assignet;
+}
+
+
+function getValue(taskid) {
+  const task = findTaskById(taskid);
+  if (!task) return;
+
+  const inputValues = getTaskInputValues();
+  const assignet = getAssignetValue(task);
+
+  return {
+    title: inputValues.title,
+    description: inputValues.description,
+    assignet: assignet,
+    date: inputValues.date,
+    prio: inputValues.prio,
+    subtask: inputValues.subtask,
+    progress: task.task.progress,
+    category: task.task.category,
+  };
+}
+
 
 const columnsOrder = [
   "todoColumn",
