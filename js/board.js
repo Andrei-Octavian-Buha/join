@@ -294,13 +294,11 @@ function handleFirebaseResponse(response, taskId, newProgress) {
 async function updateTaskProgressInFirebase(
   taskId,
   newProgress,
-  existingTaskData
-) {
+  existingTaskData) {
   try {
     const updatedTaskData = prepareUpdatedTaskData(
       existingTaskData,
-      newProgress
-    );
+      newProgress );
     const response = await sendUpdateRequestToFirebase(taskId, updatedTaskData);
     handleFirebaseResponse(response, taskId, newProgress);
   } catch (error) {

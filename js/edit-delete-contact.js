@@ -71,21 +71,27 @@ function hideSecondOverlay() {
 
 function showConfirmationToast() {
   const toast = document.getElementById("toast");
-  const confirmButton = document.createElement("button");
-  const cancelButton = document.createElement("button");
-  confirmButton.textContent = "Löschen";
-  cancelButton.textContent = "Abbrechen";
-  confirmButton.classList.add("toast-button");
-  cancelButton.classList.add("toast-button");
   toast.innerHTML = "Kontakt wirklich löschen?";
-  toast.appendChild(confirmButton);
-  toast.appendChild(cancelButton);
+  const confirmButton = createToastButton("Löschen", "toast-button");
+  const cancelButton = createToastButton("Abbrechen", "toast-button");
+  toast.append(confirmButton, cancelButton);
+  displayToast(toast);
+  return { toast, confirmButton, cancelButton };
+}
+
+function createToastButton(text, className) {
+  const button = document.createElement("button");
+  button.textContent = text;
+  button.classList.add(className);
+  return button;
+}
+
+function displayToast(toast) {
   toast.style.display = "block";
   setTimeout(() => {
     toast.classList.add("show");
     toast.classList.remove("hide");
   }, 100);
-  return { toast, confirmButton, cancelButton };
 }
 
 function handleUserConfirmation(confirmButton, cancelButton, contactId, toast) {
@@ -102,9 +108,7 @@ function handleUserConfirmation(confirmButton, cancelButton, contactId, toast) {
     cancelButton.addEventListener("click", () => {
       toast.classList.add("hide");
       setTimeout(() => (toast.style.display = "none"), 100);
-      reject("Abgebrochen");
-    });
-  });
+      reject("Abgebrochen");});});
 }
 
 async function deleteContact(contactId) {
@@ -236,8 +240,7 @@ function showToastMessage(message) {
 
 async function handleFormSubmit(event) {
   event.preventDefault();
-  const contactId = document.getElementById("edit-contact-overlay").dataset
-    .contactId;
+  const contactId = document.getElementById("edit-contact-overlay").dataset.contactId;
   const contactData = getFormData();
   if (!validateFormData(contactData)) return;
   try {
