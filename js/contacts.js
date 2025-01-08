@@ -146,23 +146,39 @@ function setActiveContact(element) {
 
 
 function openContactOverlay(contactId, contactName, contactEmail, contactPhone) {
-    const overlayContent = document.createElement('div');
-    overlayContent.innerHTML = generateContactOverlayHTML(contactId, contactName, contactEmail, contactPhone);
+    const overlayContent = createOverlayContent(contactId, contactName, contactEmail, contactPhone);
     const contactOverlay = document.getElementById('contact-overlay');
-    contactOverlay.innerHTML = '';  
+    contactOverlay.innerHTML = '';
     contactOverlay.appendChild(overlayContent);
-    overlayContent.classList.add('fly-in');
-    contactOverlay.style.display = 'block'; 
+    showOverlayWithAnimation(overlayContent, contactOverlay);
+    adjustRightContentDisplay();
+  }
+  
+  function createOverlayContent(contactId, contactName, contactEmail, contactPhone) {
+    const content = document.createElement('div');
+    content.innerHTML = generateContactOverlayHTML(contactId, contactName, contactEmail, contactPhone);
+    content.classList.add('fly-in');
+    return content;
+  }
+  
+  function showOverlayWithAnimation(overlayContent, contactOverlay) {
+    contactOverlay.style.display = 'block';
+    overlayContent.addEventListener('animationend', () => {
+      overlayContent.classList.remove('fly-in');
+    });
+  }
+  
+  function adjustRightContentDisplay() {
     const rightContent = document.querySelector('.right-content');
     if (window.innerWidth <= 920) {
-        rightContent.classList.add('show');
-        rightContent.style.display = 'flex';  
+      rightContent.classList.add('show');
+      rightContent.style.display = 'flex';
     } else {
-        rightContent.classList.remove('show');
-        rightContent.style.display = '';  }
-    overlayContent.addEventListener('animationend', () => {
-        overlayContent.classList.remove('fly-in');   });    
-}
+      rightContent.classList.remove('show');
+      rightContent.style.display = '';
+    }
+  }
+  
 
 function createContactCardHTML(contact) {
     return `
