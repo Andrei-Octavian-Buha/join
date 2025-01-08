@@ -25,26 +25,19 @@ function getSearchInput(selector) {
 
 function filterTasksInCategory(containerId, searchInput) {
   const container = document.getElementById(containerId);
-  if (!container) {
-    console.warn(`Container mit der ID '${containerId}' wurde nicht gefunden.`);
-    return;
-  }
-  const tasks = container.querySelectorAll(".boardTaskCard");
-  tasks.forEach((task) => {
-    const taskTitle = task
-      .querySelector(".boardCardTitle")
-      ?.textContent.toLowerCase();
-    const taskDescription = task
-      .querySelector(".boardCardDescription")
-      ?.textContent.toLowerCase();
-    if (
-      taskTitle?.includes(searchInput) ||
-      taskDescription?.includes(searchInput)
-    ) {
-      task.style.display = "";
-    } else {
-      task.style.display = "none";}});
+  if (!container) return console.warn(`Container mit der ID '${containerId}' wurde nicht gefunden.`);
+
+  container.querySelectorAll(".boardTaskCard").forEach((task) => {
+    toggleTaskVisibility(task, searchInput.toLowerCase());
+  });
 }
+
+function toggleTaskVisibility(task, searchInput) {
+  const taskTitle = task.querySelector(".boardCardTitle")?.textContent.toLowerCase();
+  const taskDescription = task.querySelector(".boardCardDescription")?.textContent.toLowerCase();
+  task.style.display = taskTitle?.includes(searchInput) || taskDescription?.includes(searchInput) ? "" : "none";
+}
+
 
 function filterTasksInAllCategories(categories, searchInput) {
   categories.forEach((category) => {
@@ -155,8 +148,7 @@ async function sendUpdateRequestToFirebase(taskId, updatedTaskData) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(updatedTaskData),
-    });
+      body: JSON.stringify(updatedTaskData),});
     return response;
   } catch (error) {
     console.error("Fehler beim Senden der Anfrage an Firebase:", error);
