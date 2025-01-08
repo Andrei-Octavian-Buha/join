@@ -132,15 +132,18 @@ function renderContactsforEdit(contacts, taskId) {
   dropdown.innerHTML = "";
   const task = tasks.find((t) => t.id === taskId);
   const assignedContactKeys = Array.isArray(task.task.assignet)
-    ? task.task.assignet.map((contact) => contact.key): [];
+    ? task.task.assignet.map((contact) => contact.key)
+    : [];
   contacts.forEach((element) => {
     let container = createContactElementforEdit(element, taskId);
     dropdown.appendChild(container);
     const checkbox = container.querySelector(`input[type="checkbox"]`);
     if (assignedContactKeys.includes(element.id)) {
       checkbox.checked = true;
-      whenChecked(element);}
-    startEvent(element);});
+      whenChecked(element);
+    }
+    startEvent(element);
+  });
 }
 
 /**
@@ -180,7 +183,12 @@ function createContactElementforEdit(element, taskId) {
     .slice(0, 2);
 
   let color = getColorForInitial(initials[0]);
-  container.innerHTML = dropDownContactNameHTML(element,color,initials,taskId);
+  container.innerHTML = dropDownContactNameHTML(
+    element,
+    color,
+    initials,
+    taskId
+  );
   return container;
 }
 
@@ -534,7 +542,15 @@ function variableId() {
   if (!Array.isArray(subtasks)) {
     subtasks = [];
   }
-  return {title,description,assignet,date,prio,category,subtask: subtasks, };
+  return {
+    title,
+    description,
+    assignet,
+    date,
+    prio,
+    category,
+    subtask: subtasks,
+  };
 }
 
 /**
