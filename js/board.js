@@ -1,3 +1,8 @@
+/**
+ * Loads tasks from Firebase and updates the HTML with the task data.
+ * @async
+ * @function
+ */
 async function loadTasksFromFirebase() {
   try {
     const response = await fetch(
@@ -17,11 +22,23 @@ async function loadTasksFromFirebase() {
   }
 }
 
+/**
+ * Gets the value of a search input field.
+ * @param {string} selector - The CSS selector of the input field.
+ * @returns {string} The value of the input field, converted to lowercase.
+ * @function
+ */
 function getSearchInput(selector) {
   const input = document.querySelector(selector);
   return input ? input.value.toLowerCase() : "";
 }
 
+/**
+ * Filters tasks in a specific category based on the search input.
+ * @param {string} containerId - The ID of the task container.
+ * @param {string} searchInput - The search input to filter tasks.
+ * @function
+ */
 function filterTasksInCategory(containerId, searchInput) {
   const container = document.getElementById(containerId);
   if (!container) {
@@ -42,15 +59,27 @@ function filterTasksInCategory(containerId, searchInput) {
     ) {
       task.style.display = "";
     } else {
-      task.style.display = "none";}});
+      task.style.display = "none";
+    }
+  });
 }
 
+/**
+ * Filters tasks in all categories based on the search input.
+ * @param {Array<string>} categories - An array of category IDs.
+ * @param {string} searchInput - The search input to filter tasks.
+ * @function
+ */
 function filterTasksInAllCategories(categories, searchInput) {
   categories.forEach((category) => {
     filterTasksInCategory(category, searchInput);
   });
 }
 
+/**
+ * Filters tasks in all categories using the search input.
+ * @function
+ */
 function filterTasks() {
   const searchInput = getSearchInput(".searchinput");
   const categories = [
@@ -64,20 +93,42 @@ function filterTasks() {
 
 let currentDraggedElement;
 
+/**
+ * Handles the drag start event and sets the opacity of the dragged element.
+ * @param {Event} event - The drag start event.
+ * @param {string} id - The ID of the element being dragged.
+ * @function
+ */
 function dragStart(event, id) {
   currentDraggedElement = document.querySelector(`#${id}`);
   event.dataTransfer.setData("text", id);
   event.target.style.opacity = "0.5";
 }
 
+/**
+ * Handles the drag end event and resets the opacity of the dragged element.
+ * @param {Event} event - The drag end event.
+ * @function
+ */
 function dragEnd(event) {
   event.target.style.opacity = "1";
 }
 
+/**
+ * Prevents the default action for the drop event to allow for dropping.
+ * @param {Event} event - The drop event.
+ * @function
+ */
 function allowDrop(event) {
   event.preventDefault();
 }
 
+/**
+ * Retrieves the target column element based on the category.
+ * @param {string} category - The category ID.
+ * @returns {HTMLElement|null} The target column element or null if not found.
+ * @function
+ */
 function getTargetColumn(category) {
   const targetColumn = document.getElementById(category);
   if (!targetColumn) {
@@ -86,6 +137,12 @@ function getTargetColumn(category) {
   return targetColumn;
 }
 
+/**
+ * Retrieves the new progress state based on the category.
+ * @param {string} category - The category ID.
+ * @returns {string|null} The new progress state or null if the category is invalid.
+ * @function
+ */
 function getNewProgress(category) {
   const progressMapping = {
     todoColumn: "todo",
@@ -95,14 +152,28 @@ function getNewProgress(category) {
   };
   const newProgress = progressMapping[category];
   if (!newProgress) {
-    console.error("Ungültige Kategorie:", category);}
+    console.error("Ungültige Kategorie:", category);
+  }
   return newProgress;
 }
 
+/**
+ * Moves an element to a target column.
+ * @param {HTMLElement} targetColumn - The column element to move the element to.
+ * @param {HTMLElement} element - The element to move.
+ * @function
+ */
 function moveElementToColumn(targetColumn, element) {
   targetColumn.appendChild(element);
 }
 
+/**
+ * Updates the progress of a task in Firebase.
+ * @async
+ * @param {string} taskId - The ID of the task.
+ * @param {string} newProgress - The new progress state of the task.
+ * @function
+ */
 async function updateTaskProgress(taskId, newProgress) {
   const existingTaskData = await getTaskData(taskId);
   if (existingTaskData) {
@@ -112,6 +183,13 @@ async function updateTaskProgress(taskId, newProgress) {
   }
 }
 
+/**
+ * Moves an element to a specified category and updates its progress.
+ * @async
+ * @param {string} category - The category to move the element to.
+ * @param {Event} event - The drop event.
+ * @function
+ */
 async function moveTo(category, event) {
   event.preventDefault();
   if (!currentDraggedElement) return;
@@ -124,6 +202,13 @@ async function moveTo(category, event) {
   await updateTaskProgress(taskId, newProgress);
 }
 
+/**
+ * Retrieves task data from Firebase based on the task ID.
+ * @async
+ * @param {string} taskId - The ID of the task.
+ * @returns {Object|null} The task data or null if not found.
+ * @function
+ */
 async function getTaskData(taskId) {
   try {
     const response = await fetch(
@@ -139,6 +224,13 @@ async function getTaskData(taskId) {
   }
 }
 
+/**
+ * Prepares the updated task data with the new progress state.
+ * @param {Object} existingTaskData - The existing task data.
+ * @param {string} newProgress - The new progress state of the task.
+ * @returns {Object} The updated task data.
+ * @function
+ */
 function prepareUpdatedTaskData(existingTaskData, newProgress) {
   return {
     ...existingTaskData,
@@ -146,6 +238,14 @@ function prepareUpdatedTaskData(existingTaskData, newProgress) {
   };
 }
 
+/**
+ * Sends the updated task data to Firebase.
+ * @async
+ * @param {string} taskId - The ID of the task.
+ * @param {Object} updatedTaskData - The updated task data.
+ * @returns {Response} The response from Firebase.
+ * @function
+ */
 async function sendUpdateRequestToFirebase(taskId, updatedTaskData) {
   const url = `https://join-store-ae38e-default-rtdb.europe-west1.firebasedatabase.app/task/${taskId}.json`;
   try {
@@ -163,6 +263,13 @@ async function sendUpdateRequestToFirebase(taskId, updatedTaskData) {
   }
 }
 
+/**
+ * Handles the Firebase response after updating the task data.
+ * @param {Response} response - The response from Firebase.
+ * @param {string} taskId - The ID of the task.
+ * @param {string} newProgress - The new progress state of the task.
+ * @function
+ */
 function handleFirebaseResponse(response, taskId, newProgress) {
   if (response.ok) {
   } else {
@@ -170,6 +277,14 @@ function handleFirebaseResponse(response, taskId, newProgress) {
   }
 }
 
+/**
+ * Updates the progress of a task in Firebase and manages the empty column message.
+ * @async
+ * @param {string} taskId - The ID of the task.
+ * @param {string} newProgress - The new progress state.
+ * @param {Object} existingTaskData - The existing task data.
+ * @function
+ */
 async function updateTaskProgressInFirebase(
   taskId,
   newProgress,
@@ -185,9 +300,15 @@ async function updateTaskProgressInFirebase(
   } catch (error) {
     console.error("Fehler beim Firebase-Update:", error);
   }
-  updateEmptyColumnMessages(); 
+  updateEmptyColumnMessages();
 }
 
+/**
+ * Highlights a column based on its status when a task is dragged over it.
+ * @param {string} status - The status of the column (e.g., "todo", "inprogress").
+ * @param {Event} event - The drag event.
+ * @function
+ */
 function highlightColumn(status, event) {
   const column = document.getElementById(`${status}Column`);
   if (column) {
@@ -195,6 +316,11 @@ function highlightColumn(status, event) {
   }
 }
 
+/**
+ * Removes the highlight from a column when the task is no longer being dragged over it.
+ * @param {string} status - The status of the column (e.g., "todo", "inprogress").
+ * @function
+ */
 function removeHighlight(status) {
   const column = document.getElementById(`${status}Column`);
   if (column) {
@@ -202,6 +328,10 @@ function removeHighlight(status) {
   }
 }
 
+/**
+ * Loads HTML includes and tasks on window load.
+ * @function
+ */
 window.onload = () => {
   includeHTML();
   loadTasksFromFirebase();

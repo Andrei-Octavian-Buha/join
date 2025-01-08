@@ -1,14 +1,24 @@
+/**
+ * Sets the minimum date for the date input field with id "addTaskDate" to today's date.
+ */
 document.addEventListener("DOMContentLoaded", () => {
   const today = new Date().toISOString().split("T")[0];
   document.getElementById("addTaskDate").setAttribute("min", today);
 });
 
+/**
+ * Toggles the display of the dropdown menu element with id "dropdown".
+ */
 function toggleDropdown() {
   const dropdown = document.getElementById("dropdown");
   dropdown.style.display =
     dropdown.style.display === "block" ? "none" : "block";
 }
 
+/**
+ * Hides the dropdown menu when clicking outside of the element with class "profilPic".
+ * @param {MouseEvent} event - The mouse click event.
+ */
 window.onclick = function (event) {
   if (
     !event.target.matches(".profilPic") &&
@@ -21,11 +31,16 @@ window.onclick = function (event) {
   }
 };
 
+/**
+ * Adds functionality to toggle visibility of a dropdown body and rotate its arrow.
+ * Only executes on pages containing "add_task" in the pathname.
+ */
 document.addEventListener("DOMContentLoaded", () => {
   const dropDownHeader = document.getElementById("dropDownHeaderId");
   const dropDownBody = document.getElementById("dropDownBodyId");
   if (!window.location.pathname.includes("add_task")) {
-    return; }
+    return;
+  }
   const dropDownArrow = dropDownHeader.querySelector("img");
   dropDownHeader.addEventListener("click", () => {
     dropDownBody.classList.toggle("dNone");
@@ -33,9 +48,15 @@ document.addEventListener("DOMContentLoaded", () => {
       dropDownArrow.style.transform = "rotate(180deg)";
     } else {
       dropDownArrow.style.transform = "rotate(0deg)";
-    }});
+    }
+  });
 });
 
+/**
+ * Extracts the initials from a given name.
+ * @param {string} name - The full name of a person.
+ * @returns {string} The initials of the person, or "??" if no name is provided.
+ */
 function getInitials(name) {
   if (!name) return "??";
   const nameParts = name.trim().split(" ");
@@ -43,6 +64,10 @@ function getInitials(name) {
   return initials.slice(0, 2).join("");
 }
 
+/**
+ * Sets the initials of the current user in the profile text element.
+ * Retrieves user data from sessionStorage under the key "currentUser".
+ */
 function setUserInitials() {
   const userData = sessionStorage.getItem("currentUser");
   if (userData) {
@@ -59,6 +84,10 @@ function setUserInitials() {
   }
 }
 
+/**
+ * Initializes the user's profile text by repeatedly checking for the header element.
+ * Stops the interval once the element is found and updates the user's initials.
+ */
 document.addEventListener("DOMContentLoaded", () => {
   const checkHeaderInterval = setInterval(() => {
     const profileTextElement = document.getElementById("profileText");

@@ -1,16 +1,36 @@
+/**
+ * Base URL for the Firebase database.
+ * @constant {string}
+ */
 const BASE_URL =
   "https://join-store-ae38e-default-rtdb.europe-west1.firebasedatabase.app/";
 
+/**
+ * Initializes the application by loading contacts.
+ * @async
+ * @function
+ * @returns {Promise<void>}
+ */
 async function init() {
   await loadContacts();
-  // updateEmptyColumnMessages();
 }
+
+/**
+ * Triggers actions related to subtasks, including hiding buttons and adding new subtasks.
+ * @function
+ */
 function subtasktrigger() {
   hideSubTaskAddBtn();
   deleteInputSubTask();
   addSubTask();
 }
 
+/**
+ * Sorts an array of contact objects alphabetically by name.
+ * @function
+ * @param {Array<Object>} contacts - The array of contact objects to be sorted.
+ * @returns {Array<Object>} Sorted array of contact objects.
+ */
 function sortContacts(contacts) {
   return contacts.sort((a, b) => {
     let nameA = a.cont.name.toUpperCase();
@@ -25,6 +45,12 @@ function sortContacts(contacts) {
   });
 }
 
+/**
+ * Creates a contact element for displaying in the dropdown.
+ * @function
+ * @param {Object} element - The contact object containing contact details.
+ * @returns {HTMLElement} The DOM element representing the contact.
+ */
 function createContactElement(element) {
   let container = document.createElement("label");
   container.id = `ContainerID${element.id}`;
@@ -39,6 +65,11 @@ function createContactElement(element) {
   return container;
 }
 
+/**
+ * Renders the list of contacts in a dropdown element.
+ * @function
+ * @param {Array<Object>} contacts - The array of contact objects to be rendered.
+ */
 function renderContacts(contacts) {
   let dropdown = document.getElementById("dropDownBodyId");
   dropdown.innerHTML = "";
@@ -49,6 +80,12 @@ function renderContacts(contacts) {
   });
 }
 
+/**
+ * Loads contact data from the database.
+ * @async
+ * @function
+ * @returns {Promise<Array<Object>>} An array of contact objects.
+ */
 async function loadContactsData() {
   let ContactResponse = await getAllContacts("contacts");
   let UserKeyArray = Object.keys(ContactResponse);
@@ -58,6 +95,12 @@ async function loadContactsData() {
   }));
 }
 
+/**
+ * Loads and renders sorted contact data.
+ * @async
+ * @function
+ * @returns {Promise<void>}
+ */
 async function loadContacts() {
   let contactsData = await loadContactsData();
   let sortedContacts = sortContacts(contactsData);
@@ -65,12 +108,25 @@ async function loadContacts() {
   subtasktrigger();
 }
 
+/**
+ * Loads and renders sorted contact data for a specific task being edited.
+ * @async
+ * @function
+ * @param {string} taskId - The ID of the task being edited.
+ * @returns {Promise<void>}
+ */
 async function loadContactsForEdit(taskId) {
   let contactsData = await loadContactsData();
   let sortedContacts = sortContacts(contactsData);
   renderContactsforEdit(sortedContacts, taskId);
 }
 
+/**
+ * Renders the list of contacts for a specific task being edited.
+ * @function
+ * @param {Array<Object>} contacts - The array of contact objects to be rendered.
+ * @param {string} taskId - The ID of the task being edited.
+ */
 function renderContactsforEdit(contacts, taskId) {
   let dropdown = document.getElementById("dropDownBodyId");
   dropdown.innerHTML = "";
@@ -90,6 +146,11 @@ function renderContactsforEdit(contacts, taskId) {
   });
 }
 
+/**
+ * Handles updates when a contact is checked.
+ * @function
+ * @param {Object} contactId - The contact object of the checked contact.
+ */
 function whenChecked(contactId) {
   let ck = document.getElementById(`CheckboxID${contactId.id}`);
   let container = document.getElementById(`ContainerID${contactId.id}`);
@@ -103,6 +164,13 @@ function whenChecked(contactId) {
   renderAssignees(checked, assigneeElement, maxDisplay);
 }
 
+/**
+ * Creates a contact element for editing in the dropdown.
+ * @function
+ * @param {Object} element - The contact object containing contact details.
+ * @param {string} taskId - The ID of the task being edited.
+ * @returns {HTMLElement} The DOM element representing the contact for editing.
+ */
 function createContactElementforEdit(element, taskId) {
   let container = document.createElement("label");
   container.id = `ContainerID${element.id}`;
@@ -124,6 +192,12 @@ function createContactElementforEdit(element, taskId) {
   return container;
 }
 
+/**
+ * Returns a color code for the given initial.
+ * @function
+ * @param {string} initial - The initial character for which to get the color.
+ * @returns {string} The color code corresponding to the initial.
+ */
 function getColorForInitial(initial) {
   const colors = {
     A: "#FF5733",
@@ -156,6 +230,11 @@ function getColorForInitial(initial) {
   return colors[initial] || "#333333";
 }
 
+/**
+ * Adds an event listener to a checkbox associated with a specific contact.
+ * @param {Object} contactId - An object representing the contact.
+ * @param {string} contactId.id - The ID of the contact.
+ */
 function startEvent(contactId) {
   const ck = document.getElementById(`CheckboxID${contactId.id}`);
   if (ck) {
@@ -167,6 +246,11 @@ function startEvent(contactId) {
   }
 }
 
+/**
+ * Fetches all contacts from the specified API endpoint.
+ * @param {string} [path=""] - The path to append to the base URL.
+ * @returns {Promise<Object>} A promise that resolves to the JSON response.
+ */
 async function getAllContacts(path = "") {
   let response = await fetch(`${BASE_URL}` + path + ".json");
   return (responseJs = await response.json());
@@ -174,6 +258,10 @@ async function getAllContacts(path = "") {
 
 let checked = [];
 
+/**
+ * Resets the form and updates related UI components.
+ * @param {Event} event - The event triggered by form submission.
+ */
 async function resetForm(event) {
   let assignet = document.getElementById("whoIsAssignet");
   document.getElementById("dropDownBodyId").classList.add("dNone");
@@ -193,6 +281,12 @@ async function resetForm(event) {
 
 const maxDisplay = 3;
 
+/**
+ * Updates the text and clears the assignee list if no contacts are selected.
+ * @param {HTMLElement} textElement - The element to update the text content.
+ * @param {HTMLElement} assigneeElement - The element to clear the assignee list.
+ * @param {number} checkedLength - The number of selected contacts.
+ */
 function updateTextAndClearAssignees(
   textElement,
   assigneeElement,
@@ -206,6 +300,12 @@ function updateTextAndClearAssignees(
   }
 }
 
+/**
+ * Handles the checkbox state and updates the UI and checked contacts list.
+ * @param {HTMLInputElement} ck - The checkbox element.
+ * @param {HTMLElement} container - The container element associated with the contact.
+ * @param {Object} contactId - An object representing the contact.
+ */
 function handleCheckboxState(ck, container, contactId) {
   if (ck.checked) {
     if (!checked.includes(contactId.id)) {
@@ -221,6 +321,12 @@ function handleCheckboxState(ck, container, contactId) {
   }
 }
 
+/**
+ * Generates initials from checked contacts and appends them to the assignee element.
+ * @param {Array} checked - The list of checked contacts.
+ * @param {HTMLElement} assigneeElement - The element to append the initials.
+ * @param {number} maxCount - The maximum number of initials to display.
+ */
 function generateInitialsHTML(checked, assigneeElement, maxCount) {
   checked.slice(0, maxCount).forEach((element) => {
     let initials = element.name
@@ -233,6 +339,12 @@ function generateInitialsHTML(checked, assigneeElement, maxCount) {
   });
 }
 
+/**
+ * Generates a visual element for the remaining count of contacts not displayed.
+ * @param {Array} checked - The list of checked contacts.
+ * @param {HTMLElement} assigneeElement - The element to append the remaining count.
+ * @param {number} maxCount - The maximum number of initials to display.
+ */
 function generateRemainingCountHTML(checked, assigneeElement, maxCount) {
   const remainingCount = checked.length - maxCount;
   if (remainingCount > 0) {
@@ -244,6 +356,12 @@ function generateRemainingCountHTML(checked, assigneeElement, maxCount) {
   }
 }
 
+/**
+ * Renders assignee initials and additional count if applicable.
+ * @param {Array} checked - The list of checked contacts.
+ * @param {HTMLElement} assigneeElement - The element to render assignees.
+ * @param {number} maxCount - The maximum number of initials to display.
+ */
 function renderAssignees(checked, assigneeElement, maxCount) {
   assigneeElement.innerHTML = ""; // Clear existing content
   if (checked.length > maxCount) {
@@ -256,6 +374,9 @@ function renderAssignees(checked, assigneeElement, maxCount) {
 
 let subtasks = [];
 
+/**
+ * Hides the "Add SubTask" button and displays the next step button.
+ */
 function hideSubTaskAddBtn() {
   let btn1 = document.getElementById("AddSubTaskStep1");
   let btn2 = document.getElementById("AddSubTaskStep2");
@@ -265,6 +386,9 @@ function hideSubTaskAddBtn() {
   });
 }
 
+/**
+ * Resets the subtask input and toggles the visibility of buttons.
+ */
 function hideEditAddBtn() {
   document.getElementById("AddSubTaskStep1").classList.remove("dNone");
   document.getElementById("AddSubTaskStep2").classList.add("dNone");
@@ -272,6 +396,9 @@ function hideEditAddBtn() {
   inputText.value = "";
 }
 
+/**
+ * Clears the subtask input value and resets the edit button state.
+ */
 function deleteInputSubTask() {
   let btn = document.getElementById("AddSubTaskStep2Delete");
   let inputText = document.getElementById("inputSubTask");
@@ -281,6 +408,9 @@ function deleteInputSubTask() {
   });
 }
 
+/**
+ * Adds a new subtask to the list and re-renders the subtasks.
+ */
 function addSubTask() {
   let btn = document.getElementById("AddSubTaskStep2Add");
   let inputText = document.getElementById("inputSubTask");
@@ -293,11 +423,19 @@ function addSubTask() {
   });
 }
 
+/**
+ * Deletes a subtask by index and re-renders the subtasks.
+ * @param {number} index - The index of the subtask to delete.
+ */
 function deleteSubTask(index) {
   subtasks.splice(index, 1);
   rendSubTask();
 }
 
+/**
+ * Edits an existing subtask by index and enables editing mode.
+ * @param {number} index - The index of the subtask to edit.
+ */
 function editAddedSubTask(index) {
   let inputToEdit = document.getElementById(`toEditInputSubTask-${index}`);
   inputToEdit.classList.remove("inputsubTask");
@@ -309,12 +447,20 @@ function editAddedSubTask(index) {
   subtasks[index].name = inputToEdit.value;
 }
 
+/**
+ * Changes the edit button to a save button for a specific subtask.
+ * @param {number} index - The index of the subtask to update.
+ */
 function changeEditWithCheck(index) {
   document.getElementById(`AddSubTaskStep2-${index}`).classList.remove("dNone");
   document.getElementById(`subTaskEditBtn-${index}`).classList.add("dNone");
   document.getElementById(`idSpanSubTaskEdit${index}`).classList.add("dNone");
 }
 
+/**
+ * Saves edits to a subtask or deletes it if the input is empty.
+ * @param {number} index - The index of the subtask to update.
+ */
 function addEditcheck(index) {
   let btn = document.getElementById(`AddSubTaskStep2-${index}`);
   let inputText = document.getElementById(`toEditInputSubTask-${index}`);
@@ -328,11 +474,18 @@ function addEditcheck(index) {
   });
 }
 
+/**
+ * Applies a background style to a specific subtask during editing.
+ * @param {number} index - The index of the subtask to style.
+ */
 function backgroundEdit(index) {
   let conteinerId = document.getElementById(`subtaskContainerId${index}`);
   conteinerId.classList.add("backgroundSubTaskEdit");
 }
 
+/**
+ * Renders the list of subtasks in the UI.
+ */
 function rendSubTask() {
   let toRender = document.getElementById("renderSubTask");
   toRender.innerHTML = "";
@@ -341,6 +494,12 @@ function rendSubTask() {
   });
 }
 
+/**
+ * Uploads data to Firebase.
+ * @param {string} [path=""] - The path to append to the base URL.
+ * @param {Object} [data={}] - The data to upload.
+ * @returns {Promise<Object>} A promise that resolves to the JSON response.
+ */
 async function uploadToFireBase(path = "", data = {}) {
   let response = await fetch(`${BASE_URL}` + path + ".json", {
     method: "POST",
@@ -352,6 +511,10 @@ async function uploadToFireBase(path = "", data = {}) {
   return (responseJs = await response.json());
 }
 
+/**
+ * Retrieves the value of the selected priority radio button.
+ * @returns {string} The value of the selected priority.
+ */
 function getPriorityValue() {
   const priorityRadios = document.querySelectorAll(
     ".radio-group input[type='radio']"
@@ -365,6 +528,10 @@ function getPriorityValue() {
   return selectedPriority;
 }
 
+/**
+ * Retrieves the task details from the form inputs.
+ * @returns {Object} The task details.
+ */
 function variableId() {
   title = document.getElementById("addTaskTittle").value;
   description = document.getElementById("addTaskDescription").value;
@@ -386,13 +553,18 @@ function variableId() {
   };
 }
 
+/**
+ * Handles the form submission event.
+ * @param {Event} event - The form submission event.
+ */
 function handleFormSubmit(event) {
   event.preventDefault();
-  // addDataToFireBase();
   requiredValidation();
-  // showPopupAndRedirect();
 }
 
+/**
+ * Adds task data to Firebase.
+ */
 function addDataToFireBase() {
   const taskData = variableId();
   uploadToFireBase("task", {

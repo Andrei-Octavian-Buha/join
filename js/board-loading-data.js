@@ -1,7 +1,16 @@
+/**
+ * Initializes the task by loading contacts.
+ * @returns {Promise<void>} A promise that resolves when the contacts are loaded.
+ */
 async function taskInit() {
   await loadContactss();
 }
 
+/**
+ * Fetches all contacts from a given path.
+ * @param {string} [path=""] The path to fetch contacts from.
+ * @returns {Promise<Object>} The response data as a JSON object.
+ */
 async function getAllContacts(path = "") {
   let response = await fetch(`${BASE_URL}` + path + ".json");
   return (responseJs = await response.json());
@@ -9,6 +18,10 @@ async function getAllContacts(path = "") {
 
 let tasks = [];
 
+/**
+ * Loads task data by fetching from the server and mapping the response.
+ * @returns {Promise<Array>} A list of tasks.
+ */
 async function loadTaskData() {
   let ContactResponse = await getAllContacts("task");
   let UserKeyArray = Object.keys(ContactResponse);
@@ -19,6 +32,10 @@ async function loadTaskData() {
   return tasks;
 }
 
+/**
+ * Loads the task data, resets columns, distributes tasks, and updates the UI.
+ * @returns {Promise<void>} A promise that resolves when the tasks are loaded and the UI is updated.
+ */
 async function loadContactss() {
   let tasksData = await loadTaskData();
   resetColumns();
@@ -26,24 +43,31 @@ async function loadContactss() {
   updateTasksUI(tasksData);
 }
 
+/**
+ * Resets the content of all task columns.
+ */
 function resetColumns() {
   let todoId = document.getElementById("todoColumn");
   let awaitfeedbackId = document.getElementById("awaitfeedbackColumn");
   let inprogressId = document.getElementById("inprogressColumn");
   let doneId = document.getElementById("doneColumn");
-  
+
   todoId.innerHTML = "";
   awaitfeedbackId.innerHTML = "";
   inprogressId.innerHTML = "";
   doneId.innerHTML = "";
 }
 
+/**
+ * Distributes tasks into the appropriate columns based on their progress.
+ * @param {Array} tasksData The list of tasks to distribute.
+ */
 function distributeTasks(tasksData) {
   let todoId = document.getElementById("todoColumn");
   let awaitfeedbackId = document.getElementById("awaitfeedbackColumn");
   let inprogressId = document.getElementById("inprogressColumn");
   let doneId = document.getElementById("doneColumn");
-  
+
   tasksData.forEach((task) => {
     if (task.task.progress === "todo") {
       todoId.innerHTML += renderCard(task);
@@ -58,6 +82,10 @@ function distributeTasks(tasksData) {
   });
 }
 
+/**
+ * Updates the UI for all tasks and their associated columns.
+ * @param {Array} tasksData The list of tasks to update in the UI.
+ */
 function updateTasksUI(tasksData) {
   updateEmptyColumnMessages(tasksData);
   tasksData.forEach((task) => {
@@ -65,13 +93,17 @@ function updateTasksUI(tasksData) {
   });
 }
 
-
+/**
+ * Updates the messages in empty columns to notify the user.
+ * @param {Array} tasksData The list of tasks to check for empty columns.
+ */
 function updateEmptyColumnMessages(tasksData) {
   const columns = [
     { columnId: "todoColumn", messageClass: "no-tasks-message" },
     { columnId: "awaitfeedbackColumn", messageClass: "no-tasks-message" },
     { columnId: "inprogressColumn", messageClass: "no-tasks-message" },
-    { columnId: "doneColumn", messageClass: "no-tasks-message" },];
+    { columnId: "doneColumn", messageClass: "no-tasks-message" },
+  ];
   columns.forEach(({ columnId, messageClass }) => {
     const column = document.getElementById(columnId);
     const messageDiv = column
@@ -80,9 +112,16 @@ function updateEmptyColumnMessages(tasksData) {
     if (!column.innerHTML.trim()) {
       messageDiv.style.display = "flex";
     } else {
-      messageDiv.style.display = "none";}});
+      messageDiv.style.display = "none";
+    }
+  });
 }
 
+/**
+ * Converts the category number of a task to its corresponding category name.
+ * @param {Object} task The task object.
+ * @returns {string} The category name.
+ */
 function fromNumberToName(task) {
   let categoryName;
   if (task.task.category == 1) {
@@ -93,6 +132,12 @@ function fromNumberToName(task) {
   return categoryName;
 }
 
+/**
+ * Truncates a string to a specified maximum length and adds ellipsis if necessary.
+ * @param {string} text The text to truncate.
+ * @param {number} maxLength The maximum length of the text.
+ * @returns {string} The truncated text.
+ */
 function truncateText(text, maxLength) {
   if (!text || typeof text !== "string") {
     return "";
@@ -103,6 +148,10 @@ function truncateText(text, maxLength) {
   return text;
 }
 
+/**
+ * Handles the null or empty subtask scenario by updating the progress bar display.
+ * @param {Object} task The task object.
+ */
 function nullSubtask(task) {
   let progsBar = document.getElementById(`progBar-${task.id}`);
   if (!task.task.subtask || task.task.subtask.length === 0) {
@@ -111,6 +160,11 @@ function nullSubtask(task) {
   }
 }
 
+/**
+ * Calculates the percentage of completed subtasks.
+ * @param {Object} task The task object.
+ * @returns {number} The completion percentage.
+ */
 function calculatePercentage(task) {
   let x = howManyAreChecked(task);
   let y = showSubTasks(task);
@@ -118,6 +172,11 @@ function calculatePercentage(task) {
   return z;
 }
 
+/**
+ * Counts how many subtasks are marked as checked.
+ * @param {Object} task The task object.
+ * @returns {number} The number of checked subtasks.
+ */
 function howManyAreChecked(task) {
   if (task && task.task.subtask && Array.isArray(task.task.subtask)) {
     const checkedCount = task.task.subtask.filter(
@@ -129,6 +188,11 @@ function howManyAreChecked(task) {
   }
 }
 
+/**
+ * Retrieves the number of subtasks associated with a task.
+ * @param {Object} task The task object.
+ * @returns {number|string} The number of subtasks or "0" if none.
+ */
 function showSubTasks(task) {
   if (task.task.subtask && task.task.subtask.length > 0) {
     return task.task.subtask.length;
@@ -137,6 +201,11 @@ function showSubTasks(task) {
   }
 }
 
+/**
+ * Creates initials from a given name by taking the first two letters.
+ * @param {string} name The name to create initials from.
+ * @returns {string} The initials of the name.
+ */
 function createInitials(name) {
   return name
     .split(" ")
@@ -145,6 +214,11 @@ function createInitials(name) {
     .slice(0, 2);
 }
 
+/**
+ * Renders the assigned person circle with their initials and background color.
+ * @param {Object} person The person object containing their name and key.
+ * @param {HTMLElement} asignedDiv The div to append the rendered circle to.
+ */
 function renderAssignedPerson(person, asignedDiv) {
   const initials = createInitials(person.name);
   const color = getColorForInitial(initials[0]);
@@ -156,6 +230,11 @@ function renderAssignedPerson(person, asignedDiv) {
   `;
 }
 
+/**
+ * Renders a remaining count of assigned people.
+ * @param {number} remainingCount The number of remaining assigned people.
+ * @param {HTMLElement} asignedDiv The div to append the rendered remaining count to.
+ */
 function renderRemainingCount(remainingCount, asignedDiv) {
   asignedDiv.innerHTML += `
     <div class="assignetPersonKreis" style="background: linear-gradient(135deg,rgba(123, 97, 119, 0.81) 0%,rgb(36, 178, 29) 100%);">
@@ -164,21 +243,30 @@ function renderRemainingCount(remainingCount, asignedDiv) {
   `;
 }
 
+/**
+ * Displays the assigned persons for a given task.
+ * @param {Object} task The task object.
+ */
 function showAssignet(task) {
   let asignedDiv = document.getElementById(`asigned${task.id}`);
   if (!asignedDiv) {
-    return; }
+    return;
+  }
   asignedDiv.innerHTML = "";
   let assigned = task.task.assignet;
   if (!assigned || assigned.length === 0) {
-    return;}
+    return;
+  }
   const maxVisible = 3;
   assigned.forEach((person, index) => {
     if (index < maxVisible) {
-      renderAssignedPerson(person, asignedDiv);}});
+      renderAssignedPerson(person, asignedDiv);
+    }
+  });
   if (assigned.length > maxVisible) {
     const remainingCount = assigned.length - maxVisible;
-    renderRemainingCount(remainingCount, asignedDiv);}
+    renderRemainingCount(remainingCount, asignedDiv);
+  }
 }
 
 function getColorForInitial(initial) {
@@ -213,6 +301,11 @@ function getColorForInitial(initial) {
   return colors[initial] || "#333333";
 }
 
+/**
+ * Displays the appropriate priority icon based on the task's priority.
+ * @param {Object} task The task object.
+ * @returns {string} The HTML string for the priority icon.
+ */
 function showPrioIcon(task) {
   let prio = task.task.prio;
   let iconPath;
@@ -226,6 +319,11 @@ function showPrioIcon(task) {
   return `<img src="${iconPath}" alt="${prio} priority icon" style="width:20px; height:20px;">`;
 }
 
+/**
+ * Deletes a task from the database.
+ * @param {string} contactId The ID of the task to delete.
+ * @returns {Promise<void>} A promise that resolves when the task is deleted.
+ */
 async function deleteTask(contactId) {
   try {
     const response = await fetch(`${BASE_URL}/task/${contactId}.json`, {
@@ -241,6 +339,10 @@ async function deleteTask(contactId) {
 
 let currentTask = null;
 
+/**
+ * Edits the data card of a task by displaying its information and allowing modifications.
+ * @param {string} taskId The ID of the task to edit.
+ */
 function editListDataCard(taskId) {
   const task = tasks.find((t) => t.id === taskId);
   currentTask = task;
@@ -255,6 +357,10 @@ function editListDataCard(taskId) {
   onlyToDay();
 }
 
+/**
+ * Displays the information card of a task when clicked.
+ * @param {string} taskId The ID of the task to view.
+ */
 function listDataCard(taskId) {
   const task = tasks.find((t) => t.id === taskId);
   if (!task) return;
@@ -266,11 +372,20 @@ function listDataCard(taskId) {
   showSubTasksString(task);
 }
 
+/**
+ * Capitalizes the first letter of a string.
+ * @param {string} text The text to capitalize.
+ * @returns {string} The capitalized text.
+ */
 function capitalizeFirstLetter(text) {
   if (!text) return "";
   return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
 }
 
+/**
+ * Displays the subtasks of a task in a list.
+ * @param {Object} task The task object.
+ */
 function showSubTasksString(task) {
   let subtasks = task.task.subtask;
   let subtasklist = document.getElementById("subtaskList");
@@ -285,9 +400,17 @@ function showSubTasksString(task) {
             <img src="./assets/subtask/${checkboxSrc}" alt="" class="cursor" onclick="toggleImage(this, '${task.id}' ,'${subtaskIndex}')" data-index="${subtaskIndex}"  id="checkbox" />${subtask.name}
         </div>`;
     });
-  } else { subtasklist.innerHTML = "<p>No subtasks available.</p>";}
+  } else {
+    subtasklist.innerHTML = "<p>No subtasks available.</p>";
+  }
 }
 
+/**
+ * Toggles the checkbox image for a subtask and updates its status.
+ * @param {HTMLElement} imageElement The image element representing the checkbox.
+ * @param {string} taskId The ID of the task.
+ * @param {number} subtaskIndex The index of the subtask.
+ */
 function toggleImage(imageElement, taskId, subtaskIndex) {
   const checkedSrc = "checkbox-checked.svg";
   const uncheckedSrc = "checkbox.svg";
@@ -303,6 +426,13 @@ function toggleImage(imageElement, taskId, subtaskIndex) {
   updateCheckedSubTask(taskId, subtaskIndex, isChecked);
 }
 
+/**
+ * Updates the status of a subtask and saves it to the database.
+ * @param {string} taskId The ID of the task.
+ * @param {number} subtaskIndex The index of the subtask.
+ * @param {boolean} isChecked The checked status of the subtask.
+ * @returns {Promise<Object>} The updated task data.
+ */
 async function updateCheckedSubTask(taskId, subtaskIndex, isChecked) {
   const task = tasks.find((t) => t.id === taskId);
   if (!task) return;
@@ -325,6 +455,10 @@ async function updateCheckedSubTask(taskId, subtaskIndex, isChecked) {
   }
 }
 
+/**
+ * Displays the assigned people for a task in the info card.
+ * @param {Object} task The task object.
+ */
 function showInfoAssignet(task) {
   let asignedDiv = document.getElementById(`asignedd${task.id}`);
   if (!asignedDiv) {

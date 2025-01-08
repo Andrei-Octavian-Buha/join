@@ -1,3 +1,7 @@
+/**
+ * Retrieves values from the input fields for title, date, and category.
+ * @returns {Object} An object containing the title, date, and category values.
+ */
 function getValueFromInputs() {
   title = document.getElementById("addTaskTittle").value;
   date = document.getElementById("addTaskDate").value;
@@ -9,6 +13,10 @@ function getValueFromInputs() {
   };
 }
 
+/**
+ * Validates the required input fields (title, date, and category).
+ * Displays error messages if any of the fields are empty, and adds a task if all fields are valid.
+ */
 function requiredValidation() {
   let inputValue = getValueFromInputs();
   if (!inputValue.title) {
@@ -24,6 +32,9 @@ function requiredValidation() {
   }
 }
 
+/**
+ * Resets error states by hiding error messages and removing error styles from the input fields.
+ */
 function resetErrorStates() {
   document.getElementById("reqTitle").classList.add("dNone");
   document.getElementById("reqDate").classList.add("dNone");
@@ -34,6 +45,10 @@ function resetErrorStates() {
   document.getElementById("categorySelectId").classList.remove("input-error");
 }
 
+/**
+ * Validates required fields for task creation, and handles the process of adding data to Firebase
+ * and showing a popup with redirection to another page if all fields are valid.
+ */
 function requiredValidation() {
   let inputValue = getValueFromInputs();
   resetErrorStates();
@@ -52,6 +67,10 @@ function requiredValidation() {
   }
 }
 
+/**
+ * Validates required fields for task creation, and handles the process of adding data to Firebase
+ * and showing a popup with redirection to another page if all fields are valid.
+ */
 function requiredValidationAddTaskToBoard() {
   let inputValue = getValueFromInputs();
   if (!inputValue.title) {
@@ -72,6 +91,10 @@ function requiredValidationAddTaskToBoard() {
   }
 }
 
+/**
+ * Uploads task data from the board to Firebase.
+ * @param {Object} taskData The task data to be uploaded to Firebase.
+ */
 function addDataToFireBaseFromBoard() {
   const taskData = variableId();
   uploadToFireBase("task", {
@@ -86,6 +109,9 @@ function addDataToFireBaseFromBoard() {
   });
 }
 
+/**
+ * Displays a popup and redirects the user to another page after a delay.
+ */
 function showPopupAndRedirect() {
   const popup = document.getElementById("popup");
   popup.classList.remove("hidden");
@@ -95,6 +121,10 @@ function showPopupAndRedirect() {
   }, 2500);
 }
 
+/**
+ * Initializes dropdown behavior for task board.
+ * Handles the opening and closing of the dropdown menu and the checkbox toggling within it.
+ */
 document.addEventListener("DOMContentLoaded", () => {
   const dropDownHeader = document.getElementById("dropDownHeaderId");
   const dropDownBody = document.getElementById("dropDownBodyId");
