@@ -5,21 +5,27 @@
  */
 async function loadTasksFromFirebase() {
   try {
-    const response = await fetch(
+    const data = await fetchDataFromFirebase(
       "https://join-store-ae38e-default-rtdb.europe-west1.firebasedatabase.app/task.json"
     );
-    if (!response.ok) {
-      throw new Error("Netzwerkantwort war nicht ok");
-    }
-    const data = await response.json();
-    if (data && Object.keys(data).length > 0) {
-      updateHTML(data);
-    } else {
-      console.warn("Keine Aufgaben gefunden.");
-    }
+    data && Object.keys(data).length > 0
+      ? updateHTML(data)
+      : console.warn("Keine Aufgaben gefunden.");
   } catch (error) {
     console.error("Fehler beim Laden der Aufgaben:", error);
   }
+}
+
+async function fetchDataFromFirebase(url) {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error("Netzwerkantwort war nicht ok");
+  return response.json();
+}
+
+async function fetchDataFromFirebase(url) {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error("Netzwerkantwort war nicht ok");
+  return response.json();
 }
 
 /**
@@ -41,27 +47,27 @@ function getSearchInput(selector) {
  */
 function filterTasksInCategory(containerId, searchInput) {
   const container = document.getElementById(containerId);
-  if (!container) {
-    console.warn(`Container mit der ID '${containerId}' wurde nicht gefunden.`);
-    return;
-  }
-  const tasks = container.querySelectorAll(".boardTaskCard");
-  tasks.forEach((task) => {
-    const taskTitle = task
-      .querySelector(".boardCardTitle")
-      ?.textContent.toLowerCase();
-    const taskDescription = task
-      .querySelector(".boardCardDescription")
-      ?.textContent.toLowerCase();
-    if (
-      taskTitle?.includes(searchInput) ||
-      taskDescription?.includes(searchInput)
-    ) {
-      task.style.display = "";
-    } else {
-      task.style.display = "none";
-    }
+  if (!container)
+    return console.warn(
+      `Container mit der ID '${containerId}' wurde nicht gefunden.`
+    );
+
+  container.querySelectorAll(".boardTaskCard").forEach((task) => {
+    toggleTaskVisibility(task, searchInput.toLowerCase());
   });
+}
+
+function toggleTaskVisibility(task, searchInput) {
+  const taskTitle = task
+    .querySelector(".boardCardTitle")
+    ?.textContent.toLowerCase();
+  const taskDescription = task
+    .querySelector(".boardCardDescription")
+    ?.textContent.toLowerCase();
+  task.style.display =
+    taskTitle?.includes(searchInput) || taskDescription?.includes(searchInput)
+      ? ""
+      : "none";
 }
 
 /**
