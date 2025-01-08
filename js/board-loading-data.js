@@ -21,14 +21,29 @@ async function loadTaskData() {
 
 async function loadContactss() {
   let tasksData = await loadTaskData();
+  resetColumns();
+  distributeTasks(tasksData);
+  updateTasksUI(tasksData);
+}
+
+function resetColumns() {
   let todoId = document.getElementById("todoColumn");
   let awaitfeedbackId = document.getElementById("awaitfeedbackColumn");
   let inprogressId = document.getElementById("inprogressColumn");
   let doneId = document.getElementById("doneColumn");
+  
   todoId.innerHTML = "";
   awaitfeedbackId.innerHTML = "";
   inprogressId.innerHTML = "";
   doneId.innerHTML = "";
+}
+
+function distributeTasks(tasksData) {
+  let todoId = document.getElementById("todoColumn");
+  let awaitfeedbackId = document.getElementById("awaitfeedbackColumn");
+  let inprogressId = document.getElementById("inprogressColumn");
+  let doneId = document.getElementById("doneColumn");
+  
   tasksData.forEach((task) => {
     if (task.task.progress === "todo") {
       todoId.innerHTML += renderCard(task);
@@ -41,11 +56,15 @@ async function loadContactss() {
     }
     nullSubtask(task);
   });
+}
+
+function updateTasksUI(tasksData) {
   updateEmptyColumnMessages(tasksData);
   tasksData.forEach((task) => {
     showAssignet(task);
   });
 }
+
 
 function updateEmptyColumnMessages(tasksData) {
   const columns = [
