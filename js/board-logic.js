@@ -151,32 +151,46 @@ function addEditSubTaskcheck(index) {
 }
 
 async function updateTaskOnFireBase(task) {
-  let taskData = getValue(task);
+  const taskData = prepareTaskData(task);
   try {
-    const response = await fetch(`${BASE_URL}/task/${task}.json`, {
-      method: "PUT",
-      body: JSON.stringify({
-        title: taskData.title,
-        description: taskData.description,
-        assignet: taskData.assignet,
-        date: taskData.date,
-        prio: taskData.prio,
-        category: taskData.category,
-        subtask: taskData.subtask,
-        progress: taskData.progress,
-      }),
-      headers: { "Content-Type": "application/json" },
-    });
-    if (!response.ok) {
-      throw new Error("Fehler beim Speichern der Kontaktdaten");
-    }
-    const updatedContact = await response.json();
-    return updatedContact;
+    const updatedTask = await sendTaskUpdateRequest(task, taskData);
+    return updatedTask;
   } catch (error) {
-    console.error("Fehler beim Aktualisieren des Kontakts:", error);
+    handleTaskUpdateError(error);
     throw error;
   }
 }
+
+function prepareTaskData(task) {
+  const taskData = getValue(task);
+  return {
+    title: taskData.title,
+    description: taskData.description,
+    assignet: taskData.assignet,
+    date: taskData.date,
+    prio: taskData.prio,
+    category: taskData.category,
+    subtask: taskData.subtask,
+    progress: taskData.progress,
+  };
+}
+
+async function sendTaskUpdateRequest(task, taskData) {
+  const response = await fetch(`${BASE_URL}/task/${task}.json`, {
+    method: "PUT",
+    body: JSON.stringify(taskData),
+    headers: { "Content-Type": "application/json" },
+  });
+  if (!response.ok) {
+    throw new Error("Fehler beim Speichern der Kontaktdaten");
+  }
+  return await response.json();
+}
+
+function handleTaskUpdateError(error) {
+  console.error("Fehler beim Aktualisieren des Kontakts:", error);
+}
+
 
 async function toDoForUpdateTaskOnFireBase(task) {
   await updateTaskOnFireBase(task);
