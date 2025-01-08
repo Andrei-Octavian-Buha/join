@@ -83,10 +83,8 @@ function resetTaskDisplay() {
     if (container) {
       const tasks = container.querySelectorAll(".boardTaskCard");
       tasks.forEach((task) => {
-        task.style.display = "";
+        task.style.display = "";});}
       });
-    }
-  });
 }
 
 function finalizeTaskActions() {
@@ -225,10 +223,8 @@ function getAssignetValue(task) {
 function getValue(taskid) {
   const task = findTaskById(taskid);
   if (!task) return;
-
   const inputValues = getTaskInputValues();
   const assignet = getAssignetValue(task);
-
   return {
     title: inputValues.title,
     description: inputValues.description,
@@ -237,8 +233,7 @@ function getValue(taskid) {
     prio: inputValues.prio,
     subtask: inputValues.subtask,
     progress: task.task.progress,
-    category: task.task.category,
-  };
+    category: task.task.category,};
 }
 
 
@@ -252,7 +247,6 @@ const columnsOrder = [
 function moveCardUp(taskId) {
   const taskCard = document.getElementById(taskId);
   const currentColumn = taskCard.closest(".drag-area").id;
-
   const currentIndex = columnsOrder.indexOf(currentColumn);
   if (currentIndex > 0) {
     const targetColumn = document.getElementById(
@@ -268,7 +262,6 @@ function moveCardUp(taskId) {
 function moveCardDown(taskId) {
   const taskCard = document.getElementById(taskId);
   const currentColumn = taskCard.closest(".drag-area").id;
-
   const currentIndex = columnsOrder.indexOf(currentColumn);
   if (currentIndex < columnsOrder.length - 1) {
     const targetColumn = document.getElementById(

@@ -1,21 +1,22 @@
 async function loadTasksFromFirebase() {
   try {
-    const response = await fetch(
+    const data = await fetchDataFromFirebase(
       "https://join-store-ae38e-default-rtdb.europe-west1.firebasedatabase.app/task.json"
     );
-    if (!response.ok) {
-      throw new Error("Netzwerkantwort war nicht ok");
-    }
-    const data = await response.json();
-    if (data && Object.keys(data).length > 0) {
-      updateHTML(data);
-    } else {
-      console.warn("Keine Aufgaben gefunden.");
-    }
+    data && Object.keys(data).length > 0
+      ? updateHTML(data)
+      : console.warn("Keine Aufgaben gefunden.");
   } catch (error) {
     console.error("Fehler beim Laden der Aufgaben:", error);
   }
 }
+
+async function fetchDataFromFirebase(url) {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error("Netzwerkantwort war nicht ok");
+  return response.json();
+}
+
 
 function getSearchInput(selector) {
   const input = document.querySelector(selector);
