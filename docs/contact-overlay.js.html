@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: contact-overlay.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,159 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: contact-overlay.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Generates the HTML structure for the contact overlay.
+ *
+ * @param {string} contactId - The unique identifier of the contact.
+ * @param {string} contactName - The name of the contact.
+ * @param {string} contactEmail - The email address of the contact.
+ * @param {string} contactPhone - The phone number of the contact.
+ * @returns {string} The HTML content for the contact overlay.
+ */
+function generateContactOverlayHTML(
+  contactId,
+  contactName,
+  contactEmail,
+  contactPhone
+) {
+  return `
+        &lt;div class="second-overlay-content">
+            &lt;div class="badge-and-name">
+                &lt;div class="badge">
+                    ${
+                      createInitialsBadge(contactName, "custom-badge").outerHTML
+                    }
+                    &lt;h1 class="contact-name">${contactName}&lt;/h1>
+                &lt;/div>
+                &lt;div class="detail">
+                    &lt;div class="detail-content">
+                        &lt;div class="edit-container">
+                            &lt;div class="edit-button-container">
+                                &lt;img src="assets/img/edit-pencil.png" alt="Edit" class="edit-image" />
+                                &lt;p class="edit-label" onclick="editContact('${contactId}')">Edit&lt;/p>
+                            &lt;/div>
+                            &lt;div class="delete-button-container">
+                                &lt;img src="assets/img/trash-can-icon..png" alt="Delete" class="delete-image" />
+                                &lt;p class="delete-label" onclick="deleteContact('${contactId}')">Delete&lt;/p>
+                            &lt;/div>
+                        &lt;/div>
+                    &lt;/div>
+                &lt;/div>
+            &lt;/div>
+            &lt;div class="sub-content">
+                &lt;h3 class="sub-info">Contact Information&lt;/h3>
+                &lt;div class="email">
+                    &lt;p class="contact-email-label">Email:&lt;/p>
+                    &lt;p class="contact-email">${contactEmail}&lt;/p>
+                &lt;/div>
+                &lt;div class="phone">    
+                    &lt;p class="contact-phone-label">Telefon: &lt;/p>
+                    &lt;p class="contact-phone">+49 ${contactPhone}&lt;/p>
+                &lt;/div> 
+                &lt;div class="three-points" onclick="toggleMenu()">
+                    &lt;img src="assets/img/threePoints.png" alt="Menu" class="small-img">
+                &lt;/div>
+                &lt;div class="menu hidden-menu">
+                    &lt;div class="open-overlay" class="edit-button-container hidden">
+                        &lt;img src="assets/img/edit-pencil.png" alt="Edit" class="edit-image hidden" />
+                        &lt;p class="edit-label" onclick="editContact('${contactId}', event)">Edit&lt;/p>
+                    &lt;/div>
+                    &lt;div class="delete-button-container hidden">
+                        &lt;img src="assets/img/trash-can-icon..png" alt="Delete" class="delete-image" />
+                        &lt;p class="delete-label" onclick="deleteContact('${contactId}')">Delete&lt;/p>
+                    &lt;/div>
+                &lt;/div>   
+            &lt;/div>
+        &lt;/div>
+    `;
+}
 
+/**
+ * Displays the contact overlay with the specified contact details.
+ *
+ * @param {string} contactId - The unique identifier of the contact.
+ * @param {string} contactName - The name of the contact.
+ * @param {string} contactEmail - The email address of the contact.
+ * @param {string} contactPhone - The phone number of the contact.
+ */
+function displayContactOverlay(
+  contactId,
+  contactName,
+  contactEmail,
+  contactPhone
+) {
+  const overlayContainer = document.getElementById("overlay-container");
+  const overlayHTML = generateContactOverlayHTML(
+    contactId,
+    contactName,
+    contactEmail,
+    contactPhone
+  );
 
-    <h3> </h3>
+  if (overlayContainer) {
+    overlayContainer.innerHTML = overlayHTML;
+  } else {
+  }
+}
 
+/**
+ * Handles the click event on a contact card, fetching contact details from an API.
+ *
+ * @param {string} contactId - The unique identifier of the contact.
+ */
+async function handleCardClick(contactId) {
+  try {
+    const response = await fetch(`${BASE_URL}/contacts/${contactId}.json`);
+    if (!response.ok) {
+    }
+    const contact = await response.json();
+    if (contact) {
+      openContactOverlay(contactId, contact.name, contact.email, contact.phone);
+    } else {
+    }
+  } catch (error) {}
+}
 
+/**
+ * Creates a badge element displaying the initials of the contact's name.
+ *
+ * @param {string} name - The name of the contact.
+ * @param {string} [className='default-badge'] - The CSS class to apply to the badge.
+ * @returns {HTMLElement} The badge element.
+ */
+function createInitialsBadge(name, className = "default-badge") {
+  const initials = getInitials(name);
+  const badge = document.createElement("div");
+  badge.classList.add(className);
+  badge.textContent = initials;
+  badge.style.backgroundColor = getColorForInitial(initials[0]);
+  return badge;
+}
 
-
-
-
-
-
-
-
-    
-
-
-
-
-
+/**
+ * Extracts the initials from a contact's name.
+ *
+ * @param {string} name - The full name of the contact.
+ * @returns {string} The initials of the contact's name.
+ */
+function getInitials(name) {
+  const nameParts = name.split(" ");
+  return (
+    nameParts[0][0] + (nameParts[1] ? nameParts[1][0] : "")
+  ).toUpperCase();
+}
+</code></pre>
+        </article>
+    </section>
 
 
 

@@ -22,12 +22,6 @@ async function fetchDataFromFirebase(url) {
   return response.json();
 }
 
-async function fetchDataFromFirebase(url) {
-  const response = await fetch(url);
-  if (!response.ok) throw new Error("Netzwerkantwort war nicht ok");
-  return response.json();
-}
-
 /**
  * Gets the value of a search input field.
  * @param {string} selector - The CSS selector of the input field.
@@ -294,11 +288,13 @@ function handleFirebaseResponse(response, taskId, newProgress) {
 async function updateTaskProgressInFirebase(
   taskId,
   newProgress,
-  existingTaskData) {
+  existingTaskData
+) {
   try {
     const updatedTaskData = prepareUpdatedTaskData(
       existingTaskData,
-      newProgress );
+      newProgress
+    );
     const response = await sendUpdateRequestToFirebase(taskId, updatedTaskData);
     handleFirebaseResponse(response, taskId, newProgress);
   } catch (error) {

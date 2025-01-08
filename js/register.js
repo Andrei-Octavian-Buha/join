@@ -113,13 +113,6 @@ function saveCurrentUser(user) {
 }
 
 /**
- * Redirects to the home page (summary_user.html).
- */
-function redirectToHome() {
-  window.location.href = "summary_user.html";
-}
-
-/**
  * Displays the sign-up success popup.
  */
 function showSignUpPopup() {

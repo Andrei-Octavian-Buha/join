@@ -14,25 +14,6 @@ function getValueFromInputs() {
 }
 
 /**
- * Validates the required input fields (title, date, and category).
- * Displays error messages if any of the fields are empty, and adds a task if all fields are valid.
- */
-function requiredValidation() {
-  let inputValue = getValueFromInputs();
-  if (!inputValue.title) {
-    document.getElementById("reqTitle").classList.remove("dNone");
-  } else if (!inputValue.date) {
-    document.getElementById("reqDate").classList.remove("dNone");
-  } else if (inputValue.category == 0) {
-    document.getElementById("reqCategory").classList.remove("dNone");
-  } else {
-    addDataToFireBase();
-    showPopupAndRedirect();
-    subtasks = [];
-  }
-}
-
-/**
  * Resets error states by hiding error messages and removing error styles from the input fields.
  */
 function resetErrorStates() {
@@ -43,27 +24,6 @@ function resetErrorStates() {
   document.getElementById("addTaskTittle").classList.remove("input-error");
   document.getElementById("addTaskDate").classList.remove("input-error");
   document.getElementById("categorySelectId").classList.remove("input-error");
-}
-
-function validateInput(inputValue) {
-  if (!inputValue.title) {
-    showError("reqTitle", "addTaskTittle");
-    return false;
-  }
-  if (!inputValue.date) {
-    showError("reqDate", "addTaskDate");
-    return false;
-  }
-  if (inputValue.category == 0) {
-    showError("reqCategory", "categorySelectId");
-    return false;
-  }
-  return true;
-}
-
-function showError(errorId, inputId) {
-  document.getElementById(errorId).classList.remove("dNone");
-  document.getElementById(inputId).classList.add("input-error");
 }
 
 function validateInput(inputValue) {
@@ -109,6 +69,7 @@ function requiredValidationAddTaskToBoard() {
   if (validateInput(inputValue)) {
     addDataToFireBaseFromBoard();
     taskInit();
+    document.getElementById("add-task-template").innerHTML = "";
     document.getElementById("add-task-template").classList.add("dNone");
     subtasks = [];
   }

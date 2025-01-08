@@ -27,23 +27,25 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * The base URL for interacting with the Firebase Realtime Database.
+ * Base URL for Firebase database.
+ * @constant {string}
  */
 const BASE_URL =
   "https://join-store-ae38e-default-rtdb.europe-west1.firebasedatabase.app";
 
 /**
- * A global variable to store the currently logged-in user.
+ * Current logged-in user.
+ * @type {object|null}
  */
-let currentUser = null;
+let currentUser = null; // Globale Variable für den aktuellen Nutzer
 
 /**
- * Prefills the login form with saved credentials (if available) after the DOM is loaded.
+ * Prefills login data from local storage if available.
  */
 document.addEventListener("DOMContentLoaded", prefillLoginData);
 
 /**
- * Handles the login button click event.
+ * Handles the login button click, processes the login input, and attempts login.
  * @param {Event} event - The click event.
  */
 async function handleLoginClick(event) {
@@ -56,9 +58,11 @@ async function handleLoginClick(event) {
 }
 
 /**
- * Validates the login input fields.
- * @param {Object} input - The login input object containing email and password.
- * @returns {boolean} - True if input is invalid, otherwise false.
+ * Validates the login input.
+ * @param {object} loginData - The login data containing email, password.
+ * @param {string} loginData.email - The email input.
+ * @param {string} loginData.password - The password input.
+ * @returns {boolean} - Returns true if the input is invalid, false otherwise.
  */
 function isInvalidLoginInput({ email, password }) {
   const errorContainer = document.getElementById("error-container");
@@ -68,10 +72,10 @@ function isInvalidLoginInput({ email, password }) {
 }
 
 /**
- * Attempts to log in by matching the email and password with stored users.
+ * Attempts to login by finding the user with the given email and password.
  * @param {string} email - The user's email.
  * @param {string} password - The user's password.
- * @returns {Object|null} - The matching user object or null if not found.
+ * @returns {Promise&lt;object|null>} - The user object if found, or null if login fails.
  */
 async function attemptLogin(email, password) {
   try {
@@ -82,9 +86,9 @@ async function attemptLogin(email, password) {
 }
 
 /**
- * Handles a successful login by saving the user data and redirecting to the summary page.
- * @param {Object} user - The logged-in user object.
- * @param {boolean} rememberMe - Whether to remember the user's credentials.
+ * Handles a successful login, stores user data, and redirects.
+ * @param {object} user - The logged-in user.
+ * @param {boolean} rememberMe - Whether the user chose to be remembered.
  */
 function handleSuccessfulLogin(user, rememberMe) {
   if (rememberMe) {
@@ -99,7 +103,7 @@ function handleSuccessfulLogin(user, rememberMe) {
 }
 
 /**
- * Handles a failed login attempt by displaying an error message.
+ * Handles a failed login, displaying an error message.
  */
 function handleFailedLogin() {
   const errorContainer = document.getElementById("error-container");
@@ -107,7 +111,7 @@ function handleFailedLogin() {
 }
 
 /**
- * Redirects the user to the summary page.
+ * Redirects to the summary page.
  */
 function redirectToSummary() {
   window.location.href = "./summary_user.html";
@@ -115,7 +119,7 @@ function redirectToSummary() {
 
 /**
  * Stores the user data in local storage.
- * @param {Object} user - The logged-in user object.
+ * @param {object} user - The user object.
  */
 function storeUserInLocalStorage(user) {
   localStorage.setItem(
@@ -126,7 +130,7 @@ function storeUserInLocalStorage(user) {
 
 /**
  * Stores the user data in session storage.
- * @param {Object} user - The logged-in user object.
+ * @param {object} user - The user object.
  */
 function storeUserInSession(user) {
   sessionStorage.setItem(
@@ -136,8 +140,8 @@ function storeUserInSession(user) {
 }
 
 /**
- * Retrieves login input values from the form.
- * @returns {Object} - An object containing email, password, and rememberMe values.
+ * Retrieves the login input data.
+ * @returns {object} - The login input data containing email, password, and rememberMe flag.
  */
 function getLoginInput() {
   return {
@@ -148,7 +152,7 @@ function getLoginInput() {
 }
 
 /**
- * Handles the guest login process by setting a guest user in session storage.
+ * Handles the guest login button click, storing the guest user and redirecting.
  */
 function handleGuestLoginClick() {
   sessionStorage.setItem("currentUser", JSON.stringify({ name: "Guest" }));
@@ -156,11 +160,11 @@ function handleGuestLoginClick() {
 }
 
 /**
- * Checks if the login input is invalid.
- * @param {string} email - The email input value.
- * @param {string} password - The password input value.
- * @param {HTMLElement} errorContainer - The container to display errors.
- * @returns {boolean} - True if input is invalid, otherwise false.
+ * Validates the email and password input.
+ * @param {string} email - The email input.
+ * @param {string} password - The password input.
+ * @param {HTMLElement} errorContainer - The error container element to display messages.
+ * @returns {boolean} - Returns true if invalid, false otherwise.
  */
 function isInvalidInput(email, password, errorContainer) {
   if (!email || !password) {
@@ -174,10 +178,10 @@ function isInvalidInput(email, password, errorContainer) {
 }
 
 /**
- * Finds a user by email and password.
+ * Finds a user in the database by email and password.
  * @param {string} email - The user's email.
  * @param {string} password - The user's password.
- * @returns {Object|null} - The matching user object or null if not found.
+ * @returns {Promise&lt;object|null>} - The matching user object or null if not found.
  */
 async function findUser(email, password) {
   const users = await fetchUsers();
@@ -187,8 +191,28 @@ async function findUser(email, password) {
 }
 
 /**
+ * Processes a valid login, storing the user data and redirecting.
+ * @param {boolean} rememberMe - Whether the user chose to be remembered.
+ * @param {object} user - The logged-in user.
+ */
+function processValidLogin(rememberMe, user) {
+  if (rememberMe) {
+    saveLoginData(user.email, user.password); // Save email and password
+  } else {
+    clearLoginData();
+  }
+
+  localStorage.setItem(
+    "currentUser",
+    JSON.stringify({ name: user.name, email: user.email })
+  );
+
+  window.location.href = "./summary_user.html";
+}
+
+/**
  * Fetches all users from the database.
- * @returns {Array&lt;Object>} - An array of user objects.
+ * @returns {Promise&lt;object[]>} - A list of user objects.
  */
 async function fetchUsers() {
   const response = await fetch(`${BASE_URL}/users.json`);
@@ -198,8 +222,8 @@ async function fetchUsers() {
 }
 
 /**
- * Displays an error message in the specified container.
- * @param {HTMLElement} container - The container to display the error message.
+ * Shows an error message in the provided container.
+ * @param {HTMLElement} container - The container element to display the message.
  * @param {string} message - The error message to display.
  */
 function showErrorContainer(container, message) {
@@ -208,17 +232,17 @@ function showErrorContainer(container, message) {
 }
 
 /**
- * Hides the error container.
- * @param {HTMLElement} container - The container to hide.
+ * Hides the error message container.
+ * @param {HTMLElement} container - The container element to hide.
  */
 function hideErrorContainer(container) {
   container.style.display = "none";
 }
 
 /**
- * Saves the login data (email and password) in local storage.
- * @param {string} email - The email to save.
- * @param {string} password - The password to save.
+ * Saves the login data (email and password) to local storage.
+ * @param {string} email - The user's email.
+ * @param {string} password - The user's password.
  */
 function saveLoginData(email, password) {
   localStorage.setItem("loginEmail", email);
@@ -226,7 +250,7 @@ function saveLoginData(email, password) {
 }
 
 /**
- * Clears saved login data from local storage.
+ * Clears the saved login data from local storage.
  */
 function clearLoginData() {
   localStorage.removeItem("loginEmail");
@@ -234,7 +258,7 @@ function clearLoginData() {
 }
 
 /**
- * Prefills the login form with saved credentials from local storage (if available).
+ * Prefills the login data from local storage if available.
  */
 function prefillLoginData() {
   const savedEmail = localStorage.getItem("loginEmail");
@@ -243,16 +267,16 @@ function prefillLoginData() {
   if (savedEmail &amp;&amp; savedPassword) {
     document.querySelector('input[type="email"]').value = savedEmail;
     document.getElementById("passwordFieldLogin").value = savedPassword;
-    document.getElementById("checkbox").checked = true;
+    document.getElementById("checkbox").checked = true; // Checkbox aktivieren
   }
 }
 
 /**
- * Validates user credentials and processes the login.
- * @param {Array&lt;Object>} users - The list of users.
+ * Validates a user's login credentials against a list of users.
+ * @param {object[]} users - A list of user objects.
  * @param {string} email - The user's email.
  * @param {string} password - The user's password.
- * @param {HTMLElement} errorContainer - The container to display errors.
+ * @param {HTMLElement} errorContainer - The error container element to display messages.
  */
 function validateUser(users, email, password, errorContainer) {
   const matchingUser = users.find(
@@ -267,8 +291,8 @@ function validateUser(users, email, password, errorContainer) {
 }
 
 /**
- * Handles the successful login process.
- * @param {Object} user - The matching user object.
+ * Handles the login success, saving the user and redirecting.
+ * @param {object} user - The logged-in user.
  */
 function onLoginSuccess(user) {
   currentUser = user;
@@ -277,15 +301,15 @@ function onLoginSuccess(user) {
 }
 
 /**
- * Saves the current user data in session storage.
- * @param {Object} user - The user object to save.
+ * Saves the current user in session storage.
+ * @param {object} user - The logged-in user.
  */
 function saveCurrentUser(user) {
   sessionStorage.setItem("currentUser", JSON.stringify(user));
 }
 
 /**
- * Adds an event listener for redirecting to the registration page.
+ * Adds the event listener for the signup link.
  */
 function addEvent() {
   let signUp = document.getElementById("loginToSignUp");
@@ -295,9 +319,73 @@ function addEvent() {
 }
 
 /**
- * Toggles password visibility for the login input field.
- * @param {string} inputId - The ID of the password input field.
- * @param {HTMLElement} icon - The icon element to toggle.
+ * Test function for logo animation and overlay.
+ */
+function test() {
+  const overlay = document.getElementById("overlayId");
+  const logo = document.getElementById("imgHeader1");
+  const animatedLogo = setupAnimatedLogo(logo);
+
+  applyOverlayColor(overlay);
+  animateLogoToTarget(animatedLogo, logo.getBoundingClientRect());
+
+  setTimeout(() => finalizeAnimation(animatedLogo, overlay), 2000);
+}
+
+/**
+ * Sets up the animated logo by cloning and styling it.
+ * @param {HTMLElement} logo - The logo element to clone.
+ * @returns {HTMLElement} - The cloned animated logo.
+ */
+function setupAnimatedLogo(logo) {
+  const animatedLogo = logo.cloneNode(true);
+  animatedLogo.classList.add("logoCentered");
+  document.body.appendChild(animatedLogo);
+  return animatedLogo;
+}
+
+/**
+ * Applies the appropriate overlay color based on screen width.
+ * @param {HTMLElement} overlay - The overlay element to style.
+ */
+function applyOverlayColor(overlay) {
+  if (window.innerWidth &lt; 770) {
+    overlay.style.backgroundColor = "#2A3647";
+  } else {
+    overlay.style.backgroundColor = "#ffffff";
+  }
+  overlay.classList.remove("dNone");
+}
+
+/**
+ * Animates the logo to the target position.
+ * @param {HTMLElement} animatedLogo - The animated logo element.
+ * @param {DOMRect} target - The target position for the logo.
+ */
+function animateLogoToTarget(animatedLogo, target) {
+  setTimeout(() => {
+    animatedLogo.style.top = `${target.top}px`;
+    animatedLogo.style.left = `${target.left}px`;
+    animatedLogo.style.transform = "translate(0, 0)";
+    animatedLogo.style.width = `${target.width}px`;
+    animatedLogo.classList.add("logoMoved");
+  }, 100);
+}
+
+/**
+ * Finalizes the logo animation by removing the animated logo and hiding the overlay.
+ * @param {HTMLElement} animatedLogo - The animated logo element.
+ * @param {HTMLElement} overlay - The overlay element to hide.
+ */
+function finalizeAnimation(animatedLogo, overlay) {
+  animatedLogo.remove();
+  overlay.classList.add("dNone");
+}
+
+/**
+ * Toggles the visibility of the password input field.
+ * @param {string} inputId - The ID of the input field.
+ * @param {HTMLElement} icon - The icon element to change.
  */
 function togglePassword(inputId, icon) {
   var input = document.getElementById(inputId);
@@ -317,13 +405,13 @@ function togglePassword(inputId, icon) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#BASE_URL">BASE_URL</a></li><li><a href="global.html#addConfirmationButtons">addConfirmationButtons</a></li><li><a href="global.html#addContact">addContact</a></li><li><a href="global.html#addDataToFireBase">addDataToFireBase</a></li><li><a href="global.html#addDataToFireBaseFromBoard">addDataToFireBaseFromBoard</a></li><li><a href="global.html#addEditSubTask">addEditSubTask</a></li><li><a href="global.html#addEditSubTaskcheck">addEditSubTaskcheck</a></li><li><a href="global.html#addEditcheck">addEditcheck</a></li><li><a href="global.html#addEvent">addEvent</a></li><li><a href="global.html#addLetterHeader">addLetterHeader</a></li><li><a href="global.html#addSilverline">addSilverline</a></li><li><a href="global.html#addSubTask">addSubTask</a></li><li><a href="global.html#allowDrop">allowDrop</a></li><li><a href="global.html#attemptLogin">attemptLogin</a></li><li><a href="global.html#backToLogin">backToLogin</a></li><li><a href="global.html#backgroundEdit">backgroundEdit</a></li><li><a href="global.html#capitalizeFirstLetter">capitalizeFirstLetter</a></li><li><a href="global.html#changeEditWithCheck">changeEditWithCheck</a></li><li><a href="global.html#clearErrors">clearErrors</a></li><li><a href="global.html#clearLoginData">clearLoginData</a></li><li><a href="global.html#closeOverlay">closeOverlay</a></li><li><a href="global.html#closeOverlayInfoCard">closeOverlayInfoCard</a></li><li><a href="global.html#createContactCard">createContactCard</a></li><li><a href="global.html#createContactElement">createContactElement</a></li><li><a href="global.html#createErrorMessages">createErrorMessages</a></li><li><a href="global.html#createInitialsBadge">createInitialsBadge</a></li><li><a href="global.html#createUserObject">createUserObject</a></li><li><a href="global.html#currentUser">currentUser</a></li><li><a href="global.html#deleteContact">deleteContact</a></li><li><a href="global.html#deleteContactFromApi">deleteContactFromApi</a></li><li><a href="global.html#deleteEditTask">deleteEditTask</a></li><li><a href="global.html#deleteInputSubTask">deleteInputSubTask</a></li><li><a href="global.html#deleteSubTask">deleteSubTask</a></li><li><a href="global.html#deleteTask">deleteTask</a></li><li><a href="global.html#displayContactOverlay">displayContactOverlay</a></li><li><a href="global.html#displayContacts">displayContacts</a></li><li><a href="global.html#dragEnd">dragEnd</a></li><li><a href="global.html#dragStart">dragStart</a></li><li><a href="global.html#editAddedSubTask">editAddedSubTask</a></li><li><a href="global.html#editContact">editContact</a></li><li><a href="global.html#editListDataCard">editListDataCard</a></li><li><a href="global.html#fetchAndFillContactData">fetchAndFillContactData</a></li><li><a href="global.html#fetchContactsData">fetchContactsData</a></li><li><a href="global.html#fetchUsers">fetchUsers</a></li><li><a href="global.html#filterTasks">filterTasks</a></li><li><a href="global.html#filterTasksInAllCategories">filterTasksInAllCategories</a></li><li><a href="global.html#filterTasksInCategory">filterTasksInCategory</a></li><li><a href="global.html#findUser">findUser</a></li><li><a href="global.html#fromNumberToName">fromNumberToName</a></li><li><a href="global.html#gatherContactData">gatherContactData</a></li><li><a href="global.html#generateInitials">generateInitials</a></li><li><a href="global.html#getAllContacts">getAllContacts</a></li><li><a href="global.html#getColorForInitial">getColorForInitial</a></li><li><a href="global.html#getCurrentUser">getCurrentUser</a></li><li><a href="global.html#getFormData">getFormData</a></li><li><a href="global.html#getInitials">getInitials</a></li><li><a href="global.html#getLoginInput">getLoginInput</a></li><li><a href="global.html#getNewProgress">getNewProgress</a></li><li><a href="global.html#getPriorityValue">getPriorityValue</a></li><li><a href="global.html#getSearchInput">getSearchInput</a></li><li><a href="global.html#getSignUpInputs">getSignUpInputs</a></li><li><a href="global.html#getTargetColumn">getTargetColumn</a></li><li><a href="global.html#getTaskData">getTaskData</a></li><li><a href="global.html#getValue">getValue</a></li><li><a href="global.html#getValueFromInputs">getValueFromInputs</a></li><li><a href="global.html#handleCardClick">handleCardClick</a></li><li><a href="global.html#handleClickOutsideOverlay">handleClickOutsideOverlay</a></li><li><a href="global.html#handleError">handleError</a></li><li><a href="global.html#handleFailedLogin">handleFailedLogin</a></li><li><a href="global.html#handleFirebaseResponse">handleFirebaseResponse</a></li><li><a href="global.html#handleFormSubmit">handleFormSubmit</a></li><li><a href="global.html#handleGuestLoginClick">handleGuestLoginClick</a></li><li><a href="global.html#handleLoginClick">handleLoginClick</a></li><li><a href="global.html#handleNetworkError">handleNetworkError</a></li><li><a href="global.html#handleSignUp">handleSignUp</a></li><li><a href="global.html#handleSubmit">handleSubmit</a></li><li><a href="global.html#handleSuccess">handleSuccess</a></li><li><a href="global.html#handleSuccessfulLogin">handleSuccessfulLogin</a></li><li><a href="global.html#handleUserConfirmation">handleUserConfirmation</a></li><li><a href="global.html#hideEditAddBtn">hideEditAddBtn</a></li><li><a href="global.html#hideErrorContainer">hideErrorContainer</a></li><li><a href="global.html#hideOverlayAddTask">hideOverlayAddTask</a></li><li><a href="global.html#hideOverlayInfoCard">hideOverlayInfoCard</a></li><li><a href="global.html#hideSecondOverlay">hideSecondOverlay</a></li><li><a href="global.html#hideSubTaskAddBtn">hideSubTaskAddBtn</a></li><li><a href="global.html#hideToast">hideToast</a></li><li><a href="global.html#hideshowListCard">hideshowListCard</a></li><li><a href="global.html#highlightColumn">highlightColumn</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initializeBlurValidation">initializeBlurValidation</a></li><li><a href="global.html#insertInitialsIntoElement">insertInitialsIntoElement</a></li><li><a href="global.html#insertUserName">insertUserName</a></li><li><a href="global.html#isInvalidInput">isInvalidInput</a></li><li><a href="global.html#isInvalidLoginInput">isInvalidLoginInput</a></li><li><a href="global.html#listDataCard">listDataCard</a></li><li><a href="global.html#loadContacts">loadContacts</a></li><li><a href="global.html#loadContactsData">loadContactsData</a></li><li><a href="global.html#loadContactsForEdit">loadContactsForEdit</a></li><li><a href="global.html#loadContactss">loadContactss</a></li><li><a href="global.html#loadTaskData">loadTaskData</a></li><li><a href="global.html#loadTasksFromFirebase">loadTasksFromFirebase</a></li><li><a href="global.html#loadUserDataFromSession">loadUserDataFromSession</a></li><li><a href="global.html#moveElementToColumn">moveElementToColumn</a></li><li><a href="global.html#moveTo">moveTo</a></li><li><a href="global.html#onLoginSuccess">onLoginSuccess</a></li><li><a href="global.html#onlyToDay">onlyToDay</a></li><li><a href="global.html#openContactOverlay">openContactOverlay</a></li><li><a href="global.html#openOverlay">openOverlay</a></li><li><a href="global.html#overlayListeners">overlayListeners</a></li><li><a href="global.html#prefillLoginData">prefillLoginData</a></li><li><a href="global.html#prepareUpdatedTaskData">prepareUpdatedTaskData</a></li><li><a href="global.html#processSignUp">processSignUp</a></li><li><a href="global.html#pushUserToDatabase">pushUserToDatabase</a></li><li><a href="global.html#redirectToHome">redirectToHome</a></li><li><a href="global.html#redirectToHomeSSummary">redirectToHomeSSummary</a></li><li><a href="global.html#redirectToSummary">redirectToSummary</a></li><li><a href="global.html#removeHighlight">removeHighlight</a></li><li><a href="global.html#rendEditSubTask">rendEditSubTask</a></li><li><a href="global.html#rendSubTask">rendSubTask</a></li><li><a href="global.html#renderCard">renderCard</a></li><li><a href="global.html#renderContacts">renderContacts</a></li><li><a href="global.html#renderSortedContacts">renderSortedContacts</a></li><li><a href="global.html#requiredValidation">requiredValidation</a></li><li><a href="global.html#requiredValidationAddTaskToBoard">requiredValidationAddTaskToBoard</a></li><li><a href="global.html#resetErrorStates">resetErrorStates</a></li><li><a href="global.html#resetForm">resetForm</a></li><li><a href="global.html#resetFormErrors">resetFormErrors</a></li><li><a href="global.html#saveCurrentUser">saveCurrentUser</a></li><li><a href="global.html#saveLoginData">saveLoginData</a></li><li><a href="global.html#sendContactData">sendContactData</a></li><li><a href="global.html#sendUpdateRequestToFirebase">sendUpdateRequestToFirebase</a></li><li><a href="global.html#setActiveContact">setActiveContact</a></li><li><a href="global.html#setUserInitials">setUserInitials</a></li><li><a href="global.html#setUserInitialss">setUserInitialss</a></li><li><a href="global.html#setupDropdownEvents">setupDropdownEvents</a></li><li><a href="global.html#showAssignet">showAssignet</a></li><li><a href="global.html#showConfirmationToast">showConfirmationToast</a></li><li><a href="global.html#showDeletionSuccessToast">showDeletionSuccessToast</a></li><li><a href="global.html#showError">showError</a></li><li><a href="global.html#showErrorContainer">showErrorContainer</a></li><li><a href="global.html#showInfoAssignet">showInfoAssignet</a></li><li><a href="global.html#showOverlayAddTask">showOverlayAddTask</a></li><li><a href="global.html#showOverlayInfoCard">showOverlayInfoCard</a></li><li><a href="global.html#showPasswordError">showPasswordError</a></li><li><a href="global.html#showPopupAndRedirect">showPopupAndRedirect</a></li><li><a href="global.html#showPrioIcon">showPrioIcon</a></li><li><a href="global.html#showSignUpPopup">showSignUpPopup</a></li><li><a href="global.html#showSubTasks">showSubTasks</a></li><li><a href="global.html#showSubTasksString">showSubTasksString</a></li><li><a href="global.html#showToastMessage">showToastMessage</a></li><li><a href="global.html#sortContacts">sortContacts</a></li><li><a href="global.html#startEvent">startEvent</a></li><li><a href="global.html#storeUserInLocalStorage">storeUserInLocalStorage</a></li><li><a href="global.html#storeUserInSession">storeUserInSession</a></li><li><a href="global.html#storeUserInSessionStorage">storeUserInSessionStorage</a></li><li><a href="global.html#subtasktrigger">subtasktrigger</a></li><li><a href="global.html#taskInit">taskInit</a></li><li><a href="global.html#toDoForUpdateTaskOnFireBase">toDoForUpdateTaskOnFireBase</a></li><li><a href="global.html#toggleDropdown">toggleDropdown</a></li><li><a href="global.html#toggleImage">toggleImage</a></li><li><a href="global.html#togglePassword">togglePassword</a></li><li><a href="global.html#truncateText">truncateText</a></li><li><a href="global.html#updateContactOnServer">updateContactOnServer</a></li><li><a href="global.html#updateEmptyColumnMessages">updateEmptyColumnMessages</a></li><li><a href="global.html#updateSecondOverlay">updateSecondOverlay</a></li><li><a href="global.html#updateTaskOnFireBase">updateTaskOnFireBase</a></li><li><a href="global.html#updateTaskProgress">updateTaskProgress</a></li><li><a href="global.html#updateTaskProgressInFirebase">updateTaskProgressInFirebase</a></li><li><a href="global.html#uploadToFireBase">uploadToFireBase</a></li><li><a href="global.html#validateContactData">validateContactData</a></li><li><a href="global.html#validateEmail">validateEmail</a></li><li><a href="global.html#validateField">validateField</a></li><li><a href="global.html#validateForm">validateForm</a></li><li><a href="global.html#validateFormData">validateFormData</a></li><li><a href="global.html#validateInputs">validateInputs</a></li><li><a href="global.html#validateName">validateName</a></li><li><a href="global.html#validatePasswords">validatePasswords</a></li><li><a href="global.html#validateSignUpInputs">validateSignUpInputs</a></li><li><a href="global.html#validateUser">validateUser</a></li><li><a href="global.html#variableId">variableId</a></li><li><a href="global.html#whenChecked">whenChecked</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#BASE_URL">BASE_URL</a></li><li><a href="global.html#addConfirmationButtons">addConfirmationButtons</a></li><li><a href="global.html#addContact">addContact</a></li><li><a href="global.html#addDataToFireBase">addDataToFireBase</a></li><li><a href="global.html#addDataToFireBaseFromBoard">addDataToFireBaseFromBoard</a></li><li><a href="global.html#addEditSubTask">addEditSubTask</a></li><li><a href="global.html#addEditSubTaskcheck">addEditSubTaskcheck</a></li><li><a href="global.html#addEditcheck">addEditcheck</a></li><li><a href="global.html#addEvent">addEvent</a></li><li><a href="global.html#addLetterHeader">addLetterHeader</a></li><li><a href="global.html#addSilverline">addSilverline</a></li><li><a href="global.html#addSubTask">addSubTask</a></li><li><a href="global.html#adjustRightContentDisplay">adjustRightContentDisplay</a></li><li><a href="global.html#allowDrop">allowDrop</a></li><li><a href="global.html#animateLogoToTarget">animateLogoToTarget</a></li><li><a href="global.html#applyOverlayColor">applyOverlayColor</a></li><li><a href="global.html#attemptLogin">attemptLogin</a></li><li><a href="global.html#backToLogin">backToLogin</a></li><li><a href="global.html#backgroundEdit">backgroundEdit</a></li><li><a href="global.html#calculatePercentage">calculatePercentage</a></li><li><a href="global.html#capitalizeFirstLetter">capitalizeFirstLetter</a></li><li><a href="global.html#changeEditWithCheck">changeEditWithCheck</a></li><li><a href="global.html#clearErrors">clearErrors</a></li><li><a href="global.html#clearLoginData">clearLoginData</a></li><li><a href="global.html#clearSearchInput">clearSearchInput</a></li><li><a href="global.html#closeContactOverlay">closeContactOverlay</a></li><li><a href="global.html#closeOverlay">closeOverlay</a></li><li><a href="global.html#closeOverlayInfoCard">closeOverlayInfoCard</a></li><li><a href="global.html#countTasksByCategory">countTasksByCategory</a></li><li><a href="global.html#createBadge">createBadge</a></li><li><a href="global.html#createContactCard">createContactCard</a></li><li><a href="global.html#createContactCardHTML">createContactCardHTML</a></li><li><a href="global.html#createContactElement">createContactElement</a></li><li><a href="global.html#createContactElementforEdit">createContactElementforEdit</a></li><li><a href="global.html#createErrorMessages">createErrorMessages</a></li><li><a href="global.html#createInitials">createInitials</a></li><li><a href="global.html#createInitialsBadge">createInitialsBadge</a></li><li><a href="global.html#createOverlayContent">createOverlayContent</a></li><li><a href="global.html#createToastButton">createToastButton</a></li><li><a href="global.html#createUserObject">createUserObject</a></li><li><a href="global.html#currentUser">currentUser</a></li><li><a href="global.html#deleteContact">deleteContact</a></li><li><a href="global.html#deleteContactFromApi">deleteContactFromApi</a></li><li><a href="global.html#deleteEditTask">deleteEditTask</a></li><li><a href="global.html#deleteInputSubTask">deleteInputSubTask</a></li><li><a href="global.html#deleteSubTask">deleteSubTask</a></li><li><a href="global.html#deleteTask">deleteTask</a></li><li><a href="global.html#displayBadgeInContainer">displayBadgeInContainer</a></li><li><a href="global.html#displayContactOverlay">displayContactOverlay</a></li><li><a href="global.html#displayContacts">displayContacts</a></li><li><a href="global.html#displayToast">displayToast</a></li><li><a href="global.html#distributeTasks">distributeTasks</a></li><li><a href="global.html#dragEnd">dragEnd</a></li><li><a href="global.html#dragStart">dragStart</a></li><li><a href="global.html#editAddedSubTask">editAddedSubTask</a></li><li><a href="global.html#editListDataCard">editListDataCard</a></li><li><a href="global.html#fetchAndFillContactData">fetchAndFillContactData</a></li><li><a href="global.html#fetchContactsData">fetchContactsData</a></li><li><a href="global.html#fetchUsers">fetchUsers</a></li><li><a href="global.html#fillInTasks">fillInTasks</a></li><li><a href="global.html#filterTasks">filterTasks</a></li><li><a href="global.html#filterTasksInAllCategories">filterTasksInAllCategories</a></li><li><a href="global.html#filterTasksInCategory">filterTasksInCategory</a></li><li><a href="global.html#finalizeAnimation">finalizeAnimation</a></li><li><a href="global.html#finalizeTaskActions">finalizeTaskActions</a></li><li><a href="global.html#findTaskById">findTaskById</a></li><li><a href="global.html#findUser">findUser</a></li><li><a href="global.html#fromNumberToName">fromNumberToName</a></li><li><a href="global.html#gatherContactData">gatherContactData</a></li><li><a href="global.html#generateAssignedPersonHTML">generateAssignedPersonHTML</a></li><li><a href="global.html#generateContactOverlayHTML">generateContactOverlayHTML</a></li><li><a href="global.html#generateInitials">generateInitials</a></li><li><a href="global.html#generateInitialsHTML">generateInitialsHTML</a></li><li><a href="global.html#generateRemainingCountHTML">generateRemainingCountHTML</a></li><li><a href="global.html#getAllContacts">getAllContacts</a></li><li><a href="global.html#getAssignetValue">getAssignetValue</a></li><li><a href="global.html#getColorForInitial">getColorForInitial</a></li><li><a href="global.html#getCurrentUser">getCurrentUser</a></li><li><a href="global.html#getFormData">getFormData</a></li><li><a href="global.html#getInitials">getInitials</a></li><li><a href="global.html#getLoginInput">getLoginInput</a></li><li><a href="global.html#getNewProgress">getNewProgress</a></li><li><a href="global.html#getPriorityValue">getPriorityValue</a></li><li><a href="global.html#getSearchInput">getSearchInput</a></li><li><a href="global.html#getSignUpInputs">getSignUpInputs</a></li><li><a href="global.html#getTargetColumn">getTargetColumn</a></li><li><a href="global.html#getTaskData">getTaskData</a></li><li><a href="global.html#getTaskInputValues">getTaskInputValues</a></li><li><a href="global.html#getValue">getValue</a></li><li><a href="global.html#getValueFromInputs">getValueFromInputs</a></li><li><a href="global.html#handleCardClick">handleCardClick</a></li><li><a href="global.html#handleCheckboxState">handleCheckboxState</a></li><li><a href="global.html#handleClickOutsideOverlay">handleClickOutsideOverlay</a></li><li><a href="global.html#handleError">handleError</a></li><li><a href="global.html#handleFailedLogin">handleFailedLogin</a></li><li><a href="global.html#handleFirebaseResponse">handleFirebaseResponse</a></li><li><a href="global.html#handleFormSubmit">handleFormSubmit</a></li><li><a href="global.html#handleGuestLoginClick">handleGuestLoginClick</a></li><li><a href="global.html#handleLoginClick">handleLoginClick</a></li><li><a href="global.html#handleNetworkError">handleNetworkError</a></li><li><a href="global.html#handleSignUp">handleSignUp</a></li><li><a href="global.html#handleSubmit">handleSubmit</a></li><li><a href="global.html#handleSuccess">handleSuccess</a></li><li><a href="global.html#handleSuccessfulLogin">handleSuccessfulLogin</a></li><li><a href="global.html#handleTaskUpdateError">handleTaskUpdateError</a></li><li><a href="global.html#handleUserConfirmation">handleUserConfirmation</a></li><li><a href="global.html#hideEditAddBtn">hideEditAddBtn</a></li><li><a href="global.html#hideErrorContainer">hideErrorContainer</a></li><li><a href="global.html#hideOverlayAddTask">hideOverlayAddTask</a></li><li><a href="global.html#hideOverlayAndCard">hideOverlayAndCard</a></li><li><a href="global.html#hideOverlayInfoCard">hideOverlayInfoCard</a></li><li><a href="global.html#hideSecondOverlay">hideSecondOverlay</a></li><li><a href="global.html#hideSubTaskAddBtn">hideSubTaskAddBtn</a></li><li><a href="global.html#hideToast">hideToast</a></li><li><a href="global.html#hideshowListCard">hideshowListCard</a></li><li><a href="global.html#highlightColumn">highlightColumn</a></li><li><a href="global.html#howManyAreChecked">howManyAreChecked</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initializeBlurValidation">initializeBlurValidation</a></li><li><a href="global.html#initializeBoard">initializeBoard</a></li><li><a href="global.html#initializePage">initializePage</a></li><li><a href="global.html#insertBadgeIntoContainer">insertBadgeIntoContainer</a></li><li><a href="global.html#insertInitialsIntoElement">insertInitialsIntoElement</a></li><li><a href="global.html#insertUserName">insertUserName</a></li><li><a href="global.html#isInvalidInput">isInvalidInput</a></li><li><a href="global.html#isInvalidLoginInput">isInvalidLoginInput</a></li><li><a href="global.html#listDataCard">listDataCard</a></li><li><a href="global.html#loadContacts">loadContacts</a></li><li><a href="global.html#loadContactsData">loadContactsData</a></li><li><a href="global.html#loadContactsForEdit">loadContactsForEdit</a></li><li><a href="global.html#loadContactss">loadContactss</a></li><li><a href="global.html#loadTaskData">loadTaskData</a></li><li><a href="global.html#loadTasksForSorting">loadTasksForSorting</a></li><li><a href="global.html#loadTasksFromFirebase">loadTasksFromFirebase</a></li><li><a href="global.html#loadUserDataFromSession">loadUserDataFromSession</a></li><li><a href="global.html#moveCardDown">moveCardDown</a></li><li><a href="global.html#moveCardUp">moveCardUp</a></li><li><a href="global.html#moveElementToColumn">moveElementToColumn</a></li><li><a href="global.html#moveTo">moveTo</a></li><li><a href="global.html#nullSubtask">nullSubtask</a></li><li><a href="global.html#onLoginSuccess">onLoginSuccess</a></li><li><a href="global.html#onlyToDay">onlyToDay</a></li><li><a href="global.html#openContactOverlay">openContactOverlay</a></li><li><a href="global.html#openOverlay">openOverlay</a></li><li><a href="global.html#overlayListeners">overlayListeners</a></li><li><a href="global.html#prefillLoginData">prefillLoginData</a></li><li><a href="global.html#prepareBadgeContainer">prepareBadgeContainer</a></li><li><a href="global.html#prepareTaskData">prepareTaskData</a></li><li><a href="global.html#prepareUpdatedTaskData">prepareUpdatedTaskData</a></li><li><a href="global.html#processSignUp">processSignUp</a></li><li><a href="global.html#processValidLogin">processValidLogin</a></li><li><a href="global.html#pushUserToDatabase">pushUserToDatabase</a></li><li><a href="global.html#redirectToHome">redirectToHome</a></li><li><a href="global.html#redirectToSummary">redirectToSummary</a></li><li><a href="global.html#removeHighlight">removeHighlight</a></li><li><a href="global.html#rendEditSubTask">rendEditSubTask</a></li><li><a href="global.html#rendSubTask">rendSubTask</a></li><li><a href="global.html#renderAssignedPerson">renderAssignedPerson</a></li><li><a href="global.html#renderAssignees">renderAssignees</a></li><li><a href="global.html#renderContacts">renderContacts</a></li><li><a href="global.html#renderContactsforEdit">renderContactsforEdit</a></li><li><a href="global.html#renderRemainingCount">renderRemainingCount</a></li><li><a href="global.html#renderSortedContacts">renderSortedContacts</a></li><li><a href="global.html#requiredValidation">requiredValidation</a></li><li><a href="global.html#requiredValidationAddTaskToBoard">requiredValidationAddTaskToBoard</a></li><li><a href="global.html#resetColumns">resetColumns</a></li><li><a href="global.html#resetErrorStates">resetErrorStates</a></li><li><a href="global.html#resetForm">resetForm</a></li><li><a href="global.html#resetFormErrors">resetFormErrors</a></li><li><a href="global.html#resetTaskDisplay">resetTaskDisplay</a></li><li><a href="global.html#saveCurrentUser">saveCurrentUser</a></li><li><a href="global.html#saveLoginData">saveLoginData</a></li><li><a href="global.html#sendContactData">sendContactData</a></li><li><a href="global.html#sendTaskUpdateRequest">sendTaskUpdateRequest</a></li><li><a href="global.html#sendUpdateRequestToFirebase">sendUpdateRequestToFirebase</a></li><li><a href="global.html#setActiveContact">setActiveContact</a></li><li><a href="global.html#setUserInitials">setUserInitials</a></li><li><a href="global.html#setupAnimatedLogo">setupAnimatedLogo</a></li><li><a href="global.html#setupDropdownEvents">setupDropdownEvents</a></li><li><a href="global.html#showAssignet">showAssignet</a></li><li><a href="global.html#showConfirmationToast">showConfirmationToast</a></li><li><a href="global.html#showDeletionSuccessToast">showDeletionSuccessToast</a></li><li><a href="global.html#showEditContactOverlay">showEditContactOverlay</a></li><li><a href="global.html#showError">showError</a></li><li><a href="global.html#showErrorContainer">showErrorContainer</a></li><li><a href="global.html#showInfoAssignet">showInfoAssignet</a></li><li><a href="global.html#showOverlayAddTask">showOverlayAddTask</a></li><li><a href="global.html#showOverlayInfoCard">showOverlayInfoCard</a></li><li><a href="global.html#showOverlayWithAnimation">showOverlayWithAnimation</a></li><li><a href="global.html#showPasswordError">showPasswordError</a></li><li><a href="global.html#showPopupAndRedirect">showPopupAndRedirect</a></li><li><a href="global.html#showPrioIcon">showPrioIcon</a></li><li><a href="global.html#showSignUpPopup">showSignUpPopup</a></li><li><a href="global.html#showSubTasks">showSubTasks</a></li><li><a href="global.html#showSubTasksString">showSubTasksString</a></li><li><a href="global.html#showToastMessage">showToastMessage</a></li><li><a href="global.html#sortContacts">sortContacts</a></li><li><a href="global.html#startEvent">startEvent</a></li><li><a href="global.html#storeUserInLocalStorage">storeUserInLocalStorage</a></li><li><a href="global.html#storeUserInSession">storeUserInSession</a></li><li><a href="global.html#storeUserInSessionStorage">storeUserInSessionStorage</a></li><li><a href="global.html#subtasktrigger">subtasktrigger</a></li><li><a href="global.html#taskInit">taskInit</a></li><li><a href="global.html#test">test</a></li><li><a href="global.html#toDoForUpdateTaskOnFireBase">toDoForUpdateTaskOnFireBase</a></li><li><a href="global.html#toggleDropdown">toggleDropdown</a></li><li><a href="global.html#toggleImage">toggleImage</a></li><li><a href="global.html#toggleMenu">toggleMenu</a></li><li><a href="global.html#togglePassword">togglePassword</a></li><li><a href="global.html#truncateText">truncateText</a></li><li><a href="global.html#updateArrowVisibility">updateArrowVisibility</a></li><li><a href="global.html#updateArrowVisibilityForAll">updateArrowVisibilityForAll</a></li><li><a href="global.html#updateCheckedSubTask">updateCheckedSubTask</a></li><li><a href="global.html#updateContact">updateContact</a></li><li><a href="global.html#updateContactOnServer">updateContactOnServer</a></li><li><a href="global.html#updateContactOverlay">updateContactOverlay</a></li><li><a href="global.html#updateEmptyColumnMessages">updateEmptyColumnMessages</a></li><li><a href="global.html#updateHTML">updateHTML</a></li><li><a href="global.html#updateNextDeadline">updateNextDeadline</a></li><li><a href="global.html#updateSecondOverlay">updateSecondOverlay</a></li><li><a href="global.html#updateTaskOnFireBase">updateTaskOnFireBase</a></li><li><a href="global.html#updateTaskProgress">updateTaskProgress</a></li><li><a href="global.html#updateTaskProgressInFirebase">updateTaskProgressInFirebase</a></li><li><a href="global.html#updateTasksUI">updateTasksUI</a></li><li><a href="global.html#updateTextAndClearAssignees">updateTextAndClearAssignees</a></li><li><a href="global.html#uploadToFireBase">uploadToFireBase</a></li><li><a href="global.html#validateContactData">validateContactData</a></li><li><a href="global.html#validateEmail">validateEmail</a></li><li><a href="global.html#validateField">validateField</a></li><li><a href="global.html#validateForm">validateForm</a></li><li><a href="global.html#validateFormData">validateFormData</a></li><li><a href="global.html#validateInputs">validateInputs</a></li><li><a href="global.html#validateName">validateName</a></li><li><a href="global.html#validatePasswords">validatePasswords</a></li><li><a href="global.html#validateSignUpInputs">validateSignUpInputs</a></li><li><a href="global.html#validateUser">validateUser</a></li><li><a href="global.html#variableId">variableId</a></li><li><a href="global.html#whenChecked">whenChecked</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Jan 01 2025 20:28:28 GMT+0100 (Central European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Jan 08 2025 20:35:23 GMT+0100 (Central European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

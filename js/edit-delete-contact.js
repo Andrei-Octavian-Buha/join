@@ -2,12 +2,11 @@
  * Displays a toast message with the provided text.
  * @param {string} message - The message to display in the toast.
  * @returns {HTMLElement} The toast element.
- */ function showToastMessage(message) {
+ */
+function showToastMessage(message) {
   const toast = document.getElementById("toast");
-
   toast.innerHTML = message;
   toast.style.display = "block";
-
   setTimeout(() => {
     toast.classList.add("show");
     toast.classList.remove("hide");
@@ -182,19 +181,6 @@ async function deleteContact(contactId) {
 
 /**
  * Displays the overlay for editing a contact.
- * @param {string} contactId - The ID of the contact to edit.
- */
-function editContact(contactId) {
-  const editContactOverlay = document.getElementById("edit-contact-overlay");
-
-  if (editContactOverlay) {
-    editContactOverlay.style.display = "block";
-  } else {
-  }
-}
-
-/**
- * Displays the overlay for editing a contact.
  */
 function showEditContactOverlay() {
   const editContactOverlay = document.getElementById("edit-contact-overlay");
@@ -335,25 +321,6 @@ function validateFormData(contactData) {
  */
 async function updateContact(contactId, name, email, phone) {
   return await updateContactOnServer(contactId, name, email, phone);
-}
-
-/**
- * Displays a toast message with the provided message.
- * @param {string} message - The message to display in the toast.
- */
-function showToastMessage(message) {
-  const toast = document.getElementById("toast");
-  toast.textContent = message;
-  toast.style.display = "block";
-  setTimeout(() => {
-    toast.classList.add("show");
-  }, 100);
-  setTimeout(() => {
-    toast.classList.remove("show");
-    setTimeout(() => {
-      toast.style.display = "none";
-    }, 500);
-  }, 3000);
 }
 
 /**

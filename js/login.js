@@ -281,24 +281,6 @@ function saveCurrentUser(user) {
 }
 
 /**
- * Displays the error message in the container.
- * @param {HTMLElement} container - The container to show the error in.
- * @param {string} message - The error message.
- */
-function showErrorContainer(container, message) {
-  container.textContent = message; // Fehlermeldung einfügen
-  container.style.display = "block"; // Sichtbar machen
-}
-
-/**
- * Hides the error message container.
- * @param {HTMLElement} container - The container to hide the error.
- */
-function hideErrorContainer(container) {
-  container.style.display = "none"; // Verbergen
-}
-
-/**
  * Adds the event listener for the signup link.
  */
 function addEvent() {
