@@ -1,16 +1,23 @@
-// Define BASE_URL
 const BASE_URL =
   "https://join-store-ae38e-default-rtdb.europe-west1.firebasedatabase.app";
 
-let currentUser = null; // Globale Variable für den aktuellen Nutzer
+let currentUser = null;
 
-// Nach erfolgreichem Registrieren
+/**
+ * Stores the user data in session storage after a successful registration.
+ * @param {Object} user - The user object containing name and email.
+ */
 function storeUserInSessionStorage(user) {
-  sessionStorage.setItem("currentUser", JSON.stringify({ name: user.name, email: user.email }));
+  sessionStorage.setItem(
+    "currentUser",
+    JSON.stringify({ name: user.name, email: user.email })
+  );
 }
 
-
-// Collect input values
+/**
+ * Collects input values from the sign-up form.
+ * @returns {Object} - An object containing the values of the name, email, password, confirmPassword, and checkbox.
+ */
 function getSignUpInputs() {
   return {
     name: document.querySelector('input[placeholder="Name"]').value.trim(),
@@ -23,37 +30,49 @@ function getSignUpInputs() {
   };
 }
 
-// Function to validate inputs
+/**
+ * Validates the input values for the sign-up form.
+ * @param {Object} inputs - The input values to be validated.
+ * @returns {boolean} - True if inputs are valid, false otherwise.
+ */
 function validateInputs(inputs) {
-  if (!inputs.name || !inputs.email || !inputs.password || !inputs.confirmPassword) {
+  if (
+    !inputs.name ||
+    !inputs.email ||
+    !inputs.password ||
+    !inputs.confirmPassword
+  ) {
     return false;
   }
-
   if (!inputs.isChecked) {
     return false;
   }
-
   if (inputs.password !== inputs.confirmPassword) {
     showPasswordError();
     return false;
   }
-
   return true;
 }
 
-// Function that shows error if passwords don't match
+/**
+ * Displays an error when passwords don't match.
+ */
 function showPasswordError() {
   const errorContainer = document.getElementById("passwordError");
   const passwordInputs = document.querySelectorAll('input[type="password"]');
 
   errorContainer.style.display = "block";
 
-  passwordInputs.forEach(input => {
+  passwordInputs.forEach((input) => {
     input.classList.add("error");
   });
 }
 
-// Create a user object
+/**
+ * Creates a user object from the input values.
+ * @param {Object} inputs - The input values.
+ * @returns {Object} - The created user object.
+ */
 function createUserObject(inputs) {
   return {
     name: inputs.name,
@@ -62,7 +81,11 @@ function createUserObject(inputs) {
   };
 }
 
-// Push user data to the database
+/**
+ * Pushes the user data to the database.
+ * @param {Object} user - The user object containing user data.
+ * @throws {Error} - Throws an error if the request fails.
+ */
 async function pushUserToDatabase(user) {
   const response = await fetch(`${BASE_URL}/users.json`, {
     method: "POST",
@@ -77,7 +100,10 @@ async function pushUserToDatabase(user) {
   }
 }
 
-// Save current user in Session Storage
+/**
+ * Saves the current user in session storage.
+ * @param {Object} user - The user object containing name and email.
+ */
 function saveCurrentUser(user) {
   const currentUser = {
     name: user.name,
@@ -86,12 +112,16 @@ function saveCurrentUser(user) {
   sessionStorage.setItem("currentUser", JSON.stringify(currentUser));
 }
 
-// Redirect to Summary Page
+/**
+ * Redirects to the home page (summary_user.html).
+ */
 function redirectToHome() {
   window.location.href = "summary_user.html";
 }
 
-// Display signup success popup
+/**
+ * Displays the sign-up success popup.
+ */
 function showSignUpPopup() {
   const popup = document.getElementById("signUpPopup");
   popup.classList.remove("hide");
@@ -109,14 +139,18 @@ function showSignUpPopup() {
   });
 }
 
-// Redirect to home page after a delay
+/**
+ * Redirects to the home page (index.html) after a 2-second delay.
+ */
 function redirectToHome() {
   setTimeout(() => {
     window.location.href = "index.html";
   }, 2000);
 }
 
-// Initialize event listeners after DOM is loaded
+/**
+ * Initializes event listeners after the DOM has loaded.
+ */
 document.addEventListener("DOMContentLoaded", () => {
   const signUpButton = document.getElementById("signupButton");
   if (signUpButton) {
@@ -126,17 +160,26 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+/**
+ * Toggles the visibility of a password input field.
+ * @param {string} inputId - The ID of the password input element.
+ * @param {HTMLElement} icon - The icon element to change based on visibility.
+ */
 function togglePassword(inputId, icon) {
   var input = document.getElementById(inputId);
-  var isPassword = input.type === 'password';
-  input.type = isPassword ? 'text' : 'password';
-  icon.src = isPassword ? './assets/menu/visibility-off.png' : './assets/menu/lock.svg';
+  var isPassword = input.type === "password";
+  input.type = isPassword ? "text" : "password";
+  icon.src = isPassword
+    ? "./assets/menu/visibility-off.png"
+    : "./assets/menu/lock.svg";
 }
 
+/**
+ * Validates if the passwords in two fields match.
+ */
 function validatePasswords() {
-  var passwordField1 = document.getElementById('passwordField1');
-  var passwordField2 = document.getElementById('passwordField2');
-  
+  var passwordField1 = document.getElementById("passwordField1");
+  var passwordField2 = document.getElementById("passwordField2");
   if (passwordField1.value !== passwordField2.value) {
     passwordField1.style.border = "1px solid red";
     passwordField2.style.border = "1px solid red";
@@ -146,87 +189,108 @@ function validatePasswords() {
   }
 }
 
-function backToLogin(){
+/**
+ * Redirects the user to the login page when the "Back to Login" link is clicked.
+ */
+function backToLogin() {
   let backToLogin = document.getElementById("backToLogin");
-  backToLogin.addEventListener("click", ()=>{
+  backToLogin.addEventListener("click", () => {
     window.location.href = "index.html";
-  })
+  });
 }
- 
-// Funktion zur Validierung der E-Mail-Adresse
+
+/**
+ * Validates if the provided email address is in a correct format.
+ * @param {string} email - The email address to validate.
+ * @returns {boolean} - True if the email is valid, false otherwise.
+ */
 function validateEmail(email) {
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
   return emailRegex.test(email);
 }
 
-// Funktion zur Validierung des Namens
+/**
+ * Validates if the provided name is valid.
+ * @param {string} name - The name to validate.
+ * @returns {boolean} - True if the name is valid, false otherwise.
+ */
 function validateName(name) {
-  // Name muss mindestens 3 Zeichen lang sein und darf nur Buchstaben und Leerzeichen enthalten
   const isValidLength = name.length >= 3;
-  const isValidFormat = /^[a-zA-ZäöüÄÖÜß\s]+$/.test(name); // Erlaubt Buchstaben (auch deutsche Umlaute) und Leerzeichen
+  const isValidFormat = /^[a-zA-ZäöüÄÖÜß\s]+$/.test(name);
   return isValidLength && isValidFormat;
 }
 
-// Funktion, die die Fehler im Container anzeigt
+/**
+ * Displays an error message in the error container and highlights the relevant input field.
+ * @param {string} message - The error message to display.
+ * @param {string} fieldId - The ID of the input field to highlight.
+ */
 function showError(message, fieldId) {
   const errorContainer = document.getElementById("passwordError");
-  errorContainer.textContent = message;  // Fehlermeldung setzen
-  errorContainer.style.display = "block";  // Container sichtbar machen
-
+  errorContainer.textContent = message;
+  errorContainer.style.display = "block";
   const field = document.getElementById(fieldId);
   if (field) {
-    field.style.border = "1px solid red"; // Rote Umrandung hinzufügen
+    field.style.border = "1px solid red";
   }
 }
 
-// Funktion zur Fehlerbehebung und zum Verbergen der Fehler
+/**
+ * Clears all error messages and resets input field styles.
+ */
 function clearErrors() {
   const errorContainer = document.getElementById("passwordError");
-  errorContainer.style.display = "none";  // Fehlercontainer ausblenden
-
-  // Entfernt die rote Umrandung von allen Eingabefeldern
+  errorContainer.style.display = "none";
   const fields = document.querySelectorAll(".loginInputFeld");
-  fields.forEach(field => {
-    field.style.border = ""; // Standard-Rand zurücksetzen
+  fields.forEach((field) => {
+    field.style.border = "";
   });
 }
-// Funktion, die beim Klicken auf den "Sign up"-Button aufgerufen wird
+
+/**
+ * Handles the sign-up process when the "Sign up" button is clicked.
+ */
 async function handleSignUp() {
   const inputs = getSignUpInputs();
   if (!validateInputs(inputs)) return;
-  
   const isValid = validateSignUpInputs(inputs);
   if (!isValid) return;
-
   processSignUp(inputs);
 }
 
+/**
+ * Validates the sign-up inputs (email and name).
+ * @param {Object} inputs - The input values.
+ * @returns {boolean} - True if the inputs are valid, false otherwise.
+ */
 function validateSignUpInputs(inputs) {
   clearErrors();
-
   if (!validateEmail(inputs.email)) {
     showError("Bitte gib eine gültige E-Mail-Adresse ein.", "emailField");
     return false;
   }
-
   if (!validateName(inputs.name)) {
     showError("Bitte gib einen gültigen Namen ein.", "nameField");
     return false;
   }
-
   return true;
 }
 
+/**
+ * Processes the sign-up and pushes the user data to the database.
+ * @param {Object} inputs - The user inputs.
+ */
 async function processSignUp(inputs) {
   const user = createUserObject(inputs);
   try {
     await pushUserToDatabase(user);
-    storeUserInSessionStorage(user); // Speichert Name und Email in Session Storage
+    storeUserInSessionStorage(user);
     showSignUpPopup();
     redirectToHome();
   } catch (error) {
-    showError("Ein Fehler ist aufgetreten. Bitte versuche es erneut.", "nameField"); // Generische Fehlermeldung
+    showError(
+      "Ein Fehler ist aufgetreten. Bitte versuche es erneut.",
+      "nameField"
+    );
   }
 }
-
-

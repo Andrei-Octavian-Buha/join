@@ -108,8 +108,10 @@ function resetTaskDisplay() {
     if (container) {
       const tasks = container.querySelectorAll(".boardTaskCard");
       tasks.forEach((task) => {
-        task.style.display = "";});}
+        task.style.display = "";
       });
+    }
+  });
 }
 
 /**
@@ -321,7 +323,8 @@ function getValue(taskid) {
     prio: inputValues.prio,
     subtask: inputValues.subtask,
     progress: task.task.progress,
-    category: task.task.category,};
+    category: task.task.category,
+  };
 }
 
 const columnsOrder = [

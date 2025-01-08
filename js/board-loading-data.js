@@ -455,6 +455,14 @@ function showInfoAssignet(task) {
     .join("");
 }
 
+/**
+ * Generates the HTML for displaying an assigned person with their initials and name.
+ *
+ * @param {Object} person - The person object containing details about the assigned person.
+ * @param {string} person.name - The full name of the person.
+ * @param {string} person.key - A unique key identifier for the person.
+ * @returns {string} The HTML string for displaying the assigned person with their initials and name.
+ */
 function generateAssignedPersonHTML(person) {
   const initials = person.name
     .split(" ")
