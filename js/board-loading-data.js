@@ -309,33 +309,27 @@ async function updateCheckedSubTask(taskId, subtaskIndex, isChecked) {
 }
 
 function showInfoAssignet(task) {
-  let asignedDiv = document.getElementById(`asignedd${task.id}`);
-  if (!asignedDiv) {
-    return;
-  }
-  asignedDiv.innerHTML = "";
-  let assigned = task.task.assignet;
-  if (!assigned || assigned.length === 0) {
-    return;
-  }
-  if (assigned) {
-    assigned.forEach((person) => {
-      let initials = person.name
-        .split(" ")
-        .map((word) => word[0].toUpperCase())
-        .join("")
-        .slice(0, 2);
-      let color = getColorForInitial(initials[0]);
-      asignedDiv.innerHTML += `
-      <div class="dflex" style="gap:16px;">
-                <div id="${person.key}" class="assignetPersonKreis" style="background-color: ${color};">
-          ${initials}
-        </div>
-        <span>${person.name}</span>
+  const asignedDiv = document.getElementById(`asignedd${task.id}`);
+  if (!asignedDiv || !task.task.assignet?.length) return;
+
+  asignedDiv.innerHTML = task.task.assignet
+    .map((person) => generateAssignedPersonHTML(person))
+    .join("");
+}
+
+function generateAssignedPersonHTML(person) {
+  const initials = person.name
+    .split(" ")
+    .map((word) => word[0].toUpperCase())
+    .join("")
+    .slice(0, 2);
+  const color = getColorForInitial(initials[0]);
+  return `
+    <div class="dflex" style="gap:16px;">
+      <div id="${person.key}" class="assignetPersonKreis" style="background-color: ${color};">
+        ${initials}
       </div>
-      `;
-    });
-  } else {
-    return "don't Assignet Person";
-  }
+      <span>${person.name}</span>
+    </div>
+  `;
 }
