@@ -63,20 +63,16 @@ function resetColumns() {
  * @param {Array} tasksData The list of tasks to distribute.
  */
 function distributeTasks(tasksData) {
-  let todoId = document.getElementById("todoColumn");
-  let awaitfeedbackId = document.getElementById("awaitfeedbackColumn");
-  let inprogressId = document.getElementById("inprogressColumn");
-  let doneId = document.getElementById("doneColumn");
-
+  const columns = {
+    todo: "todoColumn",
+    awaitfeedback: "awaitfeedbackColumn",
+    inprogress: "inprogressColumn",
+    done: "doneColumn",
+  };
   tasksData.forEach((task) => {
-    if (task.task.progress === "todo") {
-      todoId.innerHTML += renderCard(task);
-    } else if (task.task.progress === "awaitfeedback") {
-      awaitfeedbackId.innerHTML += renderCard(task);
-    } else if (task.task.progress === "inprogress") {
-      inprogressId.innerHTML += renderCard(task);
-    } else if (task.task.progress === "done") {
-      doneId.innerHTML += renderCard(task);
+    const columnId = columns[task.task.progress];
+    if (columnId) {
+      document.getElementById(columnId).innerHTML += renderCard(task);
     }
     nullSubtask(task);
   });
@@ -98,22 +94,17 @@ function updateTasksUI(tasksData) {
  * @param {Array} tasksData The list of tasks to check for empty columns.
  */
 function updateEmptyColumnMessages(tasksData) {
-  const columns = [
-    { columnId: "todoColumn", messageClass: "no-tasks-message" },
-    { columnId: "awaitfeedbackColumn", messageClass: "no-tasks-message" },
-    { columnId: "inprogressColumn", messageClass: "no-tasks-message" },
-    { columnId: "doneColumn", messageClass: "no-tasks-message" },
-  ];
-  columns.forEach(({ columnId, messageClass }) => {
+  [
+    "todoColumn",
+    "awaitfeedbackColumn",
+    "inprogressColumn",
+    "doneColumn",
+  ].forEach((columnId) => {
     const column = document.getElementById(columnId);
     const messageDiv = column
       .closest(".column")
-      .querySelector(`.${messageClass}`);
-    if (!column.innerHTML.trim()) {
-      messageDiv.style.display = "flex";
-    } else {
-      messageDiv.style.display = "none";
-    }
+      .querySelector(".no-tasks-message");
+    messageDiv.style.display = column.innerHTML.trim() ? "none" : "flex";
   });
 }
 
@@ -437,18 +428,14 @@ async function updateCheckedSubTask(taskId, subtaskIndex, isChecked) {
   const task = tasks.find((t) => t.id === taskId);
   if (!task) return;
   task.task.subtask[subtaskIndex].checked = isChecked;
-  let sendDataToFirebase = task.task;
   try {
     const response = await fetch(`${BASE_URL}/task/${taskId}.json`, {
       method: "PUT",
-      body: JSON.stringify(sendDataToFirebase),
+      body: JSON.stringify(task.task),
       headers: { "Content-Type": "application/json" },
     });
-    if (!response.ok) {
-      throw new Error("Fehler beim Speichern der Kontaktdaten");
-    }
-    const updatedContact = await response.json();
-    return updatedContact;
+    if (!response.ok) throw new Error("Fehler beim Speichern der Kontaktdaten");
+    return await response.json();
   } catch (error) {
     console.error("Fehler beim Aktualisieren des Kontakts:", error);
     throw error;
@@ -460,33 +447,27 @@ async function updateCheckedSubTask(taskId, subtaskIndex, isChecked) {
  * @param {Object} task The task object.
  */
 function showInfoAssignet(task) {
-  let asignedDiv = document.getElementById(`asignedd${task.id}`);
-  if (!asignedDiv) {
-    return;
-  }
-  asignedDiv.innerHTML = "";
-  let assigned = task.task.assignet;
-  if (!assigned || assigned.length === 0) {
-    return;
-  }
-  if (assigned) {
-    assigned.forEach((person) => {
-      let initials = person.name
-        .split(" ")
-        .map((word) => word[0].toUpperCase())
-        .join("")
-        .slice(0, 2);
-      let color = getColorForInitial(initials[0]);
-      asignedDiv.innerHTML += `
-      <div class="dflex" style="gap:16px;">
-                <div id="${person.key}" class="assignetPersonKreis" style="background-color: ${color};">
-          ${initials}
-        </div>
-        <span>${person.name}</span>
+  const asignedDiv = document.getElementById(`asignedd${task.id}`);
+  if (!asignedDiv || !task.task.assignet?.length) return;
+
+  asignedDiv.innerHTML = task.task.assignet
+    .map((person) => generateAssignedPersonHTML(person))
+    .join("");
+}
+
+function generateAssignedPersonHTML(person) {
+  const initials = person.name
+    .split(" ")
+    .map((word) => word[0].toUpperCase())
+    .join("")
+    .slice(0, 2);
+  const color = getColorForInitial(initials[0]);
+  return `
+    <div class="dflex" style="gap:16px;">
+      <div id="${person.key}" class="assignetPersonKreis" style="background-color: ${color};">
+        ${initials}
       </div>
-      `;
-    });
-  } else {
-    return "don't Assignet Person";
-  }
+      <span>${person.name}</span>
+    </div>
+  `;
 }
