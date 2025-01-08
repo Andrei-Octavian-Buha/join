@@ -34,19 +34,31 @@ function resetErrorStates() {
   document.getElementById("categorySelectId").classList.remove("input-error");
 }
 
+function validateInput(inputValue) {
+  if (!inputValue.title) {
+    showError("reqTitle", "addTaskTittle");
+    return false;
+  }
+  if (!inputValue.date) {
+    showError("reqDate", "addTaskDate");
+    return false;
+  }
+  if (inputValue.category == 0) {
+    showError("reqCategory", "categorySelectId");
+    return false;
+  }
+  return true;
+}
+
+function showError(errorId, inputId) {
+  document.getElementById(errorId).classList.remove("dNone");
+  document.getElementById(inputId).classList.add("input-error");
+}
+
 function requiredValidation() {
   let inputValue = getValueFromInputs();
   resetErrorStates();
-  if (!inputValue.title) {
-    document.getElementById("reqTitle").classList.remove("dNone");
-    document.getElementById("addTaskTittle").classList.add("input-error");
-  } else if (!inputValue.date) {
-    document.getElementById("reqDate").classList.remove("dNone");
-    document.getElementById("addTaskDate").classList.add("input-error");
-  } else if (inputValue.category == 0) {
-    document.getElementById("reqCategory").classList.remove("dNone");
-    document.getElementById("categorySelectId").classList.add("input-error");
-  } else {
+  if (validateInput(inputValue)) {
     addDataToFireBase();
     showPopupAndRedirect();
   }
@@ -54,23 +66,14 @@ function requiredValidation() {
 
 function requiredValidationAddTaskToBoard() {
   let inputValue = getValueFromInputs();
-  if (!inputValue.title) {
-    document.getElementById("reqTitle").classList.remove("dNone");
-    document.getElementById("addTaskTittle").classList.add("input-error");
-  } else if (!inputValue.date) {
-    document.getElementById("reqDate").classList.remove("dNone");
-    document.getElementById("addTaskDate").classList.add("input-error");
-  } else if (inputValue.category == 0) {
-    document.getElementById("reqCategory").classList.remove("dNone");
-    document.getElementById("categorySelectId").classList.add("input-error");
-  } else {
+  if (validateInput(inputValue)) {
     addDataToFireBaseFromBoard();
     taskInit();
-    let template = document.getElementById("add-task-template");
-    template.classList.add("dNone");
+    document.getElementById("add-task-template").classList.add("dNone");
     subtasks = [];
   }
 }
+
 
 function addDataToFireBaseFromBoard() {
   const taskData = variableId();
