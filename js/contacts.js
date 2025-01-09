@@ -248,21 +248,6 @@ function showOverlayWithAnimation(overlayContent, contactOverlay) {
 }
 
 /**
- * Adjusts the display of the right content based on the window size.
- * @function
- */
-function adjustRightContentDisplay() {
-  const rightContent = document.querySelector(".right-content");
-  if (window.innerWidth <= 920) {
-    rightContent.classList.add("show");
-    rightContent.style.display = "flex";
-  } else {
-    rightContent.classList.remove("show");
-    rightContent.style.display = "";
-  }
-}
-
-/**
  * Creates the HTML structure for the contact card.
  * @function
  * @param {Object} contact - The contact data.
@@ -329,25 +314,6 @@ function createBadge(contactName) {
     return null;
   }
   return badge;
-}
-
-/**
- * Prepares the container for displaying the badge.
- * @function
- * @returns {Element|null} The badge container element or null if not found.
- */
-function prepareBadgeContainer() {
-  const badgeContainer = document.getElementById("edit-badge-container");
-  const imgContainer = document.getElementById("edit-img-container");
-  if (!badgeContainer) {
-    return null;
-  }
-  if (imgContainer) {
-    imgContainer.style.display = "none";
-  }
-  badgeContainer.style.backgroundColor = "transparent";
-  badgeContainer.innerHTML = "";
-  return badgeContainer;
 }
 
 /**
@@ -419,18 +385,6 @@ function loadUserDataFromSession() {
 function insertInitialsIntoElement(initials, elementId) {
   const profileTextElement = document.getElementById(elementId);
   profileTextElement.innerHTML = initials;
-}
-
-/**
- * Sets the user's initials in the profile section.
- * @function
- */
-function setUserInitials() {
-  const user = loadUserDataFromSession();
-  if (!user || !user.name) return;
-
-  const initials = generateInitials(user.name);
-  insertInitialsIntoElement(initials, "profileText");
 }
 
 /**

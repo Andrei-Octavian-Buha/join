@@ -9,19 +9,20 @@
       href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles/dropdown_menu.css">
+    <link rel="stylesheet" href="./styles/dropdown_menu.css" />
     <link rel="stylesheet" href="./styles/header.css" />
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./styles/contacts.css" />
     <link rel="stylesheet" href="./styles/contacts-edit.css" />
-    <link rel="stylesheet" href="./styles/contact-responsiv.css">
-    <link rel="stylesheet" href="./styles/contact-overlay.css">
+    <link rel="stylesheet" href="./styles/contact-responsiv.css" />
+    <link rel="stylesheet" href="./styles/contact-overlay.css" />
     <script src="./script.js"></script>
     <script src="./js/contacts.js" defer></script>
     <script src="./js/contact-overlay.js" defer></script>
     <script src="js/contacts-help-data.js" defer></script>
     <script src="./js/add-contact.js" defer></script>
     <script src="./js/edit-delete-contact.js" defer></script>
+    <script src="./js/contacts-data.js"></script>
     <link rel="icon" href="./assets/img/logo2.svg" />
     <link rel="icon" href="./assets/img/logo2.svg" />
     <title>Contacts</title>
@@ -48,18 +49,17 @@
             </div>
           </div>
 
-          <div id="toast" class="toast" style="display: none;">
+          <div id="toast" class="toast" style="display: none">
             Kontakt erfolgreich gespeichert!
           </div>
 
           <!-- Overlay für das Formular -->
           <div id="overlay" class="overlay slide-from-right">
             <div id="overlay-content" class="overlay-content">
-              
               <!-- Linke Spalte für das Formular -->
               <div class="info-container">
                 <div class="close" onclick="closeOverlay('overlay')">X</div>
-                <div class="exit"onclick="closeOverlay('overlay')" >X</div>
+                <div class="exit" onclick="closeOverlay('overlay')">X</div>
                 <div class="responsive-container">
                   <img src="assets/img/logo2.svg" alt="" />
                   <h2>Add Contact</h2>
@@ -94,10 +94,10 @@
                     placeholder="Phone"
                     pattern="^\+?[0-9]{8,15}$"
                   />
-              
+
                   <!-- Hier wird die Fehlermeldung dynamisch eingefügt -->
                   <div class="error-container"></div>
-              
+
                   <div class="button-container">
                     <button
                       class="cancel"
@@ -106,8 +106,9 @@
                     >
                       Cancel X
                     </button>
-                    <button class="create" type="submit">Create Contact ✔</button>
-
+                    <button class="create" type="submit">
+                      Create Contact ✔
+                    </button>
                   </div>
                 </form>
               </div>
@@ -147,10 +148,13 @@
           class="edit-overlay-contact slide-from-bottom"
         >
           <div class="edit-content">
-            <div class="close" onclick="closeOverlay('edit-contact-overlay')">X</div>
-            <div class="exit" onclick="closeOverlay('edit-contact-overlay')">X</div>
+            <div class="close" onclick="closeOverlay('edit-contact-overlay')">
+              X
+            </div>
+            <div class="exit" onclick="closeOverlay('edit-contact-overlay')">
+              X
+            </div>
             <div class="edit-info">
-
               <div class="responsive-container">
                 <img src="assets/img/logo2.svg" alt="" />
                 <h2>Edit Contact</h2>
@@ -171,35 +175,35 @@
               </div>
               <form id="editContactForm" onsubmit="handleFormSubmit(event)">
                 <input
-                type="text"
-                id="inputName"
-                class="input-name"
-                placeholder="Name"
-                minlength="2"
+                  type="text"
+                  id="inputName"
+                  class="input-name"
+                  placeholder="Name"
+                  minlength="2"
                 />
                 <input
-                type="email"
-                id="inputMail"
-                class="input-mail"
-                placeholder="Email"
+                  type="email"
+                  id="inputMail"
+                  class="input-mail"
+                  placeholder="Email"
                 />
                 <input
-                type="tel"
-                id="inputPhone"
-                class="input-phone"
-                placeholder="Phone"
-                pattern="^\+?[0-9]{8,15}$"
+                  type="tel"
+                  id="inputPhone"
+                  class="input-phone"
+                  placeholder="Phone"
+                  pattern="^\+?[0-9]{8,15}$"
                 />
                 <div class="error-container-edit"></div>
                 <div class="button-container">
                   <button
-                  id="deleteButton"
-                  class="cancel"
-                  type="button"
-                  onclick=""
-                >
-                  Delete
-                </button>                
+                    id="deleteButton"
+                    class="cancel"
+                    type="button"
+                    onclick=""
+                  >
+                    Delete
+                  </button>
                   <button id="submitButton" class="create" type="submit">
                     Save ✔
                   </button>
