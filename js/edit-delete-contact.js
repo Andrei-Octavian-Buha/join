@@ -358,7 +358,7 @@ function handleClickOutsideOverlay(event) {
     editContactOverlay.contains(event.target) ||
     event.target.closest(".edit-button-container")
   ) {
-    return; // Klick innerhalb des Overlays oder auf den Edit-Button, nichts tun
+    return; 
   }
   closeOverlay("edit-contact-overlay");
 }
