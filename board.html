@@ -28,6 +28,7 @@
     <script src="./js/add_task.js"></script>
     <script src="./js/add_task_return_html.js"></script>
     <script src="./js/add-task-form-abfrage.js"></script>
+    <script src="./js/add_task_data_to_firebase.js"></script>
     <script src="./js/board.js"></script>
     <script src="./js/board-logic.js"></script>
     <script src="./js/board-loading-data.js"></script>
@@ -36,7 +37,10 @@
     <title>Board</title>
     <link rel="icon" href="./assets/img/logo2.svg" />
   </head>
-  <body id="boardPage" onload="includeHTML(), taskInit(), updateArrowVisibilityForAll()">
+  <body
+    id="boardPage"
+    onload="includeHTML(), taskInit(), updateArrowVisibilityForAll()"
+  >
     <div class="" w3-include-html="./templates/header.html"></div>
     <div class="addTaskMainDiv">
       <div class="">
