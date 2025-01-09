@@ -114,31 +114,6 @@ function resetTaskDisplay() {
   });
 }
 
-/**
- * Finalizes task actions, resetting task-related variables.
- */
-function finalizeTaskActions() {
-  checked = [];
-  taskInit();
-}
-
-/**
- * Closes the task info card overlay and clears its content.
- */
-function closeOverlayInfoCard() {
-  hideOverlayInfoCard();
-  taskInit();
-  const card = document.getElementById("taskInfoCard");
-  card.innerHTML = "";
-}
-
-/**
- * Hides the list card element.
- */
-function hideshowListCard() {
-  document.getElementById("showListCard").classList.add("dNone");
-}
-
 let subtasksEditCard = [];
 
 /**
