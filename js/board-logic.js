@@ -273,15 +273,6 @@ function getTaskInputValues() {
 }
 
 /**
- * Retrieves the assignee value for a task.
- * @param {Object} task - The task to retrieve the assignee for.
- * @returns {Array} - The assignee list for the task.
- */
-function getAssignetValue(task) {
-  return checked && checked.length > 0 ? checked : task.task.assignet;
-}
-
-/**
  * Retrieves the value of a task by its ID.
  * @param {string} taskid - The ID of the task.
  * @returns {Object} - The task data or undefined if the task is not found.
@@ -290,11 +281,10 @@ function getValue(taskid) {
   const task = findTaskById(taskid);
   if (!task) return;
   const inputValues = getTaskInputValues();
-  const assignet = getAssignetValue(task);
   return {
     title: inputValues.title,
     description: inputValues.description,
-    assignet: assignet,
+    assignet: checked,
     date: inputValues.date,
     prio: inputValues.prio,
     subtask: inputValues.subtask,
