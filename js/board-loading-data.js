@@ -200,18 +200,23 @@ function renderRemainingCount(remainingCount, asignedDiv) {
 function showAssignet(task) {
   let asignedDiv = document.getElementById(`asigned${task.id}`);
   if (!asignedDiv) {
-    return;}
+    return;
+  }
   asignedDiv.innerHTML = "";
   let assigned = task.task.assignet;
   if (!assigned || assigned.length === 0) {
-    return;}
+    return;
+  }
   const maxVisible = 3;
   assigned.forEach((person, index) => {
     if (index < maxVisible) {
-      renderAssignedPerson(person, asignedDiv);}});
+      renderAssignedPerson(person, asignedDiv);
+    }
+  });
   if (assigned.length > maxVisible) {
     const remainingCount = assigned.length - maxVisible;
-    renderRemainingCount(remainingCount, asignedDiv);}
+    renderRemainingCount(remainingCount, asignedDiv);
+  }
 }
 
 function getColorForInitial(initial) {

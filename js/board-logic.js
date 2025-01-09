@@ -244,6 +244,7 @@ async function toDoForUpdateTaskOnFireBase(task) {
   await updateTaskOnFireBase(task);
   await taskInit();
   listDataCard(task);
+  checked = [];
 }
 
 /**
