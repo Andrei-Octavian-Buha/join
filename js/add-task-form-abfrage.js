@@ -112,22 +112,24 @@ function showPopupAndRedirect() {
 document.addEventListener("DOMContentLoaded", () => {
   const dropDownHeader = document.getElementById("dropDownHeaderId");
   const dropDownBody = document.getElementById("dropDownBodyId");
+  let isDropDownOpen = false;
   if (!dropDownHeader || !dropDownBody) {
     return;
   }
-  let isDropDownOpen = false;
   dropDownHeader.addEventListener("click", (event) => {
     isDropDownOpen = !isDropDownOpen;
     event.stopPropagation();
   });
-
   document.addEventListener("click", (event) => {
     if (isDropDownOpen && !dropDownBody.contains(event.target)) {
       isDropDownOpen = false;
       dropDownBody.classList.add("dNone");
     }
   });
+  dropDownBodyEventListner(dropDownBody);
+});
 
+function dropDownBodyEventListner(dropDownBody) {
   dropDownBody.addEventListener("click", (event) => {
     const contactContainer = event.target.closest(".dropDownContactContainer");
     if (contactContainer) {
@@ -137,4 +139,4 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
-});
+}
