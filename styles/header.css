@@ -49,7 +49,7 @@
     text-decoration: none;
     color: #cdcdcd;
   }
-  span {
+ .headerButtonSpan {
     font-size: 8px;
   }
 
