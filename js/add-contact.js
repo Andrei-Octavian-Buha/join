@@ -40,24 +40,22 @@ function gatherContactData() {
  * @param {Object} contact - The contact data to validate.
  * @returns {boolean} - Returns true if the data is valid, false otherwise.
  */
-function validateContactData(contact) {
-  const { name, email, phone } = contact;
-  if (!name || !email || !phone) {
-    alert("Bitte alle Felder ausfüllen.");
-    return false;
+function validateContactData({ name, email, phone }) {
+  if (![name, email, phone].every(Boolean)) {
+    return alert("Bitte alle Felder ausfüllen."), false;
   }
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    alert("Bitte eine gültige E-Mail-Adresse eingeben.");
-    return false;
-  }
-  const phoneRegex = /^\+?[0-9]{8,15}$/;
-  if (!phoneRegex.test(phone)) {
-    alert("Bitte eine gültige Telefonnummer eingeben (8-15 Ziffern).");
-    return false;
+  const patterns = {
+    email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+    phone: /^\+?[0-9]{8,15}$/
+  };
+  for (const [field, regex] of Object.entries(patterns)) {
+    if (!regex.test(eval(field))) {
+      return alert(`Bitte eine gültige ${field === "email" ? "E-Mail-Adresse" : "Telefonnummer"} eingeben.`), false;
+    }
   }
   return true;
 }
+
 
 /**
  * Sends the contact data to the server.
