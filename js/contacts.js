@@ -20,15 +20,26 @@ function init() {
 const overlayListeners = new Map();
 
 /**
- * Opens an overlay by its ID and sets up a click event listener to close it.
+ * Opens an overlay by its ID and triggers the visibility and animation.
  * @function
  * @param {string} overlayId - The ID of the overlay to open.
  */
 function openOverlay(overlayId) {
   const overlay = document.getElementById(overlayId);
-  const overlaycontent = document.getElementById("overlay-content");
   overlay.style.display = "block"; // Sichtbar machen
   setTimeout(() => overlay.classList.add("show"), 0); // Animation starten
+  setupOverlayClickListener(overlayId);
+}
+
+/**
+ * Sets up a click event listener to close the overlay when clicking outside its content.
+ * @function
+ * @param {string} overlayId - The ID of the overlay to monitor for clicks outside.
+ */
+function setupOverlayClickListener(overlayId) {
+  const overlay = document.getElementById(overlayId);
+  const overlaycontent = document.getElementById("overlay-content");
+
   const handleClickOutside = (event) => {
     if (!overlaycontent.contains(event.target)) {
       closeOverlay(overlayId);
@@ -36,10 +47,16 @@ function openOverlay(overlayId) {
       overlayListeners.delete(overlayId);
     }
   };
+
+  // Entferne den alten Listener, wenn er schon existiert
   if (overlayListeners.has(overlayId)) {
     document.removeEventListener("click", overlayListeners.get(overlayId));
   }
+
+  // Speichern des neuen Listeners
   overlayListeners.set(overlayId, handleClickOutside);
+  
+  // Füge den neuen Listener hinzu
   setTimeout(() => {
     document.addEventListener("click", handleClickOutside);
   }, 0);

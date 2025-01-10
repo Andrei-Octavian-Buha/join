@@ -160,14 +160,13 @@ function displayToast(toast) {
 }
 
 /**
- * Handles user confirmation for deleting a contact. Resolves or rejects based on the user's action.
+ * Handles the confirmation of the deletion action.
  * @param {HTMLElement} confirmButton - The button to confirm the deletion.
- * @param {HTMLElement} cancelButton - The button to cancel the deletion.
  * @param {string} contactId - The ID of the contact to delete.
  * @param {HTMLElement} toast - The toast element containing the confirmation buttons.
- * @returns {Promise<void>} Resolves if the user confirms deletion, rejects if canceled.
+ * @returns {Promise<void>} Resolves if the user confirms deletion.
  */
-function handleUserConfirmation(confirmButton, cancelButton, contactId, toast) {
+function handleDeletionConfirmation(confirmButton, contactId, toast) {
   return new Promise((resolve, reject) => {
     confirmButton.addEventListener("click", async () => {
       const isDeleted = await deleteContactFromApi(contactId);
@@ -178,8 +177,20 @@ function handleUserConfirmation(confirmButton, cancelButton, contactId, toast) {
         updateSecondOverlay();
         resolve();
       } else {
+        reject("Fehler beim Löschen");
       }
     });
+  });
+}
+
+/**
+ * Handles the cancellation of the deletion action.
+ * @param {HTMLElement} cancelButton - The button to cancel the deletion.
+ * @param {HTMLElement} toast - The toast element containing the confirmation buttons.
+ * @returns {Promise<void>} Rejects if the user cancels the deletion.
+ */
+function handleDeletionCancellation(cancelButton, toast) {
+  return new Promise((resolve, reject) => {
     cancelButton.addEventListener("click", () => {
       toast.classList.add("hide");
       setTimeout(() => (toast.style.display = "none"), 100);
@@ -187,6 +198,26 @@ function handleUserConfirmation(confirmButton, cancelButton, contactId, toast) {
     });
   });
 }
+
+/**
+ * Handles user confirmation for deleting a contact.
+ * @param {HTMLElement} confirmButton - The button to confirm the deletion.
+ * @param {HTMLElement} cancelButton - The button to cancel the deletion.
+ * @param {string} contactId - The ID of the contact to delete.
+ * @param {HTMLElement} toast - The toast element containing the confirmation buttons.
+ * @returns {Promise<void>} Resolves if the user confirms deletion, rejects if canceled.
+ */
+function handleUserConfirmation(confirmButton, cancelButton, contactId, toast) {
+  return Promise.all([
+    handleDeletionConfirmation(confirmButton, contactId, toast),
+    handleDeletionCancellation(cancelButton, toast)
+  ]).then(() => {
+    // No rejection here, as the promise resolves when either action is completed
+  }).catch((error) => {
+    console.error(error);
+  });
+}
+
 
 /**
  * Deletes a contact and handles the confirmation process.
