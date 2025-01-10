@@ -309,7 +309,6 @@ function renderAssignees(checked, assigneeElement, maxCount) {
   if (checked.length > maxCount) {
     generateInitialsHTML(checked, assigneeElement, maxCount);
     generateRemainingCountHTML(checked, assigneeElement, maxCount);
-    console.log(checked);
   } else {
     generateInitialsHTML(checked, assigneeElement, checked.length);
   }

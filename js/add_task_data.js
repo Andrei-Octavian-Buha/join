@@ -116,44 +116,6 @@ function editAddedSubTask(index) {
 }
 
 /**
- * Returns a color code for the given initial.
- * @function
- * @param {string} initial - The initial character for which to get the color.
- * @returns {string} The color code corresponding to the initial.
- */
-function getColorForInitial(initial) {
-  const colors = {
-    A: "#FF5733",
-    B: "#FFBD33",
-    C: "#DBFF33",
-    D: "#75FF33",
-    E: "#33FF57",
-    F: "#33FFBD",
-    G: "#33DBFF",
-    H: "#3375FF",
-    I: "#5733FF",
-    J: "#BD33FF",
-    K: "#FF33DB",
-    L: "#FF3375",
-    M: "#FF3333",
-    N: "#FF6633",
-    O: "#FF9933",
-    P: "#FFCC33",
-    Q: "#FFFF33",
-    R: "#CCFF33",
-    S: "#99FF33",
-    T: "#66FF33",
-    U: "#33FF66",
-    V: "#33FF99",
-    W: "#33FFCC",
-    X: "#33FFFF",
-    Y: "#33CCFF",
-    Z: "#3399FF",
-  };
-  return colors[initial] || "#333333";
-}
-
-/**
  * Sorts an array of contact objects alphabetically by name.
  * @function
  * @param {Array<Object>} contacts - The array of contact objects to be sorted.
