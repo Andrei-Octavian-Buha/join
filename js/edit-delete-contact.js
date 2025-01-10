@@ -218,7 +218,6 @@ function handleUserConfirmation(confirmButton, cancelButton, contactId, toast) {
   });
 }
 
-
 /**
  * Deletes a contact and handles the confirmation process.
  * @param {string} contactId - The ID of the contact to delete.
@@ -324,28 +323,6 @@ function updateContactOverlay(updatedContact) {
       "+49 " + updatedContact.phone;
   }
   fetchContactsData();
-}
-
-/**
- * Validates the contact data (name, email, and phone).
- * @param {Object} contact - The contact data to validate.
- * @returns {boolean} True if the contact data is valid, false otherwise.
- */
-function validateContactData(contact) {
-  const { name, email, phone } = contact;
-  const nameRegex = /^[A-Za-z\s\-]+$/;
-  if (!name || name.trim().length === 0 || !nameRegex.test(name)) {
-    return false;
-  }
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    return false;
-  }
-  const phoneRegex = /^\+?[0-9]{8,15}$/;
-  if (!phoneRegex.test(phone)) {
-    return false;
-  }
-  return true;
 }
 
 /**
