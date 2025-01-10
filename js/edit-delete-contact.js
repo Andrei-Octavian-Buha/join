@@ -1,18 +1,47 @@
 /**
- * Displays a toast message with the provided text.
+ * Updates the content and displays the toast element.
+ * @param {HTMLElement} toast - The toast element to display.
  * @param {string} message - The message to display in the toast.
+ */
+function showToast(toast, message) {
+  toast.innerHTML = message; 
+  toast.style.display = "block"; 
+  toast.classList.add("show"); 
+  toast.classList.remove("hide"); 
+}
+
+/**
+ * Hides the toast element after a specified duration.
+ * @param {HTMLElement} toast - The toast element to hide.
+ * @param {number} duration - The duration (in milliseconds) to display the toast before hiding it.
+ */
+function hideToast(toast, duration) {
+  setTimeout(() => {
+    toast.classList.remove("show"); 
+    toast.classList.add("hide"); 
+    
+    const fadeOutDuration = 2000; 
+    setTimeout(() => {
+      toast.style.display = "none"; 
+    }, fadeOutDuration);
+  }, duration);
+}
+
+/**
+ * Displays a toast message with the provided text and hides it automatically after a delay.
+ * @param {string} message - The message to display in the toast.
+ * @param {number} duration - The duration (in milliseconds) to display the toast.
  * @returns {HTMLElement} The toast element.
  */
-function showToastMessage(message) {
-  const toast = document.getElementById("toast");
-  toast.innerHTML = message;
-  toast.style.display = "block";
-  setTimeout(() => {
-    toast.classList.add("show");
-    toast.classList.remove("hide");
-  }, 100);
+function showToastMessage(message, duration = 4000) {
+  const toast = document.getElementById("toast"); 
+  showToast(toast, message); 
+  hideToast(toast, duration); 
   return toast;
 }
+
+
+
 
 /**
  * Adds confirmation buttons (Delete and Cancel) to the toast message.
