@@ -386,17 +386,3 @@ function insertInitialsIntoElement(initials, elementId) {
   const profileTextElement = document.getElementById(elementId);
   profileTextElement.innerHTML = initials;
 }
-
-/**
- * Event listener that runs when the DOM is loaded.
- * @function
- */
-document.addEventListener("DOMContentLoaded", () => {
-  const checkHeaderInterval = setInterval(() => {
-    const profileTextElement = document.getElementById("profileText");
-    if (profileTextElement) {
-      clearInterval(checkHeaderInterval);
-      setUserInitials();
-    }
-  }, 100);
-});

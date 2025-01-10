@@ -83,4 +83,17 @@ function setUserInitials() {
   }
 }
 
+/**
+ * Initializes the user's profile text by repeatedly checking for the header element.
+ * Stops the interval once the element is found and updates the user's initials.
+ */
+document.addEventListener("DOMContentLoaded", () => {
+  const checkHeaderInterval = setInterval(() => {
+    const profileTextElement = document.getElementById("profileText");
+    if (profileTextElement) {
+      clearInterval(checkHeaderInterval);
+      setUserInitials();
+    }
+  }, 100);
+});
 

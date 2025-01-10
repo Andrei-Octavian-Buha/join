@@ -25,17 +25,3 @@ window.onclick = function (event) {
     }
   }
 };
-
-/**
- * Waits for the DOM to be fully loaded, then calls setUserInitials() to set the user's initials.
- * This function repeatedly checks for the 'profileText' element and executes once it's available.
- */
-document.addEventListener("DOMContentLoaded", () => {
-  const checkHeaderInterval = setInterval(() => {
-    const profileTextElement = document.getElementById("profileText");
-    if (profileTextElement) {
-      clearInterval(checkHeaderInterval);
-      setUserInitials();
-    }
-  }, 100);
-});

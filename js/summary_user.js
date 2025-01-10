@@ -90,19 +90,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /**
- * Waits for the DOM to load and sets the user's initials once profile text is available.
- */
-document.addEventListener("DOMContentLoaded", () => {
-  const checkHeaderInterval = setInterval(() => {
-    const profileTextElement = document.getElementById("profileText");
-    if (profileTextElement) {
-      clearInterval(checkHeaderInterval);
-      setUserInitials();
-    }
-  }, 100);
-});
-
-/**
  * Initializes the page, loading tasks, and updating deadlines and HTML content.
  */
 document.addEventListener("DOMContentLoaded", async () => {

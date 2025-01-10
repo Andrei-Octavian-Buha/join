@@ -34,18 +34,3 @@ function getCurrentUser() {
   const user = sessionStorage.getItem("currentUser");
   return user ? JSON.parse(user) : null;
 }
-
-/**
- * Event listener that runs once the DOM is fully loaded.
- * It periodically checks for the existence of the element with id 'profileText',
- * and once it's found, it sets the user's initials by calling setUserInitials.
- */
-document.addEventListener("DOMContentLoaded", () => {
-  const checkHeaderInterval = setInterval(() => {
-    const profileTextElement = document.getElementById("profileText");
-    if (profileTextElement) {
-      clearInterval(checkHeaderInterval);
-      setUserInitials();
-    }
-  }, 100);
-});
