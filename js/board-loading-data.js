@@ -233,8 +233,6 @@ function renderRemainingCountIfNecessary(assigned, container, maxVisible) {
   }
 }
 
-
-
 /**
  * Displays the appropriate priority icon based on the task's priority.
  * @param {Object} task The task object.
@@ -351,26 +349,28 @@ function showInfoAssignet(task) {
 }
 
 /**
- * Generates the HTML for displaying an assigned person with their initials and name.
- *
- * @param {Object} person - The person object containing details about the assigned person.
- * @param {string} person.name - The full name of the person.
- * @param {string} person.key - A unique key identifier for the person.
- * @returns {string} The HTML string for displaying the assigned person with their initials and name.
+ * Generates the HTML for displaying an assigned person's name and initials.
+ * @param {Object} person The person object containing their name and unique key.
+ * @returns {string} The HTML string for the assigned person.
  */
 function generateAssignedPersonHTML(person) {
-  const initials = person.name
+  const initials = getInitials(person.name);
+  const color = getColorForInitial(initials[0]);
+  return createAssignedPersonHTML(person.key, initials, color, person.name);
+}
+
+/**
+ * Extracts the initials from a person's name.
+ * @param {string} name The full name of the person.
+ * @returns {string} The initials of the person.
+ */
+function getInitials(name) {
+  return name
     .split(" ")
     .map((word) => word[0].toUpperCase())
     .join("")
     .slice(0, 2);
-  const color = getColorForInitial(initials[0]);
-  return `
-    <div class="dflex" style="gap:16px;">
-      <div id="${person.key}" class="assignetPersonKreis" style="background-color: ${color};">
-        ${initials}
-      </div>
-      <span>${person.name}</span>
-    </div>
-  `;
 }
+
+
+

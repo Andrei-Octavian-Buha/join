@@ -329,3 +329,22 @@ function renderCard(task) {
       </div>
     </div>`;
 }
+
+/**
+ * Creates the HTML markup for an assigned person.
+ * @param {string} key The unique key of the person.
+ * @param {string} initials The initials of the person.
+ * @param {string} color The background color for the initials.
+ * @param {string} name The full name of the person.
+ * @returns {string} The HTML string for the assigned person.
+ */
+function createAssignedPersonHTML(key, initials, color, name) {
+  return `
+    <div class="dflex" style="gap:16px;">
+      <div id="${key}" class="assignetPersonKreis" style="background-color: ${color};">
+        ${initials}
+      </div>
+      <span>${name}</span>
+    </div>
+  `;
+}
