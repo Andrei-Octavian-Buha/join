@@ -90,37 +90,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /**
- * Extracts the initials from a full name.
- * @param {string} name - The full name of the user.
- * @returns {string} The first two initials of the name.
- */
-function getInitials(name) {
-  if (!name) return "??";
-  const nameParts = name.trim().split(" ");
-  const initials = nameParts.map((part) => part.charAt(0).toUpperCase());
-  return initials.slice(0, 2).join("");
-}
-
-/**
- * Sets the user's initials in the profile element.
- */
-function setUserInitials() {
-  const userData = sessionStorage.getItem("currentUser");
-  if (userData) {
-    try {
-      const user = JSON.parse(userData);
-      const initials = getInitials(user.name);
-      const profileTextElement = document.getElementById("profileText");
-      if (profileTextElement) {
-        profileTextElement.innerHTML = initials;
-      }
-    } catch (error) {
-      console.error("Fehler beim Verarbeiten der Benutzerdaten:", error);
-    }
-  }
-}
-
-/**
  * Waits for the DOM to load and sets the user's initials once profile text is available.
  */
 document.addEventListener("DOMContentLoaded", () => {

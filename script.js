@@ -51,5 +51,36 @@ function getColorForInitial(initial) {
 }
 
 
+/**
+ * Extracts the initials from a given name.
+ * @param {string} name - The full name of a person.
+ * @returns {string} The initials of the person, or "??" if no name is provided.
+ */
+function getInitials(name) {
+  if (!name) return "??";
+  const nameParts = name.trim().split(" ");
+  const initials = nameParts.map((part) => part.charAt(0).toUpperCase());
+  return initials.slice(0, 2).join("");
+}
+
+
+/**
+ * Sets the user's initials in the profile element.
+ */
+function setUserInitials() {
+  const userData = sessionStorage.getItem("currentUser");
+  if (userData) {
+    try {
+      const user = JSON.parse(userData);
+      const initials = getInitials(user.name);
+      const profileTextElement = document.getElementById("profileText");
+      if (profileTextElement) {
+        profileTextElement.innerHTML = initials;
+      }
+    } catch (error) {
+      console.error("Fehler beim Verarbeiten der Benutzerdaten:", error);
+    }
+  }
+}
 
 

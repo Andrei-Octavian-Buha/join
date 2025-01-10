@@ -53,38 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /**
- * Extracts the initials from a given name.
- * @param {string} name - The full name of a person.
- * @returns {string} The initials of the person, or "??" if no name is provided.
- */
-function getInitials(name) {
-  if (!name) return "??";
-  const nameParts = name.trim().split(" ");
-  const initials = nameParts.map((part) => part.charAt(0).toUpperCase());
-  return initials.slice(0, 2).join("");
-}
-
-/**
- * Sets the initials of the current user in the profile text element.
- * Retrieves user data from sessionStorage under the key "currentUser".
- */
-function setUserInitials() {
-  const userData = sessionStorage.getItem("currentUser");
-  if (userData) {
-    try {
-      const user = JSON.parse(userData);
-      const initials = getInitials(user.name);
-      const profileTextElement = document.getElementById("profileText");
-      if (profileTextElement) {
-        profileTextElement.innerHTML = initials;
-      }
-    } catch (error) {
-      console.error("Fehler beim Verarbeiten der Benutzerdaten:", error);
-    }
-  }
-}
-
-/**
  * Initializes the user's profile text by repeatedly checking for the header element.
  * Stops the interval once the element is found and updates the user's initials.
  */
