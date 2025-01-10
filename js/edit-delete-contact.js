@@ -40,9 +40,6 @@ function showToastMessage(message, duration = 4000) {
   return toast;
 }
 
-
-
-
 /**
  * Adds confirmation buttons (Delete and Cancel) to the toast message.
  * @param {HTMLElement} toast - The toast element to append the buttons to.
