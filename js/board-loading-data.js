@@ -195,29 +195,45 @@ function renderRemainingCount(remainingCount, asignedDiv) {
 
 /**
  * Displays the assigned persons for a given task.
- * @param {Object} task The task object.
+ * @param {Object} task The task object containing the assigned persons.
  */
 function showAssignet(task) {
   let asignedDiv = document.getElementById(`asigned${task.id}`);
-  if (!asignedDiv) {
-    return;
-  }
-  asignedDiv.innerHTML = "";
+  if (!asignedDiv) return;
+
+  asignedDiv.innerHTML = ""; // Leert den Inhalt des Elements
   let assigned = task.task.assignet;
-  if (!assigned || assigned.length === 0) {
-    return;
-  }
+  if (!assigned || assigned.length === 0) return;
+
   const maxVisible = 3;
-  assigned.forEach((person, index) => {
-    if (index < maxVisible) {
-      renderAssignedPerson(person, asignedDiv);
-    }
-  });
+  renderAssignedPersons(assigned, asignedDiv, maxVisible);
+  renderRemainingCountIfNecessary(assigned, asignedDiv, maxVisible);
+}
+
+/**
+ * Renders the assigned persons, displaying up to a maximum number of visible persons.
+ * @param {Array} assigned List of assigned persons to be displayed.
+ * @param {HTMLElement} container The container element to append the rendered persons.
+ * @param {number} maxVisible The maximum number of persons to display.
+ */
+function renderAssignedPersons(assigned, container, maxVisible) {
+  assigned.slice(0, maxVisible).forEach(person => renderAssignedPerson(person, container));
+}
+
+/**
+ * Renders the remaining count if the number of assigned persons exceeds the maximum visible limit.
+ * @param {Array} assigned List of assigned persons.
+ * @param {HTMLElement} container The container element to display the remaining count.
+ * @param {number} maxVisible The maximum number of persons to display before showing the remaining count.
+ */
+function renderRemainingCountIfNecessary(assigned, container, maxVisible) {
   if (assigned.length > maxVisible) {
     const remainingCount = assigned.length - maxVisible;
-    renderRemainingCount(remainingCount, asignedDiv);
+    renderRemainingCount(remainingCount, container);
   }
 }
+
+
 
 /**
  * Displays the appropriate priority icon based on the task's priority.
