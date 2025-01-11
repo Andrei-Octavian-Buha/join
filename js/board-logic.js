@@ -354,21 +354,44 @@ function updateArrowVisibilityForAll() {
  */
 function updateArrowVisibility(taskId) {
   const taskCard = document.getElementById(taskId);
-  const currentColumn = taskCard.closest(".drag-area").id;
-  const arrowUp = taskCard.querySelector(".arrow-up");
-  const arrowDown = taskCard.querySelector(".arrow-down");
-  const currentIndex = columnsOrder.indexOf(currentColumn);
-  if (currentIndex === 0) {
-    arrowUp.style.display = "none";
-  } else {
-    arrowUp.style.display = "inline";
-  }
-  if (currentIndex === columnsOrder.length - 1) {
-    arrowDown.style.display = "none";
-  } else {
-    arrowDown.style.display = "inline";
+  if (!taskCard) return;
+
+  const currentColumn = getCurrentColumn(taskCard);
+  const currentIndex = getColumnIndex(currentColumn);
+
+  updateArrow(taskCard.querySelector(".arrow-up"), currentIndex > 0);
+  updateArrow(taskCard.querySelector(".arrow-down"), currentIndex < columnsOrder.length - 1);
+}
+
+/**
+ * Gets the ID of the current column where the task is located.
+ * @param {HTMLElement} taskCard - The task card element.
+ * @returns {string} The ID of the current column.
+ */
+function getCurrentColumn(taskCard) {
+  return taskCard.closest(".drag-area")?.id || "";
+}
+
+/**
+ * Gets the index of a column in the ordered columns array.
+ * @param {string} columnId - The ID of the column.
+ * @returns {number} The index of the column in the `columnsOrder` array.
+ */
+function getColumnIndex(columnId) {
+  return columnsOrder.indexOf(columnId);
+}
+
+/**
+ * Updates the display property of an arrow based on its visibility status.
+ * @param {HTMLElement} arrow - The arrow element (up or down).
+ * @param {boolean} isVisible - Whether the arrow should be visible.
+ */
+function updateArrow(arrow, isVisible) {
+  if (arrow) {
+    arrow.style.display = isVisible ? "inline" : "none";
   }
 }
+
 
 /**
  * Initializes the board after the page is loaded.

@@ -120,10 +120,8 @@ function renderContactsforEdit(contacts, taskId) {
     const checkbox = container.querySelector(`input[type="checkbox"]`);
     if (assignedContactKeys.includes(element.id)) {
       checkbox.checked = true;
-      whenChecked(element);
-    }
-    startEvent(element);
-  });
+      whenChecked(element);}
+    startEvent(element);});
 }
 
 /**
@@ -145,32 +143,44 @@ function whenChecked(contactId) {
 }
 
 /**
- * Creates a contact element for editing in the dropdown.
- * @function
- * @param {Object} element - The contact object containing contact details.
- * @param {string} taskId - The ID of the task being edited.
- * @returns {HTMLElement} The DOM element representing the contact for editing.
+ * Creates a contact element for editing a task.
+ * @param {Object} element - The contact element data.
+ * @param {string} taskId - The ID of the task associated with the contact.
+ * @returns {HTMLElement} The generated contact container element.
  */
 function createContactElementforEdit(element, taskId) {
-  let container = document.createElement("label");
-  container.id = `ContainerID${element.id}`;
-  container.classList.add("dropDownContactContainer");
+  const container = initializeContainer(element.id);
+  const initials = getContactInitials(element.cont.name);
+  const color = getColorForInitial(initials[0]);
+  container.innerHTML = dropDownContactNameHTML(element, color, initials, taskId);
+  return container;
+}
 
-  let initials = element.cont.name
+/**
+ * Initializes the container element with required attributes and styles.
+ * @param {string} id - The ID for the container.
+ * @returns {HTMLElement} The initialized container element.
+ */
+function initializeContainer(id) {
+  const container = document.createElement("label");
+  container.id = `ContainerID${id}`;
+  container.classList.add("dropDownContactContainer");
+  return container;
+}
+
+/**
+ * Extracts the initials from a contact name.
+ * @param {string} name - The full name of the contact.
+ * @returns {string} The initials of the contact.
+ */
+function getContactInitials(name) {
+  return name
     .split(" ")
     .map((word) => word[0].toUpperCase())
     .join("")
     .slice(0, 2);
-
-  let color = getColorForInitial(initials[0]);
-  container.innerHTML = dropDownContactNameHTML(
-    element,
-    color,
-    initials,
-    taskId
-  );
-  return container;
 }
+
 
 /**
  * Adds an event listener to a checkbox associated with a specific contact.

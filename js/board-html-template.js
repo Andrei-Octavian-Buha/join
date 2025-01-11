@@ -1,3 +1,35 @@
+/**
+ * Generates the HTML structure for an editable task card.
+ *
+ * @param {Object} task - The task object to populate the card with.
+ * @param {string} task.id - The unique identifier of the task.
+ * @param {Object} task.task - The details of the task.
+ * @param {string} task.task.title - The title of the task.
+ * @param {string} task.task.description - A description of the task.
+ * @param {string} task.task.date - The due date of the task in ISO format (YYYY-MM-DD).
+ * @param {string} task.task.prio - The priority of the task ("urgent", "medium", or "low").
+ *
+ * @returns {string} - A string representing the HTML structure for the task edit card.
+ *
+ * The generated HTML includes:
+ * - Input fields for the task title, description, and due date.
+ * - Priority selection buttons (urgent, medium, low).
+ * - A dropdown menu for selecting assigned contacts.
+ * - A section to add subtasks with options to create, edit, and delete subtasks.
+ * - A button to confirm and save changes, triggering the `toDoForUpdateTaskOnFireBase` function with the task ID.
+ *
+ * Example Usage:
+ * const task = {
+ *   id: "123",
+ *   task: {
+ *     title: "Complete the project",
+ *     description: "Finish the task module",
+ *     date: "2025-01-15",
+ *     prio: "medium"
+ *   }
+ * };
+ * const taskCardHTML = showEditCard(task);
+ */
 function showEditCard(task) {
   return `
           
@@ -347,4 +379,22 @@ function createAssignedPersonHTML(key, initials, color, name) {
       <span>${name}</span>
     </div>
   `;
+}
+
+/**
+ * Generates the HTML for a single subtask item.
+ * @param {string} taskId - The ID of the task containing the subtask.
+ * @param {Object} subtask - The subtask object.
+ * @param {number} index - The index of the subtask in the list.
+ * @returns {string} The HTML string for the subtask item.
+ */
+function generateSubtaskHTML(taskId, subtask, index) {
+  const checkboxSrc = subtask.checked ? "checkbox-checked.svg" : "checkbox.svg";
+  return `
+    <div class="subtaskItem">
+      <img src="./assets/subtask/${checkboxSrc}" alt="" 
+           class="cursor" onclick="toggleImage(this, '${taskId}', '${index}')" 
+           data-index="${index}" id="checkbox" />
+      ${subtask.name}
+    </div>`;
 }

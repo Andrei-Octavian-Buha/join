@@ -90,9 +90,7 @@ function handleSuccess() {
   setTimeout(() => {
     toast.classList.remove("show");
     setTimeout(() => {
-      toast.style.display = "none";
-    }, 500);
-  }, 3000);
+      toast.style.display = "none";}, 500);}, 3000);
 }
 
 /**

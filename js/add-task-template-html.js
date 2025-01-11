@@ -1,3 +1,28 @@
+/**
+ * Generates the HTML template for the "Add Task" overlay.
+ * 
+ * This function returns a string containing the HTML structure of the overlay 
+ * where users can input details for creating a new task. The form includes fields 
+ * for title, description, assigned contacts, due date, priority, category, and subtasks.
+ *
+ * @returns {string} - A string of HTML representing the "Add Task" overlay.
+ *
+ * Key Features:
+ * - **Title Input:** A required field to enter the task title.
+ * - **Description Textarea:** Allows users to provide a description for the task.
+ * - **Assign To Dropdown:** A dropdown to select contacts to assign the task to.
+ * - **Due Date Input:** A required date picker for specifying the task's deadline.
+ * - **Priority Options:** Radio buttons for selecting the priority level (Urgent, Medium, Low).
+ * - **Category Selector:** A dropdown to choose the task's category.
+ * - **Subtask Management:** Includes an input field and buttons for dynamically adding subtasks.
+ * - **Validation Indicators:** Displays error messages for required fields when they are empty.
+ * - **Action Buttons:** 
+ *   - "Clear" button to reset the form.
+ *   - "Create Task" button to validate and submit the form data.
+ *
+ * Note: The function uses predefined IDs and classes for interactive elements, 
+ * making it compatible with associated JavaScript functions for functionality and styling.
+ */
 function addTaskTemplate() {
   return `<div class="addTaskOverlay">
     <div class="addTaskContainer">

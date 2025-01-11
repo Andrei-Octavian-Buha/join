@@ -25,26 +25,34 @@ async function updateCheckedSubTask(taskId, subtaskIndex, isChecked) {
 
 /**
  * Displays the subtasks of a task in a list.
- * @param {Object} task The task object.
+ * @param {Object} task - The task object containing subtasks.
  */
 function showSubTasksString(task) {
-  let subtasks = task.task.subtask;
-  let subtasklist = document.getElementById("subtaskList");
-  subtasklist.innerHTML = "";
-  if (subtasks && subtasks.length > 0) {
-    subtasks.forEach((subtask, subtaskIndex) => {
-      const checkboxSrc = subtask.checked
-        ? "checkbox-checked.svg"
-        : "checkbox.svg";
-      subtasklist.innerHTML += `
-          <div class="subtaskItem">
-              <img src="./assets/subtask/${checkboxSrc}" alt="" class="cursor" onclick="toggleImage(this, '${task.id}' ,'${subtaskIndex}')" data-index="${subtaskIndex}"  id="checkbox" />${subtask.name}
-          </div>`;
-    });
-  } else {
-    subtasklist.innerHTML = "<p>No subtasks available.</p>";
-  }
+  const subtasks = task.task.subtask || [];
+  const subtaskList = document.getElementById("subtaskList");
+  subtaskList.innerHTML = subtasks.length > 0 
+    ? subtasks.map((subtask, index) => generateSubtaskHTML(task.id, subtask, index)).join("")
+    : "<p>No subtasks available.</p>";
 }
+
+/**
+ * Generates the HTML for a single subtask item.
+ * @param {string} taskId - The ID of the task containing the subtask.
+ * @param {Object} subtask - The subtask object.
+ * @param {number} index - The index of the subtask in the list.
+ * @returns {string} The HTML string for the subtask item.
+ */
+function generateSubtaskHTML(taskId, subtask, index) {
+  const checkboxSrc = subtask.checked ? "checkbox-checked.svg" : "checkbox.svg";
+  return `
+    <div class="subtaskItem">
+      <img src="./assets/subtask/${checkboxSrc}" alt="" 
+           class="cursor" onclick="toggleImage(this, '${taskId}', '${index}')" 
+           data-index="${index}" id="checkbox" />
+      ${subtask.name}
+    </div>`;
+}
+
 
 /**
  * Handles the null or empty subtask scenario by updating the progress bar display.
