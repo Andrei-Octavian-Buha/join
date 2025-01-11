@@ -31,28 +31,39 @@ function getSignUpInputs() {
 }
 
 /**
- * Validates the input values for the sign-up form.
- * @param {Object} inputs - The input values to be validated.
- * @returns {boolean} - True if inputs are valid, false otherwise.
+ * Validates user inputs for a form.
+ * @param {Object} inputs - The input fields to validate.
+ * @returns {boolean} True if all inputs are valid, false otherwise.
  */
 function validateInputs(inputs) {
-  if (
-    !inputs.name ||
-    !inputs.email ||
-    !inputs.password ||
-    !inputs.confirmPassword
-  ) {
-    return false;
-  }
-  if (!inputs.isChecked) {
-    return false;
-  }
-  if (inputs.password !== inputs.confirmPassword) {
+  if (!areRequiredFieldsFilled(inputs)) return false;
+  if (!inputs.isChecked) return false;
+  if (!arePasswordsMatching(inputs.password, inputs.confirmPassword)) {
     showPasswordError();
     return false;
   }
   return true;
 }
+
+/**
+ * Checks if all required fields are filled.
+ * @param {Object} inputs - The input fields to check.
+ * @returns {boolean} True if all required fields are filled, false otherwise.
+ */
+function areRequiredFieldsFilled(inputs) {
+  return inputs.name && inputs.email && inputs.password && inputs.confirmPassword;
+}
+
+/**
+ * Checks if the password and confirmation password match.
+ * @param {string} password - The password input.
+ * @param {string} confirmPassword - The confirmation password input.
+ * @returns {boolean} True if the passwords match, false otherwise.
+ */
+function arePasswordsMatching(password, confirmPassword) {
+  return password === confirmPassword;
+}
+
 
 /**
  * Displays an error when passwords don't match.

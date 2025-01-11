@@ -111,55 +111,74 @@ async function initializePage() {
  */
 function updateNextDeadline() {
   if (!todos || todos.length === 0) return;
-  const nextTask = todos.reduce(
-    (closest, task) => {
-      const taskDate = new Date(task.date);
-      const closestDate = new Date(closest.date);
-      return !isNaN(taskDate) && (isNaN(closestDate) || taskDate < closestDate)
-        ? task
-        : closest;
-    },
-    { date: Infinity }
-  );
-  if (nextTask && nextTask.date && !isNaN(new Date(nextTask.date))) {
-    document.getElementById("date-text").textContent = new Date(
-      nextTask.date
-    ).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
+  const nextTask = findNextDeadline(todos);
+  if (nextTask) {
+    updateDeadlineText(nextTask.date);
   }
 }
 
 /**
- * Updates the task counts for various categories and reflects them on the page.
+ * Finds the task with the closest upcoming deadline.
+ * @param {Array} tasks - Array of task objects with a `date` property.
+ * @returns {Object|null} The task with the closest deadline, or null if none found.
+ */
+function findNextDeadline(tasks) {
+  return tasks.reduce(
+    (closest, task) => {
+      const taskDate = new Date(task.date);
+      const closestDate = new Date(closest?.date);
+      return !isNaN(taskDate) && (isNaN(closestDate) || taskDate < closestDate)
+        ? task
+        : closest;
+    },
+    null
+  );
+}
+
+/**
+ * Updates the text content of the deadline display element.
+ * @param {string} date - The date string of the next deadline.
+ */
+function updateDeadlineText(date) {
+  const formattedDate = new Date(date).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  document.getElementById("date-text").textContent = formattedDate;
+}
+
+
+/**
+ * Updates the statistics display with task counts from session storage.
  */
 function fillInTasks() {
   const taskCounts = JSON.parse(sessionStorage.getItem("taskCounts")) || {};
-  if (taskCounts.todo !== undefined) {
-    document.getElementById("stats-button-to-do").textContent = taskCounts.todo;
-  }
-  if (taskCounts.done !== undefined) {
-    document.getElementById("stats-button-done").textContent = taskCounts.done;
-  }
-  if (taskCounts.urgent !== undefined) {
-    document.getElementById("stats-button-urgent").textContent =
-      taskCounts.urgent;
-  }
-  if (taskCounts.inprogress !== undefined) {
-    document.getElementById("stats-third-button-in-progress").textContent =
-      taskCounts.inprogress;
-  }
-  if (taskCounts.awaitfeedback !== undefined) {
-    document.getElementById("stats-third-button-await-feedback").textContent =
-      taskCounts.awaitfeedback;
-  }
-  if (taskCounts.total !== undefined) {
-    document.getElementById("stats-third-button-tasks-board").textContent =
-      taskCounts.total;
+  const mappings = {
+    todo: "stats-button-to-do",
+    done: "stats-button-done",
+    urgent: "stats-button-urgent",
+    inprogress: "stats-third-button-in-progress",
+    awaitfeedback: "stats-third-button-await-feedback",
+    total: "stats-third-button-tasks-board",
+  };
+  Object.keys(mappings).forEach((key) => updateStat(mappings[key], taskCounts[key]));
+}
+
+/**
+ * Updates a specific stat button with a given value if the value exists.
+ * @param {string} elementId - The ID of the HTML element to update.
+ * @param {number} value - The value to set as the text content of the element.
+ */
+function updateStat(elementId, value) {
+  if (value !== undefined) {
+    const element = document.getElementById(elementId);
+    if (element) {
+      element.textContent = value;
+    }
   }
 }
+
 
 /**
  * Loads tasks from a remote database and processes them for sorting.
@@ -175,64 +194,77 @@ async function loadTasksForSorting() {
         return { id: key, ...data[key] };
       });
       countTasksByCategory();
-    } else {
-      console.error("Keine Aufgaben gefunden.");
-    }
-  } catch (error) {
-    console.error("Fehler beim Laden der Aufgaben:", error);
-  }
+    } else {}
+  } catch (error) {}
 }
 
 /**
- * Updates the HTML content based on the tasks' progress categories.
- * @param {Array} data - The array of task objects.
+ * Updates the HTML content for task categories based on the provided data.
+ * @param {Array} data - An array of task objects with progress information.
  */
 function updateHTML(data) {
-  if (!data || Object.keys(data).length === 0) {
-    return;
-  }
-  const categories = [
-    "todoColumn",
-    "inprogressColumn",
-    "awaitfeedbackColumn",
-    "doneColumn",
-  ];
-  categories.forEach((category) => {
-    const container = document.getElementById(category);
-    if (container) {
-      container.innerHTML = ""; // Clear existing content
-      data.forEach((task) => {
-        if (
-          task.progress &&
-          task.progress.toLowerCase() ===
-            category.replace("Column", "").toLowerCase()
-        ) {
-          container.innerHTML += generateTodoHTML(task);
-        }
-      });
-    }
-  });
+  if (!data || !data.length) return; // Exit if no data is provided
+  const categories = ["todoColumn", "inprogressColumn", "awaitfeedbackColumn", "doneColumn"];
+  categories.forEach((category) => updateCategoryHTML(category, data));
 }
 
 /**
- * Counts the number of tasks in each category and updates session storage.
+ * Updates the HTML content for a specific category.
+ * @param {string} category - The ID of the HTML container for the category.
+ * @param {Array} data - An array of task objects.
+ */
+function updateCategoryHTML(category, data) {
+  const container = document.getElementById(category);
+  if (!container) return; // Skip if the container does not exist
+  container.innerHTML = ""; // Clear existing content
+  const filteredTasks = filterTasksByCategory(category, data);
+  filteredTasks.forEach((task) => (container.innerHTML += generateTodoHTML(task)));
+}
+
+/**
+ * Filters tasks that belong to a specific category.
+ * @param {string} category - The ID of the HTML container for the category.
+ * @param {Array} data - An array of task objects.
+ * @returns {Array} An array of tasks that match the category.
+ */
+function filterTasksByCategory(category, data) {
+  const categoryName = category.replace("Column", "").toLowerCase();
+  return data.filter(
+    (task) => task.progress && task.progress.toLowerCase() === categoryName
+  );
+}
+
+
+/**
+ * Counts tasks by category and priority, then stores the results in session storage.
+ * Categories include "todo", "inprogress", "awaitfeedback", "done", and "urgent".
  */
 function countTasksByCategory() {
-  const counts = {
-    todo: 0,
-    inprogress: 0,
-    awaitfeedback: 0,
-    done: 0,
-    urgent: 0,
-    total: 0,
-  };
-  todos.forEach((task) => {
-    counts.total++;
-    if (task.progress === "todo") counts.todo++;
-    if (task.progress === "inprogress") counts.inprogress++;
-    if (task.progress === "awaitfeedback") counts.awaitfeedback++;
-    if (task.progress === "done") counts.done++;
-    if (task.prio === "urgent") counts.urgent++;
-  });
-  sessionStorage.setItem("taskCounts", JSON.stringify(counts));
+  const counts = initializeCounts(); // Initialize the counts object
+  todos.forEach((task) => updateCounts(task, counts)); // Update counts for each task
+  sessionStorage.setItem("taskCounts", JSON.stringify(counts)); // Store counts in session storage
 }
+
+/**
+ * Initializes the counts object with default values for all categories.
+ * @returns {Object} An object with initialized count values.
+ */
+function initializeCounts() {
+  return { todo: 0, inprogress: 0, awaitfeedback: 0, done: 0, urgent: 0, total: 0 };
+}
+
+/**
+ * Updates the counts object based on the task's progress and priority.
+ * @param {Object} task - The task object containing progress and priority information.
+ * @param {Object} counts - The counts object to be updated.
+ */
+function updateCounts(task, counts) {
+  counts.total++; // Increment total count
+  if (counts[task.progress] !== undefined) {
+    counts[task.progress]++; // Increment progress-specific count
+  }
+  if (task.prio === "urgent") {
+    counts.urgent++; // Increment urgent count if task priority is "urgent"
+  }
+}
+
