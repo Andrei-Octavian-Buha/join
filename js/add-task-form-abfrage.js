@@ -113,9 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const dropDownHeader = document.getElementById("dropDownHeaderId");
   const dropDownBody = document.getElementById("dropDownBodyId");
   let isDropDownOpen = false;
-  if (!dropDownHeader || !dropDownBody) {
-    return;
-  }
+  if (!dropDownHeader || !dropDownBody) return;
   dropDownHeader.addEventListener("click", (event) => {
     isDropDownOpen = !isDropDownOpen;
     event.stopPropagation();
