@@ -19,7 +19,6 @@ function displayContactOverlay(
     contactEmail,
     contactPhone
   );
-
   if (overlayContainer) {
     overlayContainer.innerHTML = overlayHTML;
   } else {

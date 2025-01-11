@@ -35,23 +35,7 @@ function showSubTasksString(task) {
     : "<p>No subtasks available.</p>";
 }
 
-/**
- * Generates the HTML for a single subtask item.
- * @param {string} taskId - The ID of the task containing the subtask.
- * @param {Object} subtask - The subtask object.
- * @param {number} index - The index of the subtask in the list.
- * @returns {string} The HTML string for the subtask item.
- */
-function generateSubtaskHTML(taskId, subtask, index) {
-  const checkboxSrc = subtask.checked ? "checkbox-checked.svg" : "checkbox.svg";
-  return `
-    <div class="subtaskItem">
-      <img src="./assets/subtask/${checkboxSrc}" alt="" 
-           class="cursor" onclick="toggleImage(this, '${taskId}', '${index}')" 
-           data-index="${index}" id="checkbox" />
-      ${subtask.name}
-    </div>`;
-}
+
 
 
 /**
