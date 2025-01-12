@@ -26,6 +26,16 @@ function resetErrorStates() {
   document.getElementById("categorySelectId").classList.remove("input-error");
 }
 
+/**
+ * Validates the input values for a task, ensuring that the title, date, and category are provided and valid.
+ * If any required field is missing or invalid, an error message is shown and the function returns false.
+ * 
+ * @param {Object} inputValue - The object containing the task input values to be validated.
+ * @param {string} inputValue.title - The title of the task.
+ * @param {string} inputValue.date - The due date of the task.
+ * @param {number} inputValue.category - The category of the task (an integer representing the category).
+ * @returns {boolean} Returns `true` if all input values are valid, otherwise `false` if any validation fails.
+ */
 function validateInput(inputValue) {
   if (!inputValue.title) {
     showError("reqTitle", "addTaskTittle");
@@ -42,6 +52,13 @@ function validateInput(inputValue) {
   return true;
 }
 
+/**
+ * Displays an error message for a specific input field by showing the associated error element 
+ * and applying an error style to the input element.
+ * 
+ * @param {string} errorId - The ID of the error message element to display.
+ * @param {string} inputId - The ID of the input field that caused the error, which will receive an error style.
+ */
 function showError(errorId, inputId) {
   document.getElementById(errorId).classList.remove("dNone");
   document.getElementById(inputId).classList.add("input-error");
@@ -158,7 +175,23 @@ function initializeDropdownBodyEventListener(dropDownBody) {
   // Add specific dropdown body-related event listeners here, if needed
 }
 
-
+/**
+ * Adds a click event listener to the dropdown body to handle checkbox toggling.
+ * 
+ * @param {HTMLElement} dropDownBody - The dropdown body element where the event listener will be attached.
+ * 
+ * @description
+ * Attaches a `click` event listener to the given dropdown body element. When a click occurs:
+ * - It identifies the nearest `.dropDownContactContainer` element (if any) from the click target.
+ * - Finds the `.contactCheckbox` inside the identified container.
+ * - Toggles the `checked` state of the checkbox (checked → unchecked, unchecked → checked).
+ * 
+ * This functionality allows users to select or deselect a contact by clicking anywhere in the contact's container.
+ *
+ * @paramNotes
+ * - `dropDownBody` must be a valid DOM element containing child elements with the class `.dropDownContactContainer`.
+ * - Each `.dropDownContactContainer` must contain a `.contactCheckbox` input for the function to work properly.
+ */
 function dropDownBodyEventListner(dropDownBody) {
   dropDownBody.addEventListener("click", (event) => {
     const contactContainer = event.target.closest(".dropDownContactContainer");

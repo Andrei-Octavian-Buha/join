@@ -392,7 +392,6 @@ function updateArrow(arrow, isVisible) {
   }
 }
 
-
 /**
  * Initializes the board after the page is loaded.
  */

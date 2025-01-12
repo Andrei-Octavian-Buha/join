@@ -179,7 +179,6 @@ function updateStat(elementId, value) {
   }
 }
 
-
 /**
  * Loads tasks from a remote database and processes them for sorting.
  */

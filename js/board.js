@@ -16,6 +16,14 @@ async function loadTasksFromFirebase() {
   }
 }
 
+/**
+ * Fetches data from a given URL, handles the response, and returns the JSON data.
+ * If the network response is not OK, it throws an error with a descriptive message.
+ * 
+ * @param {string} url - The URL from which data will be fetched.
+ * @returns {Promise<Object>} A promise that resolves with the parsed JSON data from the response.
+ * @throws {Error} If the network response is not OK, an error is thrown with a message indicating the issue.
+ */
 async function fetchDataFromFirebase(url) {
   const response = await fetch(url);
   if (!response.ok) throw new Error("Netzwerkantwort war nicht ok");
@@ -51,6 +59,14 @@ function filterTasksInCategory(containerId, searchInput) {
   });
 }
 
+/**
+ * Toggles the visibility of a task based on whether its title or description matches the search input.
+ * If the task's title or description includes the search input text, the task remains visible. 
+ * Otherwise, the task is hidden.
+ * 
+ * @param {Element} task - The DOM element representing the task card that will be shown or hidden.
+ * @param {string} searchInput - The search text entered by the user, used to filter tasks.
+ */
 function toggleTaskVisibility(task, searchInput) {
   const taskTitle = task
     .querySelector(".boardCardTitle")

@@ -35,9 +35,6 @@ function showSubTasksString(task) {
     : "<p>No subtasks available.</p>";
 }
 
-
-
-
 /**
  * Handles the null or empty subtask scenario by updating the progress bar display.
  * @param {Object} task The task object.

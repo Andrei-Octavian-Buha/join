@@ -228,6 +228,32 @@ function initializeBlurValidation(inputSet) {
   });
 }
 
+/**
+ * Sets up event listeners and initializes validation for contact forms after the DOM has fully loaded.
+ *
+ * @description
+ * This script listens for the `DOMContentLoaded` event to ensure that all DOM elements are fully loaded before executing. It performs the following tasks:
+ * 
+ * 1. **Create Error Messages**:
+ *    - Calls `createErrorMessages` for two sets of inputs: `inputs` and `editInputs`.
+ *    - These are likely collections of input fields for the main contact form and the edit contact form.
+ * 
+ * 2. **Initialize Blur Validation**:
+ *    - Calls `initializeBlurValidation` for both `inputs` and `editInputs`.
+ *    - Presumably sets up validation that triggers when a user leaves (blurs) an input field.
+ * 
+ * 3. **Add Submit Event Listeners**:
+ *    - Adds a `submit` event listener to the main contact form (`contactForm`) and the edit contact form (`editContactForm`).
+ *    - On submission, both forms call the `handleSubmit` function, passing the respective event object and input collection (`inputs` or `editInputs`) as arguments.
+ * 
+ * @event DOMContentLoaded
+ * Executes the setup logic only after the DOM content has been completely loaded and parsed.
+ * 
+ * @functions
+ * - `createErrorMessages(inputs)`: Creates error messages for the specified input fields.
+ * - `initializeBlurValidation(inputs)`: Sets up blur validation for the specified input fields.
+ * - `handleSubmit(event, inputs)`: Handles form submission, typically performing validation and processing logic.
+ */
 document.addEventListener("DOMContentLoaded", () => {
   createErrorMessages(inputs);
   createErrorMessages(editInputs);

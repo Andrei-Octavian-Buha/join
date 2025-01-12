@@ -18,17 +18,6 @@
  * - A section to add subtasks with options to create, edit, and delete subtasks.
  * - A button to confirm and save changes, triggering the `toDoForUpdateTaskOnFireBase` function with the task ID.
  *
- * Example Usage:
- * const task = {
- *   id: "123",
- *   task: {
- *     title: "Complete the project",
- *     description: "Finish the task module",
- *     date: "2025-01-15",
- *     prio: "medium"
- *   }
- * };
- * const taskCardHTML = showEditCard(task);
  */
 function showEditCard(task) {
   return `
@@ -210,6 +199,21 @@ function showEditCard(task) {
       `;
 }
 
+/**
+ * Generates an HTML string for a task information card.
+ * This card displays detailed information about a task, including title, description,
+ * due date, priority, assigned members, and subtasks, with options to delete or edit the task.
+ * 
+ * @param {Object} task - The task object containing information about a specific task.
+ * @param {Object} task.task - The task details.
+ * @param {number|string} task.task.category - The category of the task.
+ * @param {string} task.task.title - The title of the task.
+ * @param {string} task.task.description - A description of the task.
+ * @param {string} task.task.date - The due date of the task.
+ * @param {string} task.task.prio - The priority of the task (e.g., "high", "low").
+ * @param {string} task.id - The unique identifier for the task.
+ * @returns {string} HTML string representing the task information card.
+ */
 function showInfoCard(task) {
   return `       
       <div class="boardOverlay">
@@ -272,6 +276,16 @@ function showInfoCard(task) {
       </div>`;
 }
 
+/**
+ * Generates an HTML string for a single editable subtask within a task editing interface.
+ * This structure includes an input field, control buttons for editing and deleting,
+ * and visual elements such as dots and separators.
+ * 
+ * @param {Object} subtask - The subtask object containing information about the subtask.
+ * @param {string} subtask.name - The name of the subtask to display as a placeholder.
+ * @param {number} index - The index of the subtask in the list (used for unique element IDs).
+ * @returns {string} HTML string representing the subtask's editable UI.
+ */
 function rendEditSubTaskHtml(subtask, index) {
   return `<div class="subtaskContainer" id="subtaskContainerId${index}">
       <div class="subtaskInputWithDot">
@@ -311,6 +325,20 @@ function rendEditSubTaskHtml(subtask, index) {
     </div>`;
 }
 
+/**
+ * Renders an HTML card element for a task, including its title, description, category, progress bar, and assignment details.
+ * The task card is designed to be draggable, with features like moving the card up/down and viewing more details when clicked.
+ * 
+ * @param {Object} task - The task object containing the task's data.
+ * @param {Object} task.task - The data for the specific task.
+ * @param {string} task.id - The unique ID of the task.
+ * @param {string} task.task.title - The title of the task.
+ * @param {string} task.task.description - The description of the task.
+ * @param {number} task.task.category - The category of the task (used for styling).
+ * @param {Array} task.task.subtasks - The subtasks related to the task.
+ * @param {string} task.task.prio - The priority of the task.
+ * @returns {string} The HTML string representing the task card.
+ */
 function renderCard(task) {
   const maxTitleLength = 30;
   const maxDescriptionLength = 35;
