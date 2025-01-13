@@ -72,6 +72,16 @@ function toggleDropdown() {
   dropdown.style.display =
     dropdown.style.display === "block" ? "none" : "block";
 }
+
+/**
+ * Handles global click events to toggle the visibility of a dropdown menu.
+ *
+ * When a user clicks anywhere on the window, this function checks if the
+ * clicked element is not the dropdown trigger (".profilPic") or its descendants.
+ * If the dropdown menu is visible, it will hide the menu.
+ *
+ * @param {MouseEvent} event - The event object for the click event.
+ */
 window.onclick = function (event) {
   if (
     !event.target.matches(".profilPic") &&
