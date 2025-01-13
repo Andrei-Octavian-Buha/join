@@ -204,7 +204,7 @@ function prepareTaskData(task) {
     date: taskData.date,
     prio: taskData.prio,
     category: taskData.category,
-    subtask: taskData.subtask,
+    subtask: subtasks,
     progress: taskData.progress,
   };
 }
@@ -360,7 +360,10 @@ function updateArrowVisibility(taskId) {
   const currentIndex = getColumnIndex(currentColumn);
 
   updateArrow(taskCard.querySelector(".arrow-up"), currentIndex > 0);
-  updateArrow(taskCard.querySelector(".arrow-down"), currentIndex < columnsOrder.length - 1);
+  updateArrow(
+    taskCard.querySelector(".arrow-down"),
+    currentIndex < columnsOrder.length - 1
+  );
 }
 
 /**
