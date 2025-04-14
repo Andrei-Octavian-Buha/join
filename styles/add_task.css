@@ -152,6 +152,7 @@
     color: #000000;
     resize: none;
     outline: none;
+    font-family: "Inter";
   }
   .inputStyleWithBtn {
     padding: 10px 21px;
